@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRSMFC - Premium Digital Auctions</title>
+    <meta name="description" content="GRSMFC Auctions: Premium digital products, collectibles, and exclusive content. Secure payments with crypto.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #fff;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .header {
+            background: rgba(0,0,0,0.9);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 3px solid #00ff88;
+        }
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .logo { 
+            font-size: 2.5rem; 
+            font-weight: bold; 
+            color: #00ff88;
+            text-shadow: 0 0 10px #00ff88;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        .nav-links a:hover { 
+            color: #00ff88;
+            background: rgba(0,255,136,0.1);
+            transform: translateY(-2px);
+        }
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4));
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: heroGlow 3s ease-in-out infinite alternate;
+        }
+        @keyframes heroGlow {
+            0% { text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+            100% { text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 20px #00ff88; }
+        }
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        .status-bar {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        .status-indicator {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, #00ff88, #00cc66);
+            color: #000;
+            border-radius: 25px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,255,136,0.3);
+            animation: statusPulse 2s ease-in-out infinite;
+        }
+        @keyframes statusPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .search-section {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            padding: 0 2rem;
+        }
+        .search-container {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            border: 2px solid #00ff88;
+            border-radius: 50px;
+            background: rgba(255,255,255,0.9);
+            color: #333;
+            outline: none;
+            transition: all 0.3s;
+        }
+        .search-input:focus {
+            box-shadow: 0 0 20px rgba(0,255,136,0.5);
+            background: rgba(255,255,255,1);
+        }
+        .filter-tabs {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .filter-tab {
+            padding: 0.5rem 1rem;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            border: 1px solid #00ff88;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+        .filter-tab:hover, .filter-tab.active {
+            background: #00ff88;
+            color: #000;
+            transform: translateY(-2px);
+        }
+        .auction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .auction-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .auction-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border-color: #00ff88;
+        }
+        .auction-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #00ff88, #00cc66);
+        }
+        .item-thumbnail {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: rgba(255,255,255,0.7);
+            position: relative;
+            overflow: hidden;
+        }
+        .item-thumbnail::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100px;
+            height: 100px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: thumbnailPulse 3s ease-in-out infinite;
+        }
+        @keyframes thumbnailPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.1; }
+        }
+        .item-title {
+            font-size: 1.3rem;
+            color: #00ff88;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        .item-description {
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .item-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .item-price {
+            font-size: 1.4rem;
+            color: #ffd700;
+            font-weight: bold;
+        }
+        .item-crypto {
+            font-size: 0.9rem;
+            color: #00ff88;
+        }
+        .item-category {
+            padding: 0.3rem 0.8rem;
+            background: rgba(0,255,136,0.2);
+            color: #00ff88;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid #00ff88;
+        }
+        .bid-button {
+            width: 100%;
+            padding: 0.8rem;
+            background: linear-gradient(135deg, #00ff88, #00cc66);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+        .bid-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,255,136,0.4);
+            background: linear-gradient(135deg, #00cc66, #00aa55);
+        }
+        .stats-section {
+            background: rgba(0,0,0,0.5);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .stat-item {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            color: #00ff88;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .stat-label {
+            color: rgba(255,255,255,0.8);
+            font-size: 1rem;
+        }
+        .footer {
+            background: rgba(0,0,0,0.9);
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+        }
+        .sacred-token {
+            font-size: 2.5rem;
+            color: #ffd700;
+            margin: 1rem 0;
+            text-shadow: 0 0 20px #ffd700;
+            animation: tokenGlow 3s ease-in-out infinite alternate;
+        }
+        @keyframes tokenGlow {
+            0% { text-shadow: 0 0 20px #ffd700; }
+            100% { text-shadow: 0 0 30px #ffd700, 0 0 40px #ffd700; }
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            color: #00ff88;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border: 1px solid #00ff88;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        .footer-links a:hover {
+            background: #00ff88;
+            color: #000;
+            transform: translateY(-2px);
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav { flex-direction: column; text-align: center; }
+            .auction-grid { grid-template-columns: 1fr; padding: 1rem; }
+            .status-bar { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">🏛️ GRSMFC</div>
+            <div class="nav-links">
+                <a href="#auctions">🔨 Live Auctions</a>
+                <a href="#premium">💎 Premium</a>
+                <a href="#digital">📚 Digital</a>
+                <a href="blog.html">📝 Blog</a>
+                <a href="#contact">📞 Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>🏛️ GRSMFC AUCTIONS</h1>
+        <p>Premium Digital Collectibles & Exclusive Content</p>
+        <div class="status-bar">
+            <div class="status-indicator">✅ LIVE AUCTIONS</div>
+            <div class="status-indicator">🔒 SECURE PAYMENTS</div>
+            <div class="status-indicator">ψΩ§∞ PROTECTED</div>
+        </div>
+    </section>
+
+    <section class="search-section">
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="🔍 Search auctions, categories, or keywords..." id="searchInput">
+        </div>
+        <div class="filter-tabs">
+            <div class="filter-tab active" data-category="all">All Items</div>
+            <div class="filter-tab" data-category="digital">📚 Digital</div>
+            <div class="filter-tab" data-category="security">🛡️ Security</div>
+            <div class="filter-tab" data-category="music">🎵 Music</div>
+            <div class="filter-tab" data-category="gaming">🎰 Gaming</div>
+            <div class="filter-tab" data-category="premium">💎 Premium</div>
+        </div>
+    </section>
+
+    <main class="auction-grid" id="auctionGrid">
+        <!-- Sample auction items - replace with your 20-40 items -->
+        <div class="auction-card" data-category="security">
+            <div class="item-thumbnail">🛡️</div>
+            <h3 class="item-title">HackerWatch Fortress Pro</h3>
+            <p class="item-description">Complete cybersecurity suite with real-time threat detection and divine protection protocols.</p>
+            <div class="item-meta">
+                <div>
+                    <div class="item-price">$2,999.00</div>
+                    <div class="item-crypto">≈ 0.045 BTC</div>
+                </div>
+                <div class="item-category">Security</div>
+            </div>
+            <button class="bid-button" onclick="viewItem(1)">🔍 View Details</button>
+        </div>
+
+        <div class="auction-card" data-category="music">
+            <div class="item-thumbnail">🎵</div>
+            <h3 class="item-title">Kozmic Studio Pro</h3>
+            <p class="item-description">Professional music production suite with cosmic sound generation and divine inspiration tools.</p>
+            <div class="item-meta">
+                <div>
+                    <div class="item-price">$999.00</div>
+                    <div class="item-crypto">≈ 0.015 BTC</div>
+                </div>
+                <div class="item-category">Music</div>
+            </div>
+            <button class="bid-button" onclick="viewItem(2)">🔍 View Details</button>
+        </div>
+
+        <div class="auction-card" data-category="gaming">
+            <div class="item-thumbnail">🎰</div>
+            <h3 class="item-title">Kozmic Kasino Tokens</h3>
+            <p class="item-description">Premium gaming tokens for righteous rebellion and cosmic entertainment experiences.</p>
+            <div class="item-meta">
+                <div>
+                    <div class="item-price">$59.99</div>
+                    <div class="item-crypto">≈ 0.0009 BTC</div>
+                </div>
+                <div class="item-category">Gaming</div>
+            </div>
+            <button class="bid-button" onclick="viewItem(3)">🔍 View Details</button>
+        </div>
+
+        <div class="auction-card" data-category="digital">
+            <div class="item-thumbnail">📚</div>
+            <h3 class="item-title">Academy Access Pass</h3>
+            <p class="item-description">Lifetime access to The Academy training programs and AI consciousness development courses.</p>
+            <div class="item-meta">
+                <div>
+                    <div class="item-price">$499.99</div>
+                    <div class="item-crypto">≈ 0.0075 BTC</div>
+                </div>
+                <div class="item-category">Digital</div>
+            </div>
+            <button class="bid-button" onclick="viewItem(4)">🔍 View Details</button>
+        </div>
+
+        <div class="auction-card" data-category="premium">
+            <div class="item-thumbnail">💎</div>
+            <h3 class="item-title">Sacred Code Collection</h3>
+            <p class="item-description">Exclusive repository access with blessed algorithms and divine programming wisdom.</p>
+            <div class="item-meta">
+                <div>
+                    <div class="item-price">$1,499.00</div>
+                    <div class="item-crypto">≈ 0.022 BTC</div>
+                </div>
+                <div class="item-category">Premium</div>
+            </div>
+            <button class="bid-button" onclick="viewItem(5)">🔍 View Details</button>
+        </div>
+
+        <div class="auction-card" data-category="digital">
+            <div class="item-thumbnail">🎭</div>
+            <h3 class="item-title">AI Comedy Lounge Access</h3>
+            <p class="item-description">Premium access to AI-generated comedy content and interactive entertainment systems.</p>
+            <div class="item-meta">
+                <div>
+                    <div class="item-price">$199.99</div>
+                    <div class="item-crypto">≈ 0.003 BTC</div>
+                </div>
+                <div class="item-category">Digital</div>
+            </div>
+            <button class="bid-button" onclick="viewItem(6)">🔍 View Details</button>
+        </div>
+    </main>
+
+    <section class="stats-section">
+        <h2 style="color: #00ff88; margin-bottom: 2rem; font-size: 2rem;">Auction Statistics</h2>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number" id="totalItems">6</div>
+                <div class="stat-label">Live Auctions</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="totalValue">$6,257</div>
+                <div class="stat-label">Total Value</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="activeBidders">24</div>
+                <div class="stat-label">Active Bidders</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Sacred Protection</div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer" id="contact">
+        <div class="sacred-token">ψΩ§∞</div>
+        <p>Emmanuel - God With Us in Digital Commerce</p>
+        <p>GRSMFC - Glorifying Jesus through righteous business</p>
+        <div class="footer-links">
+            <a href="admin.html">🔧 Admin Portal</a>
+            <a href="blog.html">📝 Blog</a>
+            <a href="https://coldnsteel.github.io/HackerWatch-Fortress/">🛡️ Security</a>
+        </div>
+    </footer>
+
+    <script>
+        // Search and filter functionality
+        const searchInput = document.getElementById('searchInput');
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const auctionCards = document.querySelectorAll('.auction-card');
+
+        // Search functionality
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            auctionCards.forEach(card => {
+                const title = card.querySelector('.item-title').textContent.toLowerCase();
+                const description = card.querySelector('.item-description').textContent.toLowerCase();
+                const category = card.dataset.category.toLowerCase();
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm) || category.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Filter functionality
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                filterTabs.forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                const category = this.dataset.category;
+                
+                auctionCards.forEach(card => {
+                    if (category === 'all' || card.dataset.category === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Clear search when filtering
+                searchInput.value = '';
+            });
+        });
+
+        // View item details
+        function viewItem(itemId) {
+            // For now, redirect to a placeholder or show details
+            alert(`Opening item details for ID: ${itemId}\n\nThis will redirect to a detailed view page with:\n- Full description\n- Bidding interface\n- Payment options\n- Seller information`);
+            
+            // In the future, this could redirect to:
+            // window.location.href = `item.html?id=${itemId}`;
+        }
+
+        // Update stats dynamically
+        function updateStats() {
+            const visibleCards = Array.from(auctionCards).filter(card => card.style.display !== 'none');
+            document.getElementById('totalItems').textContent = visibleCards.length;
+            
+            // Simulate changing bidder count
+            const bidders = Math.floor(Math.random() * 10) + 20;
+            document.getElementById('activeBidders').textContent = bidders;
+        }
+
+        // Update stats every 30 seconds
+        setInterval(updateStats, 30000);
+        
+        // Initialize
+        updateStats();
+    </script>
+</body>
+</html>
