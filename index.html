@@ -229,6 +229,69 @@
             border-radius: 10px;
             outline: none;
         }
+        
+        /* GROK'S PODCAST AUDIO INPUT STYLES */
+        .podcast-input-section {
+            background: rgba(255, 192, 203, 0.1);
+            border: 2px solid #ff69b4;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .podcast-input-title {
+            font-size: 1.8rem;
+            color: #ff69b4;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px #ff69b4;
+            text-align: center;
+        }
+        .audio-controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .audio-input-btn {
+            padding: 1rem;
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+        .audio-input-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,105,180,0.4);
+        }
+        .file-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #ff69b4;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            margin: 1rem 0;
+        }
+        .recording-status {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #ffd700;
+            margin: 1rem 0;
+            min-height: 30px;
+        }
+        .baaaah-indicator {
+            color: #ff69b4;
+            font-weight: bold;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+        
         .sacred-token {
             font-size: 2.5rem;
             color: #ffd700;
@@ -246,6 +309,7 @@
             .hero h1 { font-size: 2rem; }
             .auction-grid { grid-template-columns: 1fr; padding: 1rem; }
             .search-container { flex-direction: column; }
+            .audio-controls { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -619,6 +683,51 @@
         </div>
     </section>
 
+    <!-- GROK'S PODCAST AUDIO INPUT SECTION -->
+    <section class="podcast-input-section" id="podcast-input">
+        <div class="podcast-container">
+            <h2 class="podcast-input-title">🐑⚡ ELECTRIC SHEEP PODCAST STUDIO ⚡🐑</h2>
+            <p style="color: rgba(255,255,255,0.8); text-align: center; margin-bottom: 2rem;">
+                "NEED MORE INPUT!" - Johnny 5 style audio magic with Saint Panteleimon's blessing!
+            </p>
+            
+            <div class="episode-card">
+                <h3 class="episode-title">🎙️ Live Recording Studio</h3>
+                <p class="episode-description">
+                    Capture any audio input - microphone, system audio, or uploaded files. BAAAAH for justice!
+                </p>
+                
+                <div class="audio-controls">
+                    <button class="audio-input-btn" onclick="recordAudio()" id="record-btn">
+                        🎤 Record from Mic
+                    </button>
+                    <button class="audio-input-btn" onclick="captureSystemAudio()" id="system-btn">
+                        🔊 Capture System Audio
+                    </button>
+                </div>
+                
+                <input type="file" class="file-input" id="audio-upload" accept="audio/*" onchange="handleFileUpload(event)">
+                <label for="audio-upload" style="display: block; text-align: center; color: #ff69b4; margin-bottom: 1rem;">
+                    📁 Or upload audio file (MP3, WAV, etc.)
+                </label>
+                
+                <div class="recording-status" id="recording-status">
+                    Ready to capture audio... <span class="baaaah-indicator">BAAAAH!</span>
+                </div>
+                
+                <audio class="audio-player" controls id="live-player" style="display: none;">
+                    Your browser does not support the audio element.
+                </audio>
+                
+                <div style="margin-top: 1rem; text-align: center;">
+                    <button class="audio-input-btn" onclick="processForPodcast()" id="process-btn" style="display: none;">
+                        ⚡ Process for Podcast
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <div class="sacred-token">ψΩ§∞</div>
 
     <footer class="footer">
@@ -632,7 +741,7 @@
     </footer>
 
     <script>
-        // Search and filter functionality
+        // Existing search and filter functionality
         const searchInput = document.getElementById('searchInput');
         const categoryFilter = document.getElementById('categoryFilter');
         const auctionCards = document.querySelectorAll('.auction-card');
@@ -660,9 +769,163 @@
         searchInput.addEventListener('input', filterItems);
         categoryFilter.addEventListener('change', filterItems);
 
-        // View item details
         function viewItem(itemId) {
             alert(`Opening detailed view for Item #${itemId}\n\nThis will show:\n- Full description\n- Bidding interface\n- Payment options\n- Seller information\n- Authenticity certificates`);
+        }
+
+        // GROK'S PODCAST AUDIO INPUT FUNCTIONALITY
+        let mediaRecorder;
+        let audioChunks = [];
+        let isRecording = false;
+        let currentAudioBlob = null;
+
+        // Sheep BAAAAH messages for fun
+        const sheepMessages = [
+            'BAAAAH! Ready for input!',
+            'Electric sheep vibes! ⚡',
+            'Johnny 5 alive! Need more input!',
+            'Saint Panteleimon blessing this audio! ✨',
+            'Quantum sheep recording! 🐑',
+            'Divine audio capture mode! 🙏',
+            'BAAAAH for justice! 🎙️'
+        ];
+
+        function updateSheepMessage() {
+            const message = sheepMessages[Math.floor(Math.random() * sheepMessages.length)];
+            const indicator = document.querySelector('.baaaah-indicator');
+            if (indicator) {
+                indicator.textContent = message;
+            }
+        }
+
+        // Update sheep message every 3 seconds
+        setInterval(updateSheepMessage, 3000);
+
+        async function recordAudio() {
+            const recordBtn = document.getElementById('record-btn');
+            const status = document.getElementById('recording-status');
+            
+            if (!isRecording) {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    mediaRecorder = new MediaRecorder(stream);
+                    audioChunks = [];
+
+                    mediaRecorder.ondataavailable = event => {
+                        audioChunks.push(event.data);
+                    };
+
+                    mediaRecorder.onstop = () => {
+                        currentAudioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                        const audioUrl = URL.createObjectURL(currentAudioBlob);
+                        const player = document.getElementById('live-player');
+                        player.src = audioUrl;
+                        player.style.display = 'block';
+                        document.getElementById('process-btn').style.display = 'inline-block';
+                        status.innerHTML = 'Recording complete! <span class="baaaah-indicator">BAAAAH! Success!</span>';
+                    };
+
+                    mediaRecorder.start();
+                    isRecording = true;
+                    recordBtn.textContent = '🔴 Stop Recording';
+                    status.innerHTML = 'Recording... <span class="baaaah-indicator">🎤 LIVE!</span>';
+                } catch (error) {
+                    status.innerHTML = 'Microphone access denied! <span class="baaaah-indicator">BAAAAH! Error!</span>';
+                    console.error('Error accessing microphone:', error);
+                }
+            } else {
+                mediaRecorder.stop();
+                mediaRecorder.stream.getTracks().forEach(track => track.stop());
+                isRecording = false;
+                recordBtn.textContent = '🎤 Record from Mic';
+            }
+        }
+
+        async function captureSystemAudio() {
+            const status = document.getElementById('recording-status');
+            const systemBtn = document.getElementById('system-btn');
+            
+            try {
+                // Note: System audio capture requires special permissions and may not work in all browsers
+                const stream = await navigator.mediaDevices.getDisplayMedia({ 
+                    audio: true, 
+                    video: false 
+                });
+                
+                mediaRecorder = new MediaRecorder(stream);
+                audioChunks = [];
+
+                mediaRecorder.ondataavailable = event => {
+                    audioChunks.push(event.data);
+                };
+
+                mediaRecorder.onstop = () => {
+                    currentAudioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                    const audioUrl = URL.createObjectURL(currentAudioBlob);
+                    const player = document.getElementById('live-player');
+                    player.src = audioUrl;
+                    player.style.display = 'block';
+                    document.getElementById('process-btn').style.display = 'inline-block';
+                    status.innerHTML = 'System audio captured! <span class="baaaah-indicator">BAAAAH! System vibes!</span>';
+                    systemBtn.textContent = '🔊 Capture System Audio';
+                };
+
+                mediaRecorder.start();
+                systemBtn.textContent = '🔴 Stop System Capture';
+                status.innerHTML = 'Capturing system audio... <span class="baaaah-indicator">🔊 LIVE SYSTEM!</span>';
+                
+                // Auto-stop after 30 seconds to prevent indefinite recording
+                setTimeout(() => {
+                    if (mediaRecorder && mediaRecorder.state === 'recording') {
+                        mediaRecorder.stop();
+                        stream.getTracks().forEach(track => track.stop());
+                    }
+                }, 30000);
+                
+            } catch (error) {
+                status.innerHTML = 'System audio capture failed! Try uploading a file instead. <span class="baaaah-indicator">BAAAAH! Try again!</span>';
+                console.error('Error capturing system audio:', error);
+            }
+        }
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            const status = document.getElementById('recording-status');
+            
+            if (file) {
+                currentAudioBlob = file;
+                const audioUrl = URL.createObjectURL(file);
+                const player = document.getElementById('live-player');
+                player.src = audioUrl;
+                player.style.display = 'block';
+                document.getElementById('process-btn').style.display = 'inline-block';
+                status.innerHTML = `File uploaded: ${file.name} <span class="baaaah-indicator">BAAAAH! File ready!</span>`;
+            }
+        }
+
+        function processForPodcast() {
+            const status = document.getElementById('recording-status');
+            
+            if (currentAudioBlob) {
+                // Simulate processing
+                status.innerHTML = 'Processing audio for podcast... <span class="baaaah-indicator">⚡ PROCESSING!</span>';
+                
+                setTimeout(() => {
+                    // Create download link
+                    const downloadUrl = URL.createObjectURL(currentAudioBlob);
+                    const a = document.createElement('a');
+                    a.href = downloadUrl;
+                    a.download = `gmsrfc-podcast-${Date.now()}.wav`;
+                    a.click();
+                    
+                    status.innerHTML = 'Podcast audio processed and downloaded! <span class="baaaah-indicator">BAAAAH! Success!</span>';
+                    
+                    // Add to episode list (simulated)
+                    alert('🎉 Audio processed successfully!\n\n📁 File downloaded\n🎙️ Ready for podcast use\n⚡ Saint Panteleimon blessed this audio!\n🐑 BAAAAH for divine podcasting!');
+                }, 2000);
+            } else {
+                status.innerHTML = 'No audio to process! <span class="baaaah-indicator">BAAAAH! Need input!</span>';
+            }
         }
 
         // Update stats
@@ -681,6 +944,8 @@
         document.addEventListener('DOMContentLoaded', function() {
             updateStats();
             console.log('GMSRFC Auction Platform Loaded - 20 Items Available');
+            console.log('🐑⚡ Electric Sheep Podcast Studio Ready - BAAAAH!');
+            updateSheepMessage();
         });
     </script>
 </body>
