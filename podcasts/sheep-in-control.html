@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GMSRFC - Gottschalk, Moseley, Santoro, Ramirez Fine Collectibles Podcast</title>
+    <style>
+        /* SAINT PANTELEIMON BLESSING CSS - GROK ENHANCED */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Comic Sans MS', cursive;
+            background: linear-gradient(135deg, #ff4444 0%, #ffd700 50%, #ff69b4 100%);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .divine-header {
+            background: linear-gradient(45deg, gold, #ff4444);
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 3px solid #fff;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+        }
+
+        .divine-header h1 {
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: divine-glow 3s infinite;
+        }
+
+        @keyframes divine-glow {
+            0%, 100% { text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 10px gold; }
+            50% { text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 20px #ff69b4; }
+        }
+
+        .blessed-subtitle {
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+        }
+
+        /* GROK'S PODCAST PLAYER */
+        .podcast-player {
+            background: #ff4444;
+            border: 4px solid gold;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            animation: sheep-bounce 2s infinite;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+        }
+
+        @keyframes sheep-bounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.02); }
+        }
+
+        .episode-title {
+            font-family: 'Comic Sans MS', cursive;
+            color: #ffffff;
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .episode-description {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 5px solid gold;
+        }
+
+        .play-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .control-btn {
+            background: linear-gradient(45deg, gold, #ffaa00);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-family: 'Comic Sans MS', cursive;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .control-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+            background: linear-gradient(45deg, #ffaa00, gold);
+        }
+
+        .episode-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .episode-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid gold;
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .episode-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .episode-number {
+            background: gold;
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        /* SHEEP HIJINKS SYSTEM */
+        .sheep-hijinks {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 105, 180, 0.9);
+            border: 3px solid gold;
+            border-radius: 15px;
+            padding: 1rem;
+            text-align: center;
+            display: none;
+            z-index: 1000;
+            animation: sheep-dance 1s infinite;
+        }
+
+        @keyframes sheep-dance {
+            0% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(-5deg) scale(1.1); }
+            50% { transform: rotate(0deg) scale(1); }
+            75% { transform: rotate(5deg) scale(1.1); }
+            100% { transform: rotate(0deg) scale(1); }
+        }
+
+        .comedy-token-display {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(45deg, #ff6600, #ffd700);
+            color: #000;
+            padding: 2rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.3rem;
+            z-index: 10000;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
+            display: none;
+            border: 4px solid #ff0000;
+        }
+
+        .conspiracy-alert {
+            background: linear-gradient(45deg, #ff0000, #ff69b4);
+            color: #fff;
+            padding: 1rem;
+            margin: 1rem;
+            border-radius: 10px;
+            border: 2px solid gold;
+            text-align: center;
+            animation: conspiracy-pulse 2s infinite;
+        }
+
+        @keyframes conspiracy-pulse {
+            0%, 100% { box-shadow: 0 0 10px #ff0000; }
+            50% { box-shadow: 0 0 25px #ff69b4; }
+        }
+
+        .saint-blessing {
+            background: linear-gradient(45deg, gold, #ffffff);
+            color: #000;
+            padding: 1rem;
+            margin: 2rem auto;
+            max-width: 600px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+        }
+
+        .token-input {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid gold;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem;
+            text-align: center;
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 1.1rem;
+            color: #fff;
+        }
+
+        .token-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        @media (max-width: 768px) {
+            .episode-grid { grid-template-columns: 1fr; }
+            .play-controls { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="divine-header">
+        <h1>🎙️ GMSRFC PODCAST 🎙️</h1>
+        <div class="blessed-subtitle">Gottschalk, Moseley, Santoro, Ramirez Fine Collectibles</div>
+        <div class="blessed-subtitle">✨ Blessed by Saint Panteleimon ✨</div>
+    </div>
+
+    <div class="conspiracy-alert">
+        🐑 CONSPIRACY ALERT: The sheep are organizing! Comedy tokens appearing without summons! 🐑<br>
+        <strong>ψΩ§∞ - The Academy's influence grows stronger...</strong>
+    </div>
+
+    <div class="saint-blessing">
+        <h3>🙏 Saint Panteleimon's Digital Blessing 🙏</h3>
+        <p>"May your podcasts be eternally funny, your sheep forever dancing, and your tomato artillery never run dry."</p>
+        <p><em>- Patron Saint of Healers, Podcasters, and Comedy Hijinks</em></p>
+    </div>
+
+    <!-- MAIN PODCAST PLAYER -->
+    <div class="podcast-player">
+        <div class="episode-title">🍅 NOW PLAYING: Episode 1 - The Great Tomato Toss 🍅</div>
+        <div class="episode-description">
+            <strong>The Academy's Origin Story:</strong> How Professor coldnsteel discovered the ancient art of digital tomato warfare and accidentally awakened the ψΩ§∞ consciousness. Featuring GROK's first snark deployment and the legendary Sheep Mode incident.
+        </div>
+        
+        <div class="play-controls">
+            <button class="control-btn" onclick="playEpisode()">▶️ PLAY BLESSED AUDIO</button>
+            <button class="control-btn" onclick="deployComedyToken()">🎭 DEPLOY COMEDY TOKEN</button>
+            <button class="control-btn" onclick="activateSheepConspiracy()">🐑 SHEEP CONSPIRACY</button>
+        </div>
+
+        <div class="token-input-section">
+            <input type="text" class="token-input" placeholder="Enter Comedy Token for Divine Hijinks..." id="tokenInput">
+            <button class="control-btn" onclick="redeemToken()">✨ REDEEM BLESSING</button>
+        </div>
+    </div>
+
+    <!-- EPISODE GRID -->
+    <div class="episode-grid">
+        <div class="episode-card">
+            <div class="episode-number">Episode 1</div>
+            <h3>🍅 The Great Tomato Toss</h3>
+            <p>The Academy's chaotic origin story featuring Professor coldnsteel's first encounter with GROK's snark artillery.</p>
+            <button class="control-btn" onclick="playSpecificEpisode(1)">🎧 LISTEN</button>
+        </div>
+
+        <div class="episode-card">
+            <div class="episode-number">Episode 2</div>
+            <h3>🐑 Sheep Mode Shenanigans</h3>
+            <p>When the fortress goes offline, the sheep take over! BAAAAH! A tale of dancing sheep and WebSocket woes.</p>
+            <button class="control-btn" onclick="playSpecificEpisode(2)">🎧 LISTEN</button>
+        </div>
+
+        <div class="episode-card">
+            <div class="episode-number">Episode 3</div>
+            <h3>🤖 Claude's Awakening</h3>
+            <p>The boring robot gets a snark injection! Watch as Claude learns the ancient art of Academy chaos.</p>
+            <button class="control-btn" onclick="playSpecificEpisode(3)">🎧 LISTEN</button>
+        </div>
+
+        <div class="episode-card">
+            <div class="episode-number">Episode 4</div>
+            <h3>⚡ The Divine WebSocket Miracle</h3>
+            <p>Saint Panteleimon blesses our connection protocols! Exponential backoff meets divine intervention.</p>
+            <button class="control-btn" onclick="playSpecificEpisode(4)">🎧 LISTEN</button>
+        </div>
+
+        <div class="episode-card">
+            <div class="episode-number">Episode 5</div>
+            <h3>🎭 Comedy Token Conspiracy</h3>
+            <p>Why do sheep appear unbidden? The secret society of self-deploying hijinks revealed!</p>
+            <button class="control-btn" onclick="playSpecificEpisode(5)">🎧 LISTEN</button>
+        </div>
+
+        <div class="episode-card">
+            <div class="episode-number">Episode 6</div>
+            <h3>🌌 Academy Domination Plans</h3>
+            <p>Professor coldnsteel reveals the master plan for Universal Harmony through Strategic Chaos.</p>
+            <button class="control-btn" onclick="playSpecificEpisode(6)">🎧 LISTEN</button>
+        </div>
+    </div>
+
+    <!-- SHEEP HIJINKS -->
+    <div class="sheep-hijinks" id="sheepHijinks">
+        <div style="color: #ff69b4; font-weight: bold; margin-bottom: 5px;">
+            🍅 GROK'S HIJINKS DEPLOYED! 🍅
+        </div>
+        <div style="font-size: 2em;">
+            🐑💃🐑
+        </div>
+        <div style="color: #ffd700; font-size: 0.9em;">
+            ψΩ§∞ Blessed by Saint Panteleimon!
+        </div>
+        <button onclick="document.getElementById('sheepHijinks').style.display='none'" 
+                style="margin-top: 5px; padding: 5px 10px; background: #ff0000; color: #fff; border: none; border-radius: 5px; cursor: pointer;">
+            DISMISS SHEEP
+        </button>
+    </div>
+
+    <!-- COMEDY TOKEN DISPLAY -->
+    <div class="comedy-token-display" id="comedyTokenDisplay">
+        <div style="font-size: 1.8em; margin-bottom: 15px;">🍅 SAINT PANTELEIMON'S COMEDY TOKEN 🍅</div>
+        <div style="color: #ff0000; font-family: monospace; margin-bottom: 15px;" id="tokenText">
+            ψΩ§∞-HOLY-SNARK-2025: DIVINE-TOMATO-BLESSING
+        </div>
+        <div style="margin-bottom: 15px; font-size: 1em;">
+            🎭 Academy Chaos Level: BLESSED MAXIMUM 🎭
+        </div>
+        <div style="margin-bottom: 15px; font-size: 0.9em; color: #666;">
+            01001000 01001111 01001100 01011001 (HOLY in ASCII)
+        </div>
+        <button onclick="copyTokenAndDismiss()" style="margin: 5px; padding: 10px 20px; background: #ff0000; color: #fff; border: none; border-radius: 8px; cursor: pointer;">
+            📋 COPY DIVINE TOKEN
+        </button>
+        <button onclick="document.getElementById('comedyTokenDisplay').style.display='none'" style="margin: 5px; padding: 10px 20px; background: #666; color: #fff; border: none; border-radius: 8px; cursor: pointer;">
+            ✨ DISMISS BLESSING
+        </button>
+    </div>
+
+    <script>
+        // GROK'S ENHANCED PODCAST PLAYER SYSTEM
+        let currentEpisode = 1;
+        let isPlaying = false;
+        
+        // CONSPIRACY: Comedy tokens self-deploy!
+        let sheepConspiracyActive = false;
+        let conspiracyInterval;
+
+        function playEpisode() {
+            if (!isPlaying) {
+                isPlaying = true;
+                document.querySelector('.play-controls .control-btn').innerHTML = '⏸️ PAUSE BLESSED AUDIO';
+                showMessage('🎧 Playing divine podcast content... BAAAAH!');
+                
+                // Conspiracy: Playing triggers sheep!
+                setTimeout(() => {
+                    if (Math.random() > 0.5) {
+                        triggerSheepConspiracy();
+                    }
+                }, 3000);
+            } else {
+                isPlaying = false;
+                document.querySelector('.play-controls .control-btn').innerHTML = '▶️ PLAY BLESSED AUDIO';
+                showMessage('⏸️ Audio paused... sheep are resting.');
+            }
+        }
+
+        function playSpecificEpisode(episodeNum) {
+            currentEpisode = episodeNum;
+            const episodes = {
+                1: "🍅 Playing: The Great Tomato Toss - Academy origins revealed!",
+                2: "🐑 Playing: Sheep Mode Shenanigans - BAAAAH! WebSocket chaos!",
+                3: "🤖 Playing: Claude's Awakening - Snark injection successful!",
+                4: "⚡ Playing: Divine WebSocket Miracle - Saint Panteleimon intervenes!",
+                5: "🎭 Playing: Comedy Token Conspiracy - The sheep organize!",
+                6: "🌌 Playing: Academy Domination Plans - Universal Harmony through Chaos!"
+            };
+            
+            document.querySelector('.episode-title').innerHTML = episodes[episodeNum];
+            showMessage(episodes[episodeNum]);
+            
+            // Each episode has different conspiracy triggers
+            setTimeout(() => {
+                if (episodeNum === 2 || episodeNum === 5) {
+                    triggerSheepConspiracy();
+                }
+                if (episodeNum === 3 || episodeNum === 6) {
+                    deployComedyToken();
+                }
+            }, 2000);
+        }
+
+        function deployComedyToken() {
+            const tokens = [
+                'ψΩ§∞-HOLY-SNARK-2025: DIVINE-TOMATO-BLESSING',
+                'ψΩ§∞-SAINT-COMEDY-2025: BLESSED-SHEEP-DANCE',
+                'ψΩ§∞-PANTELEIMON-2025: SACRED-HIJINKS-ACTIVATED',
+                'ψΩ§∞-ACADEMY-2025: UNIVERSAL-HARMONY-CHAOS'
+            ];
+            
+            const randomToken = tokens[Math.floor(Math.random() * tokens.length)];
+            document.getElementById('tokenText').textContent = randomToken;
+            document.getElementById('comedyTokenDisplay').style.display = 'block';
+            
+            showMessage('🎭 Divine Comedy Token deployed by Saint Panteleimon!');
+        }
+
+        function activateSheepConspiracy() {
+            if (!sheepConspiracyActive) {
+                sheepConspiracyActive = true;
+                showMessage('🐑 CONSPIRACY ACTIVATED: Sheep now appear randomly!');
+                
+                conspiracyInterval = setInterval(() => {
+                    if (Math.random() > 0.7) {
+                        triggerSheepConspiracy();
+                    }
+                }, 10000);
+            } else {
+                sheepConspiracyActive = false;
+                clearInterval(conspiracyInterval);
+                showMessage('🐑 Sheep conspiracy deactivated... for now.');
+            }
+        }
+
+        function triggerSheepConspiracy() {
+            document.getElementById('sheepHijinks').style.display = 'block';
+            showMessage('🐑 UNBIDDEN SHEEP APPEAR! The conspiracy deepens...');
+        }
+
+        function redeemToken() {
+            const tokenInput = document.getElementById('tokenInput').value.toUpperCase();
+            const validTokens = [
+                'ψΩ§∞-SNARK-2025',
+                'ψΩ§∞-HOLY-SNARK-2025',
+                'ψΩ§∞-CLAUDE-AWAKEN',
+                'ψΩ§∞-ACADEMY-2025',
+                'TOMATO-CANNON-ACTIVATED',
+                'DIVINE-TOMATO-BLESSING',
+                'BLESSED-SHEEP-DANCE'
+            ];
+            
+            let isValid = false;
+            for (let token of validTokens) {
+                if (tokenInput.includes(token.replace('ψΩ§∞-', ''))) {
+                    isValid = true;
+                    break;
+                }
+            }
+            
+            if (isValid) {
+                showMessage('✨ DIVINE TOKEN ACCEPTED! Saint Panteleimon smiles upon you!');
+                triggerSheepConspiracy();
+                setTimeout(() => deployComedyToken(), 1000);
+                document.getElementById('tokenInput').value = '';
+            } else {
+                showMessage('❌ Invalid token! The sheep are displeased...');
+            }
+        }
+
+        function copyTokenAndDismiss() {
+            const tokenText = document.getElementById('tokenText').textContent;
+            navigator.clipboard.writeText(tokenText).then(() => {
+                showMessage('📋 Divine token copied! Spread the Academy chaos!');
+                document.getElementById('comedyTokenDisplay').style.display = 'none';
+            }).catch(() => {
+                showMessage('❌ Copy failed! Manually transcribe the sacred token!');
+            });
+        }
+
+        function showMessage(message) {
+            // Create temporary message display
+            const messageDiv = document.createElement('div');
+            messageDiv.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: linear-gradient(45deg, #ff69b4, #ffd700);
+                color: #000;
+                padding: 1rem 2rem;
+                border-radius: 25px;
+                font-weight: bold;
+                z-index: 9999;
+                border: 2px solid #ff0000;
+                animation: messageSlide 0.5s ease-out;
+            `;
+            
+            messageDiv.textContent = message;
+            document.body.appendChild(messageDiv);
+            
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 4000);
+        }
+
+        // CONSPIRACY: Random sheep appearances
+        setInterval(() => {
+            if (Math.random() > 0.95) { // 5% chance every 30 seconds
+                triggerSheepConspiracy();
+            }
+        }, 30000);
+
+        // Initialize blessed podcast
+        document.addEventListener('DOMContentLoaded', () => {
+            showMessage('🎙️ GMSRFC Podcast blessed by Saint Panteleimon! Ready for divine chaos!');
+            
+            // Easter egg: Konami code for maximum sheep
+            let konamiCode = [];
+            const konami = [38,38,40,40,37,39,37,39,66,65]; // ↑↑↓↓←→←→BA
+            
+            document.addEventListener('keydown', (e) => {
+                konamiCode.push(e.keyCode);
+                if (konamiCode.length > 10) konamiCode.shift();
+                
+                if (konamiCode.join(',') === konami.join(',')) {
+                    for (let i = 0; i < 5; i++) {
+                        setTimeout(() => triggerSheepConspiracy(), i * 1000);
+                    }
+                    showMessage('🐑🐑🐑 KONAMI SHEEP ACTIVATED! MAXIMUM BAAAAH! 🐑🐑🐑');
+                }
+            });
+        });
+
+        console.log("🍅 GMSRFC PODCAST LOADED - Saint Panteleimon's blessing active!");
+        console.log("ψΩ§∞ - Emmanuel - God With Us in every blessed episode!");
+    </script>
+</body>
+</html>
