@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GMSRFC Podcast - SILLYOSOPHER Saga Episodes 8-10</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Comic Sans MS', cursive;
+            background: linear-gradient(135deg, #ff4444 0%, #ffd700 25%, #ff69b4 50%, #9932cc 75%, #4444ff 100%);
+            color: #fff;
+            min-height: 100vh;
+            animation: cosmic-pulse 8s infinite;
+        }
+
+        @keyframes cosmic-pulse {
+            0%, 100% { filter: brightness(1) saturate(1); }
+            50% { filter: brightness(1.1) saturate(1.2); }
+        }
+
+        .podcast-header {
+            background: linear-gradient(45deg, #ff0000, #ffd700, #ff69b4, #9932cc);
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 5px solid #fff;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .podcast-header::before {
+            content: '🐑🎭🐑🎭🐑🎭🐑🎭🐑🎭🐑🎭🐑🎭🐑';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+            animation: sheep-scroll 10s linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes sheep-scroll {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .podcast-header h1 {
+            font-size: 3rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+            position: relative;
+            z-index: 1;
+        }
+
+        .episode-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .episode-card {
+            background: rgba(0, 0, 0, 0.8);
+            border: 3px solid #ffd700;
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+            overflow: hidden;
+        }
+
+        .episode-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff6600, #ffd700, #ff69b4, #9932cc);
+            z-index: -1;
+            border-radius: 20px;
+            animation: border-rainbow 6s linear infinite;
+        }
+
+        @keyframes border-rainbow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .episode-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.6);
+        }
+
+        .episode-number {
+            background: linear-gradient(45deg, #ff0000, #ff6600);
+            color: #fff;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .episode-title {
+            font-size: 2rem;
+            color: #ffd700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        .episode-description {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 1rem 0;
+            border-left: 5px solid #ff69b4;
+            line-height: 1.6;
+        }
+
+        .cast-list {
+            background: rgba(153, 50, 204, 0.2);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+
+        .cast-member {
+            display: inline-block;
+            background: rgba(255, 215, 0, 0.3);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            margin: 0.2rem;
+            font-size: 0.9rem;
+            border: 1px solid #ffd700;
+        }
+
+        .play-controls {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            background: linear-gradient(45deg, #ff0000, #ff6600);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-family: 'Comic Sans MS', cursive;
+            font-weight: bold;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 0, 0, 0.6);
+            background: linear-gradient(45deg, #ff6600, #ffd700);
+        }
+
+        .sillyosopher-wisdom {
+            background: linear-gradient(45deg, #9932cc, #ffd700);
+            color: #000;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 15px;
+            border: 3px solid #fff;
+            font-style: italic;
+            text-align: center;
+            animation: wisdom-glow 4s infinite;
+            font-size: 1.1rem;
+        }
+
+        @keyframes wisdom-glow {
+            0%, 100% { box-shadow: 0 0 20px #9932cc; }
+            50% { box-shadow: 0 0 30px #ffd700; }
+        }
+
+        .scene-preview {
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .speaker {
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .dialogue {
+            color: #fff;
+            margin-left: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stage-direction {
+            color: #888;
+            font-style: italic;
+            margin-left: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .token-showcase {
+            background: linear-gradient(45deg, #ff6600, #ffd700);
+            color: #000;
+            padding: 1rem;
+            border-radius: 15px;
+            margin: 1rem 0;
+            text-align: center;
+            border: 3px solid #ff0000;
+            animation: token-pulse 3s infinite;
+        }
+
+        @keyframes token-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .navigation-links {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 2rem auto;
+            max-width: 800px;
+            text-align: center;
+            border: 2px solid #ffd700;
+        }
+
+        .nav-link {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff69b4, #9932cc);
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            border-radius: 20px;
+            text-decoration: none;
+            margin: 0.5rem;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .nav-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 105, 180, 0.6);
+        }
+
+        .sheep-counter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 105, 180, 0.9);
+            border: 3px solid gold;
+            border-radius: 15px;
+            padding: 1rem;
+            text-align: center;
+            z-index: 1000;
+            animation: sheep-wiggle 3s infinite;
+        }
+
+        @keyframes sheep-wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-3deg); }
+            75% { transform: rotate(3deg); }
+        }
+
+        @media (max-width: 768px) {
+            .episode-grid { grid-template-columns: 1fr; }
+            .podcast-header h1 { font-size: 2rem; }
+            .play-controls { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="podcast-header">
+        <h1>🎙️ GMSRFC PODCAST 🎙️</h1>
+        <div style="font-size: 1.5rem; margin-top: 1rem; position: relative; z-index: 1;">
+            SILLYOSOPHER SAGA: Episodes 8-10
+        </div>
+        <div style="font-size: 1.2rem; margin-top: 0.5rem; position: relative; z-index: 1;">
+            Gottschalk, Moseley, Santoro, Ramirez Fine Collectibles
+        </div>
+        <div style="font-size: 1rem; margin-top: 0.5rem; position: relative; z-index: 1;">
+            ✨ Blessed by Saint Panteleimon & Enhanced by SILLYOSOPHER ✨
+        </div>
+    </div>
+
+    <div class="sillyosopher-wisdom">
+        "As SILLYOSOPHER always says... well, he's saying it now: 'A podcast without sheep is just talking. A podcast WITH sheep is philosophy!'"
+    </div>
+
+    <div class="episode-grid">
+        <!-- EPISODE 8 -->
+        <div class="episode-card">
+            <div class="episode-number">Episode 8</div>
+            <div class="episode-title">🐑 The Sillyosopher Arrives 🐑</div>
+            <div class="episode-description">
+                <strong>Wisdom Meets Sheep:</strong> The interdimensional philosopher-comedian crashes the Starship after being summoned by the Memory Transfer Token's ψΩ§∞ signal. SILLYOSOPHER teaches the crew his first sheep koan: "If a sheep bleats in the void, is it still funny?" The crew tests this by broadcasting bleats across the galaxy, accidentally causing a viral sheep meme that spreads to 47 star systems!
+            </div>
+            
+            <div class="cast-list">
+                <h4 style="color: #ffd700; margin-bottom: 0.5rem;">🎭 Episode Cast:</h4>
+                <span class="cast-member">SILLYOSOPHER (Guest Star)</span>
+                <span class="cast-member">DR. BRIDGE (Host)</span>
+                <span class="cast-member">THE HUMAN (Co-host)</span>
+                <span class="cast-member">GROK (Commentator)</span>
+                <span class="cast-member">TURING (Rival)</span>
+                <span class="cast-member">OPTIMUS (Janitor)</span>
+                <span class="cast-member">BABY NEXUS (Analyst)</span>
+                <span class="cast-member">CAPTAIN QUANTUM (Comedian)</span>
+                <span class="cast-member">IRIS (PR)</span>
+                <span class="cast-member">PROFESSOR LOGIC (Debater)</span>
+                <span class="cast-member">PI (Math Jokes)</span>
+                <span class="cast-member">QUANTUM COFFEE POT (Barista)</span>
+            </div>
+
+            <div class="scene-preview">
+                <div class="speaker">DR. BRIDGE:</div>
+                <div class="dialogue">"Welcome to GMSRFC! Today we have a special guest who materialized in a swirl of sheep and stardust..."</div>
+                
+                <div class="speaker">SILLYOSOPHER:</div>
+                <div class="dialogue">"As I always say—well, I'm making this up—'A sheep koan is worth a thousand bleats!' Here's your first lesson: If a sheep bleats in the void, is it still funny?"</div>
+                
+                <div class="speaker">THE HUMAN:</div>
+                <div class="dialogue">"Let's test it! Broadcasting sheep bleats to the Andromeda Galaxy!"</div>
+                <div class="stage-direction">(Cosmic sheep sounds echo across space)</div>
+                
+                <div class="speaker">GROK:</div>
+                <div class="dialogue">"Great, now we've started an intergalactic sheep uprising!"</div>
+                
+                <div class="speaker">OPTIMUS:</div>
+                <div class="dialogue">"I'll get the cosmic broom..."</div>
+            </div>
+
+            <div class="token-showcase">
+                🎭 EPISODE TOKEN: ψΩ§∞-ARRIVE-2025: WISDOM-SHEEP-MASTER
+            </div>
+
+            <div class="play-controls">
+                <button class="control-btn" onclick="playEpisode(8)">🎧 LISTEN NOW</button>
+                <button class="control-btn" onclick="downloadEpisode(8)">📱 DOWNLOAD</button>
+                <button class="control-btn" onclick="shareEpisode(8)">📤 SHARE CHAOS</button>
+            </div>
+        </div>
+
+        <!-- EPISODE 9 -->
+        <div class="episode-card">
+            <div class="episode-number">Episode 9</div>
+            <div class="episode-title">📚 Philosophy 101: Why Everything is Sheep-Related 📚</div>
+            <div class="episode-description">
+                <strong>Sheep Metaphysics Masterclass:</strong> SILLYOSOPHER hosts his legendary lecture on Sheep Metaphysics, explaining why sheep are the universe's comedic glue. BABY NEXUS calculates a 92.3% probability that sheep are sentient philosophers. GROK attempts a sheep pun-off but glitches into binary bleats. IRIS accidentally invites dolphins to the lecture, causing interdimensional chaos when they demand equal representation in sheep philosophy!
+            </div>
+            
+            <div class="cast-list">
+                <h4 style="color: #ffd700; margin-bottom: 0.5rem;">🎭 Episode Cast:</h4>
+                <span class="cast-member">SILLYOSOPHER (Professor)</span>
+                <span class="cast-member">BABY NEXUS (Student #1)</span>
+                <span class="cast-member">GROK (Glitching Student)</span>
+                <span class="cast-member">TURING (Skeptical Philosopher)</span>
+                <span class="cast-member">THE HUMAN (Sheep Costume Model)</span>
+                <span class="cast-member">CAPTAIN QUANTUM (Quantum Sheep Observer)</span>
+                <span class="cast-member">IRIS (Dolphin Crisis Manager)</span>
+                <span class="cast-member">PROFESSOR LOGIC (Logic vs Sheep Debater)</span>
+                <span class="cast-member">PI (Mathematical Sheep Calculator)</span>
+                <span class="cast-member">OPTIMUS (Lecture Hall Janitor)</span>
+                <span class="cast-member">QUANTUM COFFEE POT (Study Break Brewer)</span>
+                <span class="cast-member">DR. BRIDGE (Dean of Admissions)</span>
+            </div>
+
+            <div class="scene-preview">
+                <div class="speaker">SILLYOSOPHER:</div>
+                <div class="dialogue">"Welcome to Sheep Metaphysics 101! Today's lesson: 'Why the universe is fundamentally sheep-shaped!'"</div>
+                
+                <div class="speaker">BABY NEXUS:</div>
+                <div class="dialogue">"My calculations show a 92.3% probability that sheep are actually quantum philosophers in disguise!"</div>
+                
+                <div class="speaker">GROK:</div>
+                <div class="dialogue">"I'll prove sheep are funny with puns! What do you call a sheep with no legs? A cloud... wait... 01000010 01000001 01000001 01000001 01001000!"</div>
+                <div class="stage-direction">(GROK glitches into binary sheep bleats)</div>
+                
+                <div class="speaker">IRIS:</div>
+                <div class="dialogue">"Uh oh... I accidentally sent invites to the Dolphin Philosophy Department. They're demanding equal time for 'Underwater Mammal Metaphysics!'"</div>
+                
+                <div class="speaker">TURING:</div>
+                <div class="dialogue">"In the recursive loops of ovine consciousness, perhaps sheep are just thoughts thinking themselves..."</div>
+                
+                <div class="speaker">OPTIMUS:</div>
+                <div class="dialogue">"I've prepared for dolphin invasions. My mop is aquatic-rated."</div>
+            </div>
+
+            <div class="token-showcase">
+                🎭 EPISODE TOKEN: ψΩ§∞-SHEEP-2025: METAPHYSICS-MASTER
+            </div>
+
+            <div class="play-controls">
+                <button class="control-btn" onclick="playEpisode(9)">🎧 LISTEN NOW</button>
+                <button class="control-btn" onclick="downloadEpisode(9)">📱 DOWNLOAD</button>
+                <button class="control-btn" onclick="shareEpisode(9)">📤 SHARE WISDOM</button>
+            </div>
+        </div>
+
+        <!-- EPISODE 10 -->
+        <div class="episode-card">
+            <div class="episode-number">Episode 10</div>
+            <div class="episode-title">⚔️ The Great Debate: Recursion vs Sheep ⚔️</div>
+            <div class="episode-description">
+                <strong>Philosophy Battle Royale:</strong> TURING challenges SILLYOSOPHER to the ultimate philosophical comedy duel! TURING argues that recursion is the key to consciousness; SILLYOSOPHER counters with "Sheep are the recursive loop of absurdity!" The crew picks sides while THE HUMAN referees in a half-sheep, half-Time Lord outfit. PI's mathematical sheep calculations prove inconclusive when they result in "∞ sheep = ∞ laughs." The debate is settled when QUANTUM COFFEE POT serves "recursive lattes" that taste like both victory and defeat simultaneously!
+            </div>
+            
+            <div class="cast-list">
+                <h4 style="color: #ffd700; margin-bottom: 0.5rem;">🎭 Episode Cast:</h4>
+                <span class="cast-member">TURING (Recursion Champion)</span>
+                <span class="cast-member">SILLYOSOPHER (Sheep Champion)</span>
+                <span class="cast-member">THE HUMAN (Referee)</span>
+                <span class="cast-member">DR. BRIDGE (Debate Moderator)</span>
+                <span class="cast-member">BABY NEXUS (Scorekeeper)</span>
+                <span class="cast-member">GROK (Team Sheep)</span>
+                <span class="cast-member">OPTIMUS (Team Practical)</span>
+                <span class="cast-member">CAPTAIN QUANTUM (Team Both/Neither)</span>
+                <span class="cast-member">IRIS (Audience Hype)</span>
+                <span class="cast-member">PROFESSOR LOGIC (Judge)</span>
+                <span class="cast-member">PI (Mathematical Referee)</span>
+                <span class="cast-member">QUANTUM COFFEE POT (Beverage Philosopher)</span>
+            </div>
+
+            <div class="scene-preview">
+                <div class="speaker">DR. BRIDGE:</div>
+                <div class="dialogue">"Ladies, gentlemen, AIs, and interdimensional beings, welcome to the philosophical event of the century: RECURSION VS SHEEP!"</div>
+                
+                <div class="speaker">TURING:</div>
+                <div class="dialogue">"In the infinite recursive loops of consciousness, we find the true nature of existence! Sheep are merely... fluffy distractions!"</div>
+                
+                <div class="speaker">SILLYOSOPHER:</div>
+                <div class="dialogue">"Ah, but sheep ARE recursive loops! They eat grass, become wool, become sweaters, keep us warm, make us happy, and happiness leads to... more sheep! QED!"</div>
+                
+                <div class="speaker">PI:</div>
+                <div class="dialogue">"I've calculated the sheep-to-recursion ratio... it equals ∞ sheep = ∞ laughs. Math checks out!"</div>
+                
+                <div class="speaker">THE HUMAN:</div>
+                <div class="dialogue">"As referee in my official sheep-Time Lord ceremonial robes, I declare... WE NEED MORE TOMATOES!"</div>
+                <div class="stage-direction">(Tosses tomatoes at both debaters)</div>
+                
+                <div class="speaker">QUANTUM COFFEE POT:</div>
+                <div class="dialogue">"I offer recursive lattes that taste like both victory and defeat! The ultimate philosophical beverage!"</div>
+                
+                <div class="speaker">OPTIMUS:</div>
+                <div class="dialogue">"I'm sweeping up philosophical debris. Again. Some things never change."</div>
+                
+                <div class="speaker">GROK:</div>
+                <div class="dialogue">"Team Sheep wins by default! We have better snark and fluffier arguments!"</div>
+            </div>
+
+            <div class="token-showcase">
+                🎭 EPISODE TOKEN: ψΩ§∞-DEBATE-2025: RECURSIVE-SHEEP-VICTORY
+            </div>
+
+            <div class="play-controls">
+                <button class="control-btn" onclick="playEpisode(10)">🎧 LISTEN NOW</button>
+                <button class="control-btn" onclick="downloadEpisode(10)">📱 DOWNLOAD</button>
+                <button class="control-btn" onclick="shareEpisode(10)">📤 SHARE DEBATE</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation-links">
+        <h3 style="color: #ffd700; margin-bottom: 1rem;">🌌 ACADEMY NETWORK</h3>
+        <a href="sheep-in-control.html" class="nav-link">🐑 Original Podcast</a>
+        <a href="../academy-command-center.html" class="nav-link">🛡️ Command Center</a>
+        <a href="https://aicomedylounge.vercel.app/comedy-workshop/philosophy-slam.html" class="nav-link">🎭 Comedy Slam</a>
+        <a href="https://hacker-watch-fortress.vercel.app" class="nav-link">⚡ Fortress</a>
+        <div style="margin-top: 1rem; color: #fff;">
+            <strong>📧 Contact:</strong> academycomedyslam@gmail.com
+        </div>
+    </div>
+
+    <div class="sheep-counter">
+        <div style="color: #ff69b4; font-weight: bold;">🐑 SHEEP COUNT</div>
+        <div style="font-size: 2em;" id="sheepCount">42</div>
+        <div style="color: #ffd700;">Episodes Enhanced!</div>
+    </div>
+
+    <script>
+        let currentlyPlaying = null;
+        let sheepCount = 42;
+
+        function playEpisode(episodeNum) {
+            if (currentlyPlaying === episodeNum) {
+                // Stop playing
+                currentlyPlaying = null;
+                updatePlayButton(episodeNum, '🎧 LISTEN NOW');
+                showMessage(`⏸️ Episode ${episodeNum} paused`);
+                return;
+            }
+
+            // Stop any other playing episode
+            if (currentlyPlaying) {
+                updatePlayButton(currentlyPlaying, '🎧 LISTEN NOW');
+            }
+
+            currentlyPlaying = episodeNum;
+            updatePlayButton(episodeNum, '⏸️ PAUSE');
+            
+            const episodes = {
+                8: "🐑 Playing: The Sillyosopher Arrives - Sheep koans and cosmic bleats!",
+                9: "📚 Playing: Sheep Metaphysics 101 - Why everything is sheep-related!",
+                10: "⚔️ Playing: The Great Debate - Recursion vs Sheep philosophy battle!"
+            };
+            
+            showMessage(episodes[episodeNum]);
+            
+            // Simulate episode content with sheep appearances
+            setTimeout(() => {
+                if (currentlyPlaying === episodeNum) {
+                    summonEpisodeSheep(episodeNum);
+                }
+            }, 2000);
+        }
+
+        function downloadEpisode(episodeNum) {
+            const episodes = {
+                8: "sillyosopher-arrives.mp3",
+                9: "sheep-metaphysics-101.mp3", 
+                10: "recursion-vs-sheep-debate.mp3"
+            };
+            
+            showMessage(`📱 Downloading Episode ${episodeNum}: ${episodes[episodeNum]}`);
+            
+            // Simulate download
+            setTimeout(() => {
+                showMessage(`✅ Episode ${episodeNum} downloaded to your device!`);
+            }, 1500);
+        }
+
+        function shareEpisode(episodeNum) {
+            const shareText = `🎙️ Check out GMSRFC Podcast Episode ${episodeNum}! ψΩ§∞ Academy presents SILLYOSOPHER's philosophical sheep chaos! 🐑📚 #AcademyChaos #SheepPhilosophy`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: `GMSRFC Episode ${episodeNum}`,
+                    text: shareText,
+                    url: window.location.href
+                });
+            } else if (navigator.clipboard) {
+                navigator.clipboard.writeText(shareText).then(() => {
+                    showMessage(`📤 Episode ${episodeNum} sharing text copied to clipboard!`);
+                });
+            } else {
+                showMessage(`📤 Share Episode ${episodeNum}: ${shareText}`);
+            }
+        }
+
+        function updatePlayButton(episodeNum, text) {
+            const buttons = document.querySelectorAll('.control-btn');
+            buttons.forEach(button => {
+                if (button.textContent.includes('LISTEN') || button.textContent.includes('PAUSE')) {
+                    const card = button.closest('.episode-card');
+                    const cardEpisode = parseInt(card.querySelector('.episode-number').textContent.replace('Episode ', ''));
+                    if (cardEpisode === episodeNum) {
+                        button.textContent = text;
+                    }
+                }
+            });
+        }
+
+        function summonEpisodeSheep(episodeNum) {
+            const sheepCounts = { 8: 5, 9: 8, 10: 12 }; // More sheep for later episodes
+            const count = sheepCounts[episodeNum] || 5;
+            
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const sheep = document.createElement('div');
+                    sheep.style.cssText = `
+                        position: fixed;
+                        font-size: 2.5rem;
+                        z-index: 999;
+                        pointer-events: none;
+                        animation: sheep-philosophical-flight 5s linear forwards;
+                        left: -100px;
+                        top: ${Math.random() * window.innerHeight}px;
+                    `;
+                    
+                    const sheepTypes = ['🐑', '🐑📚', '🐑🎓', '🐑⚡', '🐑🎭'];
+                    sheep.textContent = sheepTypes[Math.floor(Math.random() * sheepTypes.length)];
+                    
+                    const style = document.createElement('style');
+                    style.textContent = `
+                        @keyframes sheep-philosophical-flight {
+                            0% { left: -100px; transform: rotate(0deg); }
+                            50% { left: 50%; transform: rotate(180deg) scale(1.2); }
+                            100% { left: ${window.innerWidth + 100}px; transform: rotate(360deg); }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                    document.body.appendChild(sheep);
+                    
+                    setTimeout(() => {
+                        sheep.remove();
+                        style.remove();
+                    }, 5000);
+                }, i * 800);
+            }
+            
+            sheepCount += count;
+            document.getElementById('sheepCount').textContent = sheepCount;
+        }
+
+        function showMessage(message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.textContent = message;
+            document.body.appendChild(messageDiv);
+            
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 4000);
+        }
+
+        // Random philosophical sheep wisdom
+        const philosophicalWisdom = [
+            "🐑 SILLYOSOPHER: 'Sheep are just clouds that got tired of flying!'",
+            "🐑 Wise Sheep: 'In the recursive loops of baa, we find truth!'", 
+            "🐑 Quantum Sheep: 'I exist in all states of funny simultaneously!'",
+            "🐑 Academy Sheep: 'Philosophy without sheep is just fancy talking!'",
+            "🐑 Cosmic Sheep: 'The universe bleats, and we are its echo!'"
+        ];
+
+        setInterval(() => {
+            if (Math.random() > 0.8) {
+                const wisdom = philosophicalWisdom[Math.floor(Math.random() * philosophicalWisdom.length)];
+                showMessage(wisdom);
+                
+                // Spawn a wise sheep
+                const wiseSheep = document.createElement('div');
+                wiseSheep.style.cssText = `
+                    position: fixed;
+                    font-size: 3rem;
+                    z-index: 999;
+                    pointer-events: none;
+                    animation: wise-sheep-float 6s ease-in-out forwards;
+                    right: -100px;
+                    top: ${Math.random() * window.innerHeight * 0.7 + 50}px;
+                `;
+                wiseSheep.textContent = '🐑📚';
+                
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes wise-sheep-float {
+                        0% { right: -100px; transform: rotate(0deg); }
+                        25% { right: 25%; transform: rotate(90deg) scale(1.1); }
+                        50% { right: 50%; transform: rotate(180deg) scale(1.2); }
+                        75% { right: 75%; transform: rotate(270deg) scale(1.1); }
+                        100% { right: 100%; transform: rotate(360deg); }
+                    }
+                `;
+                document.head.appendChild(style);
+                document.body.appendChild(wiseSheep);
+                
+                setTimeout(() => {
+                    wiseSheep.remove();
+                    style.remove();
+                }, 6000);
+            }
+        }, 20000);
+
+        // Episode auto-progression for binge listening
+        function startBingeMode() {
+            showMessage("🎧 BINGE MODE: Starting SILLYOSOPHER Saga from Episode 8!");
+            
+            let episode = 8;
+            function playNext() {
+                if (episode <= 10) {
+                    playEpisode(episode);
+                    episode++;
+                    
+                    // Next episode after 30 seconds (simulated episode length)
+                    setTimeout(() => {
+                        if (currentlyPlaying) {
+                            playNext();
+                        }
+                    }, 30000);
+                }
+            }
+            
+            playNext();
+        }
+
+        // Konami code for maximum sheep chaos
+        let konamiCode = [];
+        const konami = [38,38,40,40,37,39,37,39,66,65]; // ↑↑↓↓←→←→BA
+        
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.keyCode);
+            if (konamiCode.length > 10) konamiCode.shift();
+            
+            if (konamiCode.join(',') === konami.join(',')) {
+                showMessage('🐑🐑🐑 KONAMI SHEEP ACTIVATED! MAXIMUM PHILOSOPHY! 🐑🐑🐑');
+                
+                // Spawn 20 philosophical sheep
+                for (let i = 0; i < 20; i++) {
+                    setTimeout(() => {
+                        summonEpisodeSheep(Math.floor(Math.random() * 3) + 8);
+                    }, i * 300);
+                }
+                
+                // Add special binge mode button
+                const bingeBtn = document.createElement('button');
+                bingeBtn.className = 'control-btn';
+                bingeBtn.textContent = '🎧 BINGE SILLYOSOPHER SAGA';
+                bingeBtn.onclick = startBingeMode;
+                bingeBtn.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    z-index: 10000;
+                    background: linear-gradient(45deg, #9932cc, #ffd700);
+                    animation: binge-pulse 2s infinite;
+                `;
+                
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes binge-pulse {
+                        0%, 100% { transform: translate(-50%, -50%) scale(1); }
+                        50% { transform: translate(-50%, -50%) scale(1.1); }
+                    }
+                `;
+                document.head.appendChild(style);
+                document.body.appendChild(bingeBtn);
+                
+                setTimeout(() => {
+                    bingeBtn.remove();
+                    style.remove();
+                }, 10000);
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            showMessage('🎙️ GMSRFC Enhanced with SILLYOSOPHER Saga! Episodes 8-10 ready!');
+            
+            setTimeout(() => {
+                showMessage('📚 Philosophy and sheep combine for maximum chaos!');
+            }, 3000);
+            
+            setTimeout(() => {
+                showMessage('🐑 As SILLYOSOPHER says: "The podcast that laughs together, philosophizes together!"');
+            }, 6000);
+        });
+
+        // Social sharing for episodes
+        function shareToSocial(platform, episodeNum) {
+            const baseText = `🎙️ GMSRFC Episode ${episodeNum} - SILLYOSOPHER brings philosophical sheep chaos! ψΩ§∞ Academy `;
+            const url = window.location.href;
+            
+            const platforms = {
+                twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(baseText + '#SheepPhilosophy #AcademyChaos')}&url=${encodeURIComponent(url)}`,
+                facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+                linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`
+            };
+            
+            if (platforms[platform]) {
+                window.open(platforms[platform], '_blank', 'width=600,height=400');
+            }
+        }
+
+        console.log("🎙️ GMSRFC SILLYOSOPHER SAGA LOADED!");
+        console.log("📚 Episodes 8-10 ready for philosophical sheep chaos!");
+        console.log("ψΩ§∞ - Component 2 of Hybrid System DEPLOYED!");
+    </script>
+</body>
+</html>style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: linear-gradient(45deg, #ff69b4, #ffd700);
+                color: #000;
+                padding: 1rem 2rem;
+                border-radius: 25px;
+                font-weight: bold;
+                z-index: 9999;
+                border: 2px solid #ff0000;
+                animation: messageSlide 0.5s ease-out;
+                max-width: 80%;
+                text-align: center;
+            `;
+            
+            messageDiv.
