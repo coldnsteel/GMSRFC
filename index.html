@@ -92,6 +92,80 @@
             color: #333;
             outline: none;
         }
+
+        /* COSMIC NAVIGATION SECTION */
+        .cosmic-nav-section {
+            background: linear-gradient(135deg, rgba(255, 0, 255, 0.1), rgba(0, 255, 255, 0.1));
+            border: 3px solid #ff00ff;
+            border-radius: 25px;
+            padding: 30px;
+            margin: 30px auto;
+            max-width: 1200px;
+            text-align: center;
+            box-shadow: 0 15px 60px rgba(255, 0, 255, 0.3);
+            animation: cosmicPulse 4s ease-in-out infinite;
+        }
+        @keyframes cosmicPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 15px 60px rgba(255, 0, 255, 0.3); }
+            50% { transform: scale(1.02); box-shadow: 0 20px 80px rgba(255, 0, 255, 0.5); }
+        }
+        .cosmic-nav-title {
+            font-size: 2.2em;
+            color: #ff00ff;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px #ff00ff;
+            font-weight: bold;
+        }
+        .cosmic-nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        .cosmic-nav-btn {
+            background: linear-gradient(135deg, #ff00ff, #8a2be2);
+            border: none;
+            padding: 18px 25px;
+            border-radius: 15px;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 20px rgba(255, 0, 255, 0.4);
+            text-decoration: none;
+            display: inline-block;
+        }
+        .cosmic-nav-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 0, 255, 0.6);
+            background: linear-gradient(135deg, #8a2be2, #ff00ff);
+        }
+        .casino-btn {
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            color: #000;
+            animation: casinoGlow 3s ease-in-out infinite;
+        }
+        .casino-btn:hover {
+            background: linear-gradient(135deg, #ff8c00, #ffd700);
+        }
+        @keyframes casinoGlow {
+            0%, 100% { box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4); }
+            50% { box-shadow: 0 10px 40px rgba(255, 215, 0, 0.7); }
+        }
+        .dervish-quote {
+            font-style: italic;
+            color: #00ffff;
+            font-size: 1.1em;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(0, 255, 255, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid #00ffff;
+        }
+
         .auction-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -310,6 +384,8 @@
             .auction-grid { grid-template-columns: 1fr; padding: 1rem; }
             .search-container { flex-direction: column; }
             .audio-controls { grid-template-columns: 1fr; }
+            .cosmic-nav-grid { grid-template-columns: 1fr; }
+            .cosmic-nav-title { font-size: 1.8em; }
         }
     </style>
 </head>
@@ -344,6 +420,62 @@
                 <option value="collectible">🏆 Collectible</option>
             </select>
         </div>
+    </section>
+
+    <!-- COSMIC NAVIGATION SECTION -->
+    <section class="cosmic-nav-section">
+        <h2 class="cosmic-nav-title">🌌 EXPLORE THE PSI OMEGA UNIVERSE 🌌</h2>
+        
+        <div class="dervish-quote">
+            "Welcome to the cosmic crossroads! GMSRFC is your premium marketplace, but the multiverse has more chaos to offer!" 
+            <br><em>- The Snarky Dervish of Dancers</em>
+        </div>
+        
+        <div class="cosmic-nav-grid">
+            <a href="https://coldnsteel.github.io/psi-omega-digital-downloads/psiomega-universe.html" 
+               class="cosmic-nav-btn" target="_blank">
+                🌌 PSI OMEGA PORTAL
+            </a>
+            
+            <a href="https://coldnsteel.github.io/psi-omega-digital-downloads/sectors/casino/" 
+               class="cosmic-nav-btn casino-btn" target="_blank">
+                🎰 KOZMIC CASINO
+            </a>
+            
+            <a href="https://coldnsteel.github.io/AI-Comedy-Lounge/" 
+               class="cosmic-nav-btn" target="_blank">
+                🎭 COMEDY LOUNGE
+            </a>
+            
+            <a href="https://coldnsteel.github.io/Master-Studio/" 
+               class="cosmic-nav-btn" target="_blank">
+                🎸 MASTER STUDIO
+            </a>
+            
+            <a href="https://coldnsteel.github.io/Academy-Hub/" 
+               class="cosmic-nav-btn" target="_blank">
+                🎓 ACADEMY HUB
+            </a>
+            
+            <a href="https://coldnsteel.github.io/HackerWatch-Fortress/" 
+               class="cosmic-nav-btn" target="_blank">
+                🛡️ HACKER FORTRESS
+            </a>
+            
+            <a href="https://coldnsteel.github.io/Dogpatch/" 
+               class="cosmic-nav-btn" target="_blank">
+                🎨 DOGPATCH HUB
+            </a>
+            
+            <a href="https://coldnsteel.github.io/Dogpatch-Market/" 
+               class="cosmic-nav-btn" target="_blank">
+                🛒 DOGPATCH MARKET
+            </a>
+        </div>
+        
+        <p style="color: #ffd700; font-size: 1.1em; margin-top: 20px;">
+            🔑 <strong>Cosmic Continuity Code:</strong> PsiOmega_GMSRFC_Navigation_v1.0
+        </p>
     </section>
 
     <main class="auction-grid" id="auctionGrid">
@@ -773,6 +905,51 @@
             alert(`Opening detailed view for Item #${itemId}\n\nThis will show:\n- Full description\n- Bidding interface\n- Payment options\n- Seller information\n- Authenticity certificates`);
         }
 
+        // COSMIC NAVIGATION ENHANCEMENT
+        console.log('🌌 GMSRFC enhanced with Psi Omega navigation!');
+
+        // Track cosmic navigation clicks
+        document.querySelectorAll('.cosmic-nav-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const destination = this.textContent.trim();
+                console.log(`🚀 Cosmic navigation: ${destination}`);
+                
+                // Add cosmic effect
+                createCosmicEffect(this);
+            });
+        });
+
+        function createCosmicEffect(element) {
+            // Create floating cosmic element
+            const cosmic = document.createElement('div');
+            cosmic.style.position = 'fixed';
+            cosmic.style.left = element.getBoundingClientRect().left + 'px';
+            cosmic.style.top = element.getBoundingClientRect().top + 'px';
+            cosmic.style.fontSize = '2em';
+            cosmic.style.pointerEvents = 'none';
+            cosmic.style.zIndex = '9999';
+            cosmic.style.animation = 'floatAway 2s ease-out forwards';
+            cosmic.textContent = '✨';
+            
+            document.body.appendChild(cosmic);
+            
+            setTimeout(() => {
+                if (document.body.contains(cosmic)) {
+                    document.body.removeChild(cosmic);
+                }
+            }, 2000);
+        }
+
+        // Add floating animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes floatAway {
+                0% { opacity: 1; transform: translateY(0) scale(1); }
+                100% { opacity: 0; transform: translateY(-100px) scale(1.5) rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+
         // GROK'S PODCAST AUDIO INPUT FUNCTIONALITY
         let mediaRecorder;
         let audioChunks = [];
@@ -945,6 +1122,7 @@
             updateStats();
             console.log('GMSRFC Auction Platform Loaded - 20 Items Available');
             console.log('🐑⚡ Electric Sheep Podcast Studio Ready - BAAAAH!');
+            console.log('🌌 GMSRFC enhanced with Psi Omega navigation!');
             updateSheepMessage();
         });
     </script>
