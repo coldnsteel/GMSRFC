@@ -3,93 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎙️ GMSRFC - Johnny 5 Alive's Community</title>
+    <title>🛒 Dogpatch Market - Premium Cosmic Commerce 🛒</title>
     <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="manifest" href="/manifest.json">
+    <style>
+        .market-hero {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 140, 0, 0.3));
+            border: 4px solid #ffd700;
+            border-radius: 25px;
+            padding: 40px;
+            margin: 30px auto;
+            max-width: 900px;
+            text-align: center;
+            box-shadow: 0 15px 60px rgba(255, 215, 0, 0.4);
+            animation: marketGlow 4s ease-in-out infinite;
+        }
+        @keyframes marketGlow {
+            0%, 100% { box-shadow: 0 15px 60px rgba(255, 215, 0, 0.4); }
+            50% { box-shadow: 0 20px 80px rgba(255, 215, 0, 0.6); }
+        }
+        .premium-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        .premium-card {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 140, 0, 0.1));
+            border: 3px solid #ffd700;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+        .premium-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 50px rgba(255, 215, 0, 0.5);
+        }
+        .price-tag {
+            background: linear-gradient(135deg, #ff1493, #8a2be2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        .gmsrfc-price {
+            background: #003087;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+        }
+        .premium-features li { margin: 8px 0; color: #00ffff; }
+        .premium-features li::before { content: '⭐'; margin-right: 8px; }
+        .gmsrfc-section {
+            background: rgba(255, 215, 0, 0.1);
+            border: 3px solid #ffd700;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px auto;
+        }
+        .gmsrfc-card {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 255, 255, 0.1));
+            border: 3px solid #00ff88;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <header class="cosmic-header">
-            <h1 class="main-title">🎙️ GMSRFC Community</h1>
-            <nav class="nav">
-                <a href="#signup">📧 Subscribe</a>
-                <a href="#products">💾 Products</a>
-                <a href="#podcast">🎙️ Podcast</a>
-                <a href="#children">👶 Children</a>
-                <a href="/Dogpatch-Market/index.html">🛒 Market</a>
-                <a href="https://coldnsteel.github.io/little-x-rocket">📚 Little X Rocket</a>
-                <a href="https://coldnsteel.github.io/AI-Comedy-Lounge">😂 Comedy Lounge</a>
-                <a href="https://coldnsteel.github.io/KOZMIC-KASINO">🎰 Kozmic Kasino</a>
-                <a href="#admin" id="adminLink" style="display: none;">⚡ Admin</a>
-            </nav>
-        </header>
-        <section id="children">
-            <h2>👶 Children’s Cosmic Corner</h2>
-            <p>Access free content (ages 5–12) with a suggested $5 donation.</p>
-            <button class="enter-sector-btn" onclick="window.location.href='/sectors/cashier/index.html?item=donation&amount=5'">💖 Donate $5</button>
-        </section>
-        <section id="products">
-            <h2>Family-Friendly Products</h2>
-            <div class="premium-grid" id="productContainer"></div>
-        </section>
-        <section id="podcast">
-            <h2>🎙️ Podcast Network</h2>
-            <div class="console-controls" id="recordControls" style="display: none;">
-                <button class="enter-sector-btn" id="recordBtn" onclick="toggleRecording()">🔴 Start Recording</button>
-                <p>Recording time: <span id="recordTime">00:00</span></p>
-            </div>
-            <div id="episodeList"></div>
-        </section>
+    <header class="cosmic-header">
+        <h1 class="main-title">🛒 DOGPATCH MARKET 🛒</h1>
+        <div class="dervish-quip">
+            "Welcome to the premium side of the multiverse!" - <em>Snarky Dervish</em>
+        </div>
+    </header>
+    <div class="market-hero">
+        <h2 style="color: #ffd700; font-size: 2.5em;">💎 PREMIUM COSMIC CONTENT 💎</h2>
+        <p style="color: #ff8c00; font-size: 1.3em;">
+            Exclusive podcasts, studios, collectibles, and cosmic experiences for all humanity!
+        </p>
+        <button class="verify-btn" style="font-size: 1.2em; padding: 20px 40px; background: #0070ba; color: white; border: none; border-radius: 8px;" onclick="window.location.href='/sectors/cashier/index.html'">💳 SECURE COSMIC CHECKOUT 💳</button>
     </div>
+    <div class="gmsrfc-section">
+        <h2 style="color: #ffd700; text-align: center;">🎙️ GMSRFC COLLECTION 🎙️</h2>
+        <p style="color: #00ffff; text-align: center;">
+            Humanity-oriented content from Johnny 5 Alive's community
+        </p>
+        <div class="premium-grid">
+            <div class="premium-card gmsrfc-card">
+                <div class="sector-icon">🎓</div>
+                <h2 class="sector-title">Academy Edition</h2>
+                <div class="price-tag gmsrfc-price">$149.00</div>
+                <p class="sector-description">Complete educational platform.</p>
+                <ul class="premium-features">
+                    <li>Coding tutorials</li>
+                    <li>Cosmic wisdom</li>
+                    <li>Interactive tools</li>
+                    <li>Certificate</li>
+                    <li>Lifetime access</li>
+                </ul>
+                <button class="enter-sector-btn" style="padding: 12px 20px; background: #0070ba; color: white; border: none; border-radius: 8px;" onclick="purchaseGMSRFC('academy-edition', 149, 'Academy Edition')">🎓 Purchase</button>
+            </div>
+            <div class="premium-card gmsrfc-card">
+                <div class="sector-icon">🚀</div>
+                <h2 class="sector-title">Little X Rocket Bundle</h2>
+                <div class="price-tag gmsrfc-price">$15.00</div>
+                <p class="sector-description">Ebooks and tools for all ages.</p>
+                <ul class="premium-features">
+                    <li>Interactive ebooks</li>
+                    <li>Music composer</li>
+                    <li>Family sharing</li>
+                </ul>
+                <button class="enter-sector-btn" style="padding: 12px 20px; background: #0070ba; color: white; border: none; border-radius: 8px;" onclick="purchaseGMSRFC('little-x-bundle', 15, 'Little X Rocket Bundle')">🚀 Purchase</button>
+            </div>
+            <div class="premium-card gmsrfc-card">
+                <div class="sector-icon">💖</div>
+                <h2 class="sector-title">Humanity Donation</h2>
+                <div class="price-tag gmsrfc-price">$5.00</div>
+                <p class="sector-description">Support humanity-focused content.</p>
+                <ul class="premium-features">
+                    <li>Free content access</li>
+                    <li>Tax-deductible</li>
+                </ul>
+                <button class="enter-sector-btn" style="padding: 12px 20px; background: #0070ba; color: white; border: none; border-radius: 8px;" onclick="purchaseGMSRFC('donation', 5, 'Humanity Donation')">💖 Donate</button>
+            </div>
+        </div>
+    </div>
+    <div style="background: rgba(0, 255, 255, 0.1); border: 3px solid #00ffff; border-radius: 20px; padding: 30px; margin: 40px auto; max-width: 800px; text-align: center;">
+        <h3 style="color: #00ffff;">🔐 Secure Cosmic Commerce 🔐</h3>
+        <p style="color: #ffffff;">
+            Secured with cosmic-grade encryption. Accepts BTC, ETH, CTOK, PayPal.
+        </p>
+        <div style="margin: 25px 0;">
+            <span style="color: #ffd700; margin: 0 15px;">🪙 Bitcoin</span>
+            <span style="color: #ffd700; margin: 0 15px;">💎 Ethereum</span>
+            <span style="color: #ffd700; margin: 0 15px;">🌟 CTOK</span>
+            <span style="color: #ffd700; margin: 0 15px;">💖 PayPal</span>
+        </div>
+    </div>
+    <footer class="cosmic-footer">
+        <h3>🛒 Dogpatch Market</h3>
+        <div>
+            <a href="/" style="color: #ff00ff;">🏛️ Back to GMSRFC</a>
+            <a href="https://coldnsteel.github.io/psi-omega-digital-downloads/psi-omega-universe.md" style="color: #ffd700;">🌌 Psi Omega Portal</a>
+        </div>
+        <p style="color: #00ffff;">🔑 Code: PsiOmega_DogpatchMarket_Commerce_v1.0</p>
+    </footer>
     <script src="/assets/js/cosmic.js"></script>
     <script>
-        let allItems = [
-            { id: 'academy-edition', title: 'Academy Edition', description: 'Educational platform.', price: 149, emoji: '🎓', ageRating: 'child-friendly' },
-            { id: 'dino-symphony', title: 'Dino Symphony MP3', description: 'Cosmic dinosaur music.', price: 5, emoji: '🎵', ageRating: 'child-friendly' },
-            { id: 'aria-wallpaper', title: 'ARIA Wallpaper Pack', description: 'Family-friendly wallpapers.', price: 2, emoji: '🖼️', ageRating: 'child-friendly' },
-            { id: 'fortress-pass', title: 'Fortress Pass Certificate', description: 'Cybersecurity access.', price: 8, emoji: '🛡️', ageRating: 'child-friendly' },
-            { id: 'little-x-bundle', title: 'Little X Rocket Bundle', description: 'Ebooks and tools.', price: 15, emoji: '🚀', ageRating: 'child-friendly' }
-        ];
-        let podcastEpisodes = [
-            { id: 'sillyosopher-1', title: 'Sillyosopher Saga Ep1', audioUrl: '/podcasts/sillyosopher-saga-ep1.mp3', duration: '5:00', published: true },
-            { id: 'sillyosopher-2', title: 'Sillyosopher Saga Ep2', audioUrl: '/podcasts/sillyosopher-saga-ep2.mp3', duration: '5:00', published: true }
-        ];
-        let isAdminMode = false;
-        const adminPassword = 'johnny5alive2025';
-        function checkAdminAccess() {
-            const params = new URLSearchParams(window.location.search);
-            if (params.get('admin') === 'true' && params.get('password') === adminPassword) {
-                isAdminMode = true;
-                document.getElementById('admin').style.display = 'block';
-                document.getElementById('adminLink').style.display = 'inline-block';
-                document.getElementById('recordControls').style.display = 'block';
-            }
-        }
-        function renderItems() {
-            document.getElementById('productContainer').innerHTML = allItems
-                .map(item => `
-                    <div class="premium-card gmsrfc-card">
-                        <div class="sector-icon">${item.emoji}</div>
-                        <h2 class="sector-title">${item.title}</h2>
-                        <div class="price-tag gmsrfc-price">$${item.price}</div>
-                        <p class="sector-description">${item.description}</p>
-                        <button class="enter-sector-btn" onclick="handlePayment('${item.id}', ${item.price})">💳 Buy Now</button>
-                    </div>
-                `)
-                .join('');
-        }
-        function handlePayment(itemId, amount) {
+        function purchaseGMSRFC(itemId, price, itemName) {
             const log = JSON.parse(localStorage.getItem('securityLog') || '[]');
-            log.push({ issue: `Purchase: ${itemId} ($${amount})`, timestamp: new Date().toISOString(), source: 'GMSRFC' });
+            log.push({ issue: `Purchase: ${itemName} ($${price})`, timestamp: new Date().toISOString(), source: 'Dogpatch-Market' });
             localStorage.setItem('securityLog', JSON.stringify(log));
-            window.location.href = `/sectors/cashier/index.html?item=${itemId}&amount=${amount}`;
+            window.location.href = `/sectors/cashier/index.html?item=${itemId}&amount=${price}`;
         }
-        // Add podcast recording and other scripts from original
-        document.addEventListener('DOMContentLoaded', () => {
-            checkAdminAccess();
-            renderItems();
-            // Add podcast rendering
-        });
     </script>
 </body>
 </html>
