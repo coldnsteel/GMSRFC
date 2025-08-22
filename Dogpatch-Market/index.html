@@ -48,8 +48,11 @@
             margin: 15px 0;
         }
         .gmsrfc-price {
-            background: linear-gradient(135deg, #00ff88, #00ffff);
-            color: #000;
+            background: #003087;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
         }
         .premium-features li { margin: 8px 0; color: #00ffff; }
         .premium-features li::before { content: '⭐'; margin-right: 8px; }
@@ -69,7 +72,6 @@
 <body>
     <header class="cosmic-header">
         <h1 class="main-title">🛒 DOGPATCH MARKET 🛒</h1>
-        <p class="subtitle">Premium Cosmic Commerce & Digital Collectibles</p>
         <div class="dervish-quip">
             "Welcome to the premium side of the multiverse!" - <em>Snarky Dervish</em>
         </div>
@@ -77,14 +79,14 @@
     <div class="market-hero">
         <h2 style="color: #ffd700; font-size: 2.5em;">💎 PREMIUM COSMIC CONTENT 💎</h2>
         <p style="color: #ff8c00; font-size: 1.3em;">
-            Exclusive podcasts, studios, collectibles, and cosmic experiences!
+            Exclusive podcasts, studios, collectibles, and cosmic experiences for all humanity!
         </p>
         <button class="verify-btn" style="font-size: 1.2em; padding: 20px 40px; background: #0070ba; color: white; border: none; border-radius: 8px;" onclick="window.location.href='/sectors/cashier/index.html'">💳 SECURE COSMIC CHECKOUT 💳</button>
     </div>
     <div class="gmsrfc-section">
         <h2 style="color: #ffd700; text-align: center;">🎙️ GMSRFC COLLECTION 🎙️</h2>
         <p style="color: #00ffff; text-align: center;">
-            Family-friendly content from Johnny 5 Alive's community
+            Humanity-oriented content from Johnny 5 Alive's community
         </p>
         <div class="premium-grid">
             <div class="premium-card gmsrfc-card">
@@ -102,10 +104,46 @@
                 <button class="enter-sector-btn" style="padding: 12px 20px; background: #0070ba; color: white; border: none; border-radius: 8px;" onclick="purchaseGMSRFC('academy-edition', 149, 'Academy Edition')">🎓 Purchase</button>
             </div>
             <div class="premium-card gmsrfc-card">
+                <div class="sector-icon">🎵</div>
+                <h2 class="sector-title">Dino Symphony MP3</h2>
+                <div class="price-tag gmsrfc-price">$5.00</div>
+                <p class="sector-description">Cosmic dinosaur music.</p>
+                <ul class="premium-features">
+                    <li>High-quality MP3</li>
+                    <li>Humanity-friendly</li>
+                    <li>Instant download</li>
+                </ul>
+                <button class="enter-sector-btn" style="padding: 12px 20px; background: #0070ba; color: white; border: none; border-radius: 8px;" onclick="purchaseGMSRFC('dino-symphony', 5, 'Dino Symphony MP3')">🎵 Purchase</button>
+            </div>
+            <div class="premium-card gmsrfc-card">
+                <div class="sector-icon">🖼️</div>
+                <h2 class="sector-title">ARIA Wallpaper Pack</h2>
+                <div class="price-tag gmsrfc-price">$2.00</div>
+                <p class="sector-description">Humanity-friendly wallpapers.</p>
+                <ul class="premium-features">
+                    <li>HD wallpapers</li>
+                    <li>Multiple themes</li>
+                    <li>Instant download</li>
+                </ul>
+                <button class="enter-sector-btn" style="padding: 12px 20px; background: #0070ba; color: white; border: none; border-radius: 8px;" onclick="purchaseGMSRFC('aria-wallpaper', 2, 'ARIA Wallpaper Pack')">🖼️ Purchase</button>
+            </div>
+            <div class="premium-card gmsrfc-card">
+                <div class="sector-icon">🛡️</div>
+                <h2 class="sector-title">Fortress Pass Certificate</h2>
+                <div class="price-tag gmsrfc-price">$8.00</div>
+                <p class="sector-description">Cybersecurity access.</p>
+                <ul class="premium-features">
+                    <li>Secure access</li>
+                    <li>Digital certificate</li>
+                    <li>Humanity-focused</li>
+                </ul>
+                <button class="enter-sector-btn" style="padding: 12px 20px; background: #0070ba; color: white; border: none; border-radius: 8px;" onclick="purchaseGMSRFC('fortress-pass', 8, 'Fortress Pass Certificate')">🛡️ Purchase</button>
+            </div>
+            <div class="premium-card gmsrfc-card">
                 <div class="sector-icon">🚀</div>
                 <h2 class="sector-title">Little X Rocket Bundle</h2>
                 <div class="price-tag gmsrfc-price">$15.00</div>
-                <p class="sector-description">Ebooks and tools for kids.</p>
+                <p class="sector-description">Ebooks and tools for all ages.</p>
                 <ul class="premium-features">
                     <li>Interactive ebooks</li>
                     <li>Music composer</li>
@@ -115,14 +153,14 @@
             </div>
             <div class="premium-card gmsrfc-card">
                 <div class="sector-icon">💖</div>
-                <h2 class="sector-title">Children’s Donation</h2>
+                <h2 class="sector-title">Humanity Donation</h2>
                 <div class="price-tag gmsrfc-price">$5.00</div>
-                <p class="sector-description">Support kids’ content.</p>
+                <p class="sector-description">Support humanity-focused content.</p>
                 <ul class="premium-features">
                     <li>Free content access</li>
                     <li>Tax-deductible</li>
                 </ul>
-                <button class="enter-sector-btn" style="padding: 12px 20px; background: #0070ba; color: white; border: none; border-radius: 8px;" onclick="purchaseGMSRFC('donation', 5, 'Children’s Donation')">💖 Donate</button>
+                <button class="enter-sector-btn" style="padding: 12px 20px; background: #0070ba; color: white; border: none; border-radius: 8px;" onclick="purchaseGMSRFC('donation', 5, 'Humanity Donation')">💖 Donate</button>
             </div>
         </div>
     </div>
@@ -132,7 +170,7 @@
             Secured with cosmic-grade encryption. Accepts BTC, ETH, CTOK, PayPal.
         </p>
         <div style="margin: 25px 0;">
-            <span style="color: #ffd700; margin: 0 15px;">�� Bitcoin</span>
+            <span style="color: #ffd700; margin: 0 15px;">🪙 Bitcoin</span>
             <span style="color: #ffd700; margin: 0 15px;">💎 Ethereum</span>
             <span style="color: #ffd700; margin: 0 15px;">🌟 CTOK</span>
             <span style="color: #ffd700; margin: 0 15px;">💖 PayPal</span>
@@ -142,7 +180,7 @@
         <h3>🛒 Dogpatch Market</h3>
         <div>
             <a href="/" style="color: #ff00ff;">🏛️ Back to GMSRFC</a>
-            <a href="https://coldnsteel.github.io/psi-omega-digital-downloads/psi-omega-universe.md" style="color: #ffd700;">�� Psi Omega Portal</a>
+            <a href="https://coldnsteel.github.io/psi-omega-digital-downloads/psi-omega-universe.md" style="color: #ffd700;">🌌 Psi Omega Portal</a>
         </div>
         <p style="color: #00ffff;">🔑 Code: PsiOmega_DogpatchMarket_Commerce_v1.0</p>
     </footer>
