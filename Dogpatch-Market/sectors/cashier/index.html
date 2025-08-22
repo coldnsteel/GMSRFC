@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💳 Dogpatch Market - Cosmic Checkout 💳</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <style>
+        .cashier-container {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 140, 0, 0.3));
+            border: 4px solid #ffd700;
+            border-radius: 25px;
+            padding: 40px;
+            margin: 30px auto;
+            max-width: 800px;
+            text-align: center;
+            box-shadow: 0 15px 60px rgba(255, 215, 0, 0.4);
+        }
+        .cashier-title {
+            color: #ffd700;
+            font-size: 2.5em;
+        }
+        .cashier-info {
+            color: #00ffff;
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .payment-methods span {
+            color: #ffd700;
+            font-weight: bold;
+        }
+        .confirm-btn {
+            font-size: 1.2em;
+            padding: 15px 30px;
+            background: #0070ba;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .confirm-btn:hover {
+            background: #005f9e;
+        }
+        .back-btn {
+            font-size: 1em;
+            padding: 10px 20px;
+            background: #ff1493;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .back-btn:hover {
+            background: #d8117b;
+        }
+    </style>
+</head>
+<body>
+    <div class="cashier-container">
+        <h1 class="cashier-title">💳 Cosmic Checkout 💳</h1>
+        <p class="cashier-info">Securely purchase your humanity-oriented GMSRFC content!</p>
+        <div id="purchaseDetails" class="cashier-info"></div>
+        <div class="payment-methods">
+            <span>🪙 Bitcoin</span>
+            <span>💎 Ethereum</span>
+            <span>🌟 CTOK</span>
+            <span>💖 PayPal</span>
+        </div>
+        <button class="confirm-btn" onclick="confirmPurchase()">Confirm Purchase</button>
+        <br>
+        <button class="back-btn" onclick="window.location.href='/Dogpatch-Market/index.html'">🛒 Back to Market</button>
+    </div>
+    <footer class="cosmic-footer">
+        <h3>🛒 Dogpatch Market</h3>
+        <div>
+            <a href="/" style="color: #ff00ff;">🏛️ Back to GMSRFC</a>
+            <a href="https://coldnsteel.github.io/psi-omega-digital-downloads/psi-omega-universe.md" style="color: #ffd700;">🌌 Psi Omega Portal</a>
+        </div>
+        <p style="color: #00ffff;">🔑 Code: PsiOmega_Cashier_Commerce_v1.0</p>
+    </footer>
+    <script src="/assets/js/cosmic.js"></script>
+    <script>
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                item: params.get('item') || 'unknown',
+                amount: parseFloat(params.get('amount')) || 0
+            };
+        }
+        function displayPurchaseDetails() {
+            const { item, amount } = getQueryParams();
+            const itemNames = {
+                'academy-edition': 'Academy Edition',
+                'dino-symphony': 'Dino Symphony MP3',
+                'aria-wallpaper': 'ARIA Wallpaper Pack',
+                'fortress-pass': 'Fortress Pass Certificate',
+                'little-x-bundle': 'Little X Rocket Bundle',
+                'donation': 'Humanity Donation'
+            };
+            const itemName = itemNames[item] || 'Unknown Item';
+            document.getElementById('purchaseDetails').innerHTML = `Purchasing: ${itemName} for $${amount.toFixed(2)}`;
+        }
+        function confirmPurchase() {
+            const { item, amount } = getQueryParams();
+            const log = JSON.parse(localStorage.getItem('securityLog') || '[]');
+            log.push({ issue: `Confirmed Purchase: ${item} ($${amount})`, timestamp: new Date().toISOString(), source: 'Cashier' });
+            localStorage.setItem('securityLog', JSON.stringify(log));
+            alert(`Thank you for purchasing ${item}! Your transaction of $${amount.toFixed(2)} is being processed.`);
+            window.location.href = '/Dogpatch-Market/index.html';
+        }
+        document.addEventListener('DOMContentLoaded', displayPurchaseDetails);
+    </script>
+</body>
+</html>
