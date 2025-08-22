@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌌 Psi-Omega Universe - Humanity’s Cosmic Journey 🌌</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <style>
+        .psi-hero {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 140, 0, 0.3));
+            border: 4px solid #ffd700;
+            border-radius: 25px;
+            padding: 40px;
+            margin: 30px auto;
+            max-width: 900px;
+            text-align: center;
+            box-shadow: 0 15px 60px rgba(255, 215, 0, 0.4);
+            animation: psiGlow 4s ease-in-out infinite;
+        }
+        @keyframes psiGlow {
+            0%, 100% { box-shadow: 0 15px 60px rgba(255, 215, 0, 0.4); }
+            50% { box-shadow: 0 20px 80px rgba(255, 215, 0, 0.6); }
+        }
+        .psi-content {
+            background: rgba(0, 255, 255, 0.1);
+            border: 3px solid #00ffff;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px auto;
+            max-width: 800px;
+            text-align: center;
+        }
+        .psi-title {
+            color: #ffd700;
+            font-size: 2.5em;
+        }
+        .psi-text {
+            color: #00ffff;
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
+        .explore-btn {
+            font-size: 1.2em;
+            padding: 15px 30px;
+            background: #0070ba;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .explore-btn:hover {
+            background: #005f9e;
+        }
+    </style>
+</head>
+<body>
+    <div class="psi-hero">
+        <h1 class="psi-title">🌌 Welcome to the Psi-Omega Universe 🌌</h1>
+        <p class="psi-text">
+            A humanity-oriented journey of cosmic discovery, creativity, and connection from Johnny 5 Alive’s GMSRFC community.
+        </p>
+        <button class="explore-btn" onclick="window.location.href='/Dogpatch-Market/index.html'">🛒 Explore Dogpatch Market</button>
+    </div>
+    <div class="psi-content">
+        <h2 class="psi-title">Join the Cosmic Mission</h2>
+        <p class="psi-text">
+            Psi-Omega is about uniting humanity through family-friendly content, educational tools, and cosmic experiences. From coding tutorials to dinosaur music, our universe empowers all ages to explore, learn, and create.
+        </p>
+        <button class="explore-btn" onclick="window.location.href='/sectors/cashier/index.html?item=donation&amount=5'">💖 Support with $5 Donation</button>
+    </div>
+    <footer class="cosmic-footer">
+        <h3>🌌 Psi-Omega Universe</h3>
+        <div>
+            <a href="/" style="color: #ff00ff;">🏛️ Back to GMSRFC</a>
+            <a href="/Dogpatch-Market/index.html" style="color: #ffd700;">🛒 Dogpatch Market</a>
+        </div>
+        <p style="color: #00ffff;">🔑 Code: PsiOmega_Intro_v1.0</p>
+    </footer>
+    <script src="/assets/js/cosmic.js"></script>
+    <script>
+        const log = JSON.parse(localStorage.getItem('securityLog') || '[]');
+        log.push({ issue: 'Visited Psi-Omega Intro', timestamp: new Date().toISOString(), source: 'Psi-Omega' });
+        localStorage.setItem('securityLog', JSON.stringify(log));
+    </script>
+</body>
+</html>
