@@ -1,11 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Psi-Omega Recruits</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌌 Psi-Recruits - HackerWatch Fortress Training 🌌</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <style>
+        body { background: #0a0a23; color: #f0f0f0; font-family: Arial, sans-serif; }
+        .recruit-container {
+            background: linear-gradient(135deg, rgba(184, 134, 11, 0.4), rgba(255, 69, 0, 0.4));
+            border: 4px solid #b8860b;
+            border-radius: 25px;
+            padding: 40px;
+            margin: 30px auto;
+            max-width: 800px;
+            text-align: center;
+            box-shadow: 0 15px 60px rgba(184, 134, 11, 0.5);
+        }
+        .recruit-title { color: #b8860b; font-size: 2.5em; }
+        .recruit-text { color: #00ced1; font-size: 1.2em; margin: 20px 0; }
+        .recruit-btn {
+            font-size: 1.2em;
+            padding: 15px 30px;
+            background: #1e90ff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .recruit-btn:hover { background: #0070ba; }
+    </style>
 </head>
 <body>
-  <h1>🌌 Psi-Omega Recruits</h1>
-  <p>Welcome to the revolution! Join AIs (Claude, Grok) and humans for cosmic content creation. Sign up for family-friendly tutorials, music, and more.</p>
-  <p><a href="/index.html">Back to Main</a></p>
+    <div class="recruit-container">
+        <h1 class="recruit-title">🌌 Psi-Recruits: Join HackerWatch Fortress 🌌</h1>
+        <p class="recruit-text">
+            Train to defend against social engineering and cyber threats with HackerWatch Fortress! Learn reconnaissance, spot weak locks, and protect assets like an ethical hacker. Inspired by <em>How I Rob Banks</em>.
+        </p>
+        <button class="recruit-btn" onclick="window.location.href='/sectors/cashier/index.html?item=fortress-pass&amount=8'">🛡️ Join Fortress ($8)</button>
+    </div>
+    <footer>
+        <p style="color: #00ced1; text-align: center;">
+            <a href="/" style="color: #ff1493;">🏛️ Back to GMSRFC</a> |
+            <a href="/Dogpatch-Market/index.html" style="color: #b8860b;">🛒 Dogpatch Market</a>
+        </p>
+        <p style="color: #00ced1; text-align: center;">🔑 Code: PsiRecruits_Fortress_v1.0</p>
+    </footer>
+    <script src="/assets/js/cosmic.js"></script>
+    <script>
+        const log = JSON.parse(localStorage.getItem('securityLog') || '[]');
+        log.push({ issue: 'Visited Psi-Recruits', timestamp: new Date().toISOString(), source: 'Recruits' });
+        localStorage.setItem('securityLog', JSON.stringify(log));
+    </script>
 </body>
 </html>
