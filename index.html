@@ -3,38 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎙️ GMSRFC - Johnny 5 Alive's Community</title>
+    <title>🌌 GMSRFC - Johnny 5 Alive's Cosmic Community 🌌</title>
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="manifest" href="/manifest.json">
+    <style>
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .cosmic-header { text-align: center; background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 140, 0, 0.3)); border: 4px solid #ffd700; border-radius: 25px; padding: 20px; box-shadow: 0 15px 60px rgba(255, 215, 0, 0.4); }
+        .main-title { color: #ffd700; font-size: 3em; }
+        .nav { display: flex; justify-content: center; gap: 20px; margin: 20px 0; }
+        .nav a { color: #00ffff; font-size: 1.2em; text-decoration: none; }
+        .nav a:hover { color: #ff1493; }
+        .premium-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin: 30px 0; }
+        .premium-card { background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 255, 255, 0.1)); border: 3px solid #00ff88; border-radius: 20px; padding: 20px; text-align: center; transition: all 0.4s ease; }
+        .premium-card:hover { transform: translateY(-10px); box-shadow: 0 15px 50px rgba(0, 255, 136, 0.5); }
+        .gmsrfc-price { background: #003087; color: white; padding: 10px 20px; border-radius: 25px; font-weight: bold; margin: 15px 0; }
+        .enter-sector-btn { padding: 12px 20px; background: #0070ba; color: white; border: none; border-radius: 8px; cursor: pointer; }
+        .enter-sector-btn:hover { background: #005f9e; }
+        .section-title { color: #ffd700; text-align: center; font-size: 2em; }
+        .section-text { color: #00ffff; text-align: center; font-size: 1.2em; }
+    </style>
 </head>
 <body>
     <div class="container">
         <header class="cosmic-header">
-            <h1 class="main-title">🎙️ GMSRFC Community</h1>
+            <h1 class="main-title">🌌 GMSRFC Community 🌌</h1>
             <nav class="nav">
-                <a href="/psi-recruits-html">🌌 Recruits</a>
-                <a href="#signup">📧 Subscribe</a>
+                <a href="/subscribe.html">📧 Subscribe</a>
                 <a href="#products">💾 Products</a>
                 <a href="#podcast">🎙️ Podcast</a>
-                <a href="#children">👶 Children</a>
+                <a href="#humanity">💖 Humanity</a>
                 <a href="/Dogpatch-Market/index.html">🛒 Market</a>
+                <a href="/psi-recruits.html">🌌 Recruits</a>
                 <a href="https://coldnsteel.github.io/little-x-rocket">📚 Little X Rocket</a>
                 <a href="https://coldnsteel.github.io/AI-Comedy-Lounge">😂 Comedy Lounge</a>
                 <a href="https://coldnsteel.github.io/KOZMIC-KASINO">🎰 Kozmic Kasino</a>
                 <a href="#admin" id="adminLink" style="display: none;">⚡ Admin</a>
             </nav>
         </header>
-        <section id="children">
-            <h2>👶 Humanity’s Cosmic Corner</h2>
-            <p>Access free content for all ages with a suggested $5 donation.</p>
+        <section id="humanity">
+            <h2 class="section-title">💖 Humanity’s Cosmic Corner</h2>
+            <p class="section-text">Access free content for all ages with a suggested $5 donation.</p>
             <button class="enter-sector-btn" onclick="window.location.href='/sectors/cashier/index.html?item=donation&amount=5'">💖 Donate $5</button>
         </section>
         <section id="products">
-            <h2>Humanity-Friendly Products</h2>
+            <h2 class="section-title">Humanity-Friendly Products</h2>
             <div class="premium-grid" id="productContainer"></div>
         </section>
         <section id="podcast">
-            <h2>🎙️ Podcast Network</h2>
+            <h2 class="section-title">🎙️ Podcast Network</h2>
             <div class="console-controls" id="recordControls" style="display: none;">
                 <button class="enter-sector-btn" id="recordBtn" onclick="toggleRecording()">🔴 Start Recording</button>
                 <p>Recording time: <span id="recordTime">00:00</span></p>
@@ -48,7 +64,7 @@
             { id: 'academy-edition', title: 'Academy Edition', description: 'Educational platform.', price: 149, emoji: '🎓', ageRating: 'humanity-friendly' },
             { id: 'dino-symphony', title: 'Dino Symphony MP3', description: 'Cosmic dinosaur music.', price: 5, emoji: '🎵', ageRating: 'humanity-friendly' },
             { id: 'aria-wallpaper', title: 'ARIA Wallpaper Pack', description: 'Humanity-friendly wallpapers.', price: 2, emoji: '🖼️', ageRating: 'humanity-friendly' },
-            { id: 'fortress-pass', title: 'Fortress Pass Certificate', description: 'Cybersecurity access.', price: 8, emoji: '🛡️', ageRating: 'humanity-friendly' },
+            { id: 'fortress-pass', title: 'HackerWatch Fortress Pass', description: 'Cybersecurity access.', price: 8, emoji: '🛡️', ageRating: 'humanity-friendly' },
             { id: 'little-x-bundle', title: 'Little X Rocket Bundle', description: 'Ebooks and tools.', price: 15, emoji: '🚀', ageRating: 'humanity-friendly' }
         ];
         let podcastEpisodes = [
@@ -72,7 +88,7 @@
                     <div class="premium-card gmsrfc-card">
                         <div class="sector-icon">${item.emoji}</div>
                         <h2 class="sector-title">${item.title}</h2>
-                        <div class="price-tag gmsrfc-price">$${item.price}</div>
+                        <div class="gmsrfc-price">$${item.price}</div>
                         <p class="sector-description">${item.description}</p>
                         <button class="enter-sector-btn" onclick="handlePayment('${item.id}', ${item.price})">💳 Buy Now</button>
                     </div>
