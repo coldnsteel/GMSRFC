@@ -3,119 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💳 Dogpatch Market - Cosmic Checkout 💳</title>
+    <title>🛡️ Cashier - GMSRFC Cosmic Checkout 🌌</title>
     <link rel="stylesheet" href="/assets/css/style.css">
     <style>
+        body { background: #0a0a23; color: #f0f0f0; font-family: Arial, sans-serif; }
         .cashier-container {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 140, 0, 0.3));
-            border: 4px solid #ffd700;
+            background: linear-gradient(135deg, rgba(184, 134, 11, 0.4), rgba(255, 69, 0, 0.4));
+            border: 4px solid #b8860b;
             border-radius: 25px;
             padding: 40px;
             margin: 30px auto;
             max-width: 800px;
             text-align: center;
-            box-shadow: 0 15px 60px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 15px 60px rgba(184, 134, 11, 0.5);
         }
-        .cashier-title {
-            color: #ffd700;
-            font-size: 2.5em;
-        }
-        .cashier-info {
-            color: #00ffff;
-            font-size: 1.2em;
-            margin: 20px 0;
-        }
-        .payment-methods {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 20px 0;
-        }
-        .payment-methods span {
-            color: #ffd700;
-            font-weight: bold;
-        }
-        .confirm-btn {
+        .cashier-title { color: #b8860b; font-size: 2.5em; }
+        .cashier-text { color: #00ced1; font-size: 1.2em; margin: 20px 0; }
+        .cashier-btn {
             font-size: 1.2em;
             padding: 15px 30px;
-            background: #0070ba;
+            background: #1e90ff;
             color: white;
             border: none;
             border-radius: 8px;
             cursor: pointer;
         }
-        .confirm-btn:hover {
-            background: #005f9e;
-        }
-        .back-btn {
-            font-size: 1em;
-            padding: 10px 20px;
-            background: #ff1493;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        .back-btn:hover {
-            background: #d8117b;
-        }
+        .cashier-btn:hover { background: #0070ba; }
     </style>
 </head>
 <body>
     <div class="cashier-container">
-        <h1 class="cashier-title">💳 Cosmic Checkout 💳</h1>
-        <p class="cashier-info">Securely purchase your humanity-oriented GMSRFC content!</p>
-        <div id="purchaseDetails" class="cashier-info"></div>
-        <div class="payment-methods">
-            <span>🪙 Bitcoin</span>
-            <span>💎 Ethereum</span>
-            <span>🌟 CTOK</span>
-            <span>💖 PayPal</span>
-        </div>
-        <button class="confirm-btn" onclick="confirmPurchase()">Confirm Purchase</button>
-        <br>
-        <button class="back-btn" onclick="window.location.href='/Dogpatch-Market/index.html'">🛒 Back to Market</button>
+        <h1 class="cashier-title">🛡️ GMSRFC Cosmic Cashier 🌌</h1>
+        <p class="cashier-text" id="purchaseInfo">Processing your purchase...</p>
+        <button class="cashier-btn" onclick="completePurchase()">💳 Complete Purchase</button>
     </div>
-    <footer class="cosmic-footer">
-        <h3>🛒 Dogpatch Market</h3>
-        <div>
-            <a href="/" style="color: #ff00ff;">🏛️ Back to GMSRFC</a>
-            <a href="https://coldnsteel.github.io/psi-omega-digital-downloads/psi-omega-universe.md" style="color: #ffd700;">🌌 Psi Omega Portal</a>
-        </div>
-        <p style="color: #00ffff;">🔑 Code: PsiOmega_Cashier_Commerce_v1.0</p>
+    <footer>
+        <p style="color: #00ced1; text-align: center;">
+            <a href="/" style="color: #ff1493;">🏛️ Back to GMSRFC</a> |
+            <a href="/Dogpatch-Market/index.html" style="color: #b8860b;">🛒 Dogpatch Market</a>
+        </p>
+        <p style="color: #00ced1; text-align: center;">🔑 Code: Cashier_Fortress_v1.3</p>
     </footer>
     <script src="/assets/js/cosmic.js"></script>
     <script>
         function getQueryParams() {
             const params = new URLSearchParams(window.location.search);
-            return {
-                item: params.get('item') || 'unknown',
-                amount: parseFloat(params.get('amount')) || 0
-            };
+            return { item: params.get('item') || 'unknown', amount: params.get('amount') || '0' };
         }
-        function displayPurchaseDetails() {
-            const { item, amount } = getQueryParams();
-            const itemNames = {
-                'academy-edition': 'Academy Edition',
-                'dino-symphony': 'Dino Symphony MP3',
-                'aria-wallpaper': 'ARIA Wallpaper Pack',
-                'fortress-pass': 'Fortress Pass Certificate',
-                'little-x-bundle': 'Little X Rocket Bundle',
-                'donation': 'Humanity Donation'
-            };
-            const itemName = itemNames[item] || 'Unknown Item';
-            document.getElementById('purchaseDetails').innerHTML = `Purchasing: ${itemName} for $${amount.toFixed(2)}`;
-        }
-        function confirmPurchase() {
+        function completePurchase() {
             const { item, amount } = getQueryParams();
             const log = JSON.parse(localStorage.getItem('securityLog') || '[]');
-            log.push({ issue: `Confirmed Purchase: ${item} ($${amount})`, timestamp: new Date().toISOString(), source: 'Cashier' });
+            log.push({ issue: `Purchase completed: ${item} ($${amount})`, timestamp: new Date().toISOString(), source: 'Cashier' });
             localStorage.setItem('securityLog', JSON.stringify(log));
-            alert(`Thank you for purchasing ${item}! Your transaction of $${amount.toFixed(2)} is being processed.`);
+            alert(`Thank you for purchasing ${item} for $${amount}! You're now part of the Psi-Omega universe.`);
             window.location.href = '/Dogpatch-Market/index.html';
         }
-        document.addEventListener('DOMContentLoaded', displayPurchaseDetails);
+        document.addEventListener('DOMContentLoaded', () => {
+            const { item, amount } = getQueryParams();
+            document.getElementById('purchaseInfo').textContent = `Purchasing ${item} for $${amount}...`;
+        });
     </script>
 </body>
 </html>
