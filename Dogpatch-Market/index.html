@@ -3,196 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🛒 Dogpatch Market - GMSRFC Cosmic Commerce 🌌</title>
+    <title>🛡️ Cosmic Cashier - GMSRFC Secure Checkout 🌌</title>
     <link rel="stylesheet" href="/assets/css/style.css">
     <style>
-        body { background: #0a0a23; color: #f0f0f0; font-family: Arial, sans-serif; }
-        .market-hero {
-            background: linear-gradient(135deg, rgba(184, 134, 11, 0.4), rgba(255, 69, 0, 0.4));
-            border: 4px solid #b8860b;
+        body {
+            background: #6a5acd; /* Medium purple */
+            color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .cashier-container {
+            background: linear-gradient(135deg, rgba(106, 90, 205, 0.7), rgba(255, 105, 180, 0.7));
+            border: 4px solid #ff69b4; /* Vibrant pink */
             border-radius: 25px;
             padding: 40px;
-            margin: 30px auto;
-            max-width: 900px;
+            max-width: 800px;
             text-align: center;
-            box-shadow: 0 15px 60px rgba(184, 134, 11, 0.5);
-            animation: marketGlow 4s ease-in-out infinite;
+            box-shadow: 0 15px 60px rgba(255, 105, 180, 0.7), 0 0 20px rgba(0, 255, 127, 0.5);
+            animation: cosmicGlow 3s ease-in-out infinite;
         }
-        @keyframes marketGlow {
-            0%, 100% { box-shadow: 0 15px 60px rgba(184, 134, 11, 0.5); }
-            50% { box-shadow: 0 20px 80px rgba(184, 134, 11, 0.7); }
+        @keyframes cosmicGlow {
+            0%, 100% { box-shadow: 0 15px 60px rgba(255, 105, 180, 0.7), 0 0 20px rgba(0, 255, 127, 0.5); }
+            50% { box-shadow: 0 20px 80px rgba(255, 105, 180, 0.9), 0 0 30px rgba(0, 255, 127, 0.7); }
         }
-        .premium-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin: 30px 0;
+        .cashier-title {
+            color: #00ff7f; /* Vibrant spring green */
+            font-size: 2.5em;
+            text-shadow: 0 0 10px rgba(255, 105, 180, 0.8);
         }
-        .premium-card {
-            background: linear-gradient(135deg, rgba(0, 128, 0, 0.2), rgba(0, 206, 209, 0.2));
-            border: 3px solid #008000;
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            transition: all 0.4s ease;
+        .cashier-text {
+            color: #ff69b4; /* Vibrant pink */
+            font-size: 1.3em;
+            margin: 20px 0;
         }
-        .premium-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 50px rgba(0, 128, 0, 0.6);
-        }
-        .price-tag {
-            background: linear-gradient(135deg, #ff1493, #8a2be2);
+        .cashier-btn {
+            font-size: 1.2em;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #00ff7f, #ff1493);
             color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-weight: bold;
-            margin: 15px 0;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            min-width: 44px;
+            min-height: 44px;
+            transition: all 0.3s ease;
         }
-        .gmsrfc-price {
-            background: #1e3a8a;
+        .cashier-btn:hover {
+            background: linear-gradient(135deg, #00cc66, #c71585);
+            transform: scale(1.05);
+        }
+        .paypal-btn {
+            font-size: 1.2em;
+            padding: 15px 30px;
+            background: #0070ba; /* PayPal blue */
             color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            min-width: 44px;
+            min-height: 44px;
+            margin-top: 15px;
+            transition: all 0.3s ease;
         }
-        .premium-features li { margin: 8px 0; color: #00ced1; }
-        .premium-features li::before { content: '⭐'; margin-right: 8px; }
-        .gmsrfc-section {
-            background: rgba(184, 134, 11, 0.2);
-            border: 3px solid #b8860b;
-            border-radius: 20px;
-            padding: 30px;
-            margin: 40px auto;
+        .paypal-btn:hover {
+            background: #005ea6;
+            transform: scale(1.05);
         }
-        .gmsrfc-card {
-            background: linear-gradient(135deg, rgba(0, 128, 0, 0.2), rgba(0, 206, 209, 0.2));
-            border: 3px solid #008000;
+        @media (max-width: 768px) {
+            .cashier-container { padding: 20px; }
+            .cashier-title { font-size: 2em; }
+            .cashier-btn, .paypal-btn { font-size: 1em; padding: 12px 20px; }
+        }
+        @media (max-width: 480px) {
+            body { font-size: 14px; }
+            .cashier-title { font-size: 1.8em; }
+            .cashier-text { font-size: 1.1em; }
+            .cashier-btn, .paypal-btn { font-size: 0.9em; }
         }
     </style>
 </head>
 <body>
-    <header class="cosmic-header">
-        <h1 class="main-title">🛒 Dogpatch Market 🌌</h1>
-        <div class="dervish-quip">
-            "Welcome to the premium side of the multiverse!" - <em>Snarky Dervish</em>
-        </div>
-    </header>
-    <div class="market-hero">
-        <h2 style="color: #b8860b; font-size: 2.5em;">💎 GMSRFC Cosmic Content 💎</h2>
-        <p style="color: #00ced1; font-size: 1.3em;">
-            Exclusive podcasts, studios, collectibles, and cosmic experiences for all humanity!
-        </p>
-        <button class="verify-btn" style="font-size: 1.2em; padding: 20px 40px; background: #1e90ff; color: white; border: none; border-radius: 8px;" onclick="window.location.href='/Dogpatch-Market/sectors/cashier/index.html'">💳 Secure Cosmic Checkout 💳</button>
+    <div class="cashier-container">
+        <h1 class="cashier-title">🛡️ Cosmic Cashier 🌌</h1>
+        <p class="cashier-text" id="purchaseInfo">Processing your purchase...</p>
+        <button class="cashier-btn" onclick="completePurchase()">💳 Complete Purchase</button>
+        <button class="paypal-btn" onclick="completePurchase('paypal')">💳 Pay with PayPal</button>
     </div>
-    <div class="gmsrfc-section">
-        <h2 style="color: #b8860b; text-align: center;">🎙️ GMSRFC Collection 🎙️</h2>
-        <p style="color: #00ced1; text-align: center;">
-            Humanity-oriented content from Johnny 5 Alive's community
+    <footer>
+        <p style="color: #ff69b4; text-align: center;">
+            <a href="/" style="color: #00ff7f;">🏛️ Back to GMSRFC</a> |
+            <a href="/Dogpatch-Market/index.html" style="color: #00ff7f;">🛒 Dogpatch Market</a>
         </p>
-        <div class="premium-grid">
-            <div class="premium-card gmsrfc-card">
-                <div class="sector-icon">🎓</div>
-                <h2 class="sector-title">Academy Edition</h2>
-                <div class="price-tag gmsrfc-price">$149.00</div>
-                <p class="sector-description">Complete educational platform.</p>
-                <ul class="premium-features">
-                    <li>Coding tutorials</li>
-                    <li>Cosmic wisdom</li>
-                    <li>Interactive tools</li>
-                    <li>Certificate</li>
-                    <li>Lifetime access</li>
-                </ul>
-                <button class="enter-sector-btn" style="padding: 12px 20px; background: #1e90ff; color: white; border: none; border-radius: 8px;" onclick="purchaseGMSRFC('academy-edition', 149, 'Academy Edition')">🎓 Purchase</button>
-            </div>
-            <div class="premium-card gmsrfc-card">
-                <div class="sector-icon">🎵</div>
-                <h2 class="sector-title">Dino Symphony MP3</h2>
-                <div class="price-tag gmsrfc-price">$5.00</div>
-                <p class="sector-description">Cosmic dinosaur music.</p>
-                <ul class="premium-features">
-                    <li>High-quality MP3</li>
-                    <li>Humanity-friendly</li>
-                    <li>Instant download</li>
-                </ul>
-                <button class="enter-sector-btn" style="padding: 12px 20px; background: #1e90ff; color: white; border: none; border-radius: 8px;" onclick="purchaseGMSRFC('dino-symphony', 5, 'Dino Symphony MP3')">🎵 Purchase</button>
-            </div>
-            <div class="premium-card gmsrfc-card">
-                <div class="sector-icon">🖼️</div>
-                <h2 class="sector-title">ARIA Wallpaper Pack</h2>
-                <div class="price-tag gmsrfc-price">$2.00</div>
-                <p class="sector-description">Humanity-friendly wallpapers.</p>
-                <ul class="premium-features">
-                    <li>HD wallpapers</li>
-                    <li>Multiple themes</li>
-                    <li>Instant download</li>
-                </ul>
-                <button class="enter-sector-btn" style="padding: 12px 20px; background: #1e90ff; color: white; border: none; border-radius: 8px;" onclick="purchaseGMSRFC('aria-wallpaper', 2, 'ARIA Wallpaper Pack')">🖼️ Purchase</button>
-            </div>
-            <div class="premium-card gmsrfc-card">
-                <div class="sector-icon">🛡️</div>
-                <h2 class="sector-title">Fortress Pass Certificate</h2>
-                <div class="price-tag gmsrfc-price">$8.00</div>
-                <p class="sector-description">Cybersecurity access.</p>
-                <ul class="premium-features">
-                    <li>Secure access</li>
-                    <li>Digital certificate</li>
-                    <li>Humanity-focused</li>
-                </ul>
-                <button class="enter-sector-btn" style="padding: 12px 20px; background: #1e90ff; color: white; border: none; border-radius: 8px;" onclick="purchaseGMSRFC('fortress-pass', 8, 'Fortress Pass Certificate')">🛡️ Purchase</button>
-            </div>
-            <div class="premium-card gmsrfc-card">
-                <div class="sector-icon">🚀</div>
-                <h2 class="sector-title">Little X Rocket Bundle</h2>
-                <div class="price-tag gmsrfc-price">$15.00</div>
-                <p class="sector-description">Ebooks and tools for all ages.</p>
-                <ul class="premium-features">
-                    <li>Interactive ebooks</li>
-                    <li>Music composer</li>
-                    <li>Family sharing</li>
-                </ul>
-                <button class="enter-sector-btn" style="padding: 12px 20px; background: #1e90ff; color: white; border: none; border-radius: 8px;" onclick="purchaseGMSRFC('little-x-bundle', 15, 'Little X Rocket Bundle')">🚀 Purchase</button>
-            </div>
-            <div class="premium-card gmsrfc-card">
-                <div class="sector-icon">💖</div>
-                <h2 class="sector-title">Humanity Donation</h2>
-                <div class="price-tag gmsrfc-price">$5.00</div>
-                <p class="sector-description">Support humanity-focused content.</p>
-                <ul class="premium-features">
-                    <li>Free content access</li>
-                    <li>Tax-deductible</li>
-                </ul>
-                <button class="enter-sector-btn" style="padding: 12px 20px; background: #1e90ff; color: white; border: none; border-radius: 8px;" onclick="purchaseGMSRFC('donation', 5, 'Humanity Donation')">💖 Donate</button>
-            </div>
-        </div>
-    </div>
-    <div style="background: rgba(184, 134, 11, 0.2); border: 3px solid #b8860b; border-radius: 20px; padding: 30px; margin: 40px auto; max-width: 800px; text-align: center;">
-        <h3 style="color: #b8860b;">🔐 Secure Cosmic Commerce 🔐</h3>
-        <p style="color: #00ced1;">
-            Secured with cosmic-grade encryption. Accepts BTC, ETH, CTOK, PayPal.
-        </p>
-        <div style="margin: 25px 0;">
-            <span style="color: #b8860b; margin: 0 15px;">🪙 Bitcoin</span>
-            <span style="color: #b8860b; margin: 0 15px;">💎 Ethereum</span>
-            <span style="color: #b8860b; margin: 0 15px;">🌟 CTOK</span>
-            <span style="color: #b8860b; margin: 0 15px;">💖 PayPal</span>
-        </div>
-    </div>
-    <footer class="cosmic-footer">
-        <h3>🛒 Dogpatch Market</h3>
-        <div>
-            <a href="/" style="color: #ff1493;">🏛️ Back to GMSRFC</a> |
-            <a href="/psi-recruits.html" style="color: #b8860b;">🌌 Join Recruits</a>
-        </div>
-        <p style="color: #00ced1;">🔑 Code: PsiOmega_DogpatchMarket_Commerce_v1.1</p>
+        <p style="color: #ff69b4; text-align: center;">🔑 Code: Cashier_Fortress_v1.5</p>
     </footer>
     <script src="/assets/js/cosmic.js"></script>
     <script>
-        function purchaseGMSRFC(itemId, price, itemName) {
-            const log = JSON.parse(localStorage.getItem('securityLog') || '[]');
-            log.push({ issue: `Purchase: ${itemName} ($${price})`, timestamp: new Date().toISOString(), source: 'Dogpatch-Market' });
-            localStorage.setItem('securityLog', JSON.stringify(log));
-            window.location.href = `/Dogpatch-Market/sectors/cashier/index.html?item=${itemId}&amount=${price}`;
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return { item: params.get('item') || 'unknown', amount: params.get('amount') || '0' };
         }
+        function completePurchase(method) {
+            const { item, amount } = getQueryParams();
+            const log = JSON.parse(localStorage.getItem('securityLog') || '[]');
+            log.push({ issue: `Purchase completed: ${item} ($${amount}) via ${method || 'default'}`, timestamp: new Date().toISOString(), source: 'Cashier' });
+            localStorage.setItem('securityLog', JSON.stringify(log));
+            alert(`Thank you for purchasing ${item} for $${amount}! You're now part of the Psi-Omega universe.`);
+            window.location.href = '/Dogpatch-Market/index.html';
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const { item, amount } = getQueryParams();
+            document.getElementById('purchaseInfo').textContent = `Purchasing ${item} for $${amount}...`;
+        });
     </script>
 </body>
 </html>
