@@ -82,7 +82,7 @@
         <p style="color: #00ced1; font-size: 1.3em;">
             Exclusive podcasts, studios, collectibles, and cosmic experiences for all humanity!
         </p>
-        <button class="verify-btn" style="font-size: 1.2em; padding: 20px 40px; background: #1e90ff; color: white; border: none; border-radius: 8px;" onclick="window.location.href='/sectors/cashier/index.html'">💳 Secure Cosmic Checkout 💳</button>
+        <button class="verify-btn" style="font-size: 1.2em; padding: 20px 40px; background: #1e90ff; color: white; border: none; border-radius: 8px;" onclick="window.location.href='/Dogpatch-Market/sectors/cashier/index.html'">💳 Secure Cosmic Checkout 💳</button>
     </div>
     <div class="gmsrfc-section">
         <h2 style="color: #b8860b; text-align: center;">🎙️ GMSRFC Collection 🎙️</h2>
@@ -191,7 +191,7 @@
             const log = JSON.parse(localStorage.getItem('securityLog') || '[]');
             log.push({ issue: `Purchase: ${itemName} ($${price})`, timestamp: new Date().toISOString(), source: 'Dogpatch-Market' });
             localStorage.setItem('securityLog', JSON.stringify(log));
-            window.location.href = `/sectors/cashier/index.html?item=${itemId}&amount=${price}`;
+            window.location.href = `/Dogpatch-Market/sectors/cashier/index.html?item=${itemId}&amount=${price}`;
         }
     </script>
 </body>
