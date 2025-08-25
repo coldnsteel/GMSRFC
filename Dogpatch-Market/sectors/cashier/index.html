@@ -3,60 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🛡️ Cashier - GMSRFC Cosmic Checkout 🌌</title>
+    <title>🛡️ Cosmic Cashier - GMSRFC Secure Checkout 🌌</title>
     <link rel="stylesheet" href="/assets/css/style.css">
     <style>
-        body { background: #0a0a23; color: #f0f0f0; font-family: Arial, sans-serif; }
+        body {
+            background: #6a5acd; /* Medium purple */
+            color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
         .cashier-container {
-            background: linear-gradient(135deg, rgba(184, 134, 11, 0.4), rgba(255, 69, 0, 0.4));
-            border: 4px solid #b8860b;
+            background: linear-gradient(135deg, rgba(106, 90, 205, 0.7), rgba(255, 105, 180, 0.7));
+            border: 4px solid #ff69b4;
             border-radius: 25px;
             padding: 40px;
-            margin: 30px auto;
             max-width: 800px;
             text-align: center;
-            box-shadow: 0 15px 60px rgba(184, 134, 11, 0.5);
+            box-shadow: 0 15px 60px rgba(255, 105, 180, 0.7), 0 0 20px rgba(0, 255, 127, 0.5);
+            animation: cosmicGlow 3s ease-in-out infinite;
         }
-        .cashier-title { color: #b8860b; font-size: 2.5em; }
-        .cashier-text { color: #00ced1; font-size: 1.2em; margin: 20px 0; }
-        .cashier-btn {
+        @keyframes cosmicGlow {
+            0%, 100% { box-shadow: 0 15px 60px rgba(255, 105, 180, 0.7), 0 0 20px rgba(0, 255, 127, 0.5); }
+            50% { box-shadow: 0 20px 80px rgba(255, 105, 180, 0.9), 0 0 30px rgba(0, 255, 127, 0.7); }
+        }
+        .cashier-title {
+            color: #00ff7f; /* Vibrant spring green */
+            font-size: 2.5em;
+            text-shadow: 0 0 10px rgba(255, 105, 180, 0.8);
+        }
+        .cashier-text {
+            color: #ff69b4; /* Vibrant pink */
+            font-size: 1.3em;
+            margin: 20px 0;
+        }
+        .payment-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .payment-btn {
             font-size: 1.2em;
             padding: 15px 30px;
-            background: #1e90ff;
+            background: linear-gradient(135deg, #00ff7f, #ff1493);
             color: white;
             border: none;
             border-radius: 8px;
             cursor: pointer;
+            min-width: 44px;
+            min-height: 44px;
+            transition: all 0.3s ease;
         }
-        .cashier-btn:hover { background: #0070ba; }
+        .payment-btn:hover {
+            background: linear-gradient(135deg, #00cc66, #c71585);
+            transform: scale(1.05);
+        }
+        .paypal-btn {
+            background: #0070ba; /* PayPal blue */
+        }
+        .paypal-btn:hover {
+            background: #005ea6;
+        }
+        .error-message {
+            color: #ff4500;
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        @media (max-width: 768px) {
+            .cashier-container { padding: 20px; }
+            .cashier-title { font-size: 2em; }
+            .payment-btn { font-size: 1em; padding: 12px 20px; }
+        }
+        @media (max-width: 480px) {
+            body { font-size: 14px; }
+            .cashier-title { font-size: 1.8em; }
+            .cashier-text { font-size: 1.1em; }
+            .payment-btn { font-size: 0.9em; }
+        }
     </style>
 </head>
 <body>
     <div class="cashier-container">
-        <h1 class="cashier-title">🛡️ GMSRFC Cosmic Cashier 🌌</h1>
+        <h1 class="cashier-title">🛡️ Cosmic Cashier 🌌</h1>
         <p class="cashier-text" id="purchaseInfo">Processing your purchase...</p>
-        <button class="cashier-btn" onclick="completePurchase()">💳 Complete Purchase</button>
+        <div id="errorMessage" class="error-message" style="display: none;">Invalid purchase details. Please try again.</div>
+        <div class="payment-options">
+            <button class="payment-btn paypal-btn" onclick="completePurchase('paypal')">💳 Pay with PayPal</button>
+            <button class="payment-btn" onclick="completePurchase('bitcoin')">🪙 Pay with Bitcoin</button>
+            <button class="payment-btn" onclick="completePurchase('ethereum')">💎 Pay with Ethereum</button>
+            <button class="payment-btn" onclick="completePurchase('ctok')">🌟 Pay with CTOK</button>
+        </div>
     </div>
     <footer>
-        <p style="color: #00ced1; text-align: center;">
-            <a href="/" style="color: #ff1493;">🏛️ Back to GMSRFC</a> |
-            <a href="/Dogpatch-Market/index.html" style="color: #b8860b;">🛒 Dogpatch Market</a>
+        <p style="color: #ff69b4; text-align: center;">
+            <a href="/" style="color: #00ff7f;">🏛️ Back to GMSRFC</a> |
+            <a href="/Dogpatch-Market/index.html" style="color: #00ff7f;">🛒 Dogpatch Market</a>
         </p>
-        <p style="color: #00ced1; text-align: center;">🔑 Code: Cashier_Fortress_v1.3</p>
+        <p style="color: #ff69b4; text-align: center;">🔑 Code: Cashier_Fortress_v1.6</p>
     </footer>
     <script src="/assets/js/cosmic.js"></script>
     <script>
         function getQueryParams() {
             const params = new URLSearchParams(window.location.search);
-            return { item: params.get('item') || 'unknown', amount: params.get('amount') || '0' };
+            let item = params.get('item') || 'unknown';
+            let amount = parseFloat(params.get('amount')) || 0;
+            // Fallback for invalid params
+            if (item === 'unknown' || amount === 0) {
+                document.getElementById('errorMessage').style.display = 'block';
+                return { item: 'unknown', amount: 0 };
+            }
+            return { item, amount };
         }
-        function completePurchase() {
+        function completePurchase(method) {
             const { item, amount } = getQueryParams();
+            if (item === 'unknown' || amount === 0) {
+                alert('Error: Invalid purchase details. Please return to Dogpatch Market.');
+                return;
+            }
             const log = JSON.parse(localStorage.getItem('securityLog') || '[]');
-            log.push({ issue: `Purchase completed: ${item} ($${amount})`, timestamp: new Date().toISOString(), source: 'Cashier' });
+            log.push({ issue: `Purchase completed: ${item} ($${amount}) via ${method}`, timestamp: new Date().toISOString(), source: 'Cashier' });
             localStorage.setItem('securityLog', JSON.stringify(log));
-            alert(`Thank you for purchasing ${item} for $${amount}! You're now part of the Psi-Omega universe.`);
-            window.location.href = '/Dogpatch-Market/index.html';
+            if (method === 'paypal') {
+                window.location.href = 'https://www.paypal.com/ncp/payment/FWY6FR3ZYSCF2';
+            } else {
+                alert(`Thank you for purchasing ${item} for $${amount} via ${method}! You're now part of the Psi-Omega universe.`);
+                window.location.href = '/Dogpatch-Market/index.html';
+            }
         }
         document.addEventListener('DOMContentLoaded', () => {
             const { item, amount } = getQueryParams();
