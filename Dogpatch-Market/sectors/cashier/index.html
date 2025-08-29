@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>🛡️ Cosmic Cashier - GMSRFC Secure Checkout 🌌</title>
+    <!-- v2.10.2, 2025-08-29 -->
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
@@ -139,7 +140,7 @@
             <a href="/" style="color: #00ff7f;">🏛️ Back to GMSRFC</a> |
             <a href="/Dogpatch-Market/index.html" style="color: #00ff7f;">🛒 Dogpatch Market</a>
         </p>
-        <p style="color: #ff69b4; text-align: center;">🔑 Code: Cashier_Fortress_v2.10</p>
+        <p style="color: #ff69b4; text-align: center;">🔑 Code: Cashier_Fortress_v2.10.2 | Token: ψΩ§∞ | Mission: STARCOM-0825-LS-GMSRFC-DOGPATCH-V28</p>
     </footer>
     <script>
         function getQueryParams() {
@@ -178,7 +179,7 @@
             }
             const log = JSON.parse(localStorage.getItem('securityLog') || '[]');
             if (item === 'reviewer-code' && amount === 0) {
-                log.push({ issue: `Reviewer code granted: ${item}`, timestamp: new Date().toISOString(), source: 'Cashier' });
+                log.push({ issue: `Reviewer code granted: ${item}`, timestamp: new Date().toISOString(), source: 'Cashier', token: 'ψΩ§∞' });
                 localStorage.setItem('securityLog', JSON.stringify(log));
                 alert('Reviewer code granted! Welcome to Psi-Omega.');
                 window.location.href = '/Dogpatch-Market/index.html';
@@ -188,7 +189,7 @@
                 alert('PayPal requires a minimum $1 payment. Use BTC/ETH for smaller amounts.');
                 return;
             }
-            log.push({ issue: `Purchase initiated: ${item} ($${amount}) via ${method}`, timestamp: new Date().toISOString(), source: 'Cashier' });
+            log.push({ issue: `Purchase initiated: ${item} ($${amount}) via ${method}`, timestamp: new Date().toISOString(), source: 'Cashier', token: 'ψΩ§∞' });
             localStorage.setItem('securityLog', JSON.stringify(log));
             const cryptoInfo = document.getElementById('cryptoInfo');
             const cryptoAddress = document.getElementById('cryptoAddress');
