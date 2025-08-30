@@ -2,240 +2,123 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>🛡️ Cosmic Cashier - GMSRFC Secure Checkout 🌌</title>
-    <!-- v2.10.2, 2025-08-29 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛡️ Debug Cashier - GMSRFC</title>
+    <!-- v2.10.3, 2025-08-30 -->
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            background: #6a5acd !important;
-            color: #f0f0f0;
-            font-family: -apple-system, Arial, sans-serif;
-            font-size: 16px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .cashier-container {
-            background: linear-gradient(135deg, rgba(106, 90, 205, 0.7), rgba(255, 105, 180, 0.7));
-            border: 4px solid #ff69b4;
-            border-radius: 25px;
-            padding: 20px;
-            max-width: 90%;
-            width: 600px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.7);
-        }
-        .cashier-title {
-            color: #00ff7f;
-            font-size: 2em;
-            text-shadow: 0 0 5px rgba(255, 105, 180, 0.8);
-            margin-bottom: 15px;
-        }
-        .cashier-text {
-            color: #ff69b4;
-            font-size: 1.2em;
-            margin: 15px 0;
-        }
-        .payment-options {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin: 15px 0;
-        }
-        .payment-btn {
-            font-size: 1em;
-            padding: 10px 20px;
-            background: linear-gradient(135deg, #00ff7f, #ff1493);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            min-width: 44px;
-            min-height: 44px;
-            transition: transform 0.3s ease;
-        }
-        .payment-btn:hover {
-            transform: scale(1.05);
-        }
-        .paypal-btn {
-            background: #0070ba;
-        }
-        .paypal-btn:hover {
-            background: #005ea6;
-        }
-        .error-message {
-            color: #ff4500;
-            font-size: 1em;
-            margin: 10px 0;
-        }
-        .crypto-address {
-            font-size: 0.9em;
-            color: #00ff7f;
-            word-break: break-all;
-            margin-top: 10px;
-            background: rgba(0, 255, 127, 0.1);
-            padding: 10px;
-            border-radius: 8px;
-        }
-        .copy-btn {
-            font-size: 0.8em;
-            padding: 8px 15px;
-            background: #ff1493;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        .copy-btn:hover {
-            background: #e01183;
-        }
-        .paypal-instructions {
-            font-size: 0.9em;
-            color: #ff69b4;
-            margin-top: 10px;
-        }
-        @media (max-width: 480px) {
-            body { font-size: 14px; }
-            .cashier-container { padding: 15px; width: 95%; }
-            .cashier-title { font-size: 1.5em; }
-            .cashier-text { font-size: 1em; }
-            .payment-btn { font-size: 0.9em; padding: 8px 15px; }
-            footer a { word-break: break-all; white-space: normal; }
-            .crypto-address { font-size: 0.8em; }
-        }
+        body { background: #1a1a1a; color: #00ff00; font-family: monospace; padding: 20px; }
+        .debug-box { background: #000; border: 2px solid #00ff00; padding: 15px; margin: 10px 0; }
+        .error { color: #ff4444; } .success { color: #44ff44; }
+        .paypal-btn { background: #0070ba; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 10px 0; }
+        .cashier-container { background: linear-gradient(135deg, rgba(106, 90, 205, 0.7), rgba(255, 105, 180, 0.7)); border: 4px solid #ff69b4; border-radius: 25px; padding: 20px; max-width: 90%; width: 600px; text-align: center; }
+        .cashier-title { color: #00ff7f; font-size: 2em; margin-bottom: 15px; }
+        .cashier-text { color: #ff69b4; font-size: 1.2em; margin: 15px 0; }
+        @media (max-width: 480px) { body { font-size: 14px; } .cashier-container { padding: 15px; width: 95%; } .cashier-title { font-size: 1.5em; } }
     </style>
+    <script src="https://www.paypal.com/sdk/js?client-id=BAAcgBLpvWC0hTpWPzUgniqat1loTPXOsWg2v_7PP7_qS7t79Wz0TFsJjb5WbPsOkpBJVW6yMw2IJCvCq4&components=hosted-buttons&enable-funding=venmo&currency=USD"></script>
 </head>
 <body>
     <div class="cashier-container">
-        <h1 class="cashier-title">🛡️ Cosmic Cashier 🌌</h1>
+        <h1 class="cashier-title">🛡️ Debug Cashier 🌌</h1>
         <p class="cashier-text" id="purchaseInfo">Processing your purchase...</p>
-        <div id="errorMessage" class="error-message" style="display: none;">Invalid purchase details or amount below $1. Please try again.</div>
-        <div class="payment-options">
-            <form id="paypalForm" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                <input type="hidden" name="cmd" value="_xclick">
-                <input type="hidden" name="business" value="dr.karlagottschalk@gmail.com">
-                <input type="hidden" name="currency_code" value="USD">
-                <input type="hidden" name="item_name" id="itemName" value="">
-                <input type="hidden" name="amount" id="itemAmount" value="">
-                <input type="hidden" name="return" value="https://coldnsteel.github.io/GMSRFC/Dogpatch-Market/index.html">
-                <button type="submit" class="payment-btn paypal-btn">💳 Pay with PayPal</button>
-            </form>
-            <p class="paypal-instructions" id="paypalInstructions"></p>
-            <button class="payment-btn" onclick="completePurchase('bitcoin')">🪙 Pay with Bitcoin</button>
-            <button class="payment-btn" onclick="completePurchase('ethereum')">💎 Pay with Ethereum</button>
-            <button class="payment-btn" onclick="alert('CTOK payments coming soon!'); window.location.href='/Dogpatch-Market/index.html';">🌟 Pay with CTOK</button>
+        <div class="debug-box">
+            <h3>URL Debug Output:</h3>
+            <div id="debug-output">Loading...</div>
         </div>
-        <div id="cryptoInfo" style="display: none;">
-            <div class="crypto-address" id="cryptoAddress"></div>
-            <button class="copy-btn" onclick="copyAddress()">Copy Address</button>
+        <div class="debug-box">
+            <h3>PayPal Test:</h3>
+            <div id="paypal-button-container"></div>
+            <button class="paypal-btn" onclick="testPayPalOld()">Test Fallback PayPal Form</button>
         </div>
-    </div>
-    <footer>
         <p style="color: #ff69b4; text-align: center; margin: 15px 0;">
-            <a href="/" style="color: #00ff7f;">🏛️ Back to GMSRFC</a> |
             <a href="/Dogpatch-Market/index.html" style="color: #00ff7f;">🛒 Dogpatch Market</a>
         </p>
-        <p style="color: #ff69b4; text-align: center;">🔑 Code: Cashier_Fortress_v2.10.2 | Token: ψΩ§∞ | Mission: STARCOM-0825-LS-GMSRFC-DOGPATCH-V28</p>
-    </footer>
+        <p style="color: #ff69b4; text-align: center;">🔑 Code: Cashier_Fortress_v2.10.3 | Token: ψΩ§∞ | Mission: STARCOM-0825-LS-GMSRFC-DOGPATCH-V28</p>
+    </div>
     <script>
+        function debugLog(message, type = 'info') {
+            const output = document.getElementById('debug-output');
+            const timestamp = new Date().toLocaleTimeString();
+            const className = type === 'error' ? 'error' : type === 'success' ? 'success' : '';
+            output.innerHTML += `<div class="${className}">[${timestamp}] ${message}</div>`;
+        }
+
         function getQueryParams() {
             try {
                 const search = window.location.search;
-                console.log('Raw URL search:', search);
+                debugLog(`Raw URL search: ${search || 'EMPTY'}`);
                 const params = new URLSearchParams(search);
-                const item = params.get('item') || 'unknown';
-                const amount = params.get('amount') || '0';
-                console.log('Raw params - item:', item, 'amount:', amount);
+                const item = params.get('item') || 'NOT_FOUND';
+                const amount = params.get('amount') || 'NOT_FOUND';
+                debugLog(`Raw params - item: ${item} amount: ${amount}`);
                 const numAmount = parseFloat(amount);
-                console.log('Final params - item:', item, 'amount:', numAmount);
-                if (item === 'unknown' || (isNaN(numAmount) && item !== 'reviewer-code')) {
-                    document.getElementById('errorMessage').style.display = 'block';
-                    document.getElementById('errorMessage').textContent = 'Invalid purchase details. Please try again.';
-                    return { item: 'unknown', amount: 0 };
+                debugLog(`Final params - item: ${item} amount: ${numAmount}`);
+                if (item === 'NOT_FOUND' || amount === 'NOT_FOUND') {
+                    debugLog('❌ URL parameters missing', 'error');
+                    return null;
                 }
-                if (numAmount < 1 && item !== 'reviewer-code') {
-                    document.getElementById('errorMessage').style.display = 'block';
-                    document.getElementById('errorMessage').textContent = 'PayPal requires a minimum $1 payment. Use BTC/ETH for smaller amounts.';
-                    return { item, amount: numAmount };
-                }
+                debugLog('✅ URL parameters parsed successfully', 'success');
                 return { item, amount: numAmount };
             } catch (error) {
-                console.error('Error parsing query params:', error);
-                document.getElementById('errorMessage').style.display = 'block';
-                document.getElementById('errorMessage').textContent = 'Error reading purchase details. Please try again.';
-                return { item: 'unknown', amount: 0 };
+                debugLog(`❌ Error parsing query params: ${error.message}`, 'error');
+                return null;
             }
         }
-        function completePurchase(method) {
-            const { item, amount } = getQueryParams();
-            if (item === 'unknown' || (isNaN(amount) && item !== 'reviewer-code')) {
-                alert('Error: Invalid purchase details. Please return to Dogpatch Market.');
+
+        function testPayPalOld() {
+            const params = getQueryParams();
+            if (!params) return;
+            const { item, amount } = params;
+            if (amount < 1) {
+                debugLog('❌ PayPal requires $1 minimum', 'error');
                 return;
             }
-            const log = JSON.parse(localStorage.getItem('securityLog') || '[]');
-            if (item === 'reviewer-code' && amount === 0) {
-                log.push({ issue: `Reviewer code granted: ${item}`, timestamp: new Date().toISOString(), source: 'Cashier', token: 'ψΩ§∞' });
-                localStorage.setItem('securityLog', JSON.stringify(log));
-                alert('Reviewer code granted! Welcome to Psi-Omega.');
-                window.location.href = '/Dogpatch-Market/index.html';
-                return;
-            }
-            if (method === 'paypal' && amount < 1) {
-                alert('PayPal requires a minimum $1 payment. Use BTC/ETH for smaller amounts.');
-                return;
-            }
-            log.push({ issue: `Purchase initiated: ${item} ($${amount}) via ${method}`, timestamp: new Date().toISOString(), source: 'Cashier', token: 'ψΩ§∞' });
-            localStorage.setItem('securityLog', JSON.stringify(log));
-            const cryptoInfo = document.getElementById('cryptoInfo');
-            const cryptoAddress = document.getElementById('cryptoAddress');
-            if (method === 'bitcoin') {
-                cryptoAddress.innerHTML = `<strong>Bitcoin Payment</strong><br>Address: bc1qvevxcage66n8j86rtzvxn8xrzw9k5nOp5fxg<br>Amount: ${amount} USD (convert to BTC using your wallet)<br>Note: Psi-Omega Purchase - ${item}`;
-                cryptoInfo.style.display = 'block';
-            } else if (method === 'ethereum') {
-                cryptoAddress.innerHTML = `<strong>Ethereum Payment</strong><br>Address: 0xfD9FD0c94caf9AdDbEd6c968504cC47f2638C158<br>Amount: ${amount} USD (convert to ETH using your wallet)<br>Note: Psi-Omega Purchase - ${item}`;
-                cryptoInfo.style.display = 'block';
-            }
+            const form = document.createElement('form');
+            form.action = 'https://www.paypal.com/cgi-bin/webscr';
+            form.method = 'post';
+            form.target = '_top';
+            const fields = {
+                'cmd': '_xclick',
+                'business': 'dr.karlagottschalk@gmail.com',
+                'currency_code': 'USD',
+                'item_name': item,
+                'amount': amount.toFixed(2),
+                'return': 'https://coldnsteel.github.io/GMSRFC/Dogpatch-Market/index.html'
+            };
+            Object.keys(fields).forEach(key => {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                input.value = fields[key];
+                form.appendChild(input);
+            });
+            document.body.appendChild(form);
+            debugLog('✅ Submitting fallback PayPal form', 'success');
+            form.submit();
         }
-        function copyAddress() {
-            try {
-                const addressText = document.getElementById('cryptoAddress').innerHTML;
-                const addressMatch = addressText.match(/(bc1[a-zA-Z0-9]+|0x[a-fA-F0-9]+)/);
-                if (addressMatch) {
-                    const address = addressMatch[0];
-                    navigator.clipboard.writeText(address).then(() => {
-                        alert('Address copied: ' + address);
-                    }).catch(() => {
-                        alert('Copy failed. Address: ' + address);
-                    });
-                }
-            } catch (error) {
-                console.error('Error copying address:', error);
-                alert('Copy failed due to error.');
+
+        function initPayPalSDK() {
+            if (typeof paypal === 'undefined') {
+                debugLog('❌ PayPal SDK not loaded', 'error');
+                return;
             }
+            paypal.HostedButtons({
+                hostedButtonId: "YOUR_HOSTED_BUTTON_ID" // Replace with your actual PayPal hosted button ID
+            }).render("#paypal-button-container").then(() => {
+                debugLog('✅ PayPal SDK button initialized', 'success');
+            }).catch(err => {
+                debugLog(`❌ PayPal SDK error: ${err.message}`, 'error');
+            });
         }
+
         document.addEventListener('DOMContentLoaded', () => {
-            try {
-                const { item, amount } = getQueryParams();
-                document.getElementById('purchaseInfo').textContent = `Purchasing ${item} for $${amount}...`;
-                document.getElementById('itemName').value = item;
-                document.getElementById('itemAmount').value = amount;
-                document.getElementById('paypalInstructions').innerHTML = `If PayPal fails, send $${amount} USD to dr.karlagottschalk@gmail.com via PayPal with note: "${item}"`;
-                document.getElementById('paypalForm').addEventListener('submit', (e) => {
-                    if (amount < 1 && item !== 'reviewer-code') {
-                        e.preventDefault();
-                        alert('PayPal requires a minimum $1 payment. Use BTC/ETH for smaller amounts.');
-                    }
-                });
-            } catch (error) {
-                console.error('Error initializing cashier:', error);
-                document.getElementById('errorMessage').style.display = 'block';
-                document.getElementById('errorMessage').textContent = 'Error loading cashier. Please try again.';
+            debugLog('🛡️ HackerWatch Fortress Debug Started');
+            debugLog('Token: ψΩ§∞ | Mission: STARCOM-0825-LS-GMSRFC-DOGPATCH-V28');
+            const params = getQueryParams();
+            if (params) {
+                document.getElementById('purchaseInfo').textContent = `Purchasing ${params.item} for $${params.amount}...`;
             }
+            setTimeout(initPayPalSDK, 1000);
         });
     </script>
 </body>
