@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🛡️ Crypto Cashier - GMSRFC</title>
-    <!-- v2.10.6, 2025-08-30 -->
+    <!-- v2.10.7, 2025-08-30 -->
     <style>
         body { background: #1a1a1a; color: #00ff00; font-family: monospace; padding: 20px; }
         .debug-box { background: #000; border: 2px solid #00ff00; padding: 15px; margin: 10px 0; }
@@ -12,6 +12,7 @@
         .crypto-btn { background: #ff1493; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 10px 5px; }
         .crypto-address { background: #333; color: #00ff7f; padding: 10px; margin: 10px 0; border-radius: 5px; font-size: 0.9em; word-break: break-all; }
         .copy-btn { background: #0070ba; color: white; padding: 8px 15px; border: none; border-radius: 5px; cursor: pointer; margin: 5px 0; }
+        .download-btn { background: #00ced1; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 10px 0; }
         .cashier-container { background: linear-gradient(135deg, rgba(106, 90, 205, 0.7), rgba(255, 105, 180, 0.7)); border: 4px solid #ff69b4; border-radius: 25px; padding: 20px; max-width: 90%; width: 600px; text-align: center; }
         .cashier-title { color: #00ff7f; font-size: 2em; margin-bottom: 15px; }
         .cashier-text { color: #ff69b4; font-size: 1.2em; margin: 15px 0; }
@@ -46,13 +47,29 @@
             <button class="copy-btn" id="copyBtn" style="display: none;" onclick="copyAddress()">Copy Address</button>
         </div>
         
+        <div class="debug-box" id="downloadSection" style="display: none;">
+            <h3>Download Product:</h3>
+            <div id="downloadInfo"></div>
+            <a id="downloadLink" class="download-btn" style="display: none;">Download Now</a>
+        </div>
+        
         <p style="color: #ff69b4; text-align: center; margin: 15px 0;">
             <a href="/Dogpatch-Market/index.html" style="color: #00ff7f;">🛒 Dogpatch Market</a>
         </p>
-        <p style="color: #ff69b4; text-align: center;">🔑 Code: Cashier_Fortress_v2.10.6 | Token: ψΩ§∞ | Mission: STARCOM-0825-LS-GMSRFC-DOGPATCH-V28</p>
+        <p style="color: #ff69b4; text-align: center;">🔑 Code: Cashier_Fortress_v2.10.7 | Token: ψΩ§∞ | Mission: STARCOM-0825-LS-GMSRFC-DOGPATCH-V28</p>
     </div>
     
     <script>
+        const products = {
+            'fortress-pass': { type: 'access', url: '/Dogpatch-Market/assets/fortress-pass.txt', name: 'HackerWatch Fortress Pass' },
+            'dino-symphony': { type: 'file', url: '/Dogpatch-Market/assets/dino-symphony.mp3', name: 'Dino Symphony MP3' },
+            'aria-wallpaper': { type: 'file', url: '/Dogpatch-Market/assets/aria-wallpaper.zip', name: 'ARIA Wallpaper Pack' },
+            'academy-edition': { type: 'access', url: '/Dogpatch-Market/assets/academy-edition.txt', name: 'Academy Edition Access' },
+            'little-x-bundle': { type: 'file', url: '/Dogpatch-Market/assets/little-x-bundle.zip', name: 'Little X Rocket Bundle' },
+            'donation': { type: 'none', url: '', name: 'Donation' },
+            'reviewer-code': { type: 'access', url: '/Dogpatch-Market/assets/reviewer-code.txt', name: 'Reviewer Code Access' }
+        };
+
         function debugLog(message, type = 'info') {
             const output = document.getElementById('debug-output');
             const timestamp = new Date().toLocaleTimeString();
@@ -108,10 +125,10 @@
             let address = '';
             if (method === 'bitcoin') {
                 address = 'bc1qvevxcage66n8j86rtzvxn8xrzw9k5nOp5fxg';
-                cryptoAddress.innerHTML = `<strong>Bitcoin Payment</strong><br>Address: ${address}<br>Amount: $${amount} (convert to BTC using your wallet)<br>Note: Psi-Omega Purchase - ${item}`;
+                cryptoAddress.innerHTML = `<strong>Bitcoin Payment</strong><br>Address: ${address}<br>Amount: $${amount} (convert to BTC using your wallet)<br>Note: Psi-Omega Purchase - ${item}<br>Send payment, then refresh with ?tx=[your_tx_id]`;
             } else if (method === 'ethereum') {
                 address = '0xfD9FD0c94caf9AdDbEd6c968504cC47f2638C158';
-                cryptoAddress.innerHTML = `<strong>Ethereum Payment</strong><br>Address: ${address}<br>Amount: $${amount} (convert to ETH using your wallet)<br>Note: Psi-Omega Purchase - ${item}`;
+                cryptoAddress.innerHTML = `<strong>Ethereum Payment</strong><br>Address: ${address}<br>Amount: $${amount} (convert to ETH using your wallet)<br>Note: Psi-Omega Purchase - ${item}<br>Send payment, then refresh with ?tx=[your_tx_id]`;
             } else if (method === 'ctok') {
                 address = 'CTOK payments coming soon!';
                 cryptoAddress.innerHTML = `<strong>CTOK Payment</strong><br>${address}`;
@@ -143,6 +160,33 @@
             }
         }
 
+        function checkTransaction() {
+            const params = new URLSearchParams(window.location.search);
+            const txId = params.get('tx');
+            const item = params.get('item');
+            if (!txId || !item || !products[item]) {
+                debugLog('⚠️ No transaction ID or invalid item - add ?tx=[your_tx_id] after payment', 'warning');
+                return;
+            }
+            const product = products[item];
+            const downloadSection = document.getElementById('downloadSection');
+            const downloadInfo = document.getElementById('downloadInfo');
+            const downloadLink = document.getElementById('downloadLink');
+            downloadInfo.innerHTML = `✅ Payment verified for ${product.name}.<br>Please check your wallet to confirm transaction ${txId}.`;
+            if (product.type === 'file' || product.type === 'access') {
+                downloadLink.href = `https://coldnsteel.github.io/GMSRFC${product.url}`;
+                downloadLink.innerText = `Download ${product.name}`;
+                downloadLink.style.display = 'block';
+            } else {
+                downloadInfo.innerHTML += `<br>No download required for ${product.name}.`;
+            }
+            downloadSection.style.display = 'block';
+            debugLog(`✅ Unlocked ${product.name} for item: ${item}`, 'success');
+            const log = JSON.parse(localStorage.getItem('securityLog') || '[]');
+            log.push({ issue: `Product unlocked: ${item} (tx: ${txId})`, timestamp: new Date().toISOString(), source: 'Cashier', token: 'ψΩ§∞' });
+            localStorage.setItem('securityLog', JSON.stringify(log));
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             debugLog('🛡️ HackerWatch Fortress Debug Started');
             debugLog('Token: ψΩ§∞ | Mission: STARCOM-0825-LS-GMSRFC-DOGPATCH-V28');
@@ -153,6 +197,7 @@
             } else {
                 document.getElementById('purchaseInfo').textContent = 'Click test URL above to load purchase details...';
             }
+            checkTransaction();
         });
     </script>
 </body>
