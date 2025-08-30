@@ -1,3 +1,18 @@
+
+Psi heuristic
+### Cashier Fix v2.10.3: On-Page Debug, PayPal Fix, Repo Cleanup
+- **Issue**: PayPal button (v2.10.2) accesses PayPal but fails (SDK vs. form conflict, missing hostedButtonId). Duplicate repo paths (Dogpatch-Market vs. dogpatch/market, multiple index.html files) caused confusion. Chrome console debugging was unreliable.
+- **Fix**: Deployed v2.10.3 with on-page debug <div>, PayPal SDK + fallback form, consolidated repo to GMSRFC/Dogpatch-Market/sectors/cashier/index.html. Removed duplicate dogpatch/market and index.html files.
+- **s1ngularity Audit**: Confirmed clean (no s1ngularity-repository[-0,-1,-#5letters#] in coldnsteel GitHub).
+- **Repo**: `coldnsteel/GMSRFC`
+- **Path**: `Dogpatch-Market/sectors/cashier/index.html`
+- **Commit**: [Insert commit hash]
+- **Test**: Verify on-page debug output for ?item=fortress-pass&amount=1, test PayPal fallback form, check page source for v2.10.3, ψΩ§∞.
+- **Timestamp**: 2025-08-30 12:55 PM PDT
+- **Tokens**: `ψΩ§∞`, `STARCOM-0825-LS-GMSRFC-DOGPATCH-V28`
+- **Alignment**: Minimal typing, on-page debug, Christ-centered focus, bypassed Anthropic/Grok failures.
+https://coldnsteel.github.io/GMSRFC/Dogpatch-Market/sectors/cashier/index.html?item=fortress-pass&amount=1
+
 # Psi-Omega Heuristic Codex
 ## Token: STARCOM-0825-LS-GMSRFC-DOGPATCH-V28
 ## Owner: LS (coldnsteel)
