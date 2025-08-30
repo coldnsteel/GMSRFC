@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dogpatch Market - Digital Assets</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #eee;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 2px solid #00ff7f;
+        }
+        .title {
+            color: #00ff7f;
+            font-size: 2.5em;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(0, 255, 127, 0.5);
+        }
+        .subtitle {
+            color: #ff69b4;
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        .assets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .asset-card {
+            background: rgba(255, 105, 180, 0.1);
+            border: 2px solid #ff69b4;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .asset-card:hover {
+            transform: translateY(-5px);
+            border-color: #00ff7f;
+            box-shadow: 0 10px 20px rgba(0, 255, 127, 0.3);
+        }
+        .asset-title {
+            color: #00ff7f;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        .asset-description {
+            color: #ccc;
+            margin: 15px 0;
+            line-height: 1.4;
+        }
+        .asset-price {
+            color: #ff69b4;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        .buy-btn {
+            background: linear-gradient(45deg, #ff69b4, #00ff7f);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+        .buy-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+        }
+        .nav-links {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .nav-links a {
+            color: #00ff7f;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 10px 20px;
+            border: 1px solid #00ff7f;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        .nav-links a:hover {
+            background: rgba(0, 255, 127, 0.2);
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px 0;
+            border-top: 1px solid #333;
+            color: #888;
+        }
+        .token-info {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">Dogpatch Market</h1>
+            <p class="subtitle">Digital Assets & Tools</p>
+        </header>
+
+        <div class="assets-grid">
+            <div class="asset-card">
+                <h3 class="asset-title">Fortress Pass</h3>
+                <p class="asset-description">
+                    Premium access to HackerWatch Fortress security tools and monitoring systems.
+                </p>
+                <div class="asset-price">$8.00</div>
+                <button class="buy-btn" onclick="purchaseItem('fortress-pass', 8)">Buy Now</button>
+            </div>
+
+            <div class="asset-card">
+                <h3 class="asset-title">Psi-Omega Access</h3>
+                <p class="asset-description">
+                    Advanced AI collaboration tools and heuristic frameworks for enhanced productivity.
+                </p>
+                <div class="asset-price">$15.00</div>
+                <button class="buy-btn" onclick="purchaseItem('psi-omega-access', 15)">Buy Now</button>
+            </div>
+
+            <div class="asset-card">
+                <h3 class="asset-title">GMSRFC Documentation</h3>
+                <p class="asset-description">
+                    Complete technical documentation and implementation guides for GMSRFC systems.
+                </p>
+                <div class="asset-price">$5.00</div>
+                <button class="buy-btn" onclick="purchaseItem('gmsrfc-docs', 5)">Buy Now</button>
+            </div>
+
+            <div class="asset-card">
+                <h3 class="asset-title">Reviewer Code</h3>
+                <p class="asset-description">
+                    Special access code for reviewers and beta testers. Complimentary access.
+                </p>
+                <div class="asset-price">Free</div>
+                <button class="buy-btn" onclick="purchaseItem('reviewer-code', 0)">Get Access</button>
+            </div>
+        </div>
+
+        <div class="nav-links">
+            <a href="/">GMSRFC Home</a>
+            <a href="/Dogpatch-Market/sectors/cashier/index.html">Checkout</a>
+        </div>
+
+        <div class="token-info">
+            <strong>Mission Token:</strong> STARCOM-0825-LS-GMSRFC-DOGPATCH-V28<br>
+            <strong>System:</strong> ψΩ§∞ Digital Commerce Hub<br>
+            <strong>Status:</strong> HackerWatch Fortress Active
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2025 GMSRFC Dogpatch Market | Secure Digital Commerce</p>
+        </footer>
+    </div>
+
+    <script>
+        function purchaseItem(item, amount) {
+            // Redirect to cashier with item and amount parameters
+            const cashierUrl = '/Dogpatch-Market/sectors/cashier/index.html';
+            const params = new URLSearchParams({
+                item: item,
+                amount: amount
+            });
+            
+            window.location.href = `${cashierUrl}?${params.toString()}`;
+        }
+
+        // Log market activity
+        document.addEventListener('DOMContentLoaded', function() {
+            const log = JSON.parse(localStorage.getItem('securityLog') || '[]');
+            log.push({
+                issue: 'Market accessed',
+                timestamp: new Date().toISOString(),
+                source: 'DogpatchMarket',
+                token: 'ψΩ§∞'
+            });
+            localStorage.setItem('securityLog', JSON.stringify(log));
+        });
+    </script>
+</body>
+</html>
