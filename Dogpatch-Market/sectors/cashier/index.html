@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🛡️ Crypto Cashier - GMSRFC</title>
-    <!-- v2.10.7, 2025-08-30 -->
+    <!-- v2.10.7, 2025-08-31 -->
     <style>
         body { background: #1a1a1a; color: #00ff00; font-family: monospace; padding: 20px; }
         .debug-box { background: #000; border: 2px solid #00ff00; padding: 15px; margin: 10px 0; }
@@ -33,7 +33,7 @@
         <div class="debug-box">
             <h3>Test URL (Copy & Paste):</h3>
             <div class="test-url" onclick="copyTestUrl()">
-                https://coldnsteel.github.io/GMSRFC/Dogpatch-Market/sectors/cashier/index.html?item=fortress-pass&amount=1
+                https://coldnsteel.github.io/GMSRFC/Dogpatch-Market/sectors/cashier/index.html?item=fortress-pass&amount=8
             </div>
             <small style="color: #ffaa00;">Click above to copy, then paste in new tab</small>
         </div>
@@ -62,11 +62,8 @@
     <script>
         const products = {
             'fortress-pass': { type: 'access', url: '/Dogpatch-Market/assets/fortress-pass.txt', name: 'HackerWatch Fortress Pass' },
-            'dino-symphony': { type: 'file', url: '/Dogpatch-Market/assets/dino-symphony.mp3', name: 'Dino Symphony MP3' },
-            'aria-wallpaper': { type: 'file', url: '/Dogpatch-Market/assets/aria-wallpaper.zip', name: 'ARIA Wallpaper Pack' },
-            'academy-edition': { type: 'access', url: '/Dogpatch-Market/assets/academy-edition.txt', name: 'Academy Edition Access' },
-            'little-x-bundle': { type: 'file', url: '/Dogpatch-Market/assets/little-x-bundle.zip', name: 'Little X Rocket Bundle' },
-            'donation': { type: 'none', url: '', name: 'Donation' },
+            'psi-omega-access': { type: 'access', url: '/Dogpatch-Market/assets/psi-omega-access.txt', name: 'Psi-Omega Access' },
+            'gmsrfc-docs': { type: 'file', url: '/Dogpatch-Market/assets/gmsrfc-docs.pdf', name: 'GMSRFC Documentation' },
             'reviewer-code': { type: 'access', url: '/Dogpatch-Market/assets/reviewer-code.txt', name: 'Reviewer Code Access' }
         };
 
@@ -108,7 +105,7 @@
         }
 
         function copyTestUrl() {
-            const url = 'https://coldnsteel.github.io/GMSRFC/Dogpatch-Market/sectors/cashier/index.html?item=fortress-pass&amount=1';
+            const url = 'https://coldnsteel.github.io/GMSRFC/Dogpatch-Market/sectors/cashier/index.html?item=fortress-pass&amount=8';
             navigator.clipboard.writeText(url).then(() => {
                 debugLog('✅ Test URL copied to clipboard', 'success');
             }).catch(() => {
