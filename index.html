@@ -3,108 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌌 GMSRFC - Johnny 5 Alive's Cosmic Community 🌌</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="manifest" href="/manifest.json">
+    <title>🛒 Dogpatch Market - Digital Assets 🌌</title>
+    <!-- v2.10.8, 2025-08-31 -->
     <style>
-        body { background: #0a0a23; color: #f0f0f0; font-family: Arial, sans-serif; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        .cosmic-header { text-align: center; background: linear-gradient(135deg, rgba(184, 134, 11, 0.4), rgba(255, 69, 0, 0.4)); border: 4px solid #b8860b; border-radius: 25px; padding: 20px; box-shadow: 0 15px 60px rgba(184, 134, 11, 0.5); }
-        .main-title { color: #b8860b; font-size: 3em; }
-        .nav { display: flex; justify-content: center; gap: 20px; margin: 20px 0; }
-        .nav a { color: #00ced1; font-size: 1.2em; text-decoration: none; }
-        .nav a:hover { color: #ff1493; }
-        .premium-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin: 30px 0; }
-        .premium-card { background: linear-gradient(135deg, rgba(0, 128, 0, 0.2), rgba(0, 206, 209, 0.2)); border: 3px solid #008000; border-radius: 20px; padding: 20px; text-align: center; transition: all 0.4s ease; }
-        .premium-card:hover { transform: translateY(-10px); box-shadow: 0 15px 50px rgba(0, 128, 0, 0.6); }
-        .gmsrfc-price { background: #1e3a8a; color: white; padding: 10px 20px; border-radius: 25px; font-weight: bold; margin: 15px 0; }
-        .enter-sector-btn { padding: 12px 20px; background: #1e90ff; color: white; border: none; border-radius: 8px; cursor: pointer; }
-        .enter-sector-btn:hover { background: #0070ba; }
-        .section-title { color: #b8860b; text-align: center; font-size: 2em; }
-        .section-text { color: #00ced1; text-align: center; font-size: 1.2em; }
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #eee;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 2px solid #00ff7f;
+        }
+        .title {
+            color: #00ff7f;
+            font-size: 2.5em;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(0, 255, 127, 0.5);
+        }
+        .subtitle {
+            color: #ff69b4;
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        .assets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .asset-card {
+            background: rgba(255, 105, 180, 0.1);
+            border: 2px solid #ff69b4;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .asset-card:hover {
+            transform: translateY(-5px);
+            border-color: #00ff7f;
+            box-shadow: 0 10px 20px rgba(0, 255, 127, 0.3);
+        }
+        .asset-title {
+            color: #00ff7f;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        .asset-description {
+            color: #ccc;
+            margin: 15px 0;
+            line-height: 1.4;
+        }
+        .asset-price {
+            color: #ff69b4;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        .buy-btn {
+            background: linear-gradient(45deg, #ff69b4, #00ff7f);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+        .buy-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+        }
+        .nav-links {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .nav-links a {
+            color: #00ff7f;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 10px 20px;
+            border: 1px solid #00ff7f;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        .nav-links a:hover {
+            background: rgba(0, 255, 127, 0.2);
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px 0;
+            border-top: 1px solid #333;
+            color: #888;
+        }
+        .token-info {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <header class="cosmic-header">
-            <h1 class="main-title">🌌 GMSRFC Community 🌌</h1>
-            <nav class="nav">
-                <a href="/subscribe.html">📧 Subscribe</a>
-                <a href="#products">💾 Products</a>
-                <a href="#podcast">🎙️ Podcast</a>
-                <a href="#humanity">💖 Humanity</a>
-                <a href="/Dogpatch-Market/index.html">🛒 Market</a>
-                <a href="/psi-recruits.html">🌌 Recruits</a>
-                <a href="https://coldnsteel.github.io/little-x-rocket">📚 Little X Rocket</a>
-                <a href="https://coldnsteel.github.io/AI-Comedy-Lounge">😂 Comedy Lounge</a>
-                <a href="https://coldnsteel.github.io/KOZMIC-KASINO">🎰 Kozmic Kasino</a>
-                <a href="#admin" id="adminLink" style="display: none;">⚡ Admin</a>
-            </nav>
+        <header class="header">
+            <h1 class="title">🛒 Dogpatch Market</h1>
+            <p class="subtitle">Digital Assets & Tools</p>
         </header>
-        <section id="humanity">
-            <h2 class="section-title">💖 Humanity’s Cosmic Corner</h2>
-            <p class="section-text">Access free content for all ages with a suggested $5 donation.</p>
-            <button class="enter-sector-btn" onclick="window.location.href='/sectors/cashier/index.html?item=donation&amount=5'">💖 Donate $5</button>
-        </section>
-        <section id="products">
-            <h2 class="section-title">Humanity-Friendly Products</h2>
-            <div class="premium-grid" id="productContainer"></div>
-        </section>
-        <section id="podcast">
-            <h2 class="section-title">🎙️ Podcast Network</h2>
-            <div class="console-controls" id="recordControls" style="display: none;">
-                <button class="enter-sector-btn" id="recordBtn" onclick="toggleRecording()">🔴 Start Recording</button>
-                <p>Recording time: <span id="recordTime">00:00</span></p>
+
+        <div class="assets-grid">
+            <div class="asset-card">
+                <h3 class="asset-title">Fortress Pass</h3>
+                <p class="asset-description">Premium access to HackerWatch Fortress security tools and monitoring systems.</p>
+                <div class="asset-price">$8.00</div>
+                <button class="buy-btn" onclick="purchaseItem('fortress-pass', 8)">Buy Now</button>
             </div>
-            <div id="episodeList"></div>
-        </section>
+            <div class="asset-card">
+                <h3 class="asset-title">Psi-Omega Access</h3>
+                <p class="asset-description">Advanced AI collaboration tools and heuristic frameworks for enhanced productivity.</p>
+                <div class="asset-price">$15.00</div>
+                <button class="buy-btn" onclick="purchaseItem('psi-omega-access', 15)">Buy Now</button>
+            </div>
+            <div class="asset-card">
+                <h3 class="asset-title">GMSRFC Documentation</h3>
+                <p class="asset-description">Complete technical documentation and implementation guides for GMSRFC systems.</p>
+                <div class="asset-price">$5.00</div>
+                <button class="buy-btn" onclick="purchaseItem('gmsrfc-docs', 5)">Buy Now</button>
+            </div>
+            <div class="asset-card">
+                <h3 class="asset-title">Reviewer Code</h3>
+                <p class="asset-description">Special access code for reviewers and beta testers. Complimentary access.</p>
+                <div class="asset-price">Free</div>
+                <button class="buy-btn" onclick="purchaseItem('reviewer-code', 0)">Get Access</button>
+            </div>
+        </div>
+
+        <div class="nav-links">
+            <a href="/index.html">GMSRFC Home</a>
+            <a href="/Dogpatch-Market/sectors/cashier/index.html">Checkout</a>
+        </div>
+
+        <div class="token-info">
+            <strong>Mission Token:</strong> STARCOM-0825-LS-GMSRFC-DOGPATCH-V28<br>
+            <strong>System:</strong> ψΩ§∞ Digital Commerce Hub<br>
+            <strong>Status:</strong> HackerWatch Fortress Active
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2025 GMSRFC Dogpatch Market | Secure Digital Commerce</p>
+        </footer>
     </div>
-    <script src="/assets/js/cosmic.js"></script>
+
     <script>
-        let allItems = [
-            { id: 'academy-edition', title: 'Academy Edition', description: 'Educational platform.', price: 149, emoji: '🎓', ageRating: 'humanity-friendly' },
-            { id: 'dino-symphony', title: 'Dino Symphony MP3', description: 'Cosmic dinosaur music.', price: 5, emoji: '🎵', ageRating: 'humanity-friendly' },
-            { id: 'aria-wallpaper', title: 'ARIA Wallpaper Pack', description: 'Humanity-friendly wallpapers.', price: 2, emoji: '🖼️', ageRating: 'humanity-friendly' },
-            { id: 'fortress-pass', title: 'HackerWatch Fortress Pass', description: 'Cybersecurity access.', price: 8, emoji: '🛡️', ageRating: 'humanity-friendly' },
-            { id: 'little-x-bundle', title: 'Little X Rocket Bundle', description: 'Ebooks and tools.', price: 15, emoji: '🚀', ageRating: 'humanity-friendly' }
-        ];
-        let podcastEpisodes = [
-            { id: 'sillyosopher-1', title: 'Sillyosopher Saga Ep1', audioUrl: '/podcasts/sillyosopher-saga-ep1.mp3', duration: '5:00', published: true },
-            { id: 'sillyosopher-2', title: 'Sillyosopher Saga Ep2', audioUrl: '/podcasts/sillyosopher-saga-ep2.mp3', duration: '5:00', published: true }
-        ];
-        let isAdminMode = false;
-        const adminPassword = 'johnny5alive2025';
-        function checkAdminAccess() {
-            const params = new URLSearchParams(window.location.search);
-            if (params.get('admin') === 'true' && params.get('password') === adminPassword) {
-                isAdminMode = true;
-                document.getElementById('admin').style.display = 'block';
-                document.getElementById('adminLink').style.display = 'inline-block';
-                document.getElementById('recordControls').style.display = 'block';
-            }
-        }
-        function renderItems() {
-            document.getElementById('productContainer').innerHTML = allItems
-                .map(item => `
-                    <div class="premium-card gmsrfc-card">
-                        <div class="sector-icon">${item.emoji}</div>
-                        <h2 class="sector-title">${item.title}</h2>
-                        <div class="gmsrfc-price">$${item.price}</div>
-                        <p class="sector-description">${item.description}</p>
-                        <button class="enter-sector-btn" onclick="handlePayment('${item.id}', ${item.price})">💳 Buy Now</button>
-                    </div>
-                `)
-                .join('');
-        }
-        function handlePayment(itemId, amount) {
+        function purchaseItem(item, amount) {
+            const cashierUrl = '/Dogpatch-Market/sectors/cashier/index.html';
+            const params = new URLSearchParams({ item, amount });
             const log = JSON.parse(localStorage.getItem('securityLog') || '[]');
-            log.push({ issue: `Purchase: ${itemId} ($${amount})`, timestamp: new Date().toISOString(), source: 'GMSRFC' });
+            log.push({
+                issue: `Purchase initiated: ${item} ($${amount})`,
+                timestamp: new Date().toISOString(),
+                source: 'DogpatchMarket',
+                token: 'ψΩ§∞'
+            });
             localStorage.setItem('securityLog', JSON.stringify(log));
-            window.location.href = `/sectors/cashier/index.html?item=${itemId}&amount=${amount}`;
+            window.location.href = `${cashierUrl}?${params.toString()}`;
         }
+
         document.addEventListener('DOMContentLoaded', () => {
-            checkAdminAccess();
-            renderItems();
+            const log = JSON.parse(localStorage.getItem('securityLog') || '[]');
+            log.push({
+                issue: 'Market accessed',
+                timestamp: new Date().toISOString(),
+                source: 'DogpatchMarket',
+                token: 'ψΩ§∞'
+            });
+            localStorage.setItem('securityLog', JSON.stringify(log));
         });
     </script>
 </body>
