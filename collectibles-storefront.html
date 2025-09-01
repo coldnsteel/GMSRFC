@@ -3,15 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🛡️ GMSRFC Digital Products & Collectibles</title>
-    <!-- v3.0.1, 2025-09-01 - Collectibles Integration -->
+    <title>GMSRFC Unified Digital Products & Collectibles</title>
     <style>
         body { 
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d1b2e 100%); 
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d1b2e 50%, #1a2332 100%); 
             color: #00ff00; 
             font-family: 'Courier New', monospace; 
             padding: 20px; 
             margin: 0;
+            min-height: 100vh;
+        }
+        
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        .content {
+            position: relative;
+            z-index: 2;
         }
         
         .header {
@@ -21,6 +48,7 @@
             padding: 20px;
             border-radius: 10px;
             margin-bottom: 20px;
+            backdrop-filter: blur(10px);
         }
         
         .nav-tabs {
@@ -31,7 +59,7 @@
         }
         
         .nav-tab {
-            background: #333;
+            background: rgba(51,51,51,0.8);
             color: #00ff7f;
             border: 2px solid #ff69b4;
             padding: 12px 20px;
@@ -39,12 +67,14 @@
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
         }
         
         .nav-tab:hover, .nav-tab.active {
             background: #ff69b4;
             color: white;
             transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
         }
         
         .section {
@@ -54,537 +84,462 @@
             padding: 20px;
             margin: 20px 0;
             border-radius: 10px;
+            backdrop-filter: blur(10px);
         }
         
         .section.active { display: block; }
         
-        .collectible-grid {
+        .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
             margin: 20px 0;
         }
         
-        .collectible-item {
+        .product-card {
             background: rgba(51,51,51,0.8);
             border: 2px solid #ff69b4;
             padding: 15px;
             border-radius: 10px;
             text-align: center;
+            transition: transform 0.3s ease;
+            backdrop-filter: blur(5px);
+            position: relative;
         }
         
-        .photo-gallery {
-            display: flex;
-            gap: 5px;
-            margin: 10px 0;
-            justify-content: center;
-            flex-wrap: wrap;
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(255, 105, 180, 0.3);
         }
         
-        .photo-placeholder {
-            width: 80px;
-            height: 80px;
-            background: #333;
-            border: 2px dashed #ff69b4;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 5px;
-            color: #ff69b4;
-            font-size: 12px;
-            cursor: pointer;
-        }
-        
-        .photo-preview {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border: 2px solid #00ff7f;
-            border-radius: 5px;
-        }
-        
-        .add-item-form {
-            background: rgba(25,25,25,0.9);
-            border: 2px solid #9b59b6;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-        
-        .form-group {
-            margin: 15px 0;
-        }
-        
-        .form-group label {
+        .product-emoji {
+            font-size: 2em;
             display: block;
-            color: #ff69b4;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        
-        .form-input, .form-select, .form-textarea {
-            width: 100%;
-            background: #333;
-            color: #00ff7f;
-            border: 1px solid #ff69b4;
-            padding: 10px;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-        
-        .form-textarea {
-            height: 80px;
-            resize: vertical;
-        }
-        
-        .file-upload-area {
-            border: 3px dashed #ff69b4;
-            padding: 30px;
-            text-align: center;
-            border-radius: 10px;
-            background: rgba(51,51,51,0.5);
             margin: 10px 0;
         }
         
-        .upload-previews {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-            flex-wrap: wrap;
+        .product-title {
+            color: #00ff7f;
+            margin: 10px 0;
         }
         
-        .btn {
-            background: #9b59b6;
+        .product-price {
+            font-size: 1.3em;
+            color: #ffd700;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .product-description {
+            color: #ccc;
+            margin: 15px 0;
+            line-height: 1.4;
+        }
+        
+        .buy-btn {
+            background: linear-gradient(45deg, #ff1493, #9b59b6);
             color: white;
             border: none;
             padding: 12px 20px;
-            border-radius: 5px;
+            border-radius: 25px;
             cursor: pointer;
-            margin: 5px;
-            transition: all 0.3s ease;
-        }
-        
-        .btn:hover { 
-            background: #8e44ad;
-            transform: translateY(-2px);
-        }
-        
-        .btn-crypto {
-            background: #ff1493;
-        }
-        
-        .btn-crypto:hover {
-            background: #dc143c;
-        }
-        
-        .price-display {
-            font-size: 1.3em;
-            color: #00ff7f;
-            margin: 10px 0;
             font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+            min-width: 120px;
+        }
+        
+        .buy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.4);
+        }
+        
+        .featured-badge {
+            background: #ffd700;
+            color: #000;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 10px;
         }
         
         .category-header {
-            background: linear-gradient(45deg, #ff69b4, #9b59b6);
+            background: linear-gradient(45deg, #ff69b4, #9b59b6, #00ff7f);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
             font-size: 2em;
             text-align: center;
             margin: 20px 0;
-        }
-        
-        .featured-items {
-            background: rgba(25,25,25,0.8);
-            border: 2px solid #ffd700;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
+            font-weight: bold;
         }
         
         .debug-info {
-            background: #000;
+            background: rgba(0,0,0,0.8);
             border: 1px solid #00ff00;
-            padding: 10px;
-            margin: 10px 0;
+            padding: 15px;
+            margin: 20px 0;
             border-radius: 5px;
             font-size: 0.9em;
+        }
+        
+        .coupon-section {
+            background: rgba(25,25,25,0.9);
+            border: 2px solid #ffd700;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .coupon-input {
+            background: rgba(51,51,51,0.8);
+            color: #00ff7f;
+            border: 1px solid #ffd700;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 0 10px;
+            width: 200px;
+        }
+        
+        .apply-btn {
+            background: #ffd700;
+            color: #000;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        #cryptoModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(25,25,25,0.9);
+            border: 2px solid #ff69b4;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+        }
+        
+        .close-btn {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            float: right;
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>🛡️ GMSRFC Digital Products & Collectibles</h1>
-        <p><strong>Contact:</strong> Lexalytics@yahoo.com | <strong>Token:</strong> ψΩ§∞</p>
-        <p><strong>Mission:</strong> STARCOM-0825-LS-GMSRFC-DOGPATCH-V28</p>
-    </div>
+    <div class="stars" id="stars"></div>
     
-    <div class="nav-tabs">
-        <div class="nav-tab active" onclick="showSection('digital-products')">🖥️ Digital Products</div>
-        <div class="nav-tab" onclick="showSection('collectibles')">🏆 Collectibles</div>
-        <div class="nav-tab" onclick="showSection('add-item')">➕ Add Item</div>
-        <div class="nav-tab" onclick="showSection('cashier')">💰 Cashier</div>
-    </div>
-    
-    <!-- Digital Products Section -->
-    <div id="digital-products" class="section active">
-        <div class="category-header">Digital Products</div>
-        <div class="collectible-grid">
-            <div class="collectible-item">
-                <h3>🛡️ HackerWatch Fortress</h3>
-                <div class="photo-gallery">
-                    <div class="photo-placeholder">Security Dashboard</div>
-                    <div class="photo-placeholder">Threat Detection</div>
-                </div>
-                <p>Advanced security monitoring system</p>
-                <div class="price-display">$47.00</div>
-                <button class="btn btn-crypto" onclick="purchaseItem('hackerwatch-fortress', 47)">🚀 Buy Now</button>
-            </div>
-            
-            <div class="collectible-item">
-                <h3>📚 Little X Series</h3>
-                <div class="photo-gallery">
-                    <div class="photo-placeholder">Family Content</div>
-                </div>
-                <p>Family-friendly educational content</p>
-                <div class="price-display">$25.00</div>
-                <button class="btn btn-crypto" onclick="purchaseItem('little-x-series', 25)">🚀 Buy Now</button>
-            </div>
+    <div class="content">
+        <div class="header">
+            <h1>GMSRFC Unified Digital Products & Collectibles</h1>
+            <p><strong>Contact:</strong> Lexalytics@yahoo.com | <strong>Token:</strong> ψΩ§∞</p>
+            <p><strong>Mission:</strong> STARCOM-0825-LS-GMSRFC-DOGPATCH-V28</p>
+            <p>StarSeed Fulfillment Merged - Crypto-Only System</p>
         </div>
-    </div>
-    
-    <!-- Collectibles Section -->
-    <div id="collectibles" class="section">
-        <div class="category-header">Collectibles Catalog</div>
         
-        <div class="featured-items">
-            <h3>⭐ Featured Items</h3>
-            <div class="collectible-grid">
-                <div class="collectible-item">
-                    <h4>🏅 Golden Vietnam Memorial Stamp</h4>
-                    <div class="photo-gallery">
-                        <div class="photo-placeholder" onclick="uploadPhoto('vietnam-stamp', 0)">📷 Upload Photo</div>
-                    </div>
-                    <p>Rare golden Vietnam memorial stamp, mint condition</p>
-                    <div class="price-display">$125.00</div>
-                    <button class="btn btn-crypto" onclick="purchaseItem('vietnam-stamp', 125)">🚀 Buy Now</button>
-                </div>
-                
-                <div class="collectible-item">
-                    <h4>🪙 Peter the Great Kopek</h4>
-                    <div class="photo-gallery">
-                        <div class="photo-placeholder" onclick="uploadPhoto('peter-kopek', 0)">📷 Photo 1</div>
-                        <div class="photo-placeholder" onclick="uploadPhoto('peter-kopek', 1)">📷 Photo 2</div>
-                        <div class="photo-placeholder" onclick="uploadPhoto('peter-kopek', 2)">📷 Photo 3</div>
-                        <div class="photo-placeholder" onclick="uploadPhoto('peter-kopek', 3)">📷 Photo 4</div>
-                    </div>
-                    <p>Historic kopek from Peter the Great era</p>
-                    <div class="price-display">$350.00</div>
-                    <button class="btn btn-crypto" onclick="purchaseItem('peter-kopek', 350)">🚀 Buy Now</button>
-                </div>
-            </div>
+        <div class="coupon-section">
+            <h3>Coupon Codes Available</h3>
+            <input type="text" id="globalCoupon" class="coupon-input" placeholder="Enter coupon code">
+            <button class="apply-btn" onclick="applyGlobalCoupon()">Apply Coupon</button>
+            <div id="couponStatus" style="margin-top: 10px;"></div>
+            <p style="font-size: 0.9em; margin-top: 10px;">Codes: LAUNCH25, FORTRESS10, STUDENT50, BETA20</p>
         </div>
         
         <div class="nav-tabs">
-            <div class="nav-tab" onclick="showCollectibleCategory('coins')">🪙 Coins</div>
-            <div class="nav-tab" onclick="showCollectibleCategory('stamps')">📮 Stamps</div>
-            <div class="nav-tab" onclick="showCollectibleCategory('books')">📚 Books</div>
-            <div class="nav-tab" onclick="showCollectibleCategory('comics')">📰 Comics</div>
-            <div class="nav-tab" onclick="showCollectibleCategory('stash')">🗃️ Stash Box</div>
+            <div class="nav-tab active" onclick="showSection('all-products')">All Products</div>
+            <div class="nav-tab" onclick="showSection('digital-products')">Digital Products</div>
+            <div class="nav-tab" onclick="showSection('family-friendly')">Family-Friendly</div>
+            <div class="nav-tab" onclick="showSection('collectibles')">Collectibles</div>
         </div>
         
-        <div id="collectible-display" class="collectible-grid">
-            <div class="collectible-item">
-                <h4>Select a category above to browse collectibles</h4>
-                <p>Categories: Coins, Stamps, Books, Comics, Stash/Treasure Box</p>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Add Item Section -->
-    <div id="add-item" class="section">
-        <div class="category-header">Add New Item</div>
-        <div class="add-item-form">
-            <div class="form-group">
-                <label for="itemCategory">Category:</label>
-                <select id="itemCategory" class="form-select">
-                    <option value="">Select Category</option>
-                    <option value="digital">Digital Products</option>
-                    <option value="coins">Coins</option>
-                    <option value="stamps">Stamps</option>
-                    <option value="books">Books</option>
-                    <option value="comics">Comics</option>
-                    <option value="stash">Stash/Treasure Box</option>
-                </select>
-            </div>
+        <div id="all-products" class="section active">
+            <div class="category-header">Complete Digital Catalog</div>
             
-            <div class="form-group">
-                <label for="itemName">Item Name:</label>
-                <input type="text" id="itemName" class="form-input" placeholder="Enter item name">
-            </div>
-            
-            <div class="form-group">
-                <label for="itemDescription">Description:</label>
-                <textarea id="itemDescription" class="form-textarea" placeholder="Detailed description of the item"></textarea>
-            </div>
-            
-            <div class="form-group">
-                <label for="itemPrice">Price ($):</label>
-                <input type="number" id="itemPrice" class="form-input" step="0.01" min="0" placeholder="0.00">
-            </div>
-            
-            <div class="form-group">
-                <label>Photos (up to 5):</label>
-                <div class="file-upload-area" onclick="document.getElementById('photoUpload').click()">
-                    <p>📷 Click to upload photos or drag & drop</p>
-                    <p>Maximum 5 photos per item</p>
-                    <input type="file" id="photoUpload" multiple accept="image/*" style="display: none;" onchange="handlePhotoUpload(event)">
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="featured-badge">FEATURED</div>
+                    <span class="product-emoji">🛡️</span>
+                    <h3 class="product-title">HackerWatch Fortress</h3>
+                    <div class="product-price">$47.00</div>
+                    <p class="product-description">Advanced security monitoring system with threat detection</p>
+                    <button class="buy-btn" onclick="showCrypto('hackerwatch-fortress', 47)">Buy Now $47</button>
                 </div>
-                <div id="uploadPreviews" class="upload-previews"></div>
-            </div>
-            
-            <div class="form-group">
-                <button class="btn" onclick="addItem()">➕ Add Item to Catalog</button>
-                <button class="btn" onclick="clearForm()">🗑️ Clear Form</button>
+                
+                <div class="product-card">
+                    <span class="product-emoji">🦖🎵</span>
+                    <h3 class="product-title">Dino Symphony MP3</h3>
+                    <div class="product-price">$5.00</div>
+                    <p class="product-description">Enchanting musical journey through prehistoric soundscapes</p>
+                    <button class="buy-btn" onclick="showCrypto('dino-symphony', 5)">Buy Now $5</button>
+                </div>
+                
+                <div class="product-card">
+                    <span class="product-emoji">🌌🖼️</span>
+                    <h3 class="product-title">ARIA Wallpaper Pack</h3>
+                    <div class="product-price">$3.00</div>
+                    <p class="product-description">Stunning cosmic wallpapers for your digital spaces</p>
+                    <button class="buy-btn" onclick="showCrypto('aria-wallpaper', 3)">Buy Now $3</button>
+                </div>
+                
+                <div class="product-card">
+                    <span class="product-emoji">🎫🔐</span>
+                    <h3 class="product-title">Fortress Pass Certificate</h3>
+                    <div class="product-price">$2.00</div>
+                    <p class="product-description">Official access certificate with unique serial number</p>
+                    <button class="buy-btn" onclick="showCrypto('fortress-pass', 2)">Buy Now $2</button>
+                </div>
+                
+                <div class="product-card">
+                    <div class="featured-badge">BUNDLE</div>
+                    <span class="product-emoji">🌟📦</span>
+                    <h3 class="product-title">Complete Cosmic Bundle</h3>
+                    <div class="product-price">$8.00</div>
+                    <p class="product-description">All StarSeed content - Save $2!</p>
+                    <button class="buy-btn" onclick="showCrypto('cosmic-bundle', 8)">Buy Now $8</button>
+                </div>
+                
+                <div class="product-card">
+                    <span class="product-emoji">🏅📮</span>
+                    <h3 class="product-title">Golden Vietnam Memorial Stamp</h3>
+                    <div class="product-price">$125.00</div>
+                    <p class="product-description">Rare golden Vietnam memorial stamp, mint condition</p>
+                    <button class="buy-btn" onclick="showCrypto('vietnam-stamp', 125)">Buy Now $125</button>
+                </div>
+                
+                <div class="product-card">
+                    <span class="product-emoji">🪙👑</span>
+                    <h3 class="product-title">Peter the Great Kopek</h3>
+                    <div class="product-price">$350.00</div>
+                    <p class="product-description">Historic kopek from Peter the Great era</p>
+                    <button class="buy-btn" onclick="showCrypto('peter-kopek', 350)">Buy Now $350</button>
+                </div>
             </div>
         </div>
-    </div>
-    
-    <!-- Cashier Section -->
-    <div id="cashier" class="section">
-        <div class="category-header">Payment Processing</div>
-        <div id="cashier-content">
-            <p>Select an item to purchase to access the cashier system.</p>
-            <div class="debug-info">
-                <strong>Payment Methods Available:</strong><br>
-                🪙 Bitcoin: bc1qvevxcage66n8j86rtzvxn8xrzw9k5nOp5fxg<br>
-                💎 Ethereum: 0xfD9FD0c94caf9AdDbEd6c968504cC47f2638C158<br>
-                💳 PayPal: Integration pending verification
+        
+        <div id="digital-products" class="section">
+            <div class="category-header">Digital Products</div>
+            <div class="product-grid">
+                <div class="product-card">
+                    <span class="product-emoji">🛡️</span>
+                    <h3 class="product-title">HackerWatch Fortress</h3>
+                    <div class="product-price">$47.00</div>
+                    <p class="product-description">Advanced security monitoring system</p>
+                    <button class="buy-btn" onclick="showCrypto('hackerwatch-fortress', 47)">Buy Now $47</button>
+                </div>
             </div>
         </div>
-    </div>
-    
-    <!-- Hidden file input for photo uploads -->
-    <input type="file" id="hiddenPhotoUpload" accept="image/*" style="display: none;" onchange="handleSinglePhotoUpload(event)">
-    
-    <div class="debug-info">
-        <strong>Debug Log:</strong>
-        <div id="debugLog">System initialized - Ready for collectibles management</div>
+        
+        <div id="family-friendly" class="section">
+            <div class="category-header">Family-Friendly Content</div>
+            <div class="product-grid">
+                <div class="product-card">
+                    <span class="product-emoji">🦖🎵</span>
+                    <h3 class="product-title">Dino Symphony MP3</h3>
+                    <div class="product-price">$5.00</div>
+                    <p class="product-description">Enchanting musical journey</p>
+                    <button class="buy-btn" onclick="showCrypto('dino-symphony', 5)">Buy Now $5</button>
+                </div>
+                
+                <div class="product-card">
+                    <span class="product-emoji">🌌🖼️</span>
+                    <h3 class="product-title">ARIA Wallpaper Pack</h3>
+                    <div class="product-price">$3.00</div>
+                    <p class="product-description">Cosmic wallpapers</p>
+                    <button class="buy-btn" onclick="showCrypto('aria-wallpaper', 3)">Buy Now $3</button>
+                </div>
+                
+                <div class="product-card">
+                    <span class="product-emoji">🌟📦</span>
+                    <h3 class="product-title">Complete Cosmic Bundle</h3>
+                    <div class="product-price">$8.00</div>
+                    <p class="product-description">All content - Save $2!</p>
+                    <button class="buy-btn" onclick="showCrypto('cosmic-bundle', 8)">Buy Now $8</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="collectibles" class="section">
+            <div class="category-header">Collectibles Catalog</div>
+            <div class="product-grid">
+                <div class="product-card">
+                    <span class="product-emoji">🏅📮</span>
+                    <h3 class="product-title">Golden Vietnam Memorial Stamp</h3>
+                    <div class="product-price">$125.00</div>
+                    <p class="product-description">Rare memorial stamp</p>
+                    <button class="buy-btn" onclick="showCrypto('vietnam-stamp', 125)">Buy Now $125</button>
+                </div>
+                
+                <div class="product-card">
+                    <span class="product-emoji">🪙👑</span>
+                    <h3 class="product-title">Peter the Great Kopek</h3>
+                    <div class="product-price">$350.00</div>
+                    <p class="product-description">Historic Russian kopek</p>
+                    <button class="buy-btn" onclick="showCrypto('peter-kopek', 350)">Buy Now $350</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="cryptoModal">
+            <div class="modal-content">
+                <button class="close-btn" onclick="closeCryptoModal()">Close</button>
+                <div id="cryptoContent"></div>
+            </div>
+        </div>
+        
+        <div class="debug-info">
+            <strong>System Status:</strong><br>
+            <span id="debugLog">GMSRFC Unified Storefront - Crypto Only System<br>
+            Contact: Lexalytics@yahoo.com | Token: ψΩ§∞<br>
+            StarSeed Fulfillment merged successfully</span>
+        </div>
     </div>
     
     <script>
-        // Global state management
-        let collectiblesData = {
-            coins: [],
-            stamps: [
-                {
-                    name: "Golden Vietnam Memorial Stamp",
-                    description: "Rare golden Vietnam memorial stamp, mint condition",
-                    price: 125,
-                    photos: [],
-                    id: "vietnam-stamp"
-                }
-            ],
-            books: [],
-            comics: [],
-            stash: [],
-            digital: [
-                {
-                    name: "HackerWatch Fortress",
-                    description: "Advanced security monitoring system",
-                    price: 47,
-                    photos: [],
-                    id: "hackerwatch-fortress"
-                }
-            ]
+        let appliedGlobalCoupon = null;
+        
+        const coupons = {
+            'LAUNCH25': { discount: 0.25, type: 'percentage', description: '25% Launch Discount', expires: '2025-12-31' },
+            'FORTRESS10': { discount: 10, type: 'fixed', description: '$10 Off Any Purchase', expires: '2026-01-31' },
+            'STUDENT50': { discount: 0.50, type: 'percentage', description: '50% Student Discount', expires: '2025-12-31' },
+            'BETA20': { discount: 0.20, type: 'percentage', description: '20% Beta Tester Discount', expires: '2025-10-31' }
         };
         
-        let uploadedPhotos = [];
-        let currentUploadTarget = null;
-        
-        function debugLog(message) {
-            const log = document.getElementById('debugLog');
-            const timestamp = new Date().toLocaleTimeString();
-            log.innerHTML += `<br>[${timestamp}] ${message}`;
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numStars = 100;
+            
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 3 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 2 + 's';
+                starsContainer.appendChild(star);
+            }
         }
         
         function showSection(sectionId) {
-            // Hide all sections
             document.querySelectorAll('.section').forEach(section => {
                 section.classList.remove('active');
             });
             
-            // Hide all nav tabs active state
             document.querySelectorAll('.nav-tab').forEach(tab => {
                 tab.classList.remove('active');
             });
             
-            // Show selected section
             document.getElementById(sectionId).classList.add('active');
             event.target.classList.add('active');
-            
-            debugLog(`Switched to section: ${sectionId}`);
         }
         
-        function showCollectibleCategory(category) {
-            const display = document.getElementById('collectible-display');
-            const items = collectiblesData[category] || [];
+        function applyGlobalCoupon() {
+            const couponCode = document.getElementById('globalCoupon').value.toUpperCase();
+            const couponStatus = document.getElementById('couponStatus');
             
-            if (items.length === 0) {
-                display.innerHTML = `
-                    <div class="collectible-item">
-                        <h4>No ${category} items yet</h4>
-                        <p>Use the "Add Item" section to add ${category} to your catalog</p>
-                        <button class="btn" onclick="showSection('add-item')">➕ Add ${category.charAt(0).toUpperCase() + category.slice(1)}</button>
-                    </div>
-                `;
-            } else {
-                display.innerHTML = items.map(item => `
-                    <div class="collectible-item">
-                        <h4>${item.name}</h4>
-                        <div class="photo-gallery">
-                            ${item.photos.map((photo, index) => 
-                                `<img src="${photo}" class="photo-preview" alt="Photo ${index + 1}">`
-                            ).join('')}
-                            ${Array(5 - item.photos.length).fill(0).map((_, index) => 
-                                `<div class="photo-placeholder" onclick="uploadPhoto('${item.id}', ${item.photos.length + index})">📷 Photo ${item.photos.length + index + 1}</div>`
-                            ).join('')}
-                        </div>
-                        <p>${item.description}</p>
-                        <div class="price-display">$${item.price.toFixed(2)}</div>
-                        <button class="btn btn-crypto" onclick="purchaseItem('${item.id}', ${item.price})">🚀 Buy Now</button>
-                    </div>
-                `).join('');
-            }
-            
-            debugLog(`Showing ${category} category with ${items.length} items`);
-        }
-        
-        function uploadPhoto(itemId, photoIndex) {
-            currentUploadTarget = { itemId, photoIndex };
-            document.getElementById('hiddenPhotoUpload').click();
-        }
-        
-        function handleSinglePhotoUpload(event) {
-            const file = event.target.files[0];
-            if (!file || !currentUploadTarget) return;
-            
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                // Find the item and update its photos
-                for (let category in collectiblesData) {
-                    const item = collectiblesData[category].find(item => item.id === currentUploadTarget.itemId);
-                    if (item) {
-                        if (!item.photos) item.photos = [];
-                        item.photos[currentUploadTarget.photoIndex] = e.target.result;
-                        debugLog(`Photo uploaded for ${item.name} at position ${currentUploadTarget.photoIndex}`);
-                        
-                        // Refresh the current category display
-                        const activeCategory = Object.keys(collectiblesData).find(cat => 
-                            collectiblesData[cat].some(item => item.id === currentUploadTarget.itemId)
-                        );
-                        if (activeCategory !== 'digital') {
-                            showCollectibleCategory(activeCategory);
-                        }
-                        break;
-                    }
-                }
-            };
-            reader.readAsDataURL(file);
-        }
-        
-        function handlePhotoUpload(event) {
-            const files = Array.from(event.target.files).slice(0, 5);
-            uploadedPhotos = [];
-            
-            const previews = document.getElementById('uploadPreviews');
-            previews.innerHTML = '';
-            
-            files.forEach((file, index) => {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    uploadedPhotos.push(e.target.result);
-                    
-                    const preview = document.createElement('img');
-                    preview.src = e.target.result;
-                    preview.className = 'photo-preview';
-                    previews.appendChild(preview);
-                };
-                reader.readAsDataURL(file);
-            });
-            
-            debugLog(`${files.length} photos selected for upload`);
-        }
-        
-        function addItem() {
-            const category = document.getElementById('itemCategory').value;
-            const name = document.getElementById('itemName').value;
-            const description = document.getElementById('itemDescription').value;
-            const price = parseFloat(document.getElementById('itemPrice').value);
-            
-            if (!category || !name || !description || !price) {
-                alert('Please fill in all required fields');
+            if (!couponCode) {
+                couponStatus.innerHTML = '<div style="color: #ffaa00;">Please enter a coupon code</div>';
                 return;
             }
             
-            const newItem = {
-                name,
-                description,
-                price,
-                photos: [...uploadedPhotos],
-                id: name.toLowerCase().replace(/[^a-z0-9]/g, '-')
-            };
-            
-            if (!collectiblesData[category]) {
-                collectiblesData[category] = [];
+            const coupon = coupons[couponCode];
+            if (!coupon) {
+                couponStatus.innerHTML = '<div style="color: #ff4444;">Invalid coupon code</div>';
+                return;
             }
             
-            collectiblesData[category].push(newItem);
+            if (new Date() > new Date(coupon.expires)) {
+                couponStatus.innerHTML = '<div style="color: #ff4444;">Coupon has expired</div>';
+                return;
+            }
             
-            debugLog(`Added new ${category}: ${name} ($${price})`);
-            alert(`${name} added to ${category} catalog!`);
-            clearForm();
-        }
-        
-        function clearForm() {
-            document.getElementById('itemCategory').value = '';
-            document.getElementById('itemName').value = '';
-            document.getElementById('itemDescription').value = '';
-            document.getElementById('itemPrice').value = '';
-            document.getElementById('uploadPreviews').innerHTML = '';
-            uploadedPhotos = [];
-            debugLog('Form cleared');
-        }
-        
-        function purchaseItem(itemId, price) {
-            // Redirect to cashier with item details
-            const cashierContent = document.getElementById('cashier-content');
-            cashierContent.innerHTML = `
-                <div class="add-item-form">
-                    <h3>Purchase: ${itemId.replace(/-/g, ' ').toUpperCase()}</h3>
-                    <div class="price-display">Price: $${price.toFixed(2)}</div>
-                    
-                    <h4>💰 Crypto Payment</h4>
-                    <button class="btn btn-crypto" onclick="showCrypto('bitcoin', '${itemId}', ${price})">🪙 Bitcoin</button>
-                    <button class="btn btn-crypto" onclick="showCrypto('ethereum', '${itemId}', ${price})">💎 Ethereum</button>
-                    
-                    <div id="cryptoPayment" style="display: none; margin-top: 20px; padding: 15px; background: rgba(51,51,51,0.8); border-radius: 8px;"></div>
-                    
-                    <div class="debug-info" style="margin-top: 20px;">
-                        <strong>After Payment:</strong><br>
-                        1. Email transaction ID to: Lexalytics@yahoo.com<br>
-                        2. Include item name: ${itemId}<br>
-                        3. Automated fulfillment will send GitHub clone + serial number<br>
-                        4. Deploy instructions included
-                    </div>
-                </div>
-            `;
+            appliedGlobalCoupon = { code: couponCode, ...coupon };
+            couponStatus.innerHTML = '<div style="color: #44ff44;">✅ ' + coupon.description + ' applied!</div>';
             
-            showSection('cashier');
-            debugLog(`Initiated purchase for ${itemId} at $${price}`);
+            updateAllPrices();
         }
         
-        function showCrypto(method, itemId, price) {
-            const cryptoDiv = document.getElementById('cryptoPayment');
+        function updateAllPrices() {
+            if (!appliedGlobalCoupon) return;
+            
+            document.querySelectorAll('.product-price').forEach(priceElement => {
+                const originalPrice = parseFloat(priceElement.dataset.originalPrice || priceElement.textContent.replace('$', ''));
+                if (!priceElement.dataset.originalPrice) {
+                    priceElement.dataset.originalPrice = originalPrice;
+                }
+                
+                const discount = appliedGlobalCoupon.type === 'percentage' 
+                    ? originalPrice * appliedGlobalCoupon.discount 
+                    : appliedGlobalCoupon.discount;
+                
+                const finalPrice = Math.max(0, originalPrice - discount);
+                
+                priceElement.innerHTML = '<span style="text-decoration: line-through; color: #666; font-size: 0.8em;">$' + originalPrice.toFixed(2) + '</span><br><span style="color: #00ff7f;">$' + finalPrice.toFixed(2) + '</span>';
+            });
+        }
+        
+        function showCrypto(itemId, price) {
+            let finalPrice = price;
+            if (appliedGlobalCoupon) {
+                const discount = appliedGlobalCoupon.type === 'percentage' 
+                    ? price * appliedGlobalCoupon.discount 
+                    : appliedGlobalCoupon.discount;
+                finalPrice = Math.max(0, price - discount);
+            }
+            
+            const modal = document.getElementById('cryptoModal');
+            const content = document.getElementById('cryptoContent');
+            
+            const productName = itemId.replace(/-/g, ' ').toUpperCase();
+            const reference = 'GMSRFC-' + itemId.toUpperCase() + '-' + Date.now();
+            
+            content.innerHTML = '<h3 style="color: #ff69b4; text-align: center;">Crypto Payment Options</h3>' +
+                '<h4 style="color: #00ff7f; text-align: center;">' + productName + '</h4>' +
+                '<div style="text-align: center; font-size: 1.5em; color: #ffd700; margin: 20px 0;">$' + finalPrice.toFixed(2) + ' USD' +
+                (appliedGlobalCoupon ? '<div style="font-size: 0.8em; color: #ff69b4;">Coupon ' + appliedGlobalCoupon.code + ' applied!</div>' : '') + '</div>' +
+                '<div style="display: flex; gap: 20px; margin: 20px 0; flex-wrap: wrap;">' +
+                '<button onclick="showCryptoDetails(\'bitcoin\', \'' + itemId + '\', ' + finalPrice + ')" class="buy-btn" style="flex: 1;">Bitcoin</button>' +
+                '<button onclick="showCryptoDetails(\'ethereum\', \'' + itemId + '\', ' + finalPrice + ')" class="buy-btn" style="flex: 1;">Ethereum</button>' +
+                '</div>' +
+                '<div id="cryptoDetails" style="margin-top: 20px;"></div>' +
+                '<div style="background: rgba(0,0,0,0.8); padding: 15px; border-radius: 5px; margin-top: 20px;">' +
+                '<strong style="color: #ffd700;">After Payment:</strong><br>' +
+                '1. Email transaction ID to: <strong style="color: #00ff7f;">Lexalytics@yahoo.com</strong><br>' +
+                '2. Include reference: <code style="background: #333; padding: 2px 5px; border-radius: 3px;">' + reference + '</code><br>' +
+                '3. Automated fulfillment within 24 hours<br>' +
+                '4. GitHub clone + serial number + deployment instructions' +
+                '</div>';
+            
+            modal.style.display = 'block';
+        }
+        
+        function showCryptoDetails(method, itemId, price) {
+            const details = document.getElementById('cryptoDetails');
             
             let address = '';
             let currency = '';
@@ -597,49 +552,35 @@
                 currency = 'ETH';
             }
             
-            cryptoDiv.innerHTML = `
-                <h4>${method.toUpperCase()} Payment Details</h4>
-                <p><strong>Address:</strong> <code style="background: #000; padding: 5px; border-radius: 3px;">${address}</code></p>
-                <p><strong>Amount:</strong> $${price.toFixed(2)} USD (convert to ${currency})</p>
-                <p><strong>Item:</strong> ${itemId.replace(/-/g, ' ').toUpperCase()}</p>
-                <p><strong>Reference:</strong> GMSRFC-${itemId.toUpperCase()}-${Date.now()}</p>
-                
-                <div style="background: #000; padding: 10px; border-radius: 5px; margin: 10px 0;">
-                    <strong>Payment Instructions:</strong><br>
-                    1. Send $${price.toFixed(2)} worth of ${currency} to the address above<br>
-                    2. Email transaction ID to: <strong>Lexalytics@yahoo.com</strong><br>
-                    3. Include item reference in email subject<br>
-                    4. Automated delivery within 24 hours
-                </div>
-            `;
-            
-            cryptoDiv.style.display = 'block';
-            debugLog(`Showing ${method} payment for ${itemId}`);
+            details.innerHTML = '<div style="background: rgba(51,51,51,0.8); padding: 20px; border-radius: 10px; border: 2px solid #00ff7f;">' +
+                '<h4 style="color: #00ff7f;">' + method.toUpperCase() + ' Payment Details</h4>' +
+                '<p><strong>Address:</strong><br><code style="background: #000; padding: 5px; border-radius: 3px; word-break: break-all; display: block; margin: 5px 0;">' + address + '</code></p>' +
+                '<p><strong>Amount:</strong> $' + price.toFixed(2) + ' USD (convert to ' + currency + ')</p>' +
+                '<p><strong>Item:</strong> ' + itemId.replace(/-/g, ' ').toUpperCase() + '</p>' +
+                '<div style="background: #000; padding: 10px; border-radius: 5px; margin: 15px 0;">' +
+                '<strong>Step-by-Step:</strong><br>' +
+                '1. Copy the ' + currency + ' address above<br>' +
+                '2. Send $' + price.toFixed(2) + ' worth of ' + currency + '<br>' +
+                '3. Save your transaction ID<br>' +
+                '4. Email transaction ID to Lexalytics@yahoo.com<br>' +
+                '5. Receive your product within 24 hours' +
+                '</div>' +
+                '</div>';
         }
         
-        // Initialize system
+        function closeCryptoModal() {
+            document.getElementById('cryptoModal').style.display = 'none';
+        }
+        
         document.addEventListener('DOMContentLoaded', function() {
-            debugLog('🛡️ GMSRFC Collectibles Storefront loaded');
-            debugLog('Token: ψΩ§∞ | Mission: STARCOM-0825-LS-GMSRFC-DOGPATCH-V28');
-            debugLog('Contact: Lexalytics@yahoo.com');
-            
-            // Load any saved data from localStorage
-            const saved = localStorage.getItem('gmsrfc-collectibles');
-            if (saved) {
-                try {
-                    collectiblesData = JSON.parse(saved);
-                    debugLog('Loaded saved collectibles data');
-                } catch (e) {
-                    debugLog('Error loading saved data, using defaults');
-                }
-            }
+            createStars();
         });
         
-        // Save data periodically
-        setInterval(() => {
-            localStorage.setItem('gmsrfc-collectibles', JSON.stringify(collectiblesData));
-        }, 30000); // Save every 30 seconds
-        
+        document.getElementById('cryptoModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeCryptoModal();
+            }
+        });
     </script>
 </body>
 </html>
