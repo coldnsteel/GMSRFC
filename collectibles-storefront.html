@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛡️ GMSRFC Digital Products & Collectibles</title>
+    <!-- v3.0.1, 2025-09-01 - Collectibles Integration -->
+    <style>
+        body { 
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d1b2e 100%); 
+            color: #00ff00; 
+            font-family: 'Courier New', monospace; 
+            padding: 20px; 
+            margin: 0;
+        }
+        
+        .header {
+            text-align: center;
+            background: rgba(0,0,0,0.8);
+            border: 2px solid #00ff00;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .nav-tab {
+            background: #333;
+            color: #00ff7f;
+            border: 2px solid #ff69b4;
+            padding: 12px 20px;
+            margin: 5px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-tab:hover, .nav-tab.active {
+            background: #ff69b4;
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .section {
+            display: none;
+            background: rgba(0,0,0,0.7);
+            border: 2px solid #00ff00;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        
+        .section.active { display: block; }
+        
+        .collectible-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .collectible-item {
+            background: rgba(51,51,51,0.8);
+            border: 2px solid #ff69b4;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .photo-gallery {
+            display: flex;
+            gap: 5px;
+            margin: 10px 0;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .photo-placeholder {
+            width: 80px;
+            height: 80px;
+            background: #333;
+            border: 2px dashed #ff69b4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            color: #ff69b4;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        
+        .photo-preview {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border: 2px solid #00ff7f;
+            border-radius: 5px;
+        }
+        
+        .add-item-form {
+            background: rgba(25,25,25,0.9);
+            border: 2px solid #9b59b6;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .form-group {
+            margin: 15px 0;
+        }
+        
+        .form-group label {
+            display: block;
+            color: #ff69b4;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            background: #333;
+            color: #00ff7f;
+            border: 1px solid #ff69b4;
+            padding: 10px;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        
+        .form-textarea {
+            height: 80px;
+            resize: vertical;
+        }
+        
+        .file-upload-area {
+            border: 3px dashed #ff69b4;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            background: rgba(51,51,51,0.5);
+            margin: 10px 0;
+        }
+        
+        .upload-previews {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            background: #9b59b6;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover { 
+            background: #8e44ad;
+            transform: translateY(-2px);
+        }
+        
+        .btn-crypto {
+            background: #ff1493;
+        }
+        
+        .btn-crypto:hover {
+            background: #dc143c;
+        }
+        
+        .price-display {
+            font-size: 1.3em;
+            color: #00ff7f;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        
+        .category-header {
+            background: linear-gradient(45deg, #ff69b4, #9b59b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2em;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .featured-items {
+            background: rgba(25,25,25,0.8);
+            border: 2px solid #ffd700;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .debug-info {
+            background: #000;
+            border: 1px solid #00ff00;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🛡️ GMSRFC Digital Products & Collectibles</h1>
+        <p><strong>Contact:</strong> Lexalytics@yahoo.com | <strong>Token:</strong> ψΩ§∞</p>
+        <p><strong>Mission:</strong> STARCOM-0825-LS-GMSRFC-DOGPATCH-V28</p>
+    </div>
+    
+    <div class="nav-tabs">
+        <div class="nav-tab active" onclick="showSection('digital-products')">🖥️ Digital Products</div>
+        <div class="nav-tab" onclick="showSection('collectibles')">🏆 Collectibles</div>
+        <div class="nav-tab" onclick="showSection('add-item')">➕ Add Item</div>
+        <div class="nav-tab" onclick="showSection('cashier')">💰 Cashier</div>
+    </div>
+    
+    <!-- Digital Products Section -->
+    <div id="digital-products" class="section active">
+        <div class="category-header">Digital Products</div>
+        <div class="collectible-grid">
+            <div class="collectible-item">
+                <h3>🛡️ HackerWatch Fortress</h3>
+                <div class="photo-gallery">
+                    <div class="photo-placeholder">Security Dashboard</div>
+                    <div class="photo-placeholder">Threat Detection</div>
+                </div>
+                <p>Advanced security monitoring system</p>
+                <div class="price-display">$47.00</div>
+                <button class="btn btn-crypto" onclick="purchaseItem('hackerwatch-fortress', 47)">🚀 Buy Now</button>
+            </div>
+            
+            <div class="collectible-item">
+                <h3>📚 Little X Series</h3>
+                <div class="photo-gallery">
+                    <div class="photo-placeholder">Family Content</div>
+                </div>
+                <p>Family-friendly educational content</p>
+                <div class="price-display">$25.00</div>
+                <button class="btn btn-crypto" onclick="purchaseItem('little-x-series', 25)">🚀 Buy Now</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Collectibles Section -->
+    <div id="collectibles" class="section">
+        <div class="category-header">Collectibles Catalog</div>
+        
+        <div class="featured-items">
+            <h3>⭐ Featured Items</h3>
+            <div class="collectible-grid">
+                <div class="collectible-item">
+                    <h4>🏅 Golden Vietnam Memorial Stamp</h4>
+                    <div class="photo-gallery">
+                        <div class="photo-placeholder" onclick="uploadPhoto('vietnam-stamp', 0)">📷 Upload Photo</div>
+                    </div>
+                    <p>Rare golden Vietnam memorial stamp, mint condition</p>
+                    <div class="price-display">$125.00</div>
+                    <button class="btn btn-crypto" onclick="purchaseItem('vietnam-stamp', 125)">🚀 Buy Now</button>
+                </div>
+                
+                <div class="collectible-item">
+                    <h4>🪙 Peter the Great Kopek</h4>
+                    <div class="photo-gallery">
+                        <div class="photo-placeholder" onclick="uploadPhoto('peter-kopek', 0)">📷 Photo 1</div>
+                        <div class="photo-placeholder" onclick="uploadPhoto('peter-kopek', 1)">📷 Photo 2</div>
+                        <div class="photo-placeholder" onclick="uploadPhoto('peter-kopek', 2)">📷 Photo 3</div>
+                        <div class="photo-placeholder" onclick="uploadPhoto('peter-kopek', 3)">📷 Photo 4</div>
+                    </div>
+                    <p>Historic kopek from Peter the Great era</p>
+                    <div class="price-display">$350.00</div>
+                    <button class="btn btn-crypto" onclick="purchaseItem('peter-kopek', 350)">🚀 Buy Now</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="nav-tabs">
+            <div class="nav-tab" onclick="showCollectibleCategory('coins')">🪙 Coins</div>
+            <div class="nav-tab" onclick="showCollectibleCategory('stamps')">📮 Stamps</div>
+            <div class="nav-tab" onclick="showCollectibleCategory('books')">📚 Books</div>
+            <div class="nav-tab" onclick="showCollectibleCategory('comics')">📰 Comics</div>
+            <div class="nav-tab" onclick="showCollectibleCategory('stash')">🗃️ Stash Box</div>
+        </div>
+        
+        <div id="collectible-display" class="collectible-grid">
+            <div class="collectible-item">
+                <h4>Select a category above to browse collectibles</h4>
+                <p>Categories: Coins, Stamps, Books, Comics, Stash/Treasure Box</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add Item Section -->
+    <div id="add-item" class="section">
+        <div class="category-header">Add New Item</div>
+        <div class="add-item-form">
+            <div class="form-group">
+                <label for="itemCategory">Category:</label>
+                <select id="itemCategory" class="form-select">
+                    <option value="">Select Category</option>
+                    <option value="digital">Digital Products</option>
+                    <option value="coins">Coins</option>
+                    <option value="stamps">Stamps</option>
+                    <option value="books">Books</option>
+                    <option value="comics">Comics</option>
+                    <option value="stash">Stash/Treasure Box</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="itemName">Item Name:</label>
+                <input type="text" id="itemName" class="form-input" placeholder="Enter item name">
+            </div>
+            
+            <div class="form-group">
+                <label for="itemDescription">Description:</label>
+                <textarea id="itemDescription" class="form-textarea" placeholder="Detailed description of the item"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="itemPrice">Price ($):</label>
+                <input type="number" id="itemPrice" class="form-input" step="0.01" min="0" placeholder="0.00">
+            </div>
+            
+            <div class="form-group">
+                <label>Photos (up to 5):</label>
+                <div class="file-upload-area" onclick="document.getElementById('photoUpload').click()">
+                    <p>📷 Click to upload photos or drag & drop</p>
+                    <p>Maximum 5 photos per item</p>
+                    <input type="file" id="photoUpload" multiple accept="image/*" style="display: none;" onchange="handlePhotoUpload(event)">
+                </div>
+                <div id="uploadPreviews" class="upload-previews"></div>
+            </div>
+            
+            <div class="form-group">
+                <button class="btn" onclick="addItem()">➕ Add Item to Catalog</button>
+                <button class="btn" onclick="clearForm()">🗑️ Clear Form</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Cashier Section -->
+    <div id="cashier" class="section">
+        <div class="category-header">Payment Processing</div>
+        <div id="cashier-content">
+            <p>Select an item to purchase to access the cashier system.</p>
+            <div class="debug-info">
+                <strong>Payment Methods Available:</strong><br>
+                🪙 Bitcoin: bc1qvevxcage66n8j86rtzvxn8xrzw9k5nOp5fxg<br>
+                💎 Ethereum: 0xfD9FD0c94caf9AdDbEd6c968504cC47f2638C158<br>
+                💳 PayPal: Integration pending verification
+            </div>
+        </div>
+    </div>
+    
+    <!-- Hidden file input for photo uploads -->
+    <input type="file" id="hiddenPhotoUpload" accept="image/*" style="display: none;" onchange="handleSinglePhotoUpload(event)">
+    
+    <div class="debug-info">
+        <strong>Debug Log:</strong>
+        <div id="debugLog">System initialized - Ready for collectibles management</div>
+    </div>
+    
+    <script>
+        // Global state management
+        let collectiblesData = {
+            coins: [],
+            stamps: [
+                {
+                    name: "Golden Vietnam Memorial Stamp",
+                    description: "Rare golden Vietnam memorial stamp, mint condition",
+                    price: 125,
+                    photos: [],
+                    id: "vietnam-stamp"
+                }
+            ],
+            books: [],
+            comics: [],
+            stash: [],
+            digital: [
+                {
+                    name: "HackerWatch Fortress",
+                    description: "Advanced security monitoring system",
+                    price: 47,
+                    photos: [],
+                    id: "hackerwatch-fortress"
+                }
+            ]
+        };
+        
+        let uploadedPhotos = [];
+        let currentUploadTarget = null;
+        
+        function debugLog(message) {
+            const log = document.getElementById('debugLog');
+            const timestamp = new Date().toLocaleTimeString();
+            log.innerHTML += `<br>[${timestamp}] ${message}`;
+        }
+        
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Hide all nav tabs active state
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+            
+            debugLog(`Switched to section: ${sectionId}`);
+        }
+        
+        function showCollectibleCategory(category) {
+            const display = document.getElementById('collectible-display');
+            const items = collectiblesData[category] || [];
+            
+            if (items.length === 0) {
+                display.innerHTML = `
+                    <div class="collectible-item">
+                        <h4>No ${category} items yet</h4>
+                        <p>Use the "Add Item" section to add ${category} to your catalog</p>
+                        <button class="btn" onclick="showSection('add-item')">➕ Add ${category.charAt(0).toUpperCase() + category.slice(1)}</button>
+                    </div>
+                `;
+            } else {
+                display.innerHTML = items.map(item => `
+                    <div class="collectible-item">
+                        <h4>${item.name}</h4>
+                        <div class="photo-gallery">
+                            ${item.photos.map((photo, index) => 
+                                `<img src="${photo}" class="photo-preview" alt="Photo ${index + 1}">`
+                            ).join('')}
+                            ${Array(5 - item.photos.length).fill(0).map((_, index) => 
+                                `<div class="photo-placeholder" onclick="uploadPhoto('${item.id}', ${item.photos.length + index})">📷 Photo ${item.photos.length + index + 1}</div>`
+                            ).join('')}
+                        </div>
+                        <p>${item.description}</p>
+                        <div class="price-display">$${item.price.toFixed(2)}</div>
+                        <button class="btn btn-crypto" onclick="purchaseItem('${item.id}', ${item.price})">🚀 Buy Now</button>
+                    </div>
+                `).join('');
+            }
+            
+            debugLog(`Showing ${category} category with ${items.length} items`);
+        }
+        
+        function uploadPhoto(itemId, photoIndex) {
+            currentUploadTarget = { itemId, photoIndex };
+            document.getElementById('hiddenPhotoUpload').click();
+        }
+        
+        function handleSinglePhotoUpload(event) {
+            const file = event.target.files[0];
+            if (!file || !currentUploadTarget) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                // Find the item and update its photos
+                for (let category in collectiblesData) {
+                    const item = collectiblesData[category].find(item => item.id === currentUploadTarget.itemId);
+                    if (item) {
+                        if (!item.photos) item.photos = [];
+                        item.photos[currentUploadTarget.photoIndex] = e.target.result;
+                        debugLog(`Photo uploaded for ${item.name} at position ${currentUploadTarget.photoIndex}`);
+                        
+                        // Refresh the current category display
+                        const activeCategory = Object.keys(collectiblesData).find(cat => 
+                            collectiblesData[cat].some(item => item.id === currentUploadTarget.itemId)
+                        );
+                        if (activeCategory !== 'digital') {
+                            showCollectibleCategory(activeCategory);
+                        }
+                        break;
+                    }
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        function handlePhotoUpload(event) {
+            const files = Array.from(event.target.files).slice(0, 5);
+            uploadedPhotos = [];
+            
+            const previews = document.getElementById('uploadPreviews');
+            previews.innerHTML = '';
+            
+            files.forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    uploadedPhotos.push(e.target.result);
+                    
+                    const preview = document.createElement('img');
+                    preview.src = e.target.result;
+                    preview.className = 'photo-preview';
+                    previews.appendChild(preview);
+                };
+                reader.readAsDataURL(file);
+            });
+            
+            debugLog(`${files.length} photos selected for upload`);
+        }
+        
+        function addItem() {
+            const category = document.getElementById('itemCategory').value;
+            const name = document.getElementById('itemName').value;
+            const description = document.getElementById('itemDescription').value;
+            const price = parseFloat(document.getElementById('itemPrice').value);
+            
+            if (!category || !name || !description || !price) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            const newItem = {
+                name,
+                description,
+                price,
+                photos: [...uploadedPhotos],
+                id: name.toLowerCase().replace(/[^a-z0-9]/g, '-')
+            };
+            
+            if (!collectiblesData[category]) {
+                collectiblesData[category] = [];
+            }
+            
+            collectiblesData[category].push(newItem);
+            
+            debugLog(`Added new ${category}: ${name} ($${price})`);
+            alert(`${name} added to ${category} catalog!`);
+            clearForm();
+        }
+        
+        function clearForm() {
+            document.getElementById('itemCategory').value = '';
+            document.getElementById('itemName').value = '';
+            document.getElementById('itemDescription').value = '';
+            document.getElementById('itemPrice').value = '';
+            document.getElementById('uploadPreviews').innerHTML = '';
+            uploadedPhotos = [];
+            debugLog('Form cleared');
+        }
+        
+        function purchaseItem(itemId, price) {
+            // Redirect to cashier with item details
+            const cashierContent = document.getElementById('cashier-content');
+            cashierContent.innerHTML = `
+                <div class="add-item-form">
+                    <h3>Purchase: ${itemId.replace(/-/g, ' ').toUpperCase()}</h3>
+                    <div class="price-display">Price: $${price.toFixed(2)}</div>
+                    
+                    <h4>💰 Crypto Payment</h4>
+                    <button class="btn btn-crypto" onclick="showCrypto('bitcoin', '${itemId}', ${price})">🪙 Bitcoin</button>
+                    <button class="btn btn-crypto" onclick="showCrypto('ethereum', '${itemId}', ${price})">💎 Ethereum</button>
+                    
+                    <div id="cryptoPayment" style="display: none; margin-top: 20px; padding: 15px; background: rgba(51,51,51,0.8); border-radius: 8px;"></div>
+                    
+                    <div class="debug-info" style="margin-top: 20px;">
+                        <strong>After Payment:</strong><br>
+                        1. Email transaction ID to: Lexalytics@yahoo.com<br>
+                        2. Include item name: ${itemId}<br>
+                        3. Automated fulfillment will send GitHub clone + serial number<br>
+                        4. Deploy instructions included
+                    </div>
+                </div>
+            `;
+            
+            showSection('cashier');
+            debugLog(`Initiated purchase for ${itemId} at $${price}`);
+        }
+        
+        function showCrypto(method, itemId, price) {
+            const cryptoDiv = document.getElementById('cryptoPayment');
+            
+            let address = '';
+            let currency = '';
+            
+            if (method === 'bitcoin') {
+                address = 'bc1qvevxcage66n8j86rtzvxn8xrzw9k5nOp5fxg';
+                currency = 'BTC';
+            } else if (method === 'ethereum') {
+                address = '0xfD9FD0c94caf9AdDbEd6c968504cC47f2638C158';
+                currency = 'ETH';
+            }
+            
+            cryptoDiv.innerHTML = `
+                <h4>${method.toUpperCase()} Payment Details</h4>
+                <p><strong>Address:</strong> <code style="background: #000; padding: 5px; border-radius: 3px;">${address}</code></p>
+                <p><strong>Amount:</strong> $${price.toFixed(2)} USD (convert to ${currency})</p>
+                <p><strong>Item:</strong> ${itemId.replace(/-/g, ' ').toUpperCase()}</p>
+                <p><strong>Reference:</strong> GMSRFC-${itemId.toUpperCase()}-${Date.now()}</p>
+                
+                <div style="background: #000; padding: 10px; border-radius: 5px; margin: 10px 0;">
+                    <strong>Payment Instructions:</strong><br>
+                    1. Send $${price.toFixed(2)} worth of ${currency} to the address above<br>
+                    2. Email transaction ID to: <strong>Lexalytics@yahoo.com</strong><br>
+                    3. Include item reference in email subject<br>
+                    4. Automated delivery within 24 hours
+                </div>
+            `;
+            
+            cryptoDiv.style.display = 'block';
+            debugLog(`Showing ${method} payment for ${itemId}`);
+        }
+        
+        // Initialize system
+        document.addEventListener('DOMContentLoaded', function() {
+            debugLog('🛡️ GMSRFC Collectibles Storefront loaded');
+            debugLog('Token: ψΩ§∞ | Mission: STARCOM-0825-LS-GMSRFC-DOGPATCH-V28');
+            debugLog('Contact: Lexalytics@yahoo.com');
+            
+            // Load any saved data from localStorage
+            const saved = localStorage.getItem('gmsrfc-collectibles');
+            if (saved) {
+                try {
+                    collectiblesData = JSON.parse(saved);
+                    debugLog('Loaded saved collectibles data');
+                } catch (e) {
+                    debugLog('Error loading saved data, using defaults');
+                }
+            }
+        });
+        
+        // Save data periodically
+        setInterval(() => {
+            localStorage.setItem('gmsrfc-collectibles', JSON.stringify(collectiblesData));
+        }, 30000); // Save every 30 seconds
+        
+    </script>
+</body>
+</html>
