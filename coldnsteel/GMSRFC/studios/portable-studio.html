@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Cosmic Studio - COMPLETE EDITION</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            background: #ffffff;
+            border-radius: 50%;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .cosmic-container {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: rgba(0,0,0,0.7);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #4a90e2;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #4a90e2, #50e3c2, #b4ec51);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #50e3c2;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .genre-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .genre-btn {
+            padding: 8px 16px;
+            background: rgba(74, 144, 226, 0.3);
+            border: 1px solid #4a90e2;
+            border-radius: 20px;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .genre-btn:hover, .genre-btn.active {
+            background: #4a90e2;
+            transform: scale(1.05);
+        }
+
+        .main-studio {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .instrument-panel {
+            background: rgba(0,0,0,0.8);
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px solid #4a90e2;
+        }
+
+        .panel-title {
+            color: #50e3c2;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .instrument-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+        }
+
+        .instrument-btn {
+            padding: 15px 10px;
+            background: linear-gradient(45deg, #2c3e50, #34495e);
+            border: 2px solid #4a90e2;
+            border-radius: 10px;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .instrument-btn:hover {
+            background: linear-gradient(45deg, #4a90e2, #50e3c2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
+        }
+
+        .instrument-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(74, 144, 226, 0.6);
+        }
+
+        .recording-section {
+            background: rgba(0,0,0,0.8);
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px solid #e74c3c;
+            margin-bottom: 20px;
+        }
+
+        .control-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .control-btn {
+            padding: 12px;
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            border: none;
+            border-radius: 8px;
+            color: #ffffff;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            background: linear-gradient(45deg, #c0392b, #e74c3c);
+            transform: scale(1.05);
+        }
+
+        .control-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .waveform-container {
+            background: #000;
+            border: 2px solid #4a90e2;
+            border-radius: 10px;
+            height: 100px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .waveform-display {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            gap: 2px;
+        }
+
+        .waveform-bar {
+            width: 3px;
+            background: linear-gradient(to top, #4a90e2, #50e3c2);
+            border-radius: 2px;
+            transition: height 0.1s ease;
+        }
+
+        .mixer-section {
+            background: rgba(0,0,0,0.8);
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px solid #f39c12;
+            margin-bottom: 20px;
+        }
+
+        .track-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .track {
+            background: rgba(52, 73, 94, 0.5);
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid #f39c12;
+        }
+
+        .track-name {
+            color: #f39c12;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .slider-container {
+            margin-bottom: 10px;
+        }
+
+        .slider-label {
+            font-size: 0.8rem;
+            color: #bdc3c7;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .slider {
+            width: 100%;
+            height: 5px;
+            background: #34495e;
+            outline: none;
+            border-radius: 5px;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            background: #f39c12;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .slider::-moz-range-thumb {
+            width: 15px;
+            height: 15px;
+            background: #f39c12;
+            cursor: pointer;
+            border-radius: 50%;
+            border: none;
+        }
+
+        .track-buttons {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .track-btn {
+            flex: 1;
+            padding: 5px;
+            background: #34495e;
+            border: 1px solid #f39c12;
+            border-radius: 5px;
+            color: #ffffff;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .track-btn:hover {
+            background: #f39c12;
+            color: #000;
+        }
+
+        .track-btn.active {
+            background: #e74c3c;
+        }
+
+        .effects-section {
+            background: rgba(0,0,0,0.8);
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px solid #9b59b6;
+            margin-bottom: 20px;
+        }
+
+        .effects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .effect-unit {
+            background: rgba(155, 89, 182, 0.2);
+            border: 1px solid #9b59b6;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .effect-name {
+            color: #9b59b6;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .effect-toggle {
+            background: #34495e;
+            border: 2px solid #9b59b6;
+            border-radius: 5px;
+            color: #ffffff;
+            cursor: pointer;
+            padding: 8px 16px;
+            transition: all 0.3s ease;
+        }
+
+        .effect-toggle:hover, .effect-toggle.active {
+            background: #9b59b6;
+            color: #ffffff;
+        }
+
+        .collaboration-section {
+            background: rgba(0,0,0,0.8);
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px solid #1abc9c;
+            margin-bottom: 20px;
+        }
+
+        .chat-area {
+            background: #000;
+            border: 2px solid #1abc9c;
+            border-radius: 10px;
+            height: 150px;
+            padding: 10px;
+            margin-bottom: 15px;
+            overflow-y: auto;
+            font-family: monospace;
+        }
+
+        .chat-input-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 10px;
+            background: #34495e;
+            border: 1px solid #1abc9c;
+            border-radius: 5px;
+            color: #ffffff;
+        }
+
+        .send-btn {
+            padding: 10px 20px;
+            background: #1abc9c;
+            border: none;
+            border-radius: 5px;
+            color: #ffffff;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .send-btn:hover {
+            background: #16a085;
+        }
+
+        .ai-assistant {
+            background: rgba(0,0,0,0.8);
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px solid #e67e22;
+            margin-bottom: 20px;
+        }
+
+        .ai-suggestions {
+            background: #000;
+            border: 2px solid #e67e22;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            min-height: 100px;
+        }
+
+        .suggestion {
+            color: #e67e22;
+            margin-bottom: 10px;
+            padding: 5px;
+            border-left: 3px solid #e67e22;
+            padding-left: 10px;
+        }
+
+        .keyboard-shortcuts {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.9);
+            border: 2px solid #4a90e2;
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 0.8rem;
+            z-index: 1000;
+        }
+
+        .shortcut {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            color: #bdc3c7;
+        }
+
+        .key {
+            background: #34495e;
+            color: #4a90e2;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .log-panel {
+            background: rgba(0,0,0,0.8);
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px solid #95a5a6;
+            margin-bottom: 20px;
+        }
+
+        .log-content {
+            background: #000;
+            border: 2px solid #95a5a6;
+            border-radius: 10px;
+            height: 200px;
+            padding: 10px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 0.8rem;
+        }
+
+        .log-entry {
+            margin-bottom: 5px;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+
+        .log-info { background: rgba(74, 144, 226, 0.2); color: #4a90e2; }
+        .log-success { background: rgba(39, 174, 96, 0.2); color: #27ae60; }
+        .log-warning { background: rgba(241, 196, 15, 0.2); color: #f1c40f; }
+        .log-error { background: rgba(231, 76, 60, 0.2); color: #e74c3c; }
+
+        @media (max-width: 768px) {
+            .main-studio {
+                grid-template-columns: 1fr;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .control-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .keyboard-shortcuts {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="cosmic-container">
+        <div class="header">
+            <h1 class="title">Ultimate Cosmic Studio</h1>
+            <p class="subtitle">Professional Mobile Music Production - COMPLETE EDITION</p>
+            <div class="genre-selector">
+                <button class="genre-btn active" data-genre="standard">Standard</button>
+                <button class="genre-btn" data-genre="motown">Motown</button>
+                <button class="genre-btn" data-genre="wrecking-crew">Wrecking Crew</button>
+                <button class="genre-btn" data-genre="reggae">Reggae</button>
+                <button class="genre-btn" data-genre="psychedelic">Psychedelic</button>
+                <button class="genre-btn" data-genre="indian">Indian Classical</button>
+                <button class="genre-btn" data-genre="african">African Polyrhythms</button>
+            </div>
+        </div>
+
+        <div class="main-studio">
+            <div class="instrument-panel">
+                <h3 class="panel-title">Instruments</h3>
+                <div class="instrument-grid" id="instrumentGrid">
+                    <!-- Instruments will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <div class="instrument-panel">
+                <h3 class="panel-title">UAD Plugins</h3>
+                <div class="instrument-grid" id="pluginGrid">
+                    <!-- UAD Plugins will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <div class="recording-section">
+            <h3 class="panel-title" style="color: #e74c3c;">Recording & Playback</h3>
+            <div class="control-grid">
+                <button class="control-btn" id="recordBtn" onclick="toggleRecording()">🔴 Record</button>
+                <button class="control-btn" id="playBtn" onclick="togglePlayback()">▶️ Play</button>
+                <button class="control-btn" onclick="stopPlayback()">⏹️ Stop</button>
+                <button class="control-btn" onclick="exportTrack()">💾 Export</button>
+                <button class="control-btn" onclick="ultimateJam()">🚀 Ultimate Jam</button>
+                <button class="control-btn" onclick="emergencyStop()" style="background: #c0392b;">🚨 Emergency</button>
+            </div>
+            
+            <div class="waveform-container">
+                <div class="waveform-display" id="waveform">
+                    <div style="color: #4a90e2; text-align: center;">Waveform Display</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mixer-section">
+            <h3 class="panel-title" style="color: #f39c12;">8-Track Mixer</h3>
+            <div class="track-controls" id="trackControls">
+                <!-- Tracks will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <div class="effects-section">
+            <h3 class="panel-title" style="color: #9b59b6;">UAD Effects Rack</h3>
+            <div class="effects-grid" id="effectsGrid">
+                <!-- Effects will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <div class="collaboration-section">
+            <h3 class="panel-title" style="color: #1abc9c;">Collaboration Hub</h3>
+            <div class="chat-area" id="chatArea">
+                <div style="color: #1abc9c;">[SYSTEM] Collaboration hub initialized</div>
+                <div style="color: #1abc9c;">[SYSTEM] Ready for real-time collaboration</div>
+            </div>
+            <div class="chat-input-container">
+                <input type="text" class="chat-input" id="chatInput" placeholder="Send message to collaborators...">
+                <button class="send-btn" onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+
+        <div class="ai-assistant">
+            <h3 class="panel-title" style="color: #e67e22;">AI Assistant</h3>
+            <div class="ai-suggestions" id="aiSuggestions">
+                <div class="suggestion">🎵 Try layering a reggae bass line with African polyrhythms</div>
+                <div class="suggestion">🎸 The Wrecking Crew guitar tone would complement your current progression</div>
+                <div class="suggestion">🥁 Consider adding a Motown-style drum pattern for more groove</div>
+            </div>
+            <div class="control-grid">
+                <button class="control-btn" onclick="getAISuggestion()">🤖 Get Suggestion</button>
+                <button class="control-btn" onclick="analyzeJam()">📊 Analyze Jam</button>
+            </div>
+        </div>
+
+        <div class="log-panel">
+            <h3 class="panel-title" style="color: #95a5a6;">Activity Log</h3>
+            <div class="log-content" id="logContent">
+                <!-- Log entries will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <div class="keyboard-shortcuts">
+        <div class="shortcut"><span>Ultimate Jam:</span> <span class="key">J</span></div>
+        <div class="shortcut"><span>Record:</span> <span class="key">R</span></div>
+        <div class="shortcut"><span>Play/Pause:</span> <span class="key">Space</span></div>
+        <div class="shortcut"><span>Stop:</span> <span class="key">S</span></div>
+        <div class="shortcut"><span>Emergency:</span> <span class="key">ESC</span></div>
+        <div class="shortcut"><span>Export:</span> <span class="key">E</span></div>
+    </div>
+
+    <script>
+        // Global State
+        let currentGenre = 'standard';
+        let isRecording = false;
+        let isPlaying = false;
+        let audioContext = null;
+        let tracks = [];
+
+        // Genre-specific instrument configurations
+        const genreConfig = {
+            standard: {
+                instruments: ['Piano', 'Guitar', 'Bass', 'Drums', 'Strings', 'Synth', 'Vocals', 'Percussion'],
+                plugins: ['LA-610', 'Ruby 63', 'LA-2A', '1176', 'Lexicon 224', 'EMT 250']
+            },
+            motown: {
+                instruments: ['Jamerson Bass', 'Steinway Piano', 'Motown Drums', 'Tambourine', 'Strings', 'Horns', 'Vocals', 'Handclaps'],
+                plugins: ['V76', 'Fairchild 660', 'EMT 140', 'Pultec EQP-1A', '1176', 'LA-2A']
+            },
+            'wrecking-crew': {
+                instruments: ['Telecaster', 'P-Bass', 'Ludwig Drums', 'Piano', 'Harmonica', 'Brass', 'Vocals', 'Percussion'],
+                plugins: ['Neve 1073', '1176', 'LA-2A', 'EMT 250', 'Fairchild 670', 'Pultec']
+            },
+            reggae: {
+                instruments: ['Reggae Guitar', 'Bass', 'Drums', 'Keyboards', 'Percussion', 'Horns', 'Vocals', 'Melodica'],
+                plugins: ['Space Echo', 'Spring Reverb', 'Tube Compressor', 'EQ', 'Delay', 'Chorus']
+            },
+            psychedelic: {
+                instruments: ['Electric Guitar', 'Bass', 'Drums', 'Sitar', 'Synthesizer', 'Mellotron', 'Vocals', 'Effects'],
+                plugins: ['Tape Delay', 'Phaser', 'Flanger', 'Reverb', 'Distortion', 'Wah-Wah']
+            },
+            indian: {
+                instruments: ['Sitar', 'Tabla', 'Tanpura', 'Harmonium', 'Flute', 'Sarod', 'Vocals', 'Percussion'],
+                plugins: ['Reverb', 'Delay', 'Chorus', 'EQ', 'Compressor', 'Limiter']
+            },
+            african: {
+                instruments: ['Djembe', 'Kalimba', 'Kora', 'Talking Drum', 'Balafon', 'Shekere', 'Vocals', 'Polyrhythms'],
+                plugins: ['Delay', 'Reverb', 'EQ', 'Compressor', 'Chorus', 'Limiter']
+            }
+        };
+
+        // UAD Effects configuration
+        const uadEffects = [
+            'LA-610 Mk II', 'Neve 1073', 'API 560', 'Pultec EQP-1A',
+            '1176LN Limiting Amplifier', 'LA-2A Leveling Amplifier', 'Fairchild Tube Limiter',
+            'Lexicon 224 Digital Reverb', 'EMT 250 Electronic Reverb', 'Space Echo RE-201'
+        ];
+
+        // Initialize the studio
+        function initStudio() {
+            createStars();
+            setupGenreSelector();
+            updateInstruments();
+            updatePlugins();
+            initializeTracks();
+            initializeEffects();
+            addLog('system', 'Ultimate Cosmic Studio initialized', 'success');
+            setupKeyboardShortcuts();
+        }
+
+        // Create animated stars background
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numStars = 200;
+            
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = star.style.height = Math.random() * 3 + 1 + 'px';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Setup genre selector
+        function setupGenreSelector() {
+            document.querySelectorAll('.genre-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.genre-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentGenre = btn.dataset.genre;
+                    updateInstruments();
+                    updatePlugins();
+                    addLog('genre', `Switched to ${currentGenre} mode`, 'info');
+                });
+            });
+        }
+
+        // Update instruments based on genre
+        function updateInstruments() {
+            const grid = document.getElementById('instrumentGrid');
+            const instruments = genreConfig[currentGenre].instruments;
+            
+            grid.innerHTML = '';
+            instruments.forEach(instrument => {
+                const btn = document.createElement('button');
+                btn.className = 'instrument-btn';
+                btn.textContent = instrument;
+                btn.onclick = () => playInstrument(instrument);
+                grid.appendChild(btn);
+            });
+        }
+
+        // Update plugins based on genre
+        function updatePlugins() {
+            const grid = document.getElementById('pluginGrid');
+            const plugins = genreConfig[currentGenre].plugins;
+            
+            grid.innerHTML = '';
+            plugins.forEach(plugin => {
+                const btn = document.createElement('button');
+                btn.className = 'instrument-btn';
+                btn.textContent = plugin;
+                btn.onclick = () => activatePlugin(plugin);
+                grid.appendChild(btn);
+            });
+        }
+
+        // Initialize mixer tracks
+        function initializeTracks() {
+            const container = document.getElementById('trackControls');
+            container.innerHTML = '';
+            
+            for (let i = 1; i <= 8; i++) {
+                const track = document.createElement('div');
+                track.className = 'track';
+                track.innerHTML = `
+                    <div class="track-name">Track ${i}</div>
+                    <div class="slider-container">
+                        <label class="slider-label">Volume</label>
+                        <input type="range" class="slider" min="0" max="100" value="75" 
+                               onchange="updateTrackVolume(${i}, this.value)">
+                    </div>
+                    <div class="slider-container">
+                        <label class="slider-label">Pan</label>
+                        <input type="range" class="slider" min="-100" max="100" value="0"
+                               onchange="updateTrackPan(${i}, this.value)">
+                    </div>
+                    <div class="slider-container">
+                        <label class="slider-label">EQ</label>
+                        <input type="range" class="slider" min="0" max="100" value="50"
+                               onchange="updateTrackEQ(${i}, this.value)">
+                    </div>
+                    <div class="track-buttons">
+                        <button class="track-btn" onclick="soloTrack(${i})">Solo</button>
+                        <button class="track-btn" onclick="muteTrack(${i})">Mute</button>
+                        <button class="track-btn" onclick="recordTrack(${i})">Rec</button>
+                    </div>
+                `;
+                container.appendChild(track);
+                
+                tracks.push({
+                    id: i,
+                    volume: 75,
+                    pan: 0,
+                    eq: 50,
+                    solo: false,
+                    mute: false,
+                    recording: false
+                });
+            }
+        }
+
+        // Initialize effects rack
+        function initializeEffects() {
+            const container = document.getElementById('effectsGrid');
+            container.innerHTML = '';
+            
+            uadEffects.forEach(effect => {
+                const unit = document.createElement('div');
+                unit.className = 'effect-unit';
+                unit.innerHTML = `
+                    <div class="effect-name">${effect}</div>
