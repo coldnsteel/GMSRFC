@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🛡️ GMSRFC Digital Products & Collectibles</title>
-    <!-- v3.1.0, 2025-09-02 - Crypto-Only Payment System -->
+    <!-- v3.1.3, 2025-09-02 - Crypto-Only, Fixed Navigation, Clean Architecture -->
     <style>
         body { 
             background: linear-gradient(135deg, #1a1a1a 0%, #2d1b2e 100%); 
@@ -315,6 +315,14 @@
             margin: 30px 0 20px 0;
             padding-top: 20px;
         }
+        
+        .podcast-section {
+            background: rgba(51,51,51,0.6);
+            border: 2px solid #9b59b6;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
     </style>
 </head>
 <body>
@@ -326,10 +334,10 @@
     </div>
     
     <div class="nav-tabs">
-        <div class="nav-tab active" onclick="showSection('digital-products')">🖥️ Digital Products</div>
-        <div class="nav-tab" onclick="showSection('collectibles')">🏆 Collectibles</div>
-        <div class="nav-tab" onclick="showSection('add-item')">➕ Add Item</div>
-        <div class="nav-tab" onclick="showSection('crypto-cashier')">💰 Crypto Cashier</div>
+        <div class="nav-tab active" data-section="digital-products">🖥️ Digital Products</div>
+        <div class="nav-tab" data-section="collectibles">🏆 Collectibles</div>
+        <div class="nav-tab" data-section="add-item">➕ Add Item</div>
+        <div class="nav-tab" data-section="crypto-cashier">💰 Crypto Cashier</div>
     </div>
     
     <!-- Digital Products Section -->
@@ -341,8 +349,8 @@
             <div class="collectible-item">
                 <h3>🛡️ HackerWatch Fortress</h3>
                 <div class="photo-gallery">
-                    <div class="photo-placeholder">Security Dashboard</div>
-                    <div class="photo-placeholder">Threat Detection</div>
+                    <div class="photo-placeholder" onclick="uploadPhoto('hackerwatch-fortress', 0)">📷 Security Dashboard</div>
+                    <div class="photo-placeholder" onclick="uploadPhoto('hackerwatch-fortress', 1)">📷 Threat Detection</div>
                 </div>
                 <p>Advanced security monitoring system with real-time threat detection, intrusion prevention, and comprehensive logging capabilities.</p>
                 <div class="price-display">$47.00</div>
@@ -352,8 +360,8 @@
             <div class="collectible-item">
                 <h3>📚 Little X Series</h3>
                 <div class="photo-gallery">
-                    <div class="photo-placeholder">Family Content</div>
-                    <div class="photo-placeholder">Educational Tools</div>
+                    <div class="photo-placeholder" onclick="uploadPhoto('little-x-series', 0)">📷 Family Content</div>
+                    <div class="photo-placeholder" onclick="uploadPhoto('little-x-series', 1)">📷 Educational Tools</div>
                 </div>
                 <p>Family-friendly educational content series with interactive learning modules and age-appropriate material.</p>
                 <div class="price-display">$25.00</div>
@@ -369,10 +377,10 @@
                     <h3>📱🎬 Portable Studio</h3>
                     <p><em>Ultimate Cosmic Studio</em></p>
                     <div class="photo-gallery">
-                        <div class="photo-placeholder">Studio Interface</div>
-                        <div class="photo-placeholder">Mobile View</div>
+                        <div class="photo-placeholder" onclick="uploadPhoto('portable-studio', 0)">📷 Studio Interface</div>
+                        <div class="photo-placeholder" onclick="uploadPhoto('portable-studio', 1)">📷 Mobile View</div>
                     </div>
-                    <p>Mobile music production suite with multiple genres, UAD plugin emulation, AI-assisted composition, and integrated call-in streaming capabilities. Full multi-track recording and mixing.</p>
+                    <p>Mobile music production suite with multiple genres, UAD plugin emulation, AI-assisted composition, and integrated call-in streaming capabilities.</p>
                     <div class="price-display">$30.00</div>
                     <button class="btn btn-crypto" onclick="purchaseItem('portable-studio', 30, 'Portable Studio (Ultimate Cosmic Studio)')">🚀 Purchase with Crypto</button>
                 </div>
@@ -380,10 +388,10 @@
                 <div class="studio-item">
                     <h3>🎰 KOZMIC-KASINO</h3>
                     <div class="photo-gallery">
-                        <div class="photo-placeholder">Casino Interface</div>
-                        <div class="photo-placeholder">Game Selection</div>
+                        <div class="photo-placeholder" onclick="uploadPhoto('kozmic-kasino', 0)">📷 Casino Interface</div>
+                        <div class="photo-placeholder" onclick="uploadPhoto('kozmic-kasino', 1)">📷 Game Selection</div>
                     </div>
-                    <p>NFT-powered casino platform with AI croupiers, blockchain-verified games, and immersive gambling experiences. Includes poker, blackjack, slots, and custom cosmic games.</p>
+                    <p>NFT-powered casino platform with AI croupiers, blockchain-verified games, and immersive gambling experiences.</p>
                     <div class="price-display">$50.00</div>
                     <button class="btn btn-crypto" onclick="purchaseItem('kozmic-kasino', 50, 'KOZMIC-KASINO')">🚀 Purchase with Crypto</button>
                 </div>
@@ -391,10 +399,10 @@
                 <div class="studio-item">
                     <h3>🎙️🏠 Master-Studio</h3>
                     <div class="photo-gallery">
-                        <div class="photo-placeholder">Podcast Studio</div>
-                        <div class="photo-placeholder">Streaming Setup</div>
+                        <div class="photo-placeholder" onclick="uploadPhoto('master-studio', 0)">📷 Podcast Studio</div>
+                        <div class="photo-placeholder" onclick="uploadPhoto('master-studio', 1)">📷 Streaming Setup</div>
                     </div>
-                    <p>Professional all-in-one studio suite for podcasting, live streaming, and content creation. Advanced audio processing, multi-guest support, and integrated social media publishing.</p>
+                    <p>Professional all-in-one studio suite for podcasting, live streaming, and content creation.</p>
                     <div class="price-display">$75.00</div>
                     <button class="btn btn-crypto" onclick="purchaseItem('master-studio', 75, 'Master-Studio')">🚀 Purchase with Crypto</button>
                 </div>
@@ -402,10 +410,10 @@
                 <div class="studio-item">
                     <h3>🎸🎛️ Kozmic Rock & Blues Master Console</h3>
                     <div class="photo-gallery">
-                        <div class="photo-placeholder">Music Console</div>
-                        <div class="photo-placeholder">Effects Rack</div>
+                        <div class="photo-placeholder" onclick="uploadPhoto('kozmic-masterconsole', 0)">📷 Music Console</div>
+                        <div class="photo-placeholder" onclick="uploadPhoto('kozmic-masterconsole', 1)">📷 Effects Rack</div>
                     </div>
-                    <p>Specialized music production console focused on rock and blues genres. Vintage amp modeling, extensive effects library, and professional mixing capabilities.</p>
+                    <p>Specialized music production console focused on rock and blues genres.</p>
                     <div class="price-display">$60.00</div>
                     <button class="btn btn-crypto" onclick="purchaseItem('kozmic-masterconsole', 60, 'Kozmic Rock & Blues Master Console')">🚀 Purchase with Crypto</button>
                 </div>
@@ -415,12 +423,12 @@
         <!-- Podcasts Subsection -->
         <div class="subsection-divider">
             <div class="category-header">Cosmic Podcasts</div>
-            <div class="collectible-grid">
+            <div class="podcast-section">
                 <div class="collectible-item">
                     <h3>🐑🎙️ SILLYOSOPHER Saga</h3>
                     <div class="photo-gallery">
-                        <div class="photo-placeholder">Podcast Art</div>
-                        <div class="photo-placeholder">Episode Gallery</div>
+                        <div class="photo-placeholder" onclick="uploadPhoto('sillyosopher-saga', 0)">📷 Podcast Art</div>
+                        <div class="photo-placeholder" onclick="uploadPhoto('sillyosopher-saga', 1)">📷 Episode Gallery</div>
                     </div>
                     <p>Join SILLYOSOPHER for Episodes 8-10 of philosophical sheep chaos, cosmic wisdom, and metaphysical musings from the digital pasture.</p>
                     <div class="price-display">Free Access</div>
@@ -441,10 +449,10 @@
                 <div class="collectible-item">
                     <h4>🏅 Golden Vietnam Memorial Stamp</h4>
                     <div class="photo-gallery">
-                        <div class="photo-placeholder" onclick="uploadPhoto('vietnam-stamp', 0)">📷 Upload Photo</div>
-                        <div class="photo-placeholder" onclick="uploadPhoto('vietnam-stamp', 1)">📷 Detail Shot</div>
+                        <div class="photo-placeholder" onclick="uploadPhoto('vietnam-stamp', 0)">📷 Stamp Front</div>
+                        <div class="photo-placeholder" onclick="uploadPhoto('vietnam-stamp', 1)">📷 Stamp Detail</div>
                     </div>
-                    <p>Rare golden Vietnam memorial stamp in mint condition. Historical significance with verified authenticity and provenance documentation.</p>
+                    <p>Rare golden Vietnam memorial stamp in mint condition. Historical significance with verified authenticity.</p>
                     <div class="price-display">$125.00</div>
                     <button class="btn btn-crypto" onclick="purchaseItem('vietnam-stamp', 125, 'Golden Vietnam Memorial Stamp')">🚀 Purchase with Crypto</button>
                 </div>
@@ -455,9 +463,9 @@
                         <div class="photo-placeholder" onclick="uploadPhoto('peter-kopek', 0)">📷 Obverse</div>
                         <div class="photo-placeholder" onclick="uploadPhoto('peter-kopek', 1)">📷 Reverse</div>
                         <div class="photo-placeholder" onclick="uploadPhoto('peter-kopek', 2)">📷 Edge View</div>
-                        <div class="photo-placeholder" onclick="uploadPhoto('peter-kopek', 3)">📷 Detail</div>
+                        <div class="photo-placeholder" onclick="uploadPhoto('peter-kopek', 3)">📷 Coin Detail</div>
                     </div>
-                    <p>Historic kopek from the Peter the Great era (1682-1725). Authentic Russian imperial coinage with excellent preservation and documented lineage.</p>
+                    <p>Historic kopek from the Peter the Great era (1682-1725). Authentic Russian imperial coinage.</p>
                     <div class="price-display">$350.00</div>
                     <button class="btn btn-crypto" onclick="purchaseItem('peter-kopek', 350, 'Peter the Great Kopek')">🚀 Purchase with Crypto</button>
                 </div>
@@ -465,11 +473,11 @@
         </div>
         
         <div class="nav-tabs">
-            <div class="nav-tab" onclick="showCollectibleCategory('coins')">🪙 Coins</div>
-            <div class="nav-tab" onclick="showCollectibleCategory('stamps')">📮 Stamps</div>
-            <div class="nav-tab" onclick="showCollectibleCategory('books')">📚 Books</div>
-            <div class="nav-tab" onclick="showCollectibleCategory('comics')">📰 Comics</div>
-            <div class="nav-tab" onclick="showCollectibleCategory('stash')">🗃️ Stash Box</div>
+            <div class="nav-tab" data-category="coins">🪙 Coins</div>
+            <div class="nav-tab" data-category="stamps">📮 Stamps</div>
+            <div class="nav-tab" data-category="books">📚 Books</div>
+            <div class="nav-tab" data-category="comics">📰 Comics</div>
+            <div class="nav-tab" data-category="stash">🗃️ Stash Box</div>
         </div>
         
         <div id="collectible-display" class="collectible-grid">
@@ -505,7 +513,7 @@
             
             <div class="form-group">
                 <label for="itemDescription">Description:</label>
-                <textarea id="itemDescription" class="form-textarea" placeholder="Detailed description of the item, including features and specifications"></textarea>
+                <textarea id="itemDescription" class="form-textarea" placeholder="Detailed description of the item"></textarea>
             </div>
             
             <div class="form-group">
@@ -571,12 +579,12 @@
     </div>
     
     <script>
-        // Enhanced global state management
+        // Global state management
         let collectiblesData = {
             coins: [
                 {
                     name: "Peter the Great Kopek",
-                    description: "Historic kopek from the Peter the Great era (1682-1725). Authentic Russian imperial coinage with excellent preservation and documented lineage.",
+                    description: "Historic kopek from the Peter the Great era (1682-1725). Authentic Russian imperial coinage.",
                     price: 350,
                     photos: [],
                     id: "peter-kopek"
@@ -585,7 +593,7 @@
             stamps: [
                 {
                     name: "Golden Vietnam Memorial Stamp",
-                    description: "Rare golden Vietnam memorial stamp in mint condition. Historical significance with verified authenticity and provenance documentation.",
+                    description: "Rare golden Vietnam memorial stamp in mint condition. Historical significance.",
                     price: 125,
                     photos: [],
                     id: "vietnam-stamp"
@@ -597,44 +605,51 @@
             digital: [
                 {
                     name: "HackerWatch Fortress",
-                    description: "Advanced security monitoring system with real-time threat detection, intrusion prevention, and comprehensive logging capabilities.",
+                    description: "Advanced security monitoring system with real-time threat detection.",
                     price: 47,
                     photos: [],
                     id: "hackerwatch-fortress"
                 },
                 {
                     name: "Little X Series",
-                    description: "Family-friendly educational content series with interactive learning modules and age-appropriate material.",
+                    description: "Family-friendly educational content series with interactive learning modules.",
                     price: 25,
                     photos: [],
                     id: "little-x-series"
+                },
+                {
+                    name: "SILLYOSOPHER Saga",
+                    description: "Join SILLYOSOPHER for Episodes 8-10 of philosophical sheep chaos.",
+                    price: 0,
+                    photos: [],
+                    id: "sillyosopher-saga"
                 }
             ],
             studios: [
                 {
                     name: "Portable Studio (Ultimate Cosmic Studio)",
-                    description: "Mobile music production suite with multiple genres, UAD plugin emulation, AI-assisted composition, and integrated call-in streaming capabilities.",
+                    description: "Mobile music production suite with multiple genres and AI-assisted composition.",
                     price: 30,
                     photos: [],
                     id: "portable-studio"
                 },
                 {
                     name: "KOZMIC-KASINO",
-                    description: "NFT-powered casino platform with AI croupiers, blockchain-verified games, and immersive gambling experiences.",
+                    description: "NFT-powered casino platform with AI croupiers and blockchain-verified games.",
                     price: 50,
                     photos: [],
                     id: "kozmic-kasino"
                 },
                 {
                     name: "Master-Studio",
-                    description: "Professional all-in-one studio suite for podcasting, live streaming, and content creation.",
+                    description: "Professional all-in-one studio suite for podcasting and live streaming.",
                     price: 75,
                     photos: [],
                     id: "master-studio"
                 },
                 {
                     name: "Kozmic Rock & Blues Master Console",
-                    description: "Specialized music production console focused on rock and blues genres. Vintage amp modeling and professional mixing.",
+                    description: "Specialized music production console for rock and blues genres.",
                     price: 60,
                     photos: [],
                     id: "kozmic-masterconsole"
@@ -663,17 +678,29 @@
             document.querySelectorAll('.section').forEach(section => {
                 section.classList.remove('active');
             });
-            document.querySelectorAll('.nav-tab').forEach(tab => {
+            document.querySelectorAll('.nav-tab[data-section]').forEach(tab => {
                 tab.classList.remove('active');
             });
             document.getElementById(sectionId).classList.add('active');
-            event.target.classList.add('active');
+            const activeTab = document.querySelector(`.nav-tab[data-section="${sectionId}"]`);
+            if (activeTab) {
+                activeTab.classList.add('active');
+            }
             debugLog(`Navigation: Switched to ${sectionId}`);
         }
         
         function showCollectibleCategory(category) {
             const display = document.getElementById('collectible-display');
             const items = collectiblesData[category] || [];
+            
+            // Update category tab styling
+            document.querySelectorAll('.nav-tab[data-category]').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            const categoryTab = document.querySelector(`.nav-tab[data-category="${category}"]`);
+            if (categoryTab) {
+                categoryTab.classList.add('active');
+            }
             
             if (items.length === 0) {
                 display.innerHTML = `
@@ -689,14 +716,14 @@
                         <h4>${item.name}</h4>
                         <div class="photo-gallery">
                             ${item.photos.map((photo, index) => 
-                                `<img src="${photo}" class="photo-preview" alt="Photo ${index + 1}">`
+                                `<img src="${photo}" class="photo-preview" alt="${item.name} Photo ${index + 1}">`
                             ).join('')}
-                            ${Array(Math.max(0, 5 - item.photos.length)).fill(0).map((_, index) => 
+                            ${Array(Math.max(0, 8 - item.photos.length)).fill(0).map((_, index) => 
                                 `<div class="photo-placeholder" onclick="uploadPhoto('${item.id}', ${item.photos.length + index})">📷 Photo ${item.photos.length + index + 1}</div>`
                             ).join('')}
                         </div>
                         <p>${item.description}</p>
-                        <div class="price-display">$${item.price.toFixed(2)}</div>
+                        <div class="price-display">${item.price.toFixed(2)}</div>
                         <button class="btn btn-crypto" onclick="purchaseItem('${item.id}', ${item.price}, '${item.name}')">🚀 Purchase with Crypto</button>
                     </div>
                 `).join('');
@@ -723,12 +750,9 @@
                         item.photos[currentUploadTarget.photoIndex] = e.target.result;
                         debugLog(`Photo uploaded: ${item.name} [${currentUploadTarget.photoIndex}]`);
                         
-                        // Refresh display if we're viewing collectibles
-                        const activeCategory = Object.keys(collectiblesData).find(cat => 
-                            collectiblesData[cat].some(item => item.id === currentUploadTarget.itemId)
-                        );
-                        if (activeCategory !== 'digital' && activeCategory !== 'studios') {
-                            showCollectibleCategory(activeCategory);
+                        // Refresh the appropriate display
+                        if (category === 'coins' || category === 'stamps' || category === 'books' || category === 'comics' || category === 'stash') {
+                            showCollectibleCategory(category);
                         }
                         break;
                     }
@@ -772,7 +796,6 @@
             
             const itemId = name.toLowerCase().replace(/[^a-z0-9]/g, '-');
             
-            // Check for duplicate IDs
             for (let cat in collectiblesData) {
                 if (collectiblesData[cat].some(item => item.id === itemId)) {
                     alert('Item with similar name already exists. Please use a different name.');
@@ -799,9 +822,10 @@
             clearForm();
             saveCatalogData();
             
-            // Refresh display if viewing the same category
             if (category === 'digital' || category === 'studios') {
                 showSection('digital-products');
+            } else {
+                showSection('collectibles');
             }
         }
         
@@ -929,7 +953,6 @@
                 const saved = localStorage.getItem('gmsrfc-collectibles');
                 if (saved) {
                     const loadedData = JSON.parse(saved);
-                    // Merge with defaults to ensure all categories exist
                     Object.keys(collectiblesData).forEach(category => {
                         if (loadedData[category]) {
                             collectiblesData[category] = loadedData[category];
@@ -944,7 +967,7 @@
         
         // Initialize system
         document.addEventListener('DOMContentLoaded', function() {
-            debugLog('🛡️ GMSRFC Crypto Storefront v3.1.0 - Initializing');
+            debugLog('🛡️ GMSRFC Crypto Storefront v3.1.3 - Initializing');
             debugLog('Mission: STARCOM-0825-LS-GMSRFC-DOGPATCH-V28');
             debugLog('Contact: Lexalytics@yahoo.com | Token: ψΩ§∞');
             debugLog('Payment System: Crypto Only (BTC/ETH)');
@@ -952,13 +975,25 @@
             loadCatalogData();
             showSection('digital-products');
             
-            // Auto-save every 30 seconds
             setInterval(saveCatalogData, 30000);
             
             debugLog('System ready - All modules loaded');
+            
+            // Attach unified navigation system
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const sectionId = tab.getAttribute('data-section');
+                    const categoryId = tab.getAttribute('data-category');
+                    
+                    if (sectionId) {
+                        showSection(sectionId);
+                    } else if (categoryId) {
+                        showCollectibleCategory(categoryId);
+                    }
+                });
+            });
         });
         
-        // Handle page visibility changes
         document.addEventListener('visibilitychange', function() {
             if (document.hidden) {
                 saveCatalogData();
@@ -966,7 +1001,6 @@
             }
         });
         
-        // Handle before unload
         window.addEventListener('beforeunload', function() {
             saveCatalogData();
         });
