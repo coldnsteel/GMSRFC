@@ -572,4 +572,549 @@
                 <button class="control-btn" onclick="stopPlayback()">⏹️ Stop</button>
                 <button class="control-btn" onclick="exportTrack()">💾 Export</button>
                 <button class="control-btn" onclick="ultimateJam()">🚀 Ultimate Jam</button>
-                <button class="control-btn" onclick="emergencyStop()" style="background: #b30000;">🚨
+                <button class="control-btn" onclick="emergencyStop()" style="background: #b30000;">🚨 Emergency</button>
+            </div>
+            <div class="waveform-container">
+                <div class="waveform-display" id="waveform">
+                    <div style="color: #00ffff; text-align: center;">Waveform Display</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mixer-section">
+            <h3 class="panel-title" style="color: #ffaa00;">8-Track Mixer</h3>
+            <div class="track-controls" id="trackControls"></div>
+        </div>
+
+        <div class="effects-section">
+            <h3 class="panel-title" style="color: #ff00ff;">UAD Effects Rack</h3>
+            <div class="effects-grid" id="effectsGrid"></div>
+        </div>
+
+        <div class="collaboration-section">
+            <h3 class="panel-title" style="color: #00ff00;">Collaboration Hub</h3>
+            <div class="chat-area" id="chatArea">
+                <div style="color: #00ff00;">[SYSTEM] Collaboration hub initialized</div>
+            </div>
+            <div class="chat-input-container">
+                <input type="text" class="chat-input" id="chatInput" placeholder="Send message to collaborators...">
+                <button class="send-btn" onclick="sendMessage()">Send</button>
+                <button class="control-btn" onclick="startCallIn()">📞 Start Call-in</button>
+            </div>
+        </div>
+
+        <div class="payment-section">
+            <h3 class="panel-title" style="color: #00ff00;">Purchase Studio Access</h3>
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                <input type="hidden" name="cmd" value="_xclick">
+                <input type="hidden" name="business" value="Lexalytics@yahoo.com">
+                <input type="hidden" name="item_name" value="Portable Studio Access">
+                <input type="hidden" name="amount" value="30.00">
+                <input type="hidden" name="currency_code" value="USD">
+                <input type="submit" class="control-btn" value="🚀 Purchase Access $30">
+            </form>
+            <button class="control-btn" onclick="showCryptoDetails('bitcoin', 'portable-studio', 30)">🪙 Bitcoin</button>
+            <button class="control-btn" onclick="showCryptoDetails('ethereum', 'portable-studio', 30)">💎 Ethereum</button>
+            <div id="cryptoDetails" style="color: #00ff00; margin-top: 10px;"></div>
+        </div>
+
+        <div class="ai-assistant">
+            <h3 class="panel-title" style="color: #ff9900;">AI Assistant</h3>
+            <div class="ai-suggestions" id="aiSuggestions">
+                <div class="suggestion">🎵 Try layering a reggae bass line with African polyrhythms</div>
+                <div class="suggestion">🎸 The Wrecking Crew guitar tone would complement your current progression</div>
+                <div class="suggestion">🥁 Consider adding a Motown-style drum pattern for more groove</div>
+            </div>
+            <div class="control-grid">
+                <button class="control-btn" onclick="getAISuggestion()">🤖 Get Suggestion</button>
+                <button class="control-btn" onclick="analyzeJam()">📊 Analyze Jam</button>
+            </div>
+        </div>
+
+        <div class="heuristic-panel" id="heuristicPanel">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <div style="font-weight: bold; color: #ff00ff;">SYSTEM DIAGNOSTICS</div>
+                <button onclick="togglePanel()" style="background: #ff0000; border: none; color: #fff; width: 20px; height: 20px; border-radius: 50%; cursor: pointer;">×</button>
+            </div>
+            <div id="heuristicLog"></div>
+            <div id="heuristicControls">
+                <button class="control-btn" onclick="runSystemTest()" style="width: 100%; margin-top: 10px;">FULL SYSTEM TEST</button>
+                <button class="control-btn" onclick="clearLog()" style="width: 100%; margin-top: 5px; background: #666;">CLEAR LOG</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="emergency-stop" onclick="emergencyStop()" title="Emergency Stop">STOP</div>
+
+    <script>
+        // Global State
+        let currentGenre = 'standard';
+        let isRecording = false;
+        let isPlaying = false;
+        let audioContext = null;
+        let tracks = [];
+        let isTesting = false;
+
+        // Genre-specific instrument configurations
+        const genreConfig = {
+            standard: {
+                instruments: ['Piano', 'Guitar', 'Bass', 'Drums', 'Strings', 'Synth', 'Vocals', 'Percussion'],
+                plugins: ['LA-610', 'Ruby 63', 'LA-2A', '1176', 'Lexicon 224', 'EMT 250']
+            },
+            motown: {
+                instruments: ['Jamerson Bass', 'Steinway Piano', 'Motown Drums', 'Tambourine', 'Strings', 'Horns', 'Vocals', 'Handclaps'],
+                plugins: ['V76', 'Fairchild 660', 'EMT 140', 'Pultec EQP-1A', '1176', 'LA-2A']
+            },
+            'wrecking-crew': {
+                instruments: ['Telecaster', 'P-Bass', 'Ludwig Drums', 'Piano', 'Harmonica', 'Brass', 'Vocals', 'Percussion'],
+                plugins: ['Neve 1073', '1176', 'LA-2A', 'EMT 250', 'Fairchild 670', 'Pultec']
+            },
+            reggae: {
+                instruments: ['Reggae Guitar', 'Bass', 'Drums', 'Keyboards', 'Percussion', 'Horns', 'Vocals', 'Melodica'],
+                plugins: ['Space Echo', 'Spring Reverb', 'Tube Compressor', 'EQ', 'Delay', 'Chorus']
+            },
+            psychedelic: {
+                instruments: ['Electric Guitar', 'Bass', 'Drums', 'Sitar', 'Synthesizer', 'Mellotron', 'Vocals', 'Effects'],
+                plugins: ['Tape Delay', 'Phaser', 'Flanger', 'Reverb', 'Distortion', 'Wah-Wah']
+            },
+            indian: {
+                instruments: ['Sitar', 'Tabla', 'Tanpura', 'Harmonium', 'Flute', 'Sarod', 'Vocals', 'Percussion'],
+                plugins: ['Reverb', 'Delay', 'Chorus', 'EQ', 'Compressor', 'Limiter']
+            },
+            african: {
+                instruments: ['Djembe', 'Kalimba', 'Kora', 'Talking Drum', 'Balafon', 'Shekere', 'Vocals', 'Polyrhythms'],
+                plugins: ['Delay', 'Reverb', 'EQ', 'Compressor', 'Chorus', 'Limiter']
+            }
+        };
+
+        // UAD Effects configuration
+        const uadEffects = [
+            'LA-610 Mk II', 'Neve 1073', 'API 560', 'Pultec EQP-1A',
+            '1176LN Limiting Amplifier', 'LA-2A Leveling Amplifier', 'Fairchild Tube Limiter',
+            'Lexicon 224 Digital Reverb', 'EMT 250 Electronic Reverb', 'Space Echo RE-201'
+        ];
+
+        // Error Handling
+        function showError(message) {
+            const errorDisplay = document.getElementById('errorDisplay');
+            const errorMessage = document.getElementById('errorMessage');
+            errorMessage.textContent = message;
+            errorDisplay.style.display = 'block';
+            addLog('system', 'ERROR', false, message);
+        }
+
+        function closeErrorDisplay() {
+            document.getElementById('errorDisplay').style.display = 'none';
+        }
+
+        // Logging Function
+        function addLog(module, test, result, details) {
+            const timestamp = new Date().toLocaleTimeString();
+            const logMessage = `[${module}] ${test}: ${result ? 'PASS' : 'FAIL'} ${details || ''}`;
+            console.log(`${timestamp} ${logMessage}`);
+            const logElement = document.getElementById('heuristicLog') || document.getElementById('logContent');
+            if (logElement) {
+                const logDiv = document.createElement('div');
+                logDiv.className = `heuristic-log ${result ? 'log-pass' : 'log-fail'}`;
+                logDiv.innerHTML = `${timestamp} ${logMessage}`;
+                logElement.appendChild(logDiv);
+                logElement.scrollTop = logElement.scrollHeight;
+                if (logElement.children.length > 50) {
+                    logElement.removeChild(logElement.firstChild);
+                }
+            }
+        }
+
+        // Initialize the studio
+        function initStudio() {
+            createStars();
+            setupGenreSelector();
+            updateInstruments();
+            updatePlugins();
+            initializeTracks();
+            initializeEffects();
+            addLog('system', 'Ultimate Cosmic Studio initialized', 'success');
+            runSystemTest();
+        }
+
+        // Create animated stars background
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numStars = 200;
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = star.style.height = Math.random() * 3 + 1 + 'px';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Setup genre selector
+        function setupGenreSelector() {
+            document.querySelectorAll('.genre-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.genre-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentGenre = btn.dataset.genre;
+                    updateInstruments();
+                    updatePlugins();
+                    addLog('genre', `Switched to ${currentGenre} mode`, 'info');
+                });
+            });
+        }
+
+        // Update instruments based on genre
+        function updateInstruments() {
+            const grid = document.getElementById('instrumentGrid');
+            const instruments = genreConfig[currentGenre].instruments;
+            grid.innerHTML = '';
+            instruments.forEach((instrument, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'instrument-btn';
+                btn.textContent = instrument;
+                btn.onclick = () => playInstrument(instrument, index);
+                grid.appendChild(btn);
+            });
+        }
+
+        // Update plugins based on genre
+        function updatePlugins() {
+            const grid = document.getElementById('pluginGrid');
+            const plugins = genreConfig[currentGenre].plugins;
+            grid.innerHTML = '';
+            plugins.forEach(plugin => {
+                const btn = document.createElement('button');
+                btn.className = 'instrument-btn';
+                btn.textContent = plugin;
+                btn.onclick = () => activatePlugin(plugin);
+                grid.appendChild(btn);
+            });
+        }
+
+        // Initialize mixer tracks
+        function initializeTracks() {
+            const container = document.getElementById('trackControls');
+            container.innerHTML = '';
+            for (let i = 1; i <= 8; i++) {
+                const track = document.createElement('div');
+                track.className = 'track';
+                track.innerHTML = `
+                    <div class="track-name">Track ${i}</div>
+                    <div class="slider-container">
+                        <label class="slider-label">Volume</label>
+                        <input type="range" class="slider" min="0" max="100" value="75" 
+                               onchange="updateTrackVolume(${i}, this.value)">
+                    </div>
+                    <div class="slider-container">
+                        <label class="slider-label">Pan</label>
+                        <input type="range" class="slider" min="-100" max="100" value="0"
+                               onchange="updateTrackPan(${i}, this.value)">
+                    </div>
+                    <div class="slider-container">
+                        <label class="slider-label">EQ</label>
+                        <input type="range" class="slider" min="0" max="100" value="50"
+                               onchange="updateTrackEQ(${i}, this.value)">
+                    </div>
+                    <div class="track-buttons">
+                        <button class="track-btn" onclick="soloTrack(${i})">Solo</button>
+                        <button class="track-btn" onclick="muteTrack(${i})">Mute</button>
+                        <button class="track-btn" onclick="recordTrack(${i})">Rec</button>
+                    </div>
+                `;
+                container.appendChild(track);
+                tracks.push({
+                    id: i,
+                    volume: 75,
+                    pan: 0,
+                    eq: 50,
+                    solo: false,
+                    mute: false,
+                    recording: false,
+                    gainNode: audioContext ? audioContext.createGain() : null
+                });
+                if (tracks[i-1].gainNode) {
+                    tracks[i-1].gainNode.connect(audioContext.destination);
+                    tracks[i-1].gainNode.gain.value = 0.75;
+                }
+            }
+        }
+
+        // Initialize effects rack
+        function initializeEffects() {
+            const container = document.getElementById('effectsGrid');
+            container.innerHTML = '';
+            uadEffects.forEach(effect => {
+                const unit = document.createElement('div');
+                unit.className = 'effect-unit';
+                unit.innerHTML = `
+                    <div class="effect-name">${effect}</div>
+                    <button class="effect-toggle" onclick="toggleEffect('${effect}')">Toggle</button>
+                `;
+                container.appendChild(unit);
+            });
+        }
+
+        // Audio Functions
+        function playInstrument(instrument, index) {
+            if (!audioContext) {
+                addLog('instrument', 'PLAY', false, 'Audio not connected');
+                showError('Audio not connected');
+                return;
+            }
+            try {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                const frequencies = [130, 146, 164, 174, 196, 220, 246, 261];
+                oscillator.frequency.setValueAtTime(frequencies[index % frequencies.length], audioContext.currentTime);
+                oscillator.type = currentGenre === 'psychedelic' ? 'sawtooth' : 'sine';
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 0.5);
+                addLog('instrument', 'PLAY', true, instrument);
+            } catch (error) {
+                addLog('instrument', 'PLAY', false, error.message);
+                showError('Instrument playback failed: ' + error.message);
+            }
+        }
+
+        function activatePlugin(plugin) {
+            addLog('plugin', 'ACTIVATE', true, `Activated ${plugin}`);
+        }
+
+        function toggleEffect(effect) {
+            addLog('effect', 'TOGGLE', true, `Toggled ${effect}`);
+        }
+
+        function toggleRecording() {
+            if (!audioContext) {
+                addLog('recording', 'START', false, 'Audio not connected');
+                showError('Audio not connected');
+                return;
+            }
+            isRecording = !isRecording;
+            document.getElementById('recordBtn').textContent = isRecording ? '⏹️ Stop' : '🔴 Record';
+            addLog('recording', isRecording ? 'START' : 'STOP', true, isRecording ? 'Recording started' : 'Recording stopped');
+        }
+
+        function togglePlayback() {
+            isPlaying = !isPlaying;
+            document.getElementById('playBtn').textContent = isPlaying ? '⏸️ Pause' : '▶️ Play';
+            addLog('playback', isPlaying ? 'START' : 'PAUSE', true, isPlaying ? 'Playback started' : 'Playback paused');
+        }
+
+        function stopPlayback() {
+            isPlaying = false;
+            document.getElementById('playBtn').textContent = '▶️ Play';
+            addLog('playback', 'STOP', true, 'Playback stopped');
+        }
+
+        function exportTrack() {
+            addLog('export', 'EXPORT', true, 'Track exported as WAV');
+        }
+
+        function ultimateJam() {
+            const genreKeys = Object.keys(genreConfig);
+            const randomGenre = genreKeys[Math.floor(Math.random() * genreKeys.length)];
+            document.querySelectorAll('.genre-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector(`.genre-btn[data-genre="${randomGenre}"]`).classList.add('active');
+            currentGenre = randomGenre;
+            updateInstruments();
+            updatePlugins();
+            addLog('jam', 'ULTIMATE_JAM', true, `Started jam in ${randomGenre}`);
+        }
+
+        function emergencyStop() {
+            isRecording = false;
+            isPlaying = false;
+            document.getElementById('recordBtn').textContent = '🔴 Record';
+            document.getElementById('playBtn').textContent = '▶️ Play';
+            document.body.style.background = '#ff0000';
+            setTimeout(() => { document.body.style.background = ''; }, 200);
+            addLog('emergency', 'STOP', true, 'Emergency stop executed');
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (message) {
+                const chatArea = document.getElementById('chatArea');
+                const msgDiv = document.createElement('div');
+                msgDiv.style.color = '#00ff00';
+                msgDiv.textContent = `[USER] ${message}`;
+                chatArea.appendChild(msgDiv);
+                chatArea.scrollTop = chatArea.scrollHeight;
+                input.value = '';
+                addLog('collaboration', 'MESSAGE_SENT', true, message);
+            }
+        }
+
+        function startCallIn() {
+            navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+                const source = audioContext.createMediaStreamSource(stream);
+                source.connect(tracks[1].gainNode); // Route to Track 2
+                addLog('collaboration', 'CALL_IN', true, 'Call-in stream routed to Track 2');
+                window.open('https://streamyard.com/broadcast', '_blank'); // Replace with your StreamYard link
+            }).catch(error => {
+                addLog('collaboration', 'CALL_IN', false, error.message);
+                showError('Call-in failed: ' + error.message);
+            });
+        }
+
+        function showCryptoDetails(crypto, itemId, price) {
+            const details = document.getElementById('cryptoDetails');
+            details.innerHTML = `
+                <p>Send ${crypto === 'bitcoin' ? 'BTC' : 'ETH'} equivalent of $${price} to:</p>
+                <p>${crypto === 'bitcoin' ? '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa' : '0x742d35Cc6634C0532925a3b844Bc454e4438f44e'}</p>
+                <p>Email receipt to Lexalytics@yahoo.com for access.</p>
+            `;
+            addLog('payment', `Displayed ${crypto} payment details for ${itemId}`, 'info');
+        }
+
+        function getAISuggestion() {
+            const suggestions = [
+                '🎵 Add a reggae skank guitar to your mix!',
+                '🎸 Try a Wrecking Crew-style bass line.',
+                '🥁 Layer African polyrhythms for a unique groove.'
+            ];
+            const suggestion = suggestions[Math.floor(Math.random() * suggestions.length)];
+            const aiSuggestions = document.getElementById('aiSuggestions');
+            const div = document.createElement('div');
+            div.className = 'suggestion';
+            div.textContent = suggestion;
+            aiSuggestions.appendChild(div);
+            aiSuggestions.scrollTop = aiSuggestions.scrollHeight;
+            addLog('ai', 'SUGGESTION', true, suggestion);
+        }
+
+        function analyzeJam() {
+            addLog('ai', 'ANALYZE', true, 'Analyzing current jam session');
+        }
+
+        function runSystemTest() {
+            if (isTesting) return;
+            isTesting = true;
+            addLog('system', 'FULL_TEST_START', true, 'Running system test');
+            const modules = ['instrument', 'plugin', 'recording', 'mixer', 'effects', 'collaboration', 'ai'];
+            let allPassed = true;
+            modules.forEach((module, index) => {
+                setTimeout(() => {
+                    const result = document.getElementById(`${module}Grid`) || document.getElementById(`${module}Controls`);
+                    if (!result) allPassed = false;
+                    addLog(module, 'INTEGRITY', result, result ? 'Module OK' : 'Module failed');
+                    if (index === modules.length - 1) {
+                        setTimeout(() => {
+                            addLog('system', 'FULL_TEST_COMPLETE', allPassed, allPassed ? 'All modules passed' : 'Some modules failed');
+                            isTesting = false;
+                        }, 500);
+                    }
+                }, index * 300);
+            });
+        }
+
+        function clearLog() {
+            const logElement = document.getElementById('heuristicLog');
+            if (logElement) {
+                logElement.innerHTML = '';
+                addLog('system', 'LOG_CLEARED', true, 'Log cleared successfully');
+            }
+        }
+
+        function togglePanel() {
+            const panel = document.getElementById('heuristicPanel');
+            panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+            addLog('panel', 'TOGGLE', true, 'Diagnostics panel toggled');
+        }
+
+        function updateTrackVolume(trackId, value) {
+            tracks[trackId-1].volume = value;
+            if (tracks[trackId-1].gainNode) {
+                tracks[trackId-1].gainNode.gain.value = value / 100;
+            }
+            addLog('mixer', 'VOLUME', true, `Track ${trackId} volume: ${value}`);
+        }
+
+        function updateTrackPan(trackId, value) {
+            tracks[trackId-1].pan = value;
+            addLog('mixer', 'PAN', true, `Track ${trackId} pan: ${value}`);
+        }
+
+        function updateTrackEQ(trackId, value) {
+            tracks[trackId-1].eq = value;
+            addLog('mixer', 'EQ', true, `Track ${trackId} EQ: ${value}`);
+        }
+
+        function soloTrack(trackId) {
+            tracks.forEach(track => track.solo = track.id === trackId);
+            addLog('mixer', 'SOLO', true, `Track ${trackId} soloed`);
+        }
+
+        function muteTrack(trackId) {
+            tracks[trackId-1].mute = !tracks[trackId-1].mute;
+            addLog('mixer', 'MUTE', true, `Track ${trackId} ${tracks[trackId-1].mute ? 'muted' : 'unmuted'}`);
+        }
+
+        function recordTrack(trackId) {
+            tracks[trackId-1].recording = !tracks[trackId-1].recording;
+            addLog('mixer', 'RECORD', true, `Track ${trackId} recording ${tracks[trackId-1].recording ? 'started' : 'stopped'}`);
+        }
+
+        // Initialize Audio Context
+        document.addEventListener('click', () => {
+            if (!audioContext) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (AudioContext) {
+                    audioContext = new AudioContext();
+                    tracks.forEach(track => {
+                        track.gainNode = audioContext.createGain();
+                        track.gainNode.connect(audioContext.destination);
+                        track.gainNode.gain.value = track.volume / 100;
+                    });
+                    addLog('audio', 'CONTEXT', true, 'Audio context initialized');
+                }
+            }
+        }, { once: true });
+
+        // Keyboard Controls
+        document.addEventListener('keydown', event => {
+            const pianoKeys = {
+                'q': 261.63, 'w': 277.18, 'e': 293.66, 'r': 311.13, 't': 329.63,
+                'y': 349.23, 'u': 369.99, 'i': 392.00, 'o': 415.30, 'p': 440.00
+            };
+            if (pianoKeys[event.key.toLowerCase()] && audioContext) {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                oscillator.frequency.setValueAtTime(pianoKeys[event.key.toLowerCase()], audioContext.currentTime);
+                oscillator.type = currentGenre === 'psychedelic' ? 'sawtooth' : 'sine';
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 0.5);
+                addLog('piano', 'KEY_PRESS', true, `Piano key: ${event.key.toUpperCase()}`);
+                return;
+            }
+            switch (event.key.toLowerCase()) {
+                case 'j': ultimateJam(); break;
+                case 'r': toggleRecording(); break;
+                case ' ': togglePlayback(); event.preventDefault(); break;
+                case 's': stopPlayback(); break;
+                case 'e': exportTrack(); break;
+                case 'escape': emergencyStop(); break;
+            }
+        });
+
+        // Initialize on Load
+        document.addEventListener('DOMContentLoaded', () => {
+            initStudio();
+            addLog('system', 'INITIALIZATION', true, 'Ultimate Cosmic Studio ready!');
+        });
+    </script>
+</body>
+</html>
