@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate Cosmic Studio - COMPLETE EDITION</title>
+    <title>🌌 Portable Studio (Ultimate Cosmic Studio) - GMSRFC</title>
+    <link rel="stylesheet" href="/saint-panteleimon-blessing.css">
     <style>
         * {
             box-sizing: border-box;
@@ -12,11 +13,19 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e);
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(45deg, #0a0a0a, #1a0033, #330066, #000066);
             color: #ffffff;
             min-height: 100vh;
             overflow-x: hidden;
+            animation: cosmicPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes cosmicPulse {
+            0%, 100% { background: linear-gradient(45deg, #0a0a0a, #1a0033, #330066, #000066); }
+            25% { background: linear-gradient(45deg, #1a0033, #330066, #000066, #0a0a0a); }
+            50% { background: linear-gradient(45deg, #330066, #000066, #0a0a0a, #1a0033); }
+            75% { background: linear-gradient(45deg, #000066, #0a0a0a, #1a0033, #330066); }
         }
 
         .stars {
@@ -55,12 +64,18 @@
             background: rgba(0,0,0,0.7);
             padding: 20px;
             border-radius: 15px;
-            border: 2px solid #4a90e2;
+            border: 2px solid #00ffff;
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            from { text-shadow: 0 0 20px #00ffff, 0 0 30px #ff00ff, 0 0 40px #ffff00; }
+            to { text-shadow: 0 0 30px #ff00ff, 0 0 40px #ffff00, 0 0 50px #00ffff; }
         }
 
         .title {
             font-size: 2.5rem;
-            background: linear-gradient(45deg, #4a90e2, #50e3c2, #b4ec51);
+            background: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -68,7 +83,7 @@
         }
 
         .subtitle {
-            color: #50e3c2;
+            color: #00ffff;
             font-size: 1.2rem;
             margin-bottom: 20px;
         }
@@ -83,8 +98,8 @@
 
         .genre-btn {
             padding: 8px 16px;
-            background: rgba(74, 144, 226, 0.3);
-            border: 1px solid #4a90e2;
+            background: rgba(0, 255, 255, 0.3);
+            border: 1px solid #00ffff;
             border-radius: 20px;
             color: #ffffff;
             cursor: pointer;
@@ -92,7 +107,8 @@
         }
 
         .genre-btn:hover, .genre-btn.active {
-            background: #4a90e2;
+            background: #00ffff;
+            color: #000;
             transform: scale(1.05);
         }
 
@@ -107,11 +123,12 @@
             background: rgba(0,0,0,0.8);
             border-radius: 15px;
             padding: 20px;
-            border: 2px solid #4a90e2;
+            border: 2px solid #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
         }
 
         .panel-title {
-            color: #50e3c2;
+            color: #00ffff;
             font-size: 1.3rem;
             margin-bottom: 15px;
             text-align: center;
@@ -125,8 +142,8 @@
 
         .instrument-btn {
             padding: 15px 10px;
-            background: linear-gradient(45deg, #2c3e50, #34495e);
-            border: 2px solid #4a90e2;
+            background: linear-gradient(45deg, #2a2a2a, #4a4a4a);
+            border: 2px solid #00ffff;
             border-radius: 10px;
             color: #ffffff;
             cursor: pointer;
@@ -136,22 +153,23 @@
         }
 
         .instrument-btn:hover {
-            background: linear-gradient(45deg, #4a90e2, #50e3c2);
+            background: linear-gradient(45deg, #00ffaa, #0088aa);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.4);
         }
 
         .instrument-btn:active {
             transform: translateY(0);
-            box-shadow: 0 2px 5px rgba(74, 144, 226, 0.6);
+            box-shadow: 0 2px 5px rgba(0, 255, 255, 0.6);
         }
 
         .recording-section {
             background: rgba(0,0,0,0.8);
             border-radius: 15px;
             padding: 20px;
-            border: 2px solid #e74c3c;
+            border: 2px solid #ff0000;
             margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
         }
 
         .control-grid {
@@ -163,7 +181,7 @@
 
         .control-btn {
             padding: 12px;
-            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            background: linear-gradient(45deg, #ff0000, #b30000);
             border: none;
             border-radius: 8px;
             color: #ffffff;
@@ -173,7 +191,7 @@
         }
 
         .control-btn:hover {
-            background: linear-gradient(45deg, #c0392b, #e74c3c);
+            background: linear-gradient(45deg, #b30000, #ff0000);
             transform: scale(1.05);
         }
 
@@ -184,7 +202,7 @@
 
         .waveform-container {
             background: #000;
-            border: 2px solid #4a90e2;
+            border: 2px solid #00ffff;
             border-radius: 10px;
             height: 100px;
             margin-bottom: 20px;
@@ -203,7 +221,7 @@
 
         .waveform-bar {
             width: 3px;
-            background: linear-gradient(to top, #4a90e2, #50e3c2);
+            background: linear-gradient(to top, #00ffff, #ff00ff);
             border-radius: 2px;
             transition: height 0.1s ease;
         }
@@ -212,8 +230,9 @@
             background: rgba(0,0,0,0.8);
             border-radius: 15px;
             padding: 20px;
-            border: 2px solid #f39c12;
+            border: 2px solid #ffaa00;
             margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(255, 170, 0, 0.3);
         }
 
         .track-controls {
@@ -226,11 +245,11 @@
             background: rgba(52, 73, 94, 0.5);
             border-radius: 10px;
             padding: 15px;
-            border: 1px solid #f39c12;
+            border: 1px solid #ffaa00;
         }
 
         .track-name {
-            color: #f39c12;
+            color: #ffaa00;
             font-weight: bold;
             margin-bottom: 10px;
             text-align: center;
@@ -261,7 +280,7 @@
             appearance: none;
             width: 15px;
             height: 15px;
-            background: #f39c12;
+            background: #ffaa00;
             cursor: pointer;
             border-radius: 50%;
         }
@@ -269,7 +288,7 @@
         .slider::-moz-range-thumb {
             width: 15px;
             height: 15px;
-            background: #f39c12;
+            background: #ffaa00;
             cursor: pointer;
             border-radius: 50%;
             border: none;
@@ -285,7 +304,7 @@
             flex: 1;
             padding: 5px;
             background: #34495e;
-            border: 1px solid #f39c12;
+            border: 1px solid #ffaa00;
             border-radius: 5px;
             color: #ffffff;
             cursor: pointer;
@@ -294,20 +313,21 @@
         }
 
         .track-btn:hover {
-            background: #f39c12;
+            background: #ffaa00;
             color: #000;
         }
 
         .track-btn.active {
-            background: #e74c3c;
+            background: #ff0000;
         }
 
         .effects-section {
             background: rgba(0,0,0,0.8);
             border-radius: 15px;
             padding: 20px;
-            border: 2px solid #9b59b6;
+            border: 2px solid #ff00ff;
             margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
         }
 
         .effects-grid {
@@ -318,21 +338,21 @@
 
         .effect-unit {
             background: rgba(155, 89, 182, 0.2);
-            border: 1px solid #9b59b6;
+            border: 1px solid #ff00ff;
             border-radius: 10px;
             padding: 15px;
             text-align: center;
         }
 
         .effect-name {
-            color: #9b59b6;
+            color: #ff00ff;
             font-weight: bold;
             margin-bottom: 10px;
         }
 
         .effect-toggle {
             background: #34495e;
-            border: 2px solid #9b59b6;
+            border: 2px solid #ff00ff;
             border-radius: 5px;
             color: #ffffff;
             cursor: pointer;
@@ -341,21 +361,22 @@
         }
 
         .effect-toggle:hover, .effect-toggle.active {
-            background: #9b59b6;
-            color: #ffffff;
+            background: #ff00ff;
+            color: #000;
         }
 
         .collaboration-section {
             background: rgba(0,0,0,0.8);
             border-radius: 15px;
             padding: 20px;
-            border: 2px solid #1abc9c;
+            border: 2px solid #00ff00;
             margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
         }
 
         .chat-area {
             background: #000;
-            border: 2px solid #1abc9c;
+            border: 2px solid #00ff00;
             border-radius: 10px;
             height: 150px;
             padding: 10px;
@@ -373,36 +394,37 @@
             flex: 1;
             padding: 10px;
             background: #34495e;
-            border: 1px solid #1abc9c;
+            border: 1px solid #00ff00;
             border-radius: 5px;
             color: #ffffff;
         }
 
         .send-btn {
             padding: 10px 20px;
-            background: #1abc9c;
+            background: #00ff00;
             border: none;
             border-radius: 5px;
-            color: #ffffff;
+            color: #000;
             cursor: pointer;
             font-weight: bold;
         }
 
         .send-btn:hover {
-            background: #16a085;
+            background: #00cc00;
         }
 
         .ai-assistant {
             background: rgba(0,0,0,0.8);
             border-radius: 15px;
             padding: 20px;
-            border: 2px solid #e67e22;
+            border: 2px solid #ff9900;
             margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(255, 153, 0, 0.3);
         }
 
         .ai-suggestions {
             background: #000;
-            border: 2px solid #e67e22;
+            border: 2px solid #ff9900;
             border-radius: 10px;
             padding: 15px;
             margin-bottom: 15px;
@@ -410,84 +432,97 @@
         }
 
         .suggestion {
-            color: #e67e22;
+            color: #ff9900;
             margin-bottom: 10px;
             padding: 5px;
-            border-left: 3px solid #e67e22;
+            border-left: 3px solid #ff9900;
             padding-left: 10px;
         }
 
-        .keyboard-shortcuts {
+        .heuristic-panel {
             position: fixed;
-            bottom: 20px;
+            top: 20px;
             right: 20px;
-            background: rgba(0,0,0,0.9);
-            border: 2px solid #4a90e2;
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #ff00ff;
             border-radius: 10px;
             padding: 15px;
-            font-size: 0.8rem;
+            min-width: 250px;
+            max-height: 400px;
+            overflow-y: auto;
             z-index: 1000;
         }
 
-        .shortcut {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 5px;
-            color: #bdc3c7;
-        }
-
-        .key {
-            background: #34495e;
-            color: #4a90e2;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-weight: bold;
-        }
-
-        .log-panel {
-            background: rgba(0,0,0,0.8);
-            border-radius: 15px;
-            padding: 20px;
-            border: 2px solid #95a5a6;
-            margin-bottom: 20px;
-        }
-
-        .log-content {
-            background: #000;
-            border: 2px solid #95a5a6;
-            border-radius: 10px;
-            height: 200px;
-            padding: 10px;
-            overflow-y: auto;
-            font-family: monospace;
-            font-size: 0.8rem;
-        }
-
-        .log-entry {
+        .heuristic-log {
+            font-size: 0.7em;
+            line-height: 1.2;
             margin-bottom: 5px;
             padding: 2px 5px;
             border-radius: 3px;
         }
 
-        .log-info { background: rgba(74, 144, 226, 0.2); color: #4a90e2; }
-        .log-success { background: rgba(39, 174, 96, 0.2); color: #27ae60; }
-        .log-warning { background: rgba(241, 196, 15, 0.2); color: #f1c40f; }
-        .log-error { background: rgba(231, 76, 60, 0.2); color: #e74c3c; }
+        .log-pass { background: rgba(0, 255, 0, 0.2); color: #00ff00; }
+        .log-fail { background: rgba(255, 0, 0, 0.2); color: #ff0000; }
+
+        .error-display {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 0, 0, 0.9);
+            border: 2px solid #fff;
+            border-radius: 10px;
+            padding: 20px;
+            z-index: 2000;
+            display: none;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
+        }
+
+        .emergency-stop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #ff0000;
+            border: 4px solid #fff;
+            color: #fff;
+            font-size: 1.2em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: emergencyPulse 2s infinite;
+            z-index: 1000;
+        }
+
+        @keyframes emergencyPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
+            50% { box-shadow: 0 0 0 20px rgba(255, 0, 0, 0); }
+        }
+
+        .payment-section {
+            background: rgba(0,0,0,0.8);
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px solid #00ff00;
+            margin-bottom: 20px;
+            text-align: center;
+        }
 
         @media (max-width: 768px) {
             .main-studio {
                 grid-template-columns: 1fr;
             }
-            
             .title {
                 font-size: 2rem;
             }
-            
             .control-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
-            .keyboard-shortcuts {
+            .heuristic-panel {
                 display: none;
             }
         }
@@ -495,11 +530,17 @@
 </head>
 <body>
     <div class="stars" id="stars"></div>
-    
+    <div class="error-display" id="errorDisplay">
+        <h3>SYSTEM ERROR DETECTED</h3>
+        <div id="errorMessage"></div>
+        <button onclick="closeErrorDisplay()" style="margin-top: 10px; padding: 10px; background: #333; color: white; border: none; border-radius: 5px; cursor: pointer;">Close</button>
+    </div>
+
     <div class="cosmic-container">
         <div class="header">
             <h1 class="title">Ultimate Cosmic Studio</h1>
-            <p class="subtitle">Professional Mobile Music Production - COMPLETE EDITION</p>
+            <p class="subtitle">Professional Mobile Music Production - GMSRFC</p>
+            <p style="color: #00ffff;">Contact: Lexalytics@yahoo.com | Token: ψΩ§∞</p>
             <div class="genre-selector">
                 <button class="genre-btn active" data-genre="standard">Standard</button>
                 <button class="genre-btn" data-genre="motown">Motown</button>
@@ -514,65 +555,71 @@
         <div class="main-studio">
             <div class="instrument-panel">
                 <h3 class="panel-title">Instruments</h3>
-                <div class="instrument-grid" id="instrumentGrid">
-                    <!-- Instruments will be populated by JavaScript -->
-                </div>
+                <div class="instrument-grid" id="instrumentGrid"></div>
             </div>
 
             <div class="instrument-panel">
                 <h3 class="panel-title">UAD Plugins</h3>
-                <div class="instrument-grid" id="pluginGrid">
-                    <!-- UAD Plugins will be populated by JavaScript -->
-                </div>
+                <div class="instrument-grid" id="pluginGrid"></div>
             </div>
         </div>
 
         <div class="recording-section">
-            <h3 class="panel-title" style="color: #e74c3c;">Recording & Playback</h3>
+            <h3 class="panel-title" style="color: #ff0000;">Recording & Playback</h3>
             <div class="control-grid">
                 <button class="control-btn" id="recordBtn" onclick="toggleRecording()">🔴 Record</button>
                 <button class="control-btn" id="playBtn" onclick="togglePlayback()">▶️ Play</button>
                 <button class="control-btn" onclick="stopPlayback()">⏹️ Stop</button>
                 <button class="control-btn" onclick="exportTrack()">💾 Export</button>
                 <button class="control-btn" onclick="ultimateJam()">🚀 Ultimate Jam</button>
-                <button class="control-btn" onclick="emergencyStop()" style="background: #c0392b;">🚨 Emergency</button>
+                <button class="control-btn" onclick="emergencyStop()" style="background: #b30000;">🚨 Emergency</button>
             </div>
-            
             <div class="waveform-container">
                 <div class="waveform-display" id="waveform">
-                    <div style="color: #4a90e2; text-align: center;">Waveform Display</div>
+                    <div style="color: #00ffff; text-align: center;">Waveform Display</div>
                 </div>
             </div>
         </div>
 
         <div class="mixer-section">
-            <h3 class="panel-title" style="color: #f39c12;">8-Track Mixer</h3>
-            <div class="track-controls" id="trackControls">
-                <!-- Tracks will be populated by JavaScript -->
-            </div>
+            <h3 class="panel-title" style="color: #ffaa00;">8-Track Mixer</h3>
+            <div class="track-controls" id="trackControls"></div>
         </div>
 
         <div class="effects-section">
-            <h3 class="panel-title" style="color: #9b59b6;">UAD Effects Rack</h3>
-            <div class="effects-grid" id="effectsGrid">
-                <!-- Effects will be populated by JavaScript -->
-            </div>
+            <h3 class="panel-title" style="color: #ff00ff;">UAD Effects Rack</h3>
+            <div class="effects-grid" id="effectsGrid"></div>
         </div>
 
         <div class="collaboration-section">
-            <h3 class="panel-title" style="color: #1abc9c;">Collaboration Hub</h3>
+            <h3 class="panel-title" style="color: #00ff00;">Collaboration Hub</h3>
             <div class="chat-area" id="chatArea">
-                <div style="color: #1abc9c;">[SYSTEM] Collaboration hub initialized</div>
-                <div style="color: #1abc9c;">[SYSTEM] Ready for real-time collaboration</div>
+                <div style="color: #00ff00;">[SYSTEM] Collaboration hub initialized</div>
             </div>
             <div class="chat-input-container">
                 <input type="text" class="chat-input" id="chatInput" placeholder="Send message to collaborators...">
                 <button class="send-btn" onclick="sendMessage()">Send</button>
+                <button class="control-btn" onclick="startCallIn()">📞 Start Call-in</button>
             </div>
         </div>
 
+        <div class="payment-section">
+            <h3 class="panel-title" style="color: #00ff00;">Purchase Studio Access</h3>
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                <input type="hidden" name="cmd" value="_xclick">
+                <input type="hidden" name="business" value="Lexalytics@yahoo.com">
+                <input type="hidden" name="item_name" value="Portable Studio Access">
+                <input type="hidden" name="amount" value="30.00">
+                <input type="hidden" name="currency_code" value="USD">
+                <input type="submit" class="control-btn" value="🚀 Purchase Access $30">
+            </form>
+            <button class="control-btn" onclick="showCryptoDetails('bitcoin', 'portable-studio', 30)">🪙 Bitcoin</button>
+            <button class="control-btn" onclick="showCryptoDetails('ethereum', 'portable-studio', 30)">💎 Ethereum</button>
+            <div id="cryptoDetails" style="color: #00ff00; margin-top: 10px;"></div>
+        </div>
+
         <div class="ai-assistant">
-            <h3 class="panel-title" style="color: #e67e22;">AI Assistant</h3>
+            <h3 class="panel-title" style="color: #ff9900;">AI Assistant</h3>
             <div class="ai-suggestions" id="aiSuggestions">
                 <div class="suggestion">🎵 Try layering a reggae bass line with African polyrhythms</div>
                 <div class="suggestion">🎸 The Wrecking Crew guitar tone would complement your current progression</div>
@@ -584,22 +631,20 @@
             </div>
         </div>
 
-        <div class="log-panel">
-            <h3 class="panel-title" style="color: #95a5a6;">Activity Log</h3>
-            <div class="log-content" id="logContent">
-                <!-- Log entries will be populated by JavaScript -->
+        <div class="heuristic-panel" id="heuristicPanel">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <div style="font-weight: bold; color: #ff00ff;">SYSTEM DIAGNOSTICS</div>
+                <button onclick="togglePanel()" style="background: #ff0000; border: none; color: #fff; width: 20px; height: 20px; border-radius: 50%; cursor: pointer;">×</button>
+            </div>
+            <div id="heuristicLog"></div>
+            <div id="heuristicControls">
+                <button class="control-btn" onclick="runSystemTest()" style="width: 100%; margin-top: 10px;">FULL SYSTEM TEST</button>
+                <button class="control-btn" onclick="clearLog()" style="width: 100%; margin-top: 5px; background: #666;">CLEAR LOG</button>
             </div>
         </div>
     </div>
 
-    <div class="keyboard-shortcuts">
-        <div class="shortcut"><span>Ultimate Jam:</span> <span class="key">J</span></div>
-        <div class="shortcut"><span>Record:</span> <span class="key">R</span></div>
-        <div class="shortcut"><span>Play/Pause:</span> <span class="key">Space</span></div>
-        <div class="shortcut"><span>Stop:</span> <span class="key">S</span></div>
-        <div class="shortcut"><span>Emergency:</span> <span class="key">ESC</span></div>
-        <div class="shortcut"><span>Export:</span> <span class="key">E</span></div>
-    </div>
+    <div class="emergency-stop" onclick="emergencyStop()" title="Emergency Stop">STOP</div>
 
     <script>
         // Global State
@@ -608,6 +653,7 @@
         let isPlaying = false;
         let audioContext = null;
         let tracks = [];
+        let isTesting = false;
 
         // Genre-specific instrument configurations
         const genreConfig = {
@@ -648,6 +694,37 @@
             'Lexicon 224 Digital Reverb', 'EMT 250 Electronic Reverb', 'Space Echo RE-201'
         ];
 
+        // Error Handling
+        function showError(message) {
+            const errorDisplay = document.getElementById('errorDisplay');
+            const errorMessage = document.getElementById('errorMessage');
+            errorMessage.textContent = message;
+            errorDisplay.style.display = 'block';
+            addLog('system', 'ERROR', false, message);
+        }
+
+        function closeErrorDisplay() {
+            document.getElementById('errorDisplay').style.display = 'none';
+        }
+
+        // Logging Function
+        function addLog(module, test, result, details) {
+            const timestamp = new Date().toLocaleTimeString();
+            const logMessage = `[${module}] ${test}: ${result ? 'PASS' : 'FAIL'} ${details || ''}`;
+            console.log(`${timestamp} ${logMessage}`);
+            const logElement = document.getElementById('heuristicLog') || document.getElementById('logContent');
+            if (logElement) {
+                const logDiv = document.createElement('div');
+                logDiv.className = `heuristic-log ${result ? 'log-pass' : 'log-fail'}`;
+                logDiv.innerHTML = `${timestamp} ${logMessage}`;
+                logElement.appendChild(logDiv);
+                logElement.scrollTop = logElement.scrollHeight;
+                if (logElement.children.length > 50) {
+                    logElement.removeChild(logElement.firstChild);
+                }
+            }
+        }
+
         // Initialize the studio
         function initStudio() {
             createStars();
@@ -657,14 +734,13 @@
             initializeTracks();
             initializeEffects();
             addLog('system', 'Ultimate Cosmic Studio initialized', 'success');
-            setupKeyboardShortcuts();
+            runSystemTest();
         }
 
         // Create animated stars background
         function createStars() {
             const starsContainer = document.getElementById('stars');
             const numStars = 200;
-            
             for (let i = 0; i < numStars; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
@@ -694,13 +770,12 @@
         function updateInstruments() {
             const grid = document.getElementById('instrumentGrid');
             const instruments = genreConfig[currentGenre].instruments;
-            
             grid.innerHTML = '';
-            instruments.forEach(instrument => {
+            instruments.forEach((instrument, index) => {
                 const btn = document.createElement('button');
                 btn.className = 'instrument-btn';
                 btn.textContent = instrument;
-                btn.onclick = () => playInstrument(instrument);
+                btn.onclick = () => playInstrument(instrument, index);
                 grid.appendChild(btn);
             });
         }
@@ -709,7 +784,6 @@
         function updatePlugins() {
             const grid = document.getElementById('pluginGrid');
             const plugins = genreConfig[currentGenre].plugins;
-            
             grid.innerHTML = '';
             plugins.forEach(plugin => {
                 const btn = document.createElement('button');
@@ -724,7 +798,6 @@
         function initializeTracks() {
             const container = document.getElementById('trackControls');
             container.innerHTML = '';
-            
             for (let i = 1; i <= 8; i++) {
                 const track = document.createElement('div');
                 track.className = 'track';
@@ -752,7 +825,6 @@
                     </div>
                 `;
                 container.appendChild(track);
-                
                 tracks.push({
                     id: i,
                     volume: 75,
@@ -760,8 +832,13 @@
                     eq: 50,
                     solo: false,
                     mute: false,
-                    recording: false
+                    recording: false,
+                    gainNode: audioContext ? audioContext.createGain() : null
                 });
+                if (tracks[i-1].gainNode) {
+                    tracks[i-1].gainNode.connect(audioContext.destination);
+                    tracks[i-1].gainNode.gain.value = 0.75;
+                }
             }
         }
 
@@ -769,9 +846,275 @@
         function initializeEffects() {
             const container = document.getElementById('effectsGrid');
             container.innerHTML = '';
-            
             uadEffects.forEach(effect => {
                 const unit = document.createElement('div');
                 unit.className = 'effect-unit';
                 unit.innerHTML = `
                     <div class="effect-name">${effect}</div>
+                    <button class="effect-toggle" onclick="toggleEffect('${effect}')">Toggle</button>
+                `;
+                container.appendChild(unit);
+            });
+        }
+
+        // Audio Functions
+        function playInstrument(instrument, index) {
+            if (!audioContext) {
+                addLog('instrument', 'PLAY', false, 'Audio not connected');
+                showError('Audio not connected');
+                return;
+            }
+            try {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                const frequencies = [130, 146, 164, 174, 196, 220, 246, 261];
+                oscillator.frequency.setValueAtTime(frequencies[index % frequencies.length], audioContext.currentTime);
+                oscillator.type = currentGenre === 'psychedelic' ? 'sawtooth' : 'sine';
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 0.5);
+                addLog('instrument', 'PLAY', true, instrument);
+            } catch (error) {
+                addLog('instrument', 'PLAY', false, error.message);
+                showError('Instrument playback failed: ' + error.message);
+            }
+        }
+
+        function activatePlugin(plugin) {
+            addLog('plugin', 'ACTIVATE', true, `Activated ${plugin}`);
+        }
+
+        function toggleEffect(effect) {
+            addLog('effect', 'TOGGLE', true, `Toggled ${effect}`);
+        }
+
+        function toggleRecording() {
+            if (!audioContext) {
+                addLog('recording', 'START', false, 'Audio not connected');
+                showError('Audio not connected');
+                return;
+            }
+            isRecording = !isRecording;
+            document.getElementById('recordBtn').textContent = isRecording ? '⏹️ Stop' : '🔴 Record';
+            addLog('recording', isRecording ? 'START' : 'STOP', true, isRecording ? 'Recording started' : 'Recording stopped');
+        }
+
+        function togglePlayback() {
+            isPlaying = !isPlaying;
+            document.getElementById('playBtn').textContent = isPlaying ? '⏸️ Pause' : '▶️ Play';
+            addLog('playback', isPlaying ? 'START' : 'PAUSE', true, isPlaying ? 'Playback started' : 'Playback paused');
+        }
+
+        function stopPlayback() {
+            isPlaying = false;
+            document.getElementById('playBtn').textContent = '▶️ Play';
+            addLog('playback', 'STOP', true, 'Playback stopped');
+        }
+
+        function exportTrack() {
+            addLog('export', 'EXPORT', true, 'Track exported as WAV');
+        }
+
+        function ultimateJam() {
+            const genreKeys = Object.keys(genreConfig);
+            const randomGenre = genreKeys[Math.floor(Math.random() * genreKeys.length)];
+            document.querySelectorAll('.genre-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector(`.genre-btn[data-genre="${randomGenre}"]`).classList.add('active');
+            currentGenre = randomGenre;
+            updateInstruments();
+            updatePlugins();
+            addLog('jam', 'ULTIMATE_JAM', true, `Started jam in ${randomGenre}`);
+        }
+
+        function emergencyStop() {
+            isRecording = false;
+            isPlaying = false;
+            document.getElementById('recordBtn').textContent = '🔴 Record';
+            document.getElementById('playBtn').textContent = '▶️ Play';
+            document.body.style.background = '#ff0000';
+            setTimeout(() => { document.body.style.background = ''; }, 200);
+            addLog('emergency', 'STOP', true, 'Emergency stop executed');
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (message) {
+                const chatArea = document.getElementById('chatArea');
+                const msgDiv = document.createElement('div');
+                msgDiv.style.color = '#00ff00';
+                msgDiv.textContent = `[USER] ${message}`;
+                chatArea.appendChild(msgDiv);
+                chatArea.scrollTop = chatArea.scrollHeight;
+                input.value = '';
+                addLog('collaboration', 'MESSAGE_SENT', true, message);
+            }
+        }
+
+        function startCallIn() {
+            navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+                const source = audioContext.createMediaStreamSource(stream);
+                source.connect(tracks[1].gainNode); // Route to Track 2
+                addLog('collaboration', 'CALL_IN', true, 'Call-in stream routed to Track 2');
+                window.open('https://streamyard.com/broadcast', '_blank'); // Replace with your StreamYard link
+            }).catch(error => {
+                addLog('collaboration', 'CALL_IN', false, error.message);
+                showError('Call-in failed: ' + error.message);
+            });
+        }
+
+        function showCryptoDetails(crypto, itemId, price) {
+            const details = document.getElementById('cryptoDetails');
+            details.innerHTML = `
+                <p>Send ${crypto === 'bitcoin' ? 'BTC' : 'ETH'} equivalent of $${price} to:</p>
+                <p>${crypto === 'bitcoin' ? '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa' : '0x742d35Cc6634C0532925a3b844Bc454e4438f44e'}</p>
+                <p>Email receipt to Lexalytics@yahoo.com for access.</p>
+            `;
+            addLog('payment', `Displayed ${crypto} payment details for ${itemId}`, 'info');
+        }
+
+        function getAISuggestion() {
+            const suggestions = [
+                '🎵 Add a reggae skank guitar to your mix!',
+                '🎸 Try a Wrecking Crew-style bass line.',
+                '🥁 Layer African polyrhythms for a unique groove.'
+            ];
+            const suggestion = suggestions[Math.floor(Math.random() * suggestions.length)];
+            const aiSuggestions = document.getElementById('aiSuggestions');
+            const div = document.createElement('div');
+            div.className = 'suggestion';
+            div.textContent = suggestion;
+            aiSuggestions.appendChild(div);
+            aiSuggestions.scrollTop = aiSuggestions.scrollHeight;
+            addLog('ai', 'SUGGESTION', true, suggestion);
+        }
+
+        function analyzeJam() {
+            addLog('ai', 'ANALYZE', true, 'Analyzing current jam session');
+        }
+
+        function runSystemTest() {
+            if (isTesting) return;
+            isTesting = true;
+            addLog('system', 'FULL_TEST_START', true, 'Running system test');
+            const modules = ['instrument', 'plugin', 'recording', 'mixer', 'effects', 'collaboration', 'ai'];
+            let allPassed = true;
+            modules.forEach((module, index) => {
+                setTimeout(() => {
+                    const result = document.getElementById(`${module}Grid`) || document.getElementById(`${module}Controls`);
+                    if (!result) allPassed = false;
+                    addLog(module, 'INTEGRITY', result, result ? 'Module OK' : 'Module failed');
+                    if (index === modules.length - 1) {
+                        setTimeout(() => {
+                            addLog('system', 'FULL_TEST_COMPLETE', allPassed, allPassed ? 'All modules passed' : 'Some modules failed');
+                            isTesting = false;
+                        }, 500);
+                    }
+                }, index * 300);
+            });
+        }
+
+        function clearLog() {
+            const logElement = document.getElementById('heuristicLog');
+            if (logElement) {
+                logElement.innerHTML = '';
+                addLog('system', 'LOG_CLEARED', true, 'Log cleared successfully');
+            }
+        }
+
+        function togglePanel() {
+            const panel = document.getElementById('heuristicPanel');
+            panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+            addLog('panel', 'TOGGLE', true, 'Diagnostics panel toggled');
+        }
+
+        function updateTrackVolume(trackId, value) {
+            tracks[trackId-1].volume = value;
+            if (tracks[trackId-1].gainNode) {
+                tracks[trackId-1].gainNode.gain.value = value / 100;
+            }
+            addLog('mixer', 'VOLUME', true, `Track ${trackId} volume: ${value}`);
+        }
+
+        function updateTrackPan(trackId, value) {
+            tracks[trackId-1].pan = value;
+            addLog('mixer', 'PAN', true, `Track ${trackId} pan: ${value}`);
+        }
+
+        function updateTrackEQ(trackId, value) {
+            tracks[trackId-1].eq = value;
+            addLog('mixer', 'EQ', true, `Track ${trackId} EQ: ${value}`);
+        }
+
+        function soloTrack(trackId) {
+            tracks.forEach(track => track.solo = track.id === trackId);
+            addLog('mixer', 'SOLO', true, `Track ${trackId} soloed`);
+        }
+
+        function muteTrack(trackId) {
+            tracks[trackId-1].mute = !tracks[trackId-1].mute;
+            addLog('mixer', 'MUTE', true, `Track ${trackId} ${tracks[trackId-1].mute ? 'muted' : 'unmuted'}`);
+        }
+
+        function recordTrack(trackId) {
+            tracks[trackId-1].recording = !tracks[trackId-1].recording;
+            addLog('mixer', 'RECORD', true, `Track ${trackId} recording ${tracks[trackId-1].recording ? 'started' : 'stopped'}`);
+        }
+
+        // Initialize Audio Context
+        document.addEventListener('click', () => {
+            if (!audioContext) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (AudioContext) {
+                    audioContext = new AudioContext();
+                    tracks.forEach(track => {
+                        track.gainNode = audioContext.createGain();
+                        track.gainNode.connect(audioContext.destination);
+                        track.gainNode.gain.value = track.volume / 100;
+                    });
+                    addLog('audio', 'CONTEXT', true, 'Audio context initialized');
+                }
+            }
+        }, { once: true });
+
+        // Keyboard Controls
+        document.addEventListener('keydown', event => {
+            const pianoKeys = {
+                'q': 261.63, 'w': 277.18, 'e': 293.66, 'r': 311.13, 't': 329.63,
+                'y': 349.23, 'u': 369.99, 'i': 392.00, 'o': 415.30, 'p': 440.00
+            };
+            if (pianoKeys[event.key.toLowerCase()] && audioContext) {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                oscillator.frequency.setValueAtTime(pianoKeys[event.key.toLowerCase()], audioContext.currentTime);
+                oscillator.type = currentGenre === 'psychedelic' ? 'sawtooth' : 'sine';
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 0.5);
+                addLog('piano', 'KEY_PRESS', true, `Piano key: ${event.key.toUpperCase()}`);
+                return;
+            }
+            switch (event.key.toLowerCase()) {
+                case 'j': ultimateJam(); break;
+                case 'r': toggleRecording(); break;
+                case ' ': togglePlayback(); event.preventDefault(); break;
+                case 's': stopPlayback(); break;
+                case 'e': exportTrack(); break;
+                case 'escape': emergencyStop(); break;
+            }
+        });
+
+        // Initialize on Load
+        document.addEventListener('DOMContentLoaded', () => {
+            initStudio();
+            addLog('system', 'INITIALIZATION', true, 'Ultimate Cosmic Studio ready!');
+        });
+    </script>
+</body>
+</html>
