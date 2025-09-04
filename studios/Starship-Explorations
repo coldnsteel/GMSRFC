@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🚀 Starship Out Trips - GMSRFC</title>
+  <title>🚀 Starship Explorations - GMSRFC</title>
   <style>
     body {
       background-color: #6a5acd;
@@ -15,6 +15,21 @@
     .container {
       max-width: 800px;
       margin: 0 auto;
+    }
+    .launch-banner {
+      background: linear-gradient(45deg, #ff1493, #00ff7f);
+      color: #000;
+      padding: 15px;
+      text-align: center;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      font-weight: bold;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
     }
     .mission-log {
       border: 1px solid #ffffff;
@@ -46,9 +61,12 @@
   </style>
 </head>
 <body>
+  <div class="launch-banner">
+    🚀 T-7 Days to GMSRFC Launch! Explore the Cosmos with Starship! 🚀
+  </div>
   <div class="container">
-    <h1>🚀 Starship Out Trips</h1>
-    <p>Embark on a cosmic journey! Log your mission and collect starship NFTs.</p>
+    <h1>🚀 Starship Explorations</h1>
+    <p>Embark on interstellar adventures! Log missions and collect starship NFTs.</p>
 
     <!-- Mission Log -->
     <div class="mission-log" id="missionLog">
@@ -62,9 +80,9 @@
     />
     <button class="btn" onclick="logMission()">Log Mission</button>
 
-    <!-- CTOK Payment for NFT/Access -->
-    <button class="btn" onclick="buyAccess('starship-access', 1)">
-      🌟 Access Starship (1 CTOK)
+    <!-- CTOK Payment for Access/NFT -->
+    <button class="btn" onclick="buyAccess('starship-launch', 1)">
+      🌟 Launch Mission (1 CTOK)
     </button>
     <button class="btn" onclick="buyNFT('starship-nft', 5)">
       🪙 Buy Starship NFT (5 CTOK)
@@ -83,6 +101,7 @@
         window.location.href = url.toString();
       } catch (e) {
         console.error('Access payment redirect failed:', e);
+        alert('Error redirecting to cashier. Please try again.');
       }
     }
 
@@ -95,6 +114,7 @@
         window.location.href = url.toString();
       } catch (e) {
         console.error('NFT payment redirect failed:', e);
+        alert('Error redirecting to cashier. Please try again.');
       }
     }
 
