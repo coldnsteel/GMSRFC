@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🛡️ GMSRFC Digital Products & Collectibles</title>
-    <!-- v3.1.4, 2025-09-04 - Crypto-Only, Fixed Navigation, Clean Architecture, Sports Bar Integration -->
+    <!-- v3.2.0, 2025-09-04 - LAUNCH READY: Complete Studios Integration, Marketing Ready -->
     <style>
         body { 
             background: linear-gradient(135deg, #1a1a1a 0%, #2d1b2e 100%); 
@@ -21,6 +21,23 @@
             padding: 20px;
             border-radius: 10px;
             margin-bottom: 20px;
+        }
+        
+        .launch-banner {
+            background: linear-gradient(45deg, #ff1493, #00ff7f);
+            color: #000;
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
         }
         
         .nav-tabs {
@@ -331,6 +348,10 @@
     </style>
 </head>
 <body>
+    <div class="launch-banner">
+        🚀 LAUNCH WEEK COUNTDOWN: 7 Days to Blastoff! Get Ready for GMSRFC on Social Media! 🚀
+    </div>
+    
     <div class="header">
         <h1>🛡️ GMSRFC Digital Products & Collectibles</h1>
         <p><strong>Contact:</strong> Lexalytics@yahoo.com | <strong>Token:</strong> ψΩ§∞</p>
@@ -424,6 +445,30 @@
                     <div class="price-display">$1.00 Entry</div>
                     <button class="btn btn-crypto" onclick="purchaseItem('sports-bar-entry', 1, 'Sports Bar Entry')">🎟️ Enter Sports Bar</button>
                     <a href="/studios/sports-bar.html" class="btn btn-free">🏈 Visit Sports Bar</a>
+                </div>
+                
+                <div class="studio-item">
+                    <h3>📚 Academy Hub Scholars</h3>
+                    <div class="photo-gallery">
+                        <div class="photo-placeholder" onclick="uploadPhoto('academy-hub-scholars', 0)">📷 Scholar Forum</div>
+                        <div class="photo-placeholder" onclick="uploadPhoto('academy-hub-scholars', 1)">📷 Course Library</div>
+                    </div>
+                    <p>Scholastic forum for educational discussions, research collaboration, and academic community engagement.</p>
+                    <div class="price-display">$1.00 Access</div>
+                    <button class="btn btn-crypto" onclick="purchaseItem('academy-hub-access', 1, 'Academy Hub Scholars Access')">🎓 Join Scholars</button>
+                    <a href="/studios/academy-hub-scholars.html" class="btn btn-free">📚 Enter Academy</a>
+                </div>
+                
+                <div class="studio-item">
+                    <h3>🚀 Starship Explorations</h3>
+                    <div class="photo-gallery">
+                        <div class="photo-placeholder" onclick="uploadPhoto('starship-explorations', 0)">📷 Mission Control</div>
+                        <div class="photo-placeholder" onclick="uploadPhoto('starship-explorations', 1)">📷 Exploration Log</div>
+                    </div>
+                    <p>Cosmic exploration platform with mission logging, starship NFT collectibles, and interstellar adventures.</p>
+                    <div class="price-display">$1.00 Launch</div>
+                    <button class="btn btn-crypto" onclick="purchaseItem('starship-launch', 1, 'Starship Explorations Launch')">🌟 Launch Mission</button>
+                    <a href="/studios/starship-explorations.html" class="btn btn-free">🚀 Board Starship</a>
                 </div>
                 
                 <div class="studio-item">
@@ -605,7 +650,7 @@
     
     <div class="debug-info">
         <strong>System Status:</strong>
-        <div id="debugLog">🛡️ GMSRFC Crypto Storefront - Online and Ready</div>
+        <div id="debugLog">🛡️ GMSRFC Crypto Storefront v3.2.0 - LAUNCH READY</div>
     </div>
     
     <script>
@@ -683,6 +728,20 @@
                     price: 1,
                     photos: [],
                     id: "sports-bar"
+                },
+                {
+                    name: "Academy Hub Scholars",
+                    description: "Scholastic forum for educational discussions, research collaboration, and academic community engagement.",
+                    price: 1,
+                    photos: [],
+                    id: "academy-hub-scholars"
+                },
+                {
+                    name: "Starship Explorations",
+                    description: "Cosmic exploration platform with mission logging, starship NFT collectibles, and interstellar adventures.",
+                    price: 1,
+                    photos: [],
+                    id: "starship-explorations"
                 },
                 {
                     name: "Master-Studio",
@@ -1012,17 +1071,18 @@
         
         // Initialize system
         document.addEventListener('DOMContentLoaded', function() {
-            debugLog('🛡️ GMSRFC Crypto Storefront v3.1.4 - Initializing');
+            debugLog('🛡️ GMSRFC Crypto Storefront v3.2.0 - LAUNCH WEEK READY');
             debugLog('Mission: STARCOM-0825-LS-GMSRFC-DOGPATCH-V28');
             debugLog('Contact: Lexalytics@yahoo.com | Token: ψΩ§∞');
             debugLog('Payment System: Crypto Only (BTC/ETH)');
+            debugLog('Studios: Kozmic Kasino, Comedy Theatre, Sports Bar, Academy Hub Scholars, Starship Explorations');
             
             loadCatalogData();
             showSection('digital-products');
             
             setInterval(saveCatalogData, 30000);
             
-            debugLog('System ready - All modules loaded');
+            debugLog('System ready - All modules loaded - T-7 Days to Marketing Launch');
             
             // Attach unified navigation system
             document.querySelectorAll('.nav-tab').forEach(tab => {
