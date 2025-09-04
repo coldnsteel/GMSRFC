@@ -1,1 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📚 Academy Hub - GMSRFC</title>
+  <style>
+    body {
+      background-color: #6a5acd;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .forum-box {
+      border: 1px solid #ffffff;
+      height: 300px;
+      overflow-y: scroll;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    .forum-input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      font-size: 18px;
+      min-width: 44px;
+      min-height: 44px;
+      background-color: #ff4500;
+      color: #ffffff;
+      border: none;
+      cursor: pointer;
+      margin: 10px 0;
+    }
+    .btn:hover {
+      background-color: #ff6347;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📚 Academy Hub</h1>
+    <p>Welcome to the Scholastic Forum! Join discussions and access educational content.</p>
 
+    <!-- Forum Discussion -->
+    <div class="forum-box" id="forumBox">
+      <p><strong>Scholar1:</strong> Discussing AI ethics today! 🧠</p>
+    </div>
+    <input
+      type="text"
+      class="forum-input"
+      id="forumInput"
+      placeholder="Type your message..."
+    />
+    <button class="btn" onclick="sendMessage()">Send Message</button>
+
+    <!-- CTOK Payment for Access -->
+    <button class="btn" onclick="buyAccess('academy-hub-access', 1)">
+      🎓 Access Academy Hub (1 CTOK)
+    </button>
+    <a href="/index.html">Back to GMSRFC Hub</a>
+  </div>
+
+  <script>
+    // CTOK Payment Function
+    function buyAccess(itemId, price) {
+      try {
+        const url = new URL(window.location.href);
+        url.pathname = '/Dogpatch-Market/sectors/cashier/index.html';
+        url.searchParams.set('item', itemId);
+        url.searchParams.set('amount', price);
+        window.location.href = url.toString();
+      } catch (e) {
+        console.error('Access payment redirect failed:', e);
+      }
+    }
+
+    // Forum Functionality
+    function sendMessage() {
+      const input = document.getElementById('forumInput');
+      const forumBox = document.getElementById('forumBox');
+      const message = input.value.trim();
+      if (message) {
+        const newMessage = document.createElement('p');
+        newMessage.innerHTML = `<strong>Scholar:</strong> ${message}`;
+        forumBox.appendChild(newMessage);
+        forumBox.scrollTop = forumBox.scrollHeight;
+        input.value = '';
+      }
+    }
+
+    // Handle Enter key for forum
+    document.getElementById('forumInput').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+  </script>
+</body>
+</html>
