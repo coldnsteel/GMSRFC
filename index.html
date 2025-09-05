@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🛡️ GMSRFC Digital Products & Collectibles</title>
-    <!-- v3.2.0, 2025-09-04 - LAUNCH READY: Complete Studios Integration, Marketing Ready -->
+    <!-- v3.2.1, 2025-09-05 - LAUNCH READY: MyWebsite Integration + CTOK Payment -->
     <style>
         body { 
             background: linear-gradient(135deg, #1a1a1a 0%, #2d1b2e 100%); 
@@ -349,14 +349,14 @@
 </head>
 <body>
     <div class="launch-banner">
-        🚀 LAUNCH WEEK COUNTDOWN: 7 Days to Blastoff! Get Ready for GMSRFC on Social Media! 🚀
+        🚀 LAUNCH WEEK COUNTDOWN: 6 Days to Blastoff! Get Ready for GMSRFC on Social Media! 🚀
     </div>
     
     <div class="header">
         <h1>🛡️ GMSRFC Digital Products & Collectibles</h1>
         <p><strong>Contact:</strong> Lexalytics@yahoo.com | <strong>Token:</strong> ψΩ§∞</p>
         <p><strong>Mission:</strong> STARCOM-0825-LS-GMSRFC-DOGPATCH-V28</p>
-        <p><strong>Payment:</strong> Crypto Only - Bitcoin & Ethereum Accepted</p>
+        <p><strong>Payment:</strong> Crypto + CTOK - Bitcoin, Ethereum & CTOK Accepted</p>
     </div>
     
     <div class="nav-tabs">
@@ -392,6 +392,17 @@
                 <p>Family-friendly educational content series with interactive learning modules and age-appropriate material.</p>
                 <div class="price-display">$25.00</div>
                 <button class="btn btn-crypto" onclick="purchaseItem('little-x-series', 25, 'Little X Series')">🚀 Purchase with Crypto</button>
+            </div>
+
+            <div class="collectible-item">
+                <h3>🌐 MyWebsite Cosmic Vault</h3>
+                <div class="photo-gallery">
+                    <div class="photo-placeholder" onclick="uploadPhoto('mywebsite', 0)">📷 Platform Overview</div>
+                    <div class="photo-placeholder" onclick="uploadPhoto('mywebsite', 1)">📷 AI Tools</div>
+                </div>
+                <p>Complete digital platform with auctions, AI-driven tools, security features, and cosmic collectibles. Full source code access.</p>
+                <div class="price-display">$149.00</div>
+                <button class="btn btn-crypto" onclick="purchaseItem('mywebsite', 149, 'MyWebsite Cosmic Vault')">🚀 Purchase with Crypto</button>
             </div>
         </div>
         
@@ -429,10 +440,10 @@
                         <div class="photo-placeholder" onclick="uploadPhoto('comedy-theatre', 0)">📷 Stage View</div>
                         <div class="photo-placeholder" onclick="uploadPhoto('comedy-theatre', 1)">📷 Character Gallery</div>
                     </div>
-                    <p>AI Comedy Lounge with 14-character showcase, interactive performances, and Hollywood-style entertainment.</p>
+                    <p>AI Comedy Lounge with 161 cosmic jokes, interactive performances, and user-submitted zingers.</p>
                     <div class="price-display">$1.00 Ticket</div>
                     <button class="btn btn-crypto" onclick="purchaseItem('comedy-show', 1, 'Comedy Show Ticket')">🎫 Buy Ticket</button>
-                    <a href="/studios/comedy-theatre.html" class="btn btn-free">🎭 Enter Theatre</a>
+                    <a href="/studios/comedy-lounge/jokebox.html" class="btn btn-free">🎭 Enter Theatre</a>
                 </div>
                 
                 <div class="studio-item">
@@ -619,15 +630,15 @@
         <div class="category-header">Crypto Payment Center</div>
         <div id="cashier-content">
             <div class="crypto-payment-panel">
-                <h3>💰 Cryptocurrency Payments Only</h3>
-                <p>We accept Bitcoin and Ethereum for all purchases. Select an item to generate payment instructions.</p>
+                <h3>💰 Cryptocurrency + CTOK Payments</h3>
+                <p>We accept Bitcoin, Ethereum, and CTOK for all purchases. Select an item to generate payment instructions.</p>
                 
                 <div class="payment-instructions">
                     <h4>Payment Process:</h4>
                     <ol>
                         <li>Select item and click "Purchase with Crypto"</li>
-                        <li>Choose Bitcoin or Ethereum payment method</li>
-                        <li>Send exact amount to provided wallet address</li>
+                        <li>Choose Bitcoin, Ethereum, or CTOK payment method</li>
+                        <li>Send exact amount to provided wallet address or use CTOK cashier</li>
                         <li>Email transaction ID to: <strong>Lexalytics@yahoo.com</strong></li>
                         <li>Include item reference code in email subject</li>
                         <li>Automated delivery within 24 hours of confirmation</li>
@@ -638,6 +649,7 @@
                     <strong>Accepted Cryptocurrencies:</strong><br>
                     🪙 Bitcoin (BTC): bc1qvevxcage66n8j86rtzvxn8xrzw9k5nOp5fxg<br>
                     💎 Ethereum (ETH): 0xfD9FD0c94caf9AdDbEd6c968504cC47f2638C158<br>
+                    🪙 CTOK: Via Kozmic Kasino & Cashier System<br>
                     📧 Support: Lexalytics@yahoo.com<br>
                     🔐 All transactions verified on blockchain
                 </div>
@@ -650,7 +662,7 @@
     
     <div class="debug-info">
         <strong>System Status:</strong>
-        <div id="debugLog">🛡️ GMSRFC Crypto Storefront v3.2.0 - LAUNCH READY</div>
+        <div id="debugLog">🛡️ GMSRFC Crypto Storefront v3.2.1 - LAUNCH READY + MyWebsite + CTOK</div>
     </div>
     
     <script>
@@ -698,6 +710,13 @@
                     price: 0,
                     photos: [],
                     id: "sillyosopher-saga"
+                },
+                {
+                    name: "MyWebsite Cosmic Vault",
+                    description: "Complete digital platform with auctions, AI-driven tools, security features, and cosmic collectibles.",
+                    price: 149,
+                    photos: [],
+                    id: "mywebsite"
                 }
             ],
             studios: [
@@ -717,7 +736,7 @@
                 },
                 {
                     name: "Comedy Theatre",
-                    description: "AI Comedy Lounge with 14-character showcase and interactive performances.",
+                    description: "AI Comedy Lounge with 161 cosmic jokes, interactive performances, and user-submitted zingers.",
                     price: 1,
                     photos: [],
                     id: "comedy-theatre"
@@ -974,6 +993,7 @@
                     <h4>Select Payment Method:</h4>
                     <button class="btn btn-crypto" onclick="showCryptoPayment('bitcoin')">🪙 Pay with Bitcoin</button>
                     <button class="btn btn-crypto" onclick="showCryptoPayment('ethereum')">💎 Pay with Ethereum</button>
+                    <button class="btn btn-crypto" onclick="showCryptoPayment('ctok')">🪙 Pay with CTOK</button>
                     <button class="btn btn-crypto" onclick="window.open('/studios/kozmic-kasino.html', '_blank')">🎰 Earn CTOK</button>
                     
                     <div id="cryptoPaymentDetails" style="display: none;"></div>
@@ -997,45 +1017,75 @@
             if (!currentTransaction) return;
             
             const detailsDiv = document.getElementById('cryptoPaymentDetails');
-            const wallet = CRYPTO_WALLETS[method];
-            const currency = method === 'bitcoin' ? 'BTC' : 'ETH';
+            let paymentContent = '';
             
-            detailsDiv.innerHTML = `
-                <div class="crypto-payment-panel" style="margin-top: 20px;">
-                    <h4>${currency} Payment Instructions</h4>
-                    
-                    <div class="crypto-address">
-                        <strong>Wallet Address:</strong><br>
-                        ${wallet}
+            if (method === 'ctok') {
+                paymentContent = `
+                    <div class="crypto-payment-panel" style="margin-top: 20px;">
+                        <h4>CTOK Payment Instructions</h4>
+                        <div style="background: rgba(51,51,51,0.8); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                            <strong>Pay with CTOK:</strong><br>
+                            Amount: ${currentTransaction.price.toFixed(2)} USD<br>
+                            Item: ${currentTransaction.itemName}<br>
+                            Reference: ${currentTransaction.reference}<br>
+                            <a href="/Dogpatch-Market/sectors/cashier/index.html?item=${currentTransaction.itemId}&amount=${currentTransaction.price}" class="btn btn-crypto">🪙 Pay with CTOK</a>
+                        </div>
+                        <div class="payment-instructions">
+                            <strong>Step-by-Step Process:</strong><br>
+                            1. Click "Pay with CTOK" to visit the cashier<br>
+                            2. Follow instructions to earn or use CTOK via Kozmic Kasino<br>
+                            3. Email <strong>Lexalytics@yahoo.com</strong> with:<br>
+                            &nbsp;&nbsp;- Subject: ${currentTransaction.reference}<br>
+                            &nbsp;&nbsp;- Transaction details<br>
+                            &nbsp;&nbsp;- Item: ${currentTransaction.itemName}
+                        </div>
+                        <div class="transaction-reference">
+                            Keep this reference: ${currentTransaction.reference}
+                        </div>
                     </div>
-                    
-                    <div style="background: rgba(51,51,51,0.8); padding: 15px; border-radius: 8px; margin: 15px 0;">
-                        <strong>Payment Details:</strong><br>
-                        Amount: ${currentTransaction.price.toFixed(2)} USD<br>
-                        Convert to: ${currency} (use current exchange rate)<br>
-                        Item: ${currentTransaction.itemName}<br>
-                        Reference: ${currentTransaction.reference}
+                `;
+            } else {
+                const wallet = CRYPTO_WALLETS[method];
+                const currency = method === 'bitcoin' ? 'BTC' : 'ETH';
+                
+                paymentContent = `
+                    <div class="crypto-payment-panel" style="margin-top: 20px;">
+                        <h4>${currency} Payment Instructions</h4>
+                        
+                        <div class="crypto-address">
+                            <strong>Wallet Address:</strong><br>
+                            ${wallet}
+                        </div>
+                        
+                        <div style="background: rgba(51,51,51,0.8); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                            <strong>Payment Details:</strong><br>
+                            Amount: ${currentTransaction.price.toFixed(2)} USD<br>
+                            Convert to: ${currency} (use current exchange rate)<br>
+                            Item: ${currentTransaction.itemName}<br>
+                            Reference: ${currentTransaction.reference}
+                        </div>
+                        
+                        <div class="payment-instructions">
+                            <strong>Step-by-Step Process:</strong><br>
+                            1. Copy the ${currency} wallet address above<br>
+                            2. Open your crypto wallet app/exchange<br>
+                            3. Send ${currentTransaction.price.toFixed(2)} worth of ${currency} to the address<br>
+                            4. Copy the transaction hash after sending<br>
+                            5. Email <strong>Lexalytics@yahoo.com</strong> with:<br>
+                            &nbsp;&nbsp;- Subject: ${currentTransaction.reference}<br>
+                            &nbsp;&nbsp;- Transaction hash<br>
+                            &nbsp;&nbsp;- Wallet address used<br>
+                            &nbsp;&nbsp;- Item: ${currentTransaction.itemName}
+                        </div>
+                        
+                        <div class="transaction-reference">
+                            Keep this reference: ${currentTransaction.reference}
+                        </div>
                     </div>
-                    
-                    <div class="payment-instructions">
-                        <strong>Step-by-Step Process:</strong><br>
-                        1. Copy the ${currency} wallet address above<br>
-                        2. Open your crypto wallet app/exchange<br>
-                        3. Send ${currentTransaction.price.toFixed(2)} worth of ${currency} to the address<br>
-                        4. Copy the transaction hash after sending<br>
-                        5. Email <strong>Lexalytics@yahoo.com</strong> with:<br>
-                        &nbsp;&nbsp;- Subject: ${currentTransaction.reference}<br>
-                        &nbsp;&nbsp;- Transaction hash<br>
-                        &nbsp;&nbsp;- Wallet address used<br>
-                        &nbsp;&nbsp;- Item: ${currentTransaction.itemName}
-                    </div>
-                    
-                    <div class="transaction-reference">
-                        Keep this reference: ${currentTransaction.reference}
-                    </div>
-                </div>
-            `;
+                `;
+            }
             
+            detailsDiv.innerHTML = paymentContent;
             detailsDiv.style.display = 'block';
             debugLog(`${method} payment details shown for ${currentTransaction.reference}`);
         }
@@ -1071,18 +1121,19 @@
         
         // Initialize system
         document.addEventListener('DOMContentLoaded', function() {
-            debugLog('🛡️ GMSRFC Crypto Storefront v3.2.0 - LAUNCH WEEK READY');
+            debugLog('🛡️ GMSRFC Crypto Storefront v3.2.1 - LAUNCH WEEK READY + MyWebsite + CTOK');
             debugLog('Mission: STARCOM-0825-LS-GMSRFC-DOGPATCH-V28');
             debugLog('Contact: Lexalytics@yahoo.com | Token: ψΩ§∞');
-            debugLog('Payment System: Crypto Only (BTC/ETH)');
+            debugLog('Payment System: Crypto + CTOK (BTC/ETH/CTOK)');
             debugLog('Studios: Kozmic Kasino, Comedy Theatre, Sports Bar, Academy Hub Scholars, Starship Explorations');
+            debugLog('NEW: MyWebsite Cosmic Vault ($149) + CTOK Payment Integration');
             
             loadCatalogData();
             showSection('digital-products');
             
             setInterval(saveCatalogData, 30000);
             
-            debugLog('System ready - All modules loaded - T-7 Days to Marketing Launch');
+            debugLog('System ready - All modules loaded - T-6 Days to Marketing Launch');
             
             // Attach unified navigation system
             document.querySelectorAll('.nav-tab').forEach(tab => {
