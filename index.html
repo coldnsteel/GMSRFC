@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🛡️ GMSRFC Digital Products & Collectibles</title>
-    <!-- v3.2.1, 2025-09-05 - LAUNCH READY: MyWebsite Integration + CTOK Payment -->
+    <!-- v3.2.2, 2025-09-05 - LAUNCH READY: MyWebsite + CTOK + Little X + Diana Dutch-Belgian Bash -->
     <style>
         body { 
             background: linear-gradient(135deg, #1a1a1a 0%, #2d1b2e 100%); 
@@ -378,7 +378,7 @@
                     <div class="photo-placeholder" onclick="uploadPhoto('hackerwatch-fortress', 0)">📷 Security Dashboard</div>
                     <div class="photo-placeholder" onclick="uploadPhoto('hackerwatch-fortress', 1)">📷 Threat Detection</div>
                 </div>
-                <p>Advanced security monitoring system with real-time threat detection, intrusion prevention, and comprehensive logging capabilities.</p>
+                <p>Advanced security monitoring system with real-time threat detection, intrusion prevention, email protection, and comprehensive logging capabilities.</p>
                 <div class="price-display">$47.00</div>
                 <button class="btn btn-crypto" onclick="purchaseItem('hackerwatch-fortress', 47, 'HackerWatch Fortress')">🚀 Purchase with Crypto</button>
             </div>
@@ -403,6 +403,51 @@
                 <p>Complete digital platform with auctions, AI-driven tools, security features, and cosmic collectibles. Full source code access.</p>
                 <div class="price-display">$149.00</div>
                 <button class="btn btn-crypto" onclick="purchaseItem('mywebsite', 149, 'MyWebsite Cosmic Vault')">🚀 Purchase with Crypto</button>
+            </div>
+
+            <div class="collectible-item">
+                <h3>🎵 Little X Composer Chalkboard</h3>
+                <div class="photo-gallery">
+                    <div class="photo-placeholder" onclick="uploadPhoto('little-x-chalkboard', 0)">📷 Chalkboard Interface</div>
+                    <div class="photo-placeholder" onclick="uploadPhoto('little-x-chalkboard', 1)">📷 Music Lessons</div>
+                </div>
+                <p>Interactive educational tool for children to learn music composition and theory through a digital chalkboard interface.</p>
+                <div class="price-display">$25.00</div>
+                <button class="btn btn-crypto" onclick="purchaseItem('little-x-chalkboard', 25, 'Little X Composer Chalkboard')">🚀 Purchase with Crypto</button>
+            </div>
+
+            <div class="collectible-item">
+                <h3>🚀 Little X Rocket</h3>
+                <div class="photo-gallery">
+                    <div class="photo-placeholder" onclick="uploadPhoto('little-x-rocket', 0)">📷 Story Interface</div>
+                    <div class="photo-placeholder" onclick="uploadPhoto('little-x-rocket', 1)">📷 Game Modules</div>
+                </div>
+                <p>Consolidated children's platform with interactive stories, games, and educational content, including Little X Book 2.</p>
+                <div class="price-display">$30.00</div>
+                <button class="btn btn-crypto" onclick="purchaseItem('little-x-rocket', 30, 'Little X Rocket')">🚀 Purchase with Crypto</button>
+            </div>
+
+            <div class="collectible-item">
+                <h3>🎹 Little X Musical Composer</h3>
+                <div class="photo-gallery">
+                    <div class="photo-placeholder" onclick="uploadPhoto('little-x-musical-composer', 0)">📷 Composition Tools</div>
+                    <div class="photo-placeholder" onclick="uploadPhoto('little-x-musical-composer', 1)">📷 Instrument Sims</div>
+                </div>
+                <p>Music education tool for kids, featuring composition tutorials, instrument simulations, and creative exercises.</p>
+                <div class="price-display">$25.00</div>
+                <button class="btn btn-crypto" onclick="purchaseItem('little-x-musical-composer', 25, 'Little X Musical Composer')">🚀 Purchase with Crypto</button>
+            </div>
+
+            <div class="collectible-item">
+                <h3>🇳🇱 Diana Dutch-Belgian Bash</h3>
+                <div class="photo-gallery">
+                    <div class="photo-placeholder" onclick="uploadPhoto('diana-dutch-belgian-bash', 0)">📷 Cultural Interface</div>
+                    <div class="photo-placeholder" onclick="uploadPhoto('diana-dutch-belgian-bash', 1)">📷 Game Modules</div>
+                </div>
+                <p>Cultural adventure platform with interactive games, stories, and collectibles inspired by Dutch and Belgian heritage.</p>
+                <div class="price-display">$25.00</div>
+                <button class="btn btn-crypto" onclick="purchaseItem('diana-dutch-belgian-bash', 25, 'Diana Dutch-Belgian Bash')">🚀 Purchase with Crypto</button>
+                <a href="/public/diana-dutch-belgian-bash.html" class="btn btn-free">🇳🇱 Explore Now</a>
             </div>
         </div>
         
@@ -662,7 +707,7 @@
     
     <div class="debug-info">
         <strong>System Status:</strong>
-        <div id="debugLog">🛡️ GMSRFC Crypto Storefront v3.2.1 - LAUNCH READY + MyWebsite + CTOK</div>
+        <div id="debugLog">🛡️ GMSRFC Crypto Storefront v3.2.2 - LAUNCH READY + MyWebsite + CTOK + Little X + Diana Dutch-Belgian Bash</div>
     </div>
     
     <script>
@@ -692,14 +737,14 @@
             digital: [
                 {
                     name: "HackerWatch Fortress",
-                    description: "Advanced security monitoring system with real-time threat detection.",
+                    description: "Advanced security monitoring system with real-time threat detection, intrusion prevention, email protection, and comprehensive logging capabilities.",
                     price: 47,
                     photos: [],
                     id: "hackerwatch-fortress"
                 },
                 {
                     name: "Little X Series",
-                    description: "Family-friendly educational content series with interactive learning modules.",
+                    description: "Family-friendly educational content series with interactive learning modules and age-appropriate material.",
                     price: 25,
                     photos: [],
                     id: "little-x-series"
@@ -717,6 +762,34 @@
                     price: 149,
                     photos: [],
                     id: "mywebsite"
+                },
+                {
+                    name: "Little X Composer Chalkboard",
+                    description: "Interactive educational tool for children to learn music composition and theory through a digital chalkboard interface.",
+                    price: 25,
+                    photos: [],
+                    id: "little-x-chalkboard"
+                },
+                {
+                    name: "Little X Rocket",
+                    description: "Consolidated children's platform with interactive stories, games, and educational content, including Little X Book 2.",
+                    price: 30,
+                    photos: [],
+                    id: "little-x-rocket"
+                },
+                {
+                    name: "Little X Musical Composer",
+                    description: "Music education tool for kids, featuring composition tutorials, instrument simulations, and creative exercises.",
+                    price: 25,
+                    photos: [],
+                    id: "little-x-musical-composer"
+                },
+                {
+                    name: "Diana Dutch-Belgian Bash",
+                    description: "Cultural adventure platform with interactive games, stories, and collectibles inspired by Dutch and Belgian heritage.",
+                    price: 25,
+                    photos: [],
+                    id: "diana-dutch-belgian-bash"
                 }
             ],
             studios: [
@@ -1121,12 +1194,12 @@
         
         // Initialize system
         document.addEventListener('DOMContentLoaded', function() {
-            debugLog('🛡️ GMSRFC Crypto Storefront v3.2.1 - LAUNCH WEEK READY + MyWebsite + CTOK');
+            debugLog('🛡️ GMSRFC Crypto Storefront v3.2.2 - LAUNCH WEEK READY + MyWebsite + CTOK + Little X + Diana Dutch-Belgian Bash');
             debugLog('Mission: STARCOM-0825-LS-GMSRFC-DOGPATCH-V28');
             debugLog('Contact: Lexalytics@yahoo.com | Token: ψΩ§∞');
             debugLog('Payment System: Crypto + CTOK (BTC/ETH/CTOK)');
             debugLog('Studios: Kozmic Kasino, Comedy Theatre, Sports Bar, Academy Hub Scholars, Starship Explorations');
-            debugLog('NEW: MyWebsite Cosmic Vault ($149) + CTOK Payment Integration');
+            debugLog('NEW: Little X Products + Diana Dutch-Belgian Bash + Enhanced HackerWatch Fortress');
             
             loadCatalogData();
             showSection('digital-products');
