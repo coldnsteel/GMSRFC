@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🛡️ GMSRFC Digital Products & Collectibles</title>
-    <!-- v3.2.2, 2025-09-05 - LAUNCH READY: MyWebsite + CTOK + Little X + Diana Dutch-Belgian Bash -->
+    <!-- v3.2.3, 2025-09-05 - LAUNCH READY: MyWebsite + CTOK + Little X + Diana Dutch-Belgian Bash + Playground Sandbox + Happy Birthday Party -->
     <style>
         body { 
             background: linear-gradient(135deg, #1a1a1a 0%, #2d1b2e 100%); 
@@ -422,7 +422,7 @@
                     <div class="photo-placeholder" onclick="uploadPhoto('little-x-rocket', 0)">📷 Story Interface</div>
                     <div class="photo-placeholder" onclick="uploadPhoto('little-x-rocket', 1)">📷 Game Modules</div>
                 </div>
-                <p>Consolidated children's platform with interactive stories, games, and educational content, including Little X Book 2.</p>
+                <p>Consolidated children's platform with interactive stories, games, and educational content.</p>
                 <div class="price-display">$30.00</div>
                 <button class="btn btn-crypto" onclick="purchaseItem('little-x-rocket', 30, 'Little X Rocket')">🚀 Purchase with Crypto</button>
             </div>
@@ -439,6 +439,30 @@
             </div>
 
             <div class="collectible-item">
+                <h3>📖 Little X Book</h3>
+                <div class="photo-gallery">
+                    <div class="photo-placeholder" onclick="uploadPhoto('little-x-book', 0)">📷 Book Cover</div>
+                    <div class="photo-placeholder" onclick="uploadPhoto('little-x-book', 1)">📷 Story Pages</div>
+                </div>
+                <p>Interactive educational book for kids with engaging stories and learning activities.</p>
+                <div class="price-display">$25.00</div>
+                <button class="btn btn-crypto" onclick="purchaseItem('little-x-book', 25, 'Little X Book')">🚀 Purchase with Crypto</button>
+                <a href="/public/little-x-book.html" class="btn btn-free">📖 Explore Now</a>
+            </div>
+
+            <div class="collectible-item">
+                <h3>📘 Little X Book 2</h3>
+                <div class="photo-gallery">
+                    <div class="photo-placeholder" onclick="uploadPhoto('little-x-book-2', 0)">📷 Book Cover</div>
+                    <div class="photo-placeholder" onclick="uploadPhoto('little-x-book-2', 1)">📷 Story Pages</div>
+                </div>
+                <p>Second edition of the Little X Book series with new stories and advanced learning activities for kids.</p>
+                <div class="price-display">$25.00</div>
+                <button class="btn btn-crypto" onclick="purchaseItem('little-x-book-2', 25, 'Little X Book 2')">🚀 Purchase with Crypto</button>
+                <a href="/public/little-x-book-2.html" class="btn btn-free">📘 Explore Now</a>
+            </div>
+
+            <div class="collectible-item">
                 <h3>🇳🇱 Diana Dutch-Belgian Bash</h3>
                 <div class="photo-gallery">
                     <div class="photo-placeholder" onclick="uploadPhoto('diana-dutch-belgian-bash', 0)">📷 Cultural Interface</div>
@@ -448,6 +472,30 @@
                 <div class="price-display">$25.00</div>
                 <button class="btn btn-crypto" onclick="purchaseItem('diana-dutch-belgian-bash', 25, 'Diana Dutch-Belgian Bash')">🚀 Purchase with Crypto</button>
                 <a href="/public/diana-dutch-belgian-bash.html" class="btn btn-free">🇳🇱 Explore Now</a>
+            </div>
+
+            <div class="collectible-item">
+                <h3>🏖️ Playground Sandbox</h3>
+                <div class="photo-gallery">
+                    <div class="photo-placeholder" onclick="uploadPhoto('playground-sandbox', 0)">📷 Sandbox Interface</div>
+                    <div class="photo-placeholder" onclick="uploadPhoto('playground-sandbox', 1)">📷 Play Activities</div>
+                </div>
+                <p>Interactive digital sandbox for kids with marbles, jacks, and a variety of playful activities to spark creativity and fun.</p>
+                <div class="price-display">$25.00</div>
+                <button class="btn btn-crypto" onclick="purchaseItem('playground-sandbox', 25, 'Playground Sandbox')">🚀 Purchase with Crypto</button>
+                <a href="/public/playground-sandbox.html" class="btn btn-free">🏖️ Explore Now</a>
+            </div>
+
+            <div class="collectible-item">
+                <h3>🎉 Happy Birthday Party</h3>
+                <div class="photo-gallery">
+                    <div class="photo-placeholder" onclick="uploadPhoto('happy-birthday-party', 0)">📷 Party Interface</div>
+                    <div class="photo-placeholder" onclick="uploadPhoto('happy-birthday-party', 1)">📷 Celebration Content</div>
+                </div>
+                <p>Customizable digital platform for kids' birthday parties, featuring personalized name changes, party games, and celebratory content.</p>
+                <div class="price-display">$25.00</div>
+                <button class="btn btn-crypto" onclick="purchaseItem('happy-birthday-party', 25, 'Happy Birthday Party')">🚀 Purchase with Crypto</button>
+                <a href="/public/happy-birthday-party.html" class="btn btn-free">🎉 Explore Now</a>
             </div>
         </div>
         
@@ -707,7 +755,7 @@
     
     <div class="debug-info">
         <strong>System Status:</strong>
-        <div id="debugLog">🛡️ GMSRFC Crypto Storefront v3.2.2 - LAUNCH READY + MyWebsite + CTOK + Little X + Diana Dutch-Belgian Bash</div>
+        <div id="debugLog">🛡️ GMSRFC Crypto Storefront v3.2.3 - LAUNCH READY + MyWebsite + CTOK + Little X + Diana Dutch-Belgian Bash + Playground Sandbox + Happy Birthday Party</div>
     </div>
     
     <script>
@@ -772,7 +820,7 @@
                 },
                 {
                     name: "Little X Rocket",
-                    description: "Consolidated children's platform with interactive stories, games, and educational content, including Little X Book 2.",
+                    description: "Consolidated children's platform with interactive stories, games, and educational content.",
                     price: 30,
                     photos: [],
                     id: "little-x-rocket"
@@ -785,11 +833,39 @@
                     id: "little-x-musical-composer"
                 },
                 {
+                    name: "Little X Book",
+                    description: "Interactive educational book for kids with engaging stories and learning activities.",
+                    price: 25,
+                    photos: [],
+                    id: "little-x-book"
+                },
+                {
+                    name: "Little X Book 2",
+                    description: "Second edition of the Little X Book series with new stories and advanced learning activities for kids.",
+                    price: 25,
+                    photos: [],
+                    id: "little-x-book-2"
+                },
+                {
                     name: "Diana Dutch-Belgian Bash",
                     description: "Cultural adventure platform with interactive games, stories, and collectibles inspired by Dutch and Belgian heritage.",
                     price: 25,
                     photos: [],
                     id: "diana-dutch-belgian-bash"
+                },
+                {
+                    name: "Playground Sandbox",
+                    description: "Interactive digital sandbox for kids with marbles, jacks, and a variety of playful activities to spark creativity and fun.",
+                    price: 25,
+                    photos: [],
+                    id: "playground-sandbox"
+                },
+                {
+                    name: "Happy Birthday Party",
+                    description: "Customizable digital platform for kids' birthday parties, featuring personalized name changes, party games, and celebratory content.",
+                    price: 25,
+                    photos: [],
+                    id: "happy-birthday-party"
                 }
             ],
             studios: [
@@ -1194,12 +1270,12 @@
         
         // Initialize system
         document.addEventListener('DOMContentLoaded', function() {
-            debugLog('🛡️ GMSRFC Crypto Storefront v3.2.2 - LAUNCH WEEK READY + MyWebsite + CTOK + Little X + Diana Dutch-Belgian Bash');
+            debugLog('🛡️ GMSRFC Crypto Storefront v3.2.3 - LAUNCH WEEK READY + MyWebsite + CTOK + Little X + Diana Dutch-Belgian Bash + Playground Sandbox + Happy Birthday Party');
             debugLog('Mission: STARCOM-0825-LS-GMSRFC-DOGPATCH-V28');
             debugLog('Contact: Lexalytics@yahoo.com | Token: ψΩ§∞');
             debugLog('Payment System: Crypto + CTOK (BTC/ETH/CTOK)');
             debugLog('Studios: Kozmic Kasino, Comedy Theatre, Sports Bar, Academy Hub Scholars, Starship Explorations');
-            debugLog('NEW: Little X Products + Diana Dutch-Belgian Bash + Enhanced HackerWatch Fortress');
+            debugLog('NEW: Little X Book + Book 2 + Playground Sandbox + Happy Birthday Party (11 Digital Products)');
             
             loadCatalogData();
             showSection('digital-products');
