@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🛡️ GMSRFC Digital Products & Collectibles</title>
-    <!-- v3.2.3, 2025-09-05 - LAUNCH READY: MyWebsite + CTOK + Little X + Diana Dutch-Belgian Bash + Playground Sandbox + Happy Birthday Party -->
     <style>
         body { 
             background: linear-gradient(135deg, #1a1a1a 0%, #2d1b2e 100%); 
@@ -13,7 +12,6 @@
             padding: 20px; 
             margin: 0;
         }
-        
         .header {
             text-align: center;
             background: rgba(0,0,0,0.8);
@@ -22,7 +20,6 @@
             border-radius: 10px;
             margin-bottom: 20px;
         }
-        
         .launch-banner {
             background: linear-gradient(45deg, #ff1493, #00ff7f);
             color: #000;
@@ -33,20 +30,17 @@
             font-weight: bold;
             animation: pulse 2s infinite;
         }
-        
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.02); }
             100% { transform: scale(1); }
         }
-        
         .nav-tabs {
             display: flex;
             justify-content: center;
             margin: 20px 0;
             flex-wrap: wrap;
         }
-        
         .nav-tab {
             background: #333;
             color: #00ff7f;
@@ -57,13 +51,11 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        
         .nav-tab:hover, .nav-tab.active {
             background: #ff69b4;
             color: white;
             transform: scale(1.05);
         }
-        
         .section {
             display: none;
             background: rgba(0,0,0,0.7);
@@ -72,16 +64,13 @@
             margin: 20px 0;
             border-radius: 10px;
         }
-        
         .section.active { display: block; }
-        
         .collectible-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 20px;
             margin: 20px 0;
         }
-        
         .collectible-item {
             background: rgba(51,51,51,0.8);
             border: 2px solid #ff69b4;
@@ -90,12 +79,10 @@
             text-align: center;
             transition: all 0.3s ease;
         }
-        
         .collectible-item:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 16px rgba(255,105,180,0.3);
         }
-        
         .photo-gallery {
             display: flex;
             gap: 5px;
@@ -103,7 +90,6 @@
             justify-content: center;
             flex-wrap: wrap;
         }
-        
         .photo-placeholder {
             width: 80px;
             height: 80px;
@@ -114,88 +100,27 @@
             justify-content: center;
             border-radius: 5px;
             color: #ff69b4;
-            font-size: 12px;
+            font-size: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
+            text-align: center;
         }
-        
         .photo-placeholder:hover {
             background: #444;
             border-color: #00ff7f;
         }
-        
         .photo-preview {
             width: 80px;
             height: 80px;
             object-fit: cover;
             border: 2px solid #00ff7f;
             border-radius: 5px;
-        }
-        
-        .add-item-form {
-            background: rgba(25,25,25,0.9);
-            border: 2px solid #9b59b6;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-        
-        .form-group {
-            margin: 15px 0;
-        }
-        
-        .form-group label {
-            display: block;
-            color: #ff69b4;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        
-        .form-input, .form-select, .form-textarea {
-            width: 100%;
-            background: #333;
-            color: #00ff7f;
-            border: 1px solid #ff69b4;
-            padding: 10px;
-            border-radius: 5px;
-            box-sizing: border-box;
-            transition: all 0.3s ease;
-        }
-        
-        .form-input:focus, .form-select:focus, .form-textarea:focus {
-            border-color: #00ff7f;
-            outline: none;
-            box-shadow: 0 0 8px rgba(0,255,127,0.3);
-        }
-        
-        .form-textarea {
-            height: 80px;
-            resize: vertical;
-        }
-        
-        .file-upload-area {
-            border: 3px dashed #ff69b4;
-            padding: 30px;
-            text-align: center;
-            border-radius: 10px;
-            background: rgba(51,51,51,0.5);
-            margin: 10px 0;
             cursor: pointer;
-            transition: all 0.3s ease;
         }
-        
-        .file-upload-area:hover {
-            border-color: #00ff7f;
-            background: rgba(51,51,51,0.7);
+        .photo-preview:hover {
+            transform: scale(1.1);
+            border-color: #ff69b4;
         }
-        
-        .upload-previews {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-            flex-wrap: wrap;
-        }
-        
         .btn {
             background: #9b59b6;
             color: white;
@@ -212,32 +137,26 @@
             min-height: 44px;
             box-sizing: border-box;
         }
-        
         .btn:hover { 
             background: #8e44ad;
             transform: translateY(-2px);
         }
-        
         .btn-crypto {
             background: linear-gradient(45deg, #ff1493, #dc143c);
             border: 2px solid #ff1493;
         }
-        
         .btn-crypto:hover {
             background: linear-gradient(45deg, #dc143c, #b91372);
             box-shadow: 0 4px 12px rgba(255,20,147,0.4);
         }
-        
         .btn-free {
             background: linear-gradient(45deg, #00ff7f, #32cd32);
             color: #000;
             border: 2px solid #00ff7f;
         }
-        
         .btn-free:hover {
             background: linear-gradient(45deg, #32cd32, #228b22);
         }
-        
         .price-display {
             font-size: 1.3em;
             color: #00ff7f;
@@ -245,7 +164,6 @@
             font-weight: bold;
             text-shadow: 0 0 8px rgba(0,255,127,0.5);
         }
-        
         .category-header {
             background: linear-gradient(45deg, #ff69b4, #9b59b6);
             -webkit-background-clip: text;
@@ -253,9 +171,7 @@
             font-size: 2em;
             text-align: center;
             margin: 20px 0;
-            text-shadow: 0 0 10px rgba(255,105,180,0.3);
         }
-        
         .featured-items {
             background: rgba(25,25,25,0.8);
             border: 2px solid #ffd700;
@@ -263,29 +179,34 @@
             border-radius: 10px;
             margin: 20px 0;
         }
-        
-        .studios-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
+        .form-group {
+            margin: 15px 0;
         }
-        
-        .studio-item {
-            background: rgba(25,25,25,0.9);
-            border: 2px solid #00ff7f;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
+        .form-group label {
+            display: block;
+            color: #ff69b4;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            background: #333;
+            color: #00ff7f;
+            border: 1px solid #ff69b4;
+            padding: 10px;
+            border-radius: 5px;
+            box-sizing: border-box;
             transition: all 0.3s ease;
         }
-        
-        .studio-item:hover {
-            transform: scale(1.02);
-            border-color: #ff69b4;
-            box-shadow: 0 8px 20px rgba(0,255,127,0.2);
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            border-color: #00ff7f;
+            outline: none;
+            box-shadow: 0 0 8px rgba(0,255,127,0.3);
         }
-        
+        .form-textarea {
+            height: 80px;
+            resize: vertical;
+        }
         .crypto-payment-panel {
             background: rgba(0,0,0,0.9);
             border: 2px solid #ff1493;
@@ -293,25 +214,12 @@
             border-radius: 10px;
             margin: 20px 0;
         }
-        
-        .crypto-address {
-            background: #000;
-            color: #00ff7f;
-            padding: 12px;
-            border-radius: 5px;
-            font-family: 'Courier New', monospace;
-            word-break: break-all;
-            border: 1px solid #ff69b4;
-            margin: 10px 0;
-        }
-        
         .payment-instructions {
             background: rgba(51,51,51,0.8);
             border-left: 4px solid #ff69b4;
             padding: 15px;
             margin: 15px 0;
         }
-        
         .debug-info {
             background: #000;
             border: 1px solid #00ff00;
@@ -320,30 +228,32 @@
             border-radius: 5px;
             font-size: 0.9em;
         }
-        
-        .transaction-reference {
-            background: #1a1a1a;
-            border: 2px dashed #ffd700;
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 5px;
-            color: #ffd700;
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            max-height: 80%;
+            object-fit: contain;
+        }
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
             font-weight: bold;
-            text-align: center;
-        }
-        
-        .subsection-divider {
-            border-top: 2px solid #ff69b4;
-            margin: 30px 0 20px 0;
-            padding-top: 20px;
-        }
-        
-        .podcast-section {
-            background: rgba(51,51,51,0.6);
-            border: 2px solid #9b59b6;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 20px 0;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -370,13 +280,12 @@
     <div id="digital-products" class="section active">
         <div class="category-header">Digital Products</div>
         
-        <!-- Core Digital Products -->
         <div class="collectible-grid">
             <div class="collectible-item">
                 <h3>🛡️ HackerWatch Fortress</h3>
                 <div class="photo-gallery">
-                    <div class="photo-placeholder" onclick="uploadPhoto('hackerwatch-fortress', 0)">📷 Security Dashboard</div>
-                    <div class="photo-placeholder" onclick="uploadPhoto('hackerwatch-fortress', 1)">📷 Threat Detection</div>
+                    <div class="photo-placeholder">📷 Security Dashboard</div>
+                    <div class="photo-placeholder">📷 Threat Detection</div>
                 </div>
                 <p>Advanced security monitoring system with real-time threat detection, intrusion prevention, email protection, and comprehensive logging capabilities.</p>
                 <div class="price-display">$47.00</div>
@@ -386,8 +295,8 @@
             <div class="collectible-item">
                 <h3>📚 Little X Series</h3>
                 <div class="photo-gallery">
-                    <div class="photo-placeholder" onclick="uploadPhoto('little-x-series', 0)">📷 Family Content</div>
-                    <div class="photo-placeholder" onclick="uploadPhoto('little-x-series', 1)">📷 Educational Tools</div>
+                    <div class="photo-placeholder">📷 Family Content</div>
+                    <div class="photo-placeholder">📷 Educational Tools</div>
                 </div>
                 <p>Family-friendly educational content series with interactive learning modules and age-appropriate material.</p>
                 <div class="price-display">$25.00</div>
@@ -397,8 +306,8 @@
             <div class="collectible-item">
                 <h3>🌐 MyWebsite Cosmic Vault</h3>
                 <div class="photo-gallery">
-                    <div class="photo-placeholder" onclick="uploadPhoto('mywebsite', 0)">📷 Platform Overview</div>
-                    <div class="photo-placeholder" onclick="uploadPhoto('mywebsite', 1)">📷 AI Tools</div>
+                    <div class="photo-placeholder">📷 Platform Overview</div>
+                    <div class="photo-placeholder">📷 AI Tools</div>
                 </div>
                 <p>Complete digital platform with auctions, AI-driven tools, security features, and cosmic collectibles. Full source code access.</p>
                 <div class="price-display">$149.00</div>
@@ -408,8 +317,8 @@
             <div class="collectible-item">
                 <h3>🎵 Little X Composer Chalkboard</h3>
                 <div class="photo-gallery">
-                    <div class="photo-placeholder" onclick="uploadPhoto('little-x-chalkboard', 0)">📷 Chalkboard Interface</div>
-                    <div class="photo-placeholder" onclick="uploadPhoto('little-x-chalkboard', 1)">📷 Music Lessons</div>
+                    <div class="photo-placeholder">📷 Chalkboard Interface</div>
+                    <div class="photo-placeholder">📷 Music Lessons</div>
                 </div>
                 <p>Interactive educational tool for children to learn music composition and theory through a digital chalkboard interface.</p>
                 <div class="price-display">$25.00</div>
@@ -419,8 +328,8 @@
             <div class="collectible-item">
                 <h3>🚀 Little X Rocket</h3>
                 <div class="photo-gallery">
-                    <div class="photo-placeholder" onclick="uploadPhoto('little-x-rocket', 0)">📷 Story Interface</div>
-                    <div class="photo-placeholder" onclick="uploadPhoto('little-x-rocket', 1)">📷 Game Modules</div>
+                    <div class="photo-placeholder">📷 Story Interface</div>
+                    <div class="photo-placeholder">📷 Game Modules</div>
                 </div>
                 <p>Consolidated children's platform with interactive stories, games, and educational content.</p>
                 <div class="price-display">$30.00</div>
@@ -430,8 +339,8 @@
             <div class="collectible-item">
                 <h3>🎹 Little X Musical Composer</h3>
                 <div class="photo-gallery">
-                    <div class="photo-placeholder" onclick="uploadPhoto('little-x-musical-composer', 0)">📷 Composition Tools</div>
-                    <div class="photo-placeholder" onclick="uploadPhoto('little-x-musical-composer', 1)">📷 Instrument Sims</div>
+                    <div class="photo-placeholder">📷 Composition Tools</div>
+                    <div class="photo-placeholder">📷 Instrument Sims</div>
                 </div>
                 <p>Music education tool for kids, featuring composition tutorials, instrument simulations, and creative exercises.</p>
                 <div class="price-display">$25.00</div>
@@ -441,8 +350,8 @@
             <div class="collectible-item">
                 <h3>📖 Little X Book</h3>
                 <div class="photo-gallery">
-                    <div class="photo-placeholder" onclick="uploadPhoto('little-x-book', 0)">📷 Book Cover</div>
-                    <div class="photo-placeholder" onclick="uploadPhoto('little-x-book', 1)">📷 Story Pages</div>
+                    <div class="photo-placeholder">📷 Book Cover</div>
+                    <div class="photo-placeholder">📷 Story Pages</div>
                 </div>
                 <p>Interactive educational book for kids with engaging stories and learning activities.</p>
                 <div class="price-display">$25.00</div>
@@ -453,8 +362,8 @@
             <div class="collectible-item">
                 <h3>📘 Little X Book 2</h3>
                 <div class="photo-gallery">
-                    <div class="photo-placeholder" onclick="uploadPhoto('little-x-book-2', 0)">📷 Book Cover</div>
-                    <div class="photo-placeholder" onclick="uploadPhoto('little-x-book-2', 1)">📷 Story Pages</div>
+                    <div class="photo-placeholder">📷 Book Cover</div>
+                    <div class="photo-placeholder">📷 Story Pages</div>
                 </div>
                 <p>Second edition of the Little X Book series with new stories and advanced learning activities for kids.</p>
                 <div class="price-display">$25.00</div>
@@ -465,8 +374,8 @@
             <div class="collectible-item">
                 <h3>🇳🇱 Diana Dutch-Belgian Bash</h3>
                 <div class="photo-gallery">
-                    <div class="photo-placeholder" onclick="uploadPhoto('diana-dutch-belgian-bash', 0)">📷 Cultural Interface</div>
-                    <div class="photo-placeholder" onclick="uploadPhoto('diana-dutch-belgian-bash', 1)">📷 Game Modules</div>
+                    <div class="photo-placeholder">📷 Cultural Interface</div>
+                    <div class="photo-placeholder">📷 Game Modules</div>
                 </div>
                 <p>Cultural adventure platform with interactive games, stories, and collectibles inspired by Dutch and Belgian heritage.</p>
                 <div class="price-display">$25.00</div>
@@ -477,8 +386,8 @@
             <div class="collectible-item">
                 <h3>🏖️ Playground Sandbox</h3>
                 <div class="photo-gallery">
-                    <div class="photo-placeholder" onclick="uploadPhoto('playground-sandbox', 0)">📷 Sandbox Interface</div>
-                    <div class="photo-placeholder" onclick="uploadPhoto('playground-sandbox', 1)">📷 Play Activities</div>
+                    <div class="photo-placeholder">📷 Sandbox Interface</div>
+                    <div class="photo-placeholder">📷 Play Activities</div>
                 </div>
                 <p>Interactive digital sandbox for kids with marbles, jacks, and a variety of playful activities to spark creativity and fun.</p>
                 <div class="price-display">$25.00</div>
@@ -489,131 +398,13 @@
             <div class="collectible-item">
                 <h3>🎉 Happy Birthday Party</h3>
                 <div class="photo-gallery">
-                    <div class="photo-placeholder" onclick="uploadPhoto('happy-birthday-party', 0)">📷 Party Interface</div>
-                    <div class="photo-placeholder" onclick="uploadPhoto('happy-birthday-party', 1)">📷 Celebration Content</div>
+                    <div class="photo-placeholder">📷 Party Interface</div>
+                    <div class="photo-placeholder">📷 Celebration Content</div>
                 </div>
                 <p>Customizable digital platform for kids' birthday parties, featuring personalized name changes, party games, and celebratory content.</p>
                 <div class="price-display">$25.00</div>
                 <button class="btn btn-crypto" onclick="purchaseItem('happy-birthday-party', 25, 'Happy Birthday Party')">🚀 Purchase with Crypto</button>
                 <a href="/public/happy-birthday-party.html" class="btn btn-free">🎉 Explore Now</a>
-            </div>
-        </div>
-        
-        <!-- Studios Subsection -->
-        <div class="subsection-divider">
-            <div class="category-header">Studios Collection</div>
-            <div class="studios-grid">
-                <div class="studio-item">
-                    <h3>📱🎬 Portable Studio</h3>
-                    <p><em>Ultimate Cosmic Studio</em></p>
-                    <div class="photo-gallery">
-                        <div class="photo-placeholder" onclick="uploadPhoto('portable-studio', 0)">📷 Studio Interface</div>
-                        <div class="photo-placeholder" onclick="uploadPhoto('portable-studio', 1)">📷 Mobile View</div>
-                    </div>
-                    <p>Mobile music production suite with multiple genres, UAD plugin emulation, AI-assisted composition, and integrated call-in streaming capabilities.</p>
-                    <div class="price-display">$30.00</div>
-                    <button class="btn btn-crypto" onclick="purchaseItem('portable-studio', 30, 'Portable Studio (Ultimate Cosmic Studio)')">🚀 Purchase with Crypto</button>
-                </div>
-                
-                <div class="studio-item">
-                    <h3>🎰 KOZMIC-KASINO</h3>
-                    <div class="photo-gallery">
-                        <div class="photo-placeholder" onclick="uploadPhoto('kozmic-kasino', 0)">📷 Casino Interface</div>
-                        <div class="photo-placeholder" onclick="uploadPhoto('kozmic-kasino', 1)">📷 Game Selection</div>
-                    </div>
-                    <p>NFT-powered casino platform with AI croupiers, blockchain-verified games, and immersive gambling experiences.</p>
-                    <div class="price-display">$50.00</div>
-                    <button class="btn btn-crypto" onclick="purchaseItem('kozmic-kasino', 50, 'KOZMIC-KASINO')">🚀 Purchase with Crypto</button>
-                    <a href="/studios/kozmic-kasino.html" class="btn btn-free">🎰 Play Now</a>
-                </div>
-                
-                <div class="studio-item">
-                    <h3>🎭 Comedy Theatre</h3>
-                    <div class="photo-gallery">
-                        <div class="photo-placeholder" onclick="uploadPhoto('comedy-theatre', 0)">📷 Stage View</div>
-                        <div class="photo-placeholder" onclick="uploadPhoto('comedy-theatre', 1)">📷 Character Gallery</div>
-                    </div>
-                    <p>AI Comedy Lounge with 161 cosmic jokes, interactive performances, and user-submitted zingers.</p>
-                    <div class="price-display">$1.00 Ticket</div>
-                    <button class="btn btn-crypto" onclick="purchaseItem('comedy-show', 1, 'Comedy Show Ticket')">🎫 Buy Ticket</button>
-                    <a href="/studios/comedy-lounge/jokebox.html" class="btn btn-free">🎭 Enter Theatre</a>
-                </div>
-                
-                <div class="studio-item">
-                    <h3>🏈 Sports Bar</h3>
-                    <div class="photo-gallery">
-                        <div class="photo-placeholder" onclick="uploadPhoto('sports-bar', 0)">📷 Video Feed</div>
-                        <div class="photo-placeholder" onclick="uploadPhoto('sports-bar', 1)">📷 Patron Chat</div>
-                    </div>
-                    <p>Live sports streaming with patron chat and CTOK betting. Social entertainment hub.</p>
-                    <div class="price-display">$1.00 Entry</div>
-                    <button class="btn btn-crypto" onclick="purchaseItem('sports-bar-entry', 1, 'Sports Bar Entry')">🎟️ Enter Sports Bar</button>
-                    <a href="/studios/sports-bar.html" class="btn btn-free">🏈 Visit Sports Bar</a>
-                </div>
-                
-                <div class="studio-item">
-                    <h3>📚 Academy Hub Scholars</h3>
-                    <div class="photo-gallery">
-                        <div class="photo-placeholder" onclick="uploadPhoto('academy-hub-scholars', 0)">📷 Scholar Forum</div>
-                        <div class="photo-placeholder" onclick="uploadPhoto('academy-hub-scholars', 1)">📷 Course Library</div>
-                    </div>
-                    <p>Scholastic forum for educational discussions, research collaboration, and academic community engagement.</p>
-                    <div class="price-display">$1.00 Access</div>
-                    <button class="btn btn-crypto" onclick="purchaseItem('academy-hub-access', 1, 'Academy Hub Scholars Access')">🎓 Join Scholars</button>
-                    <a href="/studios/academy-hub-scholars.html" class="btn btn-free">📚 Enter Academy</a>
-                </div>
-                
-                <div class="studio-item">
-                    <h3>🚀 Starship Explorations</h3>
-                    <div class="photo-gallery">
-                        <div class="photo-placeholder" onclick="uploadPhoto('starship-explorations', 0)">📷 Mission Control</div>
-                        <div class="photo-placeholder" onclick="uploadPhoto('starship-explorations', 1)">📷 Exploration Log</div>
-                    </div>
-                    <p>Cosmic exploration platform with mission logging, starship NFT collectibles, and interstellar adventures.</p>
-                    <div class="price-display">$1.00 Launch</div>
-                    <button class="btn btn-crypto" onclick="purchaseItem('starship-launch', 1, 'Starship Explorations Launch')">🌟 Launch Mission</button>
-                    <a href="/studios/starship-explorations.html" class="btn btn-free">🚀 Board Starship</a>
-                </div>
-                
-                <div class="studio-item">
-                    <h3>🎙️🏠 Master-Studio</h3>
-                    <div class="photo-gallery">
-                        <div class="photo-placeholder" onclick="uploadPhoto('master-studio', 0)">📷 Podcast Studio</div>
-                        <div class="photo-placeholder" onclick="uploadPhoto('master-studio', 1)">📷 Streaming Setup</div>
-                    </div>
-                    <p>Professional all-in-one studio suite for podcasting, live streaming, and content creation.</p>
-                    <div class="price-display">$75.00</div>
-                    <button class="btn btn-crypto" onclick="purchaseItem('master-studio', 75, 'Master-Studio')">🚀 Purchase with Crypto</button>
-                </div>
-                
-                <div class="studio-item">
-                    <h3>🎸🎛️ Kozmic Rock & Blues Master Console</h3>
-                    <div class="photo-gallery">
-                        <div class="photo-placeholder" onclick="uploadPhoto('kozmic-masterconsole', 0)">📷 Music Console</div>
-                        <div class="photo-placeholder" onclick="uploadPhoto('kozmic-masterconsole', 1)">📷 Effects Rack</div>
-                    </div>
-                    <p>Specialized music production console focused on rock and blues genres.</p>
-                    <div class="price-display">$60.00</div>
-                    <button class="btn btn-crypto" onclick="purchaseItem('kozmic-masterconsole', 60, 'Kozmic Rock & Blues Master Console')">🚀 Purchase with Crypto</button>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Podcasts Subsection -->
-        <div class="subsection-divider">
-            <div class="category-header">Cosmic Podcasts</div>
-            <div class="podcast-section">
-                <div class="collectible-item">
-                    <h3>🐑🎙️ SILLYOSOPHER Saga</h3>
-                    <div class="photo-gallery">
-                        <div class="photo-placeholder" onclick="uploadPhoto('sillyosopher-saga', 0)">📷 Podcast Art</div>
-                        <div class="photo-placeholder" onclick="uploadPhoto('sillyosopher-saga', 1)">📷 Episode Gallery</div>
-                    </div>
-                    <p>Join SILLYOSOPHER for Episodes 8-10 of philosophical sheep chaos, cosmic wisdom, and metaphysical musings from the digital pasture.</p>
-                    <div class="price-display">Free Access</div>
-                    <a href="/podcasts/sillyosopher-saga.html" class="btn btn-free">🎧 Listen Now</a>
-                    <a href="/podcasts/podcast-player.html" class="btn btn-free">🎵 Open Player</a>
-                </div>
             </div>
         </div>
     </div>
@@ -628,8 +419,8 @@
                 <div class="collectible-item">
                     <h4>🏅 Golden Vietnam Memorial Stamp</h4>
                     <div class="photo-gallery">
-                        <div class="photo-placeholder" onclick="uploadPhoto('vietnam-stamp', 0)">📷 Stamp Front</div>
-                        <div class="photo-placeholder" onclick="uploadPhoto('vietnam-stamp', 1)">📷 Stamp Detail</div>
+                        <div class="photo-placeholder">📷 Stamp Front</div>
+                        <div class="photo-placeholder">📷 Stamp Detail</div>
                     </div>
                     <p>Rare golden Vietnam memorial stamp in mint condition. Historical significance with verified authenticity.</p>
                     <div class="price-display">$125.00</div>
@@ -639,30 +430,15 @@
                 <div class="collectible-item">
                     <h4>🪙 Peter the Great Kopek</h4>
                     <div class="photo-gallery">
-                        <div class="photo-placeholder" onclick="uploadPhoto('peter-kopek', 0)">📷 Obverse</div>
-                        <div class="photo-placeholder" onclick="uploadPhoto('peter-kopek', 1)">📷 Reverse</div>
-                        <div class="photo-placeholder" onclick="uploadPhoto('peter-kopek', 2)">📷 Edge View</div>
-                        <div class="photo-placeholder" onclick="uploadPhoto('peter-kopek', 3)">📷 Coin Detail</div>
+                        <img src="/public/images/peter-kopek-0.jpg" class="photo-preview" alt="Peter the Great Kopek Photo 1" onclick="openModal(this.src)" onerror="this.style.display='none'">
+                        <img src="/public/images/peter-kopek-1.jpg" class="photo-preview" alt="Peter the Great Kopek Photo 2" onclick="openModal(this.src)" onerror="this.style.display='none'">
+                        <img src="/public/images/peter-kopek-2.jpg" class="photo-preview" alt="Government Certificate" onclick="openModal(this.src)" onerror="this.style.display='none'">
+                        <img src="/public/images/peter-kopek-3.jpg" class="photo-preview" alt="Certifier Details" onclick="openModal(this.src)" onerror="this.style.display='none'">
                     </div>
-                    <p>Historic kopek from the Peter the Great era (1682-1725). Authentic Russian imperial coinage.</p>
+                    <p>Historic kopek from the Peter the Great era (1682-1725). Authentic Russian imperial coinage with government certificate and certifier verification.</p>
                     <div class="price-display">$350.00</div>
                     <button class="btn btn-crypto" onclick="purchaseItem('peter-kopek', 350, 'Peter the Great Kopek')">🚀 Purchase with Crypto</button>
                 </div>
-            </div>
-        </div>
-        
-        <div class="nav-tabs">
-            <div class="nav-tab" data-category="coins">🪙 Coins</div>
-            <div class="nav-tab" data-category="stamps">📮 Stamps</div>
-            <div class="nav-tab" data-category="books">📚 Books</div>
-            <div class="nav-tab" data-category="comics">📰 Comics</div>
-            <div class="nav-tab" data-category="stash">🗃️ Stash Box</div>
-        </div>
-        
-        <div id="collectible-display" class="collectible-grid">
-            <div class="collectible-item">
-                <h4>Select a category above to browse collectibles</h4>
-                <p>Available categories: Coins, Stamps, Books, Comics, and Stash/Treasure Box items</p>
             </div>
         </div>
     </div>
@@ -670,51 +446,45 @@
     <!-- Add Item Section -->
     <div id="add-item" class="section">
         <div class="category-header">Add New Item</div>
-        <div class="add-item-form">
-            <div class="form-group">
-                <label for="itemCategory">Category:</label>
-                <select id="itemCategory" class="form-select">
-                    <option value="">Select Category</option>
-                    <option value="digital">Digital Products</option>
-                    <option value="studios">Studios</option>
-                    <option value="coins">Coins</option>
-                    <option value="stamps">Stamps</option>
-                    <option value="books">Books</option>
-                    <option value="comics">Comics</option>
-                    <option value="stash">Stash/Treasure Box</option>
-                </select>
+        <div class="form-group">
+            <label for="itemCategory">Category:</label>
+            <select id="itemCategory" class="form-select">
+                <option value="">Select Category</option>
+                <option value="digital">Digital Products</option>
+                <option value="books">Books</option>
+                <option value="coins">Coins</option>
+                <option value="stamps">Stamps</option>
+                <option value="stash">Stash/Treasure Box</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="itemName">Item Name:</label>
+            <input type="text" id="itemName" class="form-input" placeholder="Enter item name">
+        </div>
+        
+        <div class="form-group">
+            <label for="itemDescription">Description:</label>
+            <textarea id="itemDescription" class="form-textarea" placeholder="Detailed description of the item"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="itemPrice">Price ($):</label>
+            <input type="number" id="itemPrice" class="form-input" step="0.01" min="0" placeholder="0.00">
+        </div>
+        
+        <div class="form-group">
+            <div class="payment-instructions">
+                <strong>Image Upload Instructions:</strong><br>
+                1. Upload images to GitHub: <code>/public/images/[item-name]-0.jpg</code><br>
+                2. Or email to: <strong>Lexalytics@yahoo.com</strong><br>
+                3. Subject: "Image Upload for [Item Name]"
             </div>
-            
-            <div class="form-group">
-                <label for="itemName">Item Name:</label>
-                <input type="text" id="itemName" class="form-input" placeholder="Enter item name">
-            </div>
-            
-            <div class="form-group">
-                <label for="itemDescription">Description:</label>
-                <textarea id="itemDescription" class="form-textarea" placeholder="Detailed description of the item"></textarea>
-            </div>
-            
-            <div class="form-group">
-                <label for="itemPrice">Price ($):</label>
-                <input type="number" id="itemPrice" class="form-input" step="0.01" min="0" placeholder="0.00">
-            </div>
-            
-            <div class="form-group">
-                <label>Photos (up to 8):</label>
-                <div class="file-upload-area" onclick="document.getElementById('photoUpload').click()">
-                    <p>📷 Click to upload photos or drag & drop</p>
-                    <p>Maximum 8 photos per item (JPG, PNG, WebP)</p>
-                    <input type="file" id="photoUpload" multiple accept="image/*" style="display: none;" onchange="handlePhotoUpload(event)">
-                </div>
-                <div id="uploadPreviews" class="upload-previews"></div>
-            </div>
-            
-            <div class="form-group">
-                <button class="btn" onclick="addItem()">➕ Add Item to Catalog</button>
-                <button class="btn" onclick="clearForm()">🗑️ Clear Form</button>
-                <button class="btn" onclick="exportCatalog()">📤 Export Catalog</button>
-            </div>
+        </div>
+        
+        <div class="form-group">
+            <button class="btn" onclick="addItem()">➕ Add Item to Catalog</button>
+            <button class="btn" onclick="clearForm()">🗑️ Clear Form</button>
         </div>
     </div>
     
@@ -731,10 +501,9 @@
                     <ol>
                         <li>Select item and click "Purchase with Crypto"</li>
                         <li>Choose Bitcoin, Ethereum, or CTOK payment method</li>
-                        <li>Send exact amount to provided wallet address or use CTOK cashier</li>
+                        <li>Send exact amount to provided wallet address</li>
                         <li>Email transaction ID to: <strong>Lexalytics@yahoo.com</strong></li>
-                        <li>Include item reference code in email subject</li>
-                        <li>Automated delivery within 24 hours of confirmation</li>
+                        <li>Automated delivery within 24 hours</li>
                     </ol>
                 </div>
                 
@@ -743,206 +512,33 @@
                     🪙 Bitcoin (BTC): bc1qvevxcage66n8j86rtzvxn8xrzw9k5nOp5fxg<br>
                     💎 Ethereum (ETH): 0xfD9FD0c94caf9AdDbEd6c968504cC47f2638C158<br>
                     🪙 CTOK: Via Kozmic Kasino & Cashier System<br>
-                    📧 Support: Lexalytics@yahoo.com<br>
-                    🔐 All transactions verified on blockchain
+                    📧 Support: Lexalytics@yahoo.com
                 </div>
             </div>
         </div>
     </div>
-    
-    <!-- Hidden file inputs -->
-    <input type="file" id="hiddenPhotoUpload" accept="image/*" style="display: none;" onchange="handleSinglePhotoUpload(event)">
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="image-modal" onclick="closeModal()">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
     
     <div class="debug-info">
         <strong>System Status:</strong>
-        <div id="debugLog">🛡️ GMSRFC Crypto Storefront v3.2.3 - LAUNCH READY + MyWebsite + CTOK + Little X + Diana Dutch-Belgian Bash + Playground Sandbox + Happy Birthday Party</div>
+        <div id="debugLog">🛡️ GMSRFC Crypto Storefront v3.2.3 - LAUNCH READY + Fixed Images</div>
     </div>
     
     <script>
-        // Global state management
-        let collectiblesData = {
-            coins: [
-                {
-                    name: "Peter the Great Kopek",
-                    description: "Historic kopek from the Peter the Great era (1682-1725). Authentic Russian imperial coinage.",
-                    price: 350,
-                    photos: [],
-                    id: "peter-kopek"
-                }
-            ],
-            stamps: [
-                {
-                    name: "Golden Vietnam Memorial Stamp",
-                    description: "Rare golden Vietnam memorial stamp in mint condition. Historical significance.",
-                    price: 125,
-                    photos: [],
-                    id: "vietnam-stamp"
-                }
-            ],
-            books: [],
-            comics: [],
-            stash: [],
-            digital: [
-                {
-                    name: "HackerWatch Fortress",
-                    description: "Advanced security monitoring system with real-time threat detection, intrusion prevention, email protection, and comprehensive logging capabilities.",
-                    price: 47,
-                    photos: [],
-                    id: "hackerwatch-fortress"
-                },
-                {
-                    name: "Little X Series",
-                    description: "Family-friendly educational content series with interactive learning modules and age-appropriate material.",
-                    price: 25,
-                    photos: [],
-                    id: "little-x-series"
-                },
-                {
-                    name: "SILLYOSOPHER Saga",
-                    description: "Join SILLYOSOPHER for Episodes 8-10 of philosophical sheep chaos.",
-                    price: 0,
-                    photos: [],
-                    id: "sillyosopher-saga"
-                },
-                {
-                    name: "MyWebsite Cosmic Vault",
-                    description: "Complete digital platform with auctions, AI-driven tools, security features, and cosmic collectibles.",
-                    price: 149,
-                    photos: [],
-                    id: "mywebsite"
-                },
-                {
-                    name: "Little X Composer Chalkboard",
-                    description: "Interactive educational tool for children to learn music composition and theory through a digital chalkboard interface.",
-                    price: 25,
-                    photos: [],
-                    id: "little-x-chalkboard"
-                },
-                {
-                    name: "Little X Rocket",
-                    description: "Consolidated children's platform with interactive stories, games, and educational content.",
-                    price: 30,
-                    photos: [],
-                    id: "little-x-rocket"
-                },
-                {
-                    name: "Little X Musical Composer",
-                    description: "Music education tool for kids, featuring composition tutorials, instrument simulations, and creative exercises.",
-                    price: 25,
-                    photos: [],
-                    id: "little-x-musical-composer"
-                },
-                {
-                    name: "Little X Book",
-                    description: "Interactive educational book for kids with engaging stories and learning activities.",
-                    price: 25,
-                    photos: [],
-                    id: "little-x-book"
-                },
-                {
-                    name: "Little X Book 2",
-                    description: "Second edition of the Little X Book series with new stories and advanced learning activities for kids.",
-                    price: 25,
-                    photos: [],
-                    id: "little-x-book-2"
-                },
-                {
-                    name: "Diana Dutch-Belgian Bash",
-                    description: "Cultural adventure platform with interactive games, stories, and collectibles inspired by Dutch and Belgian heritage.",
-                    price: 25,
-                    photos: [],
-                    id: "diana-dutch-belgian-bash"
-                },
-                {
-                    name: "Playground Sandbox",
-                    description: "Interactive digital sandbox for kids with marbles, jacks, and a variety of playful activities to spark creativity and fun.",
-                    price: 25,
-                    photos: [],
-                    id: "playground-sandbox"
-                },
-                {
-                    name: "Happy Birthday Party",
-                    description: "Customizable digital platform for kids' birthday parties, featuring personalized name changes, party games, and celebratory content.",
-                    price: 25,
-                    photos: [],
-                    id: "happy-birthday-party"
-                }
-            ],
-            studios: [
-                {
-                    name: "Portable Studio (Ultimate Cosmic Studio)",
-                    description: "Mobile music production suite with multiple genres and AI-assisted composition.",
-                    price: 30,
-                    photos: [],
-                    id: "portable-studio"
-                },
-                {
-                    name: "KOZMIC-KASINO",
-                    description: "NFT-powered casino platform with AI croupiers and blockchain-verified games.",
-                    price: 50,
-                    photos: [],
-                    id: "kozmic-kasino"
-                },
-                {
-                    name: "Comedy Theatre",
-                    description: "AI Comedy Lounge with 161 cosmic jokes, interactive performances, and user-submitted zingers.",
-                    price: 1,
-                    photos: [],
-                    id: "comedy-theatre"
-                },
-                {
-                    name: "Sports Bar",
-                    description: "Live sports streaming with patron chat and CTOK betting. Social entertainment hub.",
-                    price: 1,
-                    photos: [],
-                    id: "sports-bar"
-                },
-                {
-                    name: "Academy Hub Scholars",
-                    description: "Scholastic forum for educational discussions, research collaboration, and academic community engagement.",
-                    price: 1,
-                    photos: [],
-                    id: "academy-hub-scholars"
-                },
-                {
-                    name: "Starship Explorations",
-                    description: "Cosmic exploration platform with mission logging, starship NFT collectibles, and interstellar adventures.",
-                    price: 1,
-                    photos: [],
-                    id: "starship-explorations"
-                },
-                {
-                    name: "Master-Studio",
-                    description: "Professional all-in-one studio suite for podcasting and live streaming.",
-                    price: 75,
-                    photos: [],
-                    id: "master-studio"
-                },
-                {
-                    name: "Kozmic Rock & Blues Master Console",
-                    description: "Specialized music production console for rock and blues genres.",
-                    price: 60,
-                    photos: [],
-                    id: "kozmic-masterconsole"
-                }
-            ]
-        };
+        function openModal(imageSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.style.display = 'block';
+            modalImg.src = imageSrc;
+        }
         
-        let uploadedPhotos = [];
-        let currentUploadTarget = null;
-        let currentTransaction = null;
-        
-        // Crypto wallet addresses
-        const CRYPTO_WALLETS = {
-            bitcoin: 'bc1qvevxcage66n8j86rtzvxn8xrzw9k5nOp5fxg',
-            ethereum: '0xfD9FD0c94caf9AdDbEd6c968504cC47f2638C158'
-        };
-        
-        function debugLog(message) {
-            const log = document.getElementById('debugLog');
-            const timestamp = new Date().toLocaleTimeString();
-            log.innerHTML += `<br>[${timestamp}] ${message}`;
-            console.log(`[GMSRFC] ${message}`);
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
         }
         
         function showSection(sectionId) {
@@ -953,105 +549,102 @@
                 tab.classList.remove('active');
             });
             document.getElementById(sectionId).classList.add('active');
-            const activeTab = document.querySelector(`.nav-tab[data-section="${sectionId}"]`);
+            const activeTab = document.querySelector(`[data-section="${sectionId}"]`);
             if (activeTab) {
                 activeTab.classList.add('active');
             }
-            debugLog(`Navigation: Switched to ${sectionId}`);
         }
         
-        function showCollectibleCategory(category) {
-            const display = document.getElementById('collectible-display');
-            const items = collectiblesData[category] || [];
+        function purchaseItem(itemId, price, itemName) {
+            const reference = `GMSRFC-${itemId.toUpperCase()}-${Date.now().toString(36).toUpperCase()}`;
             
-            // Update category tab styling
-            document.querySelectorAll('.nav-tab[data-category]').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            const categoryTab = document.querySelector(`.nav-tab[data-category="${category}"]`);
-            if (categoryTab) {
-                categoryTab.classList.add('active');
-            }
-            
-            if (items.length === 0) {
-                display.innerHTML = `
-                    <div class="collectible-item">
-                        <h4>No ${category} items available</h4>
-                        <p>Use the "Add Item" section to expand the ${category} catalog</p>
-                        <button class="btn" onclick="showSection('add-item')">➕ Add ${category.charAt(0).toUpperCase() + category.slice(1)}</button>
+            const cashierContent = document.getElementById('cashier-content');
+            cashierContent.innerHTML = `
+                <div class="crypto-payment-panel">
+                    <h3>💰 Crypto Purchase: ${itemName}</h3>
+                    <div class="price-display">Total: $${price.toFixed(2)} USD</div>
+                    <div style="background: #1a1a1a; border: 2px dashed #ffd700; padding: 12px; margin: 10px 0; border-radius: 5px; color: #ffd700; font-weight: bold; text-align: center;">
+                        Reference: ${reference}
                     </div>
-                `;
-            } else {
-                display.innerHTML = items.map(item => `
-                    <div class="collectible-item">
-                        <h4>${item.name}</h4>
-                        <div class="photo-gallery">
-                            ${item.photos.map((photo, index) => 
-                                `<img src="${photo}" class="photo-preview" alt="${item.name} Photo ${index + 1}">`
-                            ).join('')}
-                            ${Array(Math.max(0, 8 - item.photos.length)).fill(0).map((_, index) => 
-                                `<div class="photo-placeholder" onclick="uploadPhoto('${item.id}', ${item.photos.length + index})">📷 Photo ${item.photos.length + index + 1}</div>`
-                            ).join('')}
-                        </div>
-                        <p>${item.description}</p>
-                        <div class="price-display">${item.price.toFixed(2)}</div>
-                        <button class="btn btn-crypto" onclick="purchaseItem('${item.id}', ${item.price}, '${item.name}')">🚀 Purchase with Crypto</button>
+                    
+                    <h4>Select Payment Method:</h4>
+                    <button class="btn btn-crypto" onclick="showBitcoinPayment('${reference}', ${price}, '${itemName}')">🪙 Pay with Bitcoin</button>
+                    <button class="btn btn-crypto" onclick="showEthereumPayment('${reference}', ${price}, '${itemName}')">💎 Pay with Ethereum</button>
+                    <button class="btn btn-crypto" onclick="showCTOKPayment('${reference}', ${price}, '${itemName}', '${itemId}')">🪙 Pay with CTOK</button>
+                    
+                    <div id="cryptoPaymentDetails" style="display: none;"></div>
+                </div>
+            `;
+            
+            showSection('crypto-cashier');
+        }
+        
+        function showBitcoinPayment(reference, price, itemName) {
+            const detailsDiv = document.getElementById('cryptoPaymentDetails');
+            detailsDiv.innerHTML = `
+                <div class="crypto-payment-panel" style="margin-top: 20px;">
+                    <h4>Bitcoin Payment Instructions</h4>
+                    <div style="background: #000; color: #00ff7f; padding: 12px; border-radius: 5px; font-family: 'Courier New', monospace; word-break: break-all; border: 1px solid #ff69b4; margin: 10px 0;">
+                        <strong>Bitcoin Address:</strong><br>
+                        bc1qvevxcage66n8j86rtzvxn8xrzw9k5nOp5fxg
                     </div>
-                `).join('');
-            }
-            debugLog(`Category ${category}: Displaying ${items.length} items`);
+                    <div class="payment-instructions">
+                        <strong>Steps:</strong><br>
+                        1. Send $${price.toFixed(2)} worth of BTC to the address above<br>
+                        2. Email transaction hash to: <strong>Lexalytics@yahoo.com</strong><br>
+                        3. Subject: "${reference}"<br>
+                        4. Include: ${itemName}, wallet address, transaction hash
+                    </div>
+                </div>
+            `;
+            detailsDiv.style.display = 'block';
         }
         
-        function uploadPhoto(itemId, photoIndex) {
-            currentUploadTarget = { itemId, photoIndex };
-            document.getElementById('hiddenPhotoUpload').click();
-            debugLog(`Photo upload initiated: ${itemId} position ${photoIndex}`);
+        function showEthereumPayment(reference, price, itemName) {
+            const detailsDiv = document.getElementById('cryptoPaymentDetails');
+            detailsDiv.innerHTML = `
+                <div class="crypto-payment-panel" style="margin-top: 20px;">
+                    <h4>Ethereum Payment Instructions</h4>
+                    <div style="background: #000; color: #00ff7f; padding: 12px; border-radius: 5px; font-family: 'Courier New', monospace; word-break: break-all; border: 1px solid #ff69b4; margin: 10px 0;">
+                        <strong>Ethereum Address:</strong><br>
+                        0xfD9FD0c94caf9AdDbEd6c968504cC47f2638C158
+                    </div>
+                    <div class="payment-instructions">
+                        <strong>Steps:</strong><br>
+                        1. Send ${price.toFixed(2)} worth of ETH to the address above<br>
+                        2. Email transaction hash to: <strong>Lexalytics@yahoo.com</strong><br>
+                        3. Subject: "${reference}"<br>
+                        4. Include: ${itemName}, wallet address, transaction hash
+                    </div>
+                </div>
+            `;
+            detailsDiv.style.display = 'block';
         }
         
-        function handleSinglePhotoUpload(event) {
-            const file = event.target.files[0];
-            if (!file || !currentUploadTarget) return;
-            
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                for (let category in collectiblesData) {
-                    const item = collectiblesData[category].find(item => item.id === currentUploadTarget.itemId);
-                    if (item) {
-                        if (!item.photos) item.photos = [];
-                        item.photos[currentUploadTarget.photoIndex] = e.target.result;
-                        debugLog(`Photo uploaded: ${item.name} [${currentUploadTarget.photoIndex}]`);
-                        
-                        // Refresh the appropriate display
-                        if (category === 'coins' || category === 'stamps' || category === 'books' || category === 'comics' || category === 'stash') {
-                            showCollectibleCategory(category);
-                        }
-                        break;
-                    }
-                }
-                saveCatalogData();
-            };
-            reader.readAsDataURL(file);
-        }
-        
-        function handlePhotoUpload(event) {
-            const files = Array.from(event.target.files).slice(0, 8);
-            uploadedPhotos = [];
-            const previews = document.getElementById('uploadPreviews');
-            previews.innerHTML = '';
-            
-            files.forEach((file, index) => {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    uploadedPhotos.push(e.target.result);
-                    const preview = document.createElement('img');
-                    preview.src = e.target.result;
-                    preview.className = 'photo-preview';
-                    preview.style.margin = '5px';
-                    previews.appendChild(preview);
-                };
-                reader.readAsDataURL(file);
-            });
-            debugLog(`Photo upload: ${files.length} files selected`);
+        function showCTOKPayment(reference, price, itemName, itemId) {
+            const detailsDiv = document.getElementById('cryptoPaymentDetails');
+            detailsDiv.innerHTML = `
+                <div class="crypto-payment-panel" style="margin-top: 20px;">
+                    <h4>CTOK Payment Instructions</h4>
+                    <div style="background: rgba(51,51,51,0.8); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <strong>Pay with CTOK:</strong><br>
+                        Amount: ${price.toFixed(2)} USD<br>
+                        Item: ${itemName}<br>
+                        Reference: ${reference}<br>
+                        <a href="/Dogpatch-Market/sectors/cashier/index.html?item=${itemId}&amount=${price}" class="btn btn-crypto" style="margin-top: 10px;">🪙 Pay with CTOK</a>
+                    </div>
+                    <div class="payment-instructions">
+                        <strong>CTOK Process:</strong><br>
+                        1. Click "Pay with CTOK" to visit the cashier<br>
+                        2. Follow instructions to earn or use CTOK via Kozmic Kasino<br>
+                        3. Email <strong>Lexalytics@yahoo.com</strong> with:<br>
+                        &nbsp;&nbsp;- Subject: ${reference}<br>
+                        &nbsp;&nbsp;- Transaction details<br>
+                        &nbsp;&nbsp;- Item: ${itemName}
+                    </div>
+                </div>
+            `;
+            detailsDiv.style.display = 'block';
         }
         
         function addItem() {
@@ -1066,38 +659,8 @@
             }
             
             const itemId = name.toLowerCase().replace(/[^a-z0-9]/g, '-');
-            
-            for (let cat in collectiblesData) {
-                if (collectiblesData[cat].some(item => item.id === itemId)) {
-                    alert('Item with similar name already exists. Please use a different name.');
-                    return;
-                }
-            }
-            
-            const newItem = {
-                name,
-                description,
-                price,
-                photos: [...uploadedPhotos],
-                id: itemId,
-                dateAdded: new Date().toISOString()
-            };
-            
-            if (!collectiblesData[category]) {
-                collectiblesData[category] = [];
-            }
-            
-            collectiblesData[category].push(newItem);
-            debugLog(`Item added: ${category}/${name} (${price})`);
-            alert(`${name} successfully added to ${category} catalog!`);
+            alert(`${name} added to ${category} catalog! Upload images to /public/images/${itemId}-0.jpg or email to Lexalytics@yahoo.com`);
             clearForm();
-            saveCatalogData();
-            
-            if (category === 'digital' || category === 'studios') {
-                showSection('digital-products');
-            } else {
-                showSection('collectibles');
-            }
         }
         
         function clearForm() {
@@ -1105,209 +668,19 @@
             document.getElementById('itemName').value = '';
             document.getElementById('itemDescription').value = '';
             document.getElementById('itemPrice').value = '';
-            document.getElementById('uploadPreviews').innerHTML = '';
-            uploadedPhotos = [];
-            debugLog('Form cleared');
-        }
-        
-        function exportCatalog() {
-            const dataStr = JSON.stringify(collectiblesData, null, 2);
-            const dataBlob = new Blob([dataStr], {type: 'application/json'});
-            const url = URL.createObjectURL(dataBlob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = `gmsrfc-catalog-${new Date().toISOString().split('T')[0]}.json`;
-            link.click();
-            debugLog('Catalog exported to JSON file');
-        }
-        
-        function purchaseItem(itemId, price, itemName) {
-            currentTransaction = {
-                itemId,
-                price,
-                itemName,
-                reference: `GMSRFC-${itemId.toUpperCase()}-${Date.now().toString(36).toUpperCase()}`,
-                timestamp: new Date().toISOString()
-            };
-            
-            const cashierContent = document.getElementById('cashier-content');
-            cashierContent.innerHTML = `
-                <div class="crypto-payment-panel">
-                    <h3>💰 Crypto Purchase: ${itemName}</h3>
-                    <div class="price-display">Total: ${price.toFixed(2)} USD</div>
-                    <div class="transaction-reference">
-                        Reference: ${currentTransaction.reference}
-                    </div>
-                    
-                    <h4>Select Payment Method:</h4>
-                    <button class="btn btn-crypto" onclick="showCryptoPayment('bitcoin')">🪙 Pay with Bitcoin</button>
-                    <button class="btn btn-crypto" onclick="showCryptoPayment('ethereum')">💎 Pay with Ethereum</button>
-                    <button class="btn btn-crypto" onclick="showCryptoPayment('ctok')">🪙 Pay with CTOK</button>
-                    <button class="btn btn-crypto" onclick="window.open('/studios/kozmic-kasino.html', '_blank')">🎰 Earn CTOK</button>
-                    
-                    <div id="cryptoPaymentDetails" style="display: none;"></div>
-                    
-                    <div class="payment-instructions">
-                        <strong>After Payment:</strong><br>
-                        1. Email transaction ID to: <strong>Lexalytics@yahoo.com</strong><br>
-                        2. Subject: "${currentTransaction.reference}"<br>
-                        3. Include: Item name, wallet address used, transaction hash<br>
-                        4. Automated fulfillment within 24 hours of confirmation<br>
-                        5. GitHub repository access + deployment instructions provided
-                    </div>
-                </div>
-            `;
-            
-            showSection('crypto-cashier');
-            debugLog(`Purchase initiated: ${itemName} (${price}) - ${currentTransaction.reference}`);
-        }
-        
-        function showCryptoPayment(method) {
-            if (!currentTransaction) return;
-            
-            const detailsDiv = document.getElementById('cryptoPaymentDetails');
-            let paymentContent = '';
-            
-            if (method === 'ctok') {
-                paymentContent = `
-                    <div class="crypto-payment-panel" style="margin-top: 20px;">
-                        <h4>CTOK Payment Instructions</h4>
-                        <div style="background: rgba(51,51,51,0.8); padding: 15px; border-radius: 8px; margin: 15px 0;">
-                            <strong>Pay with CTOK:</strong><br>
-                            Amount: ${currentTransaction.price.toFixed(2)} USD<br>
-                            Item: ${currentTransaction.itemName}<br>
-                            Reference: ${currentTransaction.reference}<br>
-                            <a href="/Dogpatch-Market/sectors/cashier/index.html?item=${currentTransaction.itemId}&amount=${currentTransaction.price}" class="btn btn-crypto">🪙 Pay with CTOK</a>
-                        </div>
-                        <div class="payment-instructions">
-                            <strong>Step-by-Step Process:</strong><br>
-                            1. Click "Pay with CTOK" to visit the cashier<br>
-                            2. Follow instructions to earn or use CTOK via Kozmic Kasino<br>
-                            3. Email <strong>Lexalytics@yahoo.com</strong> with:<br>
-                            &nbsp;&nbsp;- Subject: ${currentTransaction.reference}<br>
-                            &nbsp;&nbsp;- Transaction details<br>
-                            &nbsp;&nbsp;- Item: ${currentTransaction.itemName}
-                        </div>
-                        <div class="transaction-reference">
-                            Keep this reference: ${currentTransaction.reference}
-                        </div>
-                    </div>
-                `;
-            } else {
-                const wallet = CRYPTO_WALLETS[method];
-                const currency = method === 'bitcoin' ? 'BTC' : 'ETH';
-                
-                paymentContent = `
-                    <div class="crypto-payment-panel" style="margin-top: 20px;">
-                        <h4>${currency} Payment Instructions</h4>
-                        
-                        <div class="crypto-address">
-                            <strong>Wallet Address:</strong><br>
-                            ${wallet}
-                        </div>
-                        
-                        <div style="background: rgba(51,51,51,0.8); padding: 15px; border-radius: 8px; margin: 15px 0;">
-                            <strong>Payment Details:</strong><br>
-                            Amount: ${currentTransaction.price.toFixed(2)} USD<br>
-                            Convert to: ${currency} (use current exchange rate)<br>
-                            Item: ${currentTransaction.itemName}<br>
-                            Reference: ${currentTransaction.reference}
-                        </div>
-                        
-                        <div class="payment-instructions">
-                            <strong>Step-by-Step Process:</strong><br>
-                            1. Copy the ${currency} wallet address above<br>
-                            2. Open your crypto wallet app/exchange<br>
-                            3. Send ${currentTransaction.price.toFixed(2)} worth of ${currency} to the address<br>
-                            4. Copy the transaction hash after sending<br>
-                            5. Email <strong>Lexalytics@yahoo.com</strong> with:<br>
-                            &nbsp;&nbsp;- Subject: ${currentTransaction.reference}<br>
-                            &nbsp;&nbsp;- Transaction hash<br>
-                            &nbsp;&nbsp;- Wallet address used<br>
-                            &nbsp;&nbsp;- Item: ${currentTransaction.itemName}
-                        </div>
-                        
-                        <div class="transaction-reference">
-                            Keep this reference: ${currentTransaction.reference}
-                        </div>
-                    </div>
-                `;
-            }
-            
-            detailsDiv.innerHTML = paymentContent;
-            detailsDiv.style.display = 'block';
-            debugLog(`${method} payment details shown for ${currentTransaction.reference}`);
-        }
-        
-        function saveCatalogData() {
-            try {
-                localStorage.setItem('gmsrfc-collectibles', JSON.stringify(collectiblesData));
-                localStorage.setItem('gmsrfc-transactions', JSON.stringify({
-                    current: currentTransaction,
-                    history: JSON.parse(localStorage.getItem('gmsrfc-transaction-history') || '[]')
-                }));
-            } catch (e) {
-                debugLog('Error saving data: ' + e.message);
-            }
-        }
-        
-        function loadCatalogData() {
-            try {
-                const saved = localStorage.getItem('gmsrfc-collectibles');
-                if (saved) {
-                    const loadedData = JSON.parse(saved);
-                    Object.keys(collectiblesData).forEach(category => {
-                        if (loadedData[category]) {
-                            collectiblesData[category] = loadedData[category];
-                        }
-                    });
-                    debugLog('Catalog data loaded from storage');
-                }
-            } catch (e) {
-                debugLog('Error loading data, using defaults: ' + e.message);
-            }
         }
         
         // Initialize system
         document.addEventListener('DOMContentLoaded', function() {
-            debugLog('🛡️ GMSRFC Crypto Storefront v3.2.3 - LAUNCH WEEK READY + MyWebsite + CTOK + Little X + Diana Dutch-Belgian Bash + Playground Sandbox + Happy Birthday Party');
-            debugLog('Mission: STARCOM-0825-LS-GMSRFC-DOGPATCH-V28');
-            debugLog('Contact: Lexalytics@yahoo.com | Token: ψΩ§∞');
-            debugLog('Payment System: Crypto + CTOK (BTC/ETH/CTOK)');
-            debugLog('Studios: Kozmic Kasino, Comedy Theatre, Sports Bar, Academy Hub Scholars, Starship Explorations');
-            debugLog('NEW: Little X Book + Book 2 + Playground Sandbox + Happy Birthday Party (11 Digital Products)');
-            
-            loadCatalogData();
-            showSection('digital-products');
-            
-            setInterval(saveCatalogData, 30000);
-            
-            debugLog('System ready - All modules loaded - T-6 Days to Marketing Launch');
-            
-            // Attach unified navigation system
+            // Attach navigation system
             document.querySelectorAll('.nav-tab').forEach(tab => {
                 tab.addEventListener('click', () => {
                     const sectionId = tab.getAttribute('data-section');
-                    const categoryId = tab.getAttribute('data-category');
-                    
                     if (sectionId) {
                         showSection(sectionId);
-                    } else if (categoryId) {
-                        showCollectibleCategory(categoryId);
                     }
                 });
             });
-        });
-        
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                saveCatalogData();
-                debugLog('Page hidden - Data saved');
-            }
-        });
-        
-        window.addEventListener('beforeunload', function() {
-            saveCatalogData();
         });
     </script>
 </body>
