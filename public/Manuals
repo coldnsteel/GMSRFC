@@ -1,1 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manuals - GMSRFC</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(45deg, #0a0a0a, #1a0033, #330066, #000066);
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .manuals-section {
+            background: rgba(0,0,0,0.8);
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px solid #00ff00;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+        .panel-title {
+            color: #00ff00;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        .control-btn {
+            padding: 12px;
+            background: linear-gradient(45deg, #ff0000, #b30000);
+            border: none;
+            border-radius: 8px;
+            color: #ffffff;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        .control-btn:hover {
+            background: linear-gradient(45deg, #b30000, #ff0000);
+            transform: scale(1.05);
+        }
+        #manualsList a.control-btn {
+            background: linear-gradient(45deg, #00ff00, #00cc00);
+        }
+        #manualsList a.control-btn:hover {
+            background: linear-gradient(45deg, #00cc00, #00ff00);
+        }
+        .heuristic-panel {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.9);
+            border: 2px solid #ff00ff;
+            border-radius: 10px;
+            padding: 15px;
+            min-width: 250px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .heuristic-log {
+            font-size: 0.7em;
+            line-height: 1.2;
+            margin-bottom: 5px;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        .log-pass { background: rgba(0,255,0,0.2); color: #00ff00; }
+        .log-fail { background: rgba(255,0,0,0.2); color: #ff0000; }
+    </style>
+</head>
+<body>
+    <div class="heuristic-panel" id="heuristicPanel">
+        <div style="font-weight: bold; color: #ff00ff; margin-bottom: 10px;">SYSTEM DIAGNOSTICS</div>
+        <div id="heuristicLog"></div>
+    </div>
+    <div class="manuals-section">
+        <h3 class="panel-title">Manuals & Downloads</h3>
+        <div id="manualsList" style="color: #ffffff; margin-top: 10px;"></div>
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+            <input type="hidden" name="cmd" value="_xclick">
+            <input type="hidden" name="business" value="Lexalytics@yahoo.com">
+            <input type="hidden" name="item_name" value="Manuals Access">
+            <input type="hidden" name="amount" value="10.00">
+            <input type="hidden" name="currency_code" value="USD">
+            <input type="submit" class="control-btn" value="🚀 Purchase Access $10">
+        </form>
+        <button class="control-btn" onclick="showCryptoDetails('bitcoin', 'manuals', 10)">🪙 Bitcoin</button>
+        <button class="control-btn" onclick="showCryptoDetails('ethereum', 'manuals', 10)">💎 Ethereum</button>
+        <div id="cryptoDetails" style="color: #00ff00; margin-top: 10px;"></div>
+    </div>
 
+    <script>
+        const products = {
+            'hackerwatch-manual': { 
+                type: 'file', 
+                url: '/public/Manuals/HACKERWATCH_USER_MANUAL.pdf', 
+                name: 'HackerWatch User Manual' 
+            },
+            'kozmic-kasino-manual': { 
+                type: 'file', 
+                url: '/public/Manuals/KOZMIC_KASINO_USER_MANUAL.pdf', 
+                name: 'Kozmic Kasino User Manual' 
+            },
+            'studio-manual': { 
+                type: 'file', 
+                url: '/public/Manuals/PERSONAL_HOME_STUDIO_MANUAL.pdf', 
+                name: 'Personal Home Studio Manual' 
+            }
+        };
+
+        function addLog(module, test, result, details) {
+            const timestamp = new Date().toLocaleTimeString();
+            const logMessage = `[${module}] ${test}: ${result ? 'PASS' : 'FAIL'} ${details || ''}`;
+            const logElement = document.getElementById('heuristicLog');
+            if (logElement) {
+                const logDiv = document.createElement('div');
+                logDiv.className = `heuristic-log ${result ? 'log-pass' : 'log-fail'}`;
+                logDiv.textContent = `${timestamp} ${logMessage}`;
+                logElement.appendChild(logDiv);
+                logElement.scrollTop = logElement.scrollHeight;
+                if (logElement.children.length > 50) {
+                    logElement.removeChild(logElement.firstChild);
+                }
+            }
+        }
+
+        function showCryptoDetails(crypto, itemId, price) {
+            const details = document.getElementById('cryptoDetails');
+            details.innerHTML = `
+                <p>Send ${crypto === 'bitcoin' ? 'BTC' : 'ETH'} equivalent of $${price} to:</p>
+                <p>${crypto === 'bitcoin' ? '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa' : '0x742d35Cc6634C0532925a3b844Bc454e4438f44e'}</p>
+                <p>Email receipt to Lexalytics@yahoo.com and add ?tx=[your_tx_id]&item=[hackerwatch-manual|kozmic-kasino-manual|studio-manual] to URL.</p>
+            `;
+            addLog('payment', `Displayed ${crypto} payment details for ${itemId}`, true);
+        }
+
+        function checkTransaction() {
+            const params = new URLSearchParams(window.location.search);
+            const txId = params.get('tx');
+            const item = params.get('item');
+            const manualsList = document.getElementById('manualsList');
+            if (!txId || !item || !products[item]) {
+                addLog('payment', 'Invalid transaction or item', false, 'Add ?tx=[your_tx_id]&item=[hackerwatch-manual|kozmic-kasino-manual|studio-manual]');
+                manualsList.innerHTML = '⚠️ Complete payment and add transaction ID to access manuals.';
+                return;
+            }
+            const product = products[item];
+            manualsList.innerHTML = `✅ Access verified. <a href="https://coldnsteel.github.io/GMSRFC${product.url}" class="control-btn" download>Download ${product.name}</a>`;
+            addLog('payment', `Unlocked ${product.name}`, true);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            addLog('system', 'INITIALIZATION', true, 'Manuals page ready!');
+            checkTransaction();
+        });
+    </script>
+</body>
+</html>
