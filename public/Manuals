@@ -97,17 +97,17 @@
         const products = {
             'hackerwatch-manual': { 
                 type: 'file', 
-                url: '/public/Manuals/HACKERWATCH_USER_MANUAL.pdf', 
+                url: '/public/Manuals/HACKERWATCH_USER_MANUAL.md', 
                 name: 'HackerWatch User Manual' 
             },
             'kozmic-kasino-manual': { 
                 type: 'file', 
-                url: '/public/Manuals/KOZMIC_KASINO_USER_MANUAL.pdf', 
+                url: '/public/Manuals/KOZMIC_KASINO_USER_MANUAL.md', 
                 name: 'Kozmic Kasino User Manual' 
             },
             'studio-manual': { 
                 type: 'file', 
-                url: '/public/Manuals/PERSONAL_HOME_STUDIO_MANUAL.pdf', 
+                url: '/public/Manuals/PERSONAL_HOME_STUDIO_MANUAL.md', 
                 name: 'Personal Home Studio Manual' 
             }
         };
