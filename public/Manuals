@@ -16,98 +16,153 @@
         .manuals-section {
             background: rgba(0,0,0,0.8);
             border-radius: 15px;
-            padding: 20px;
+            padding: 30px;
             border: 2px solid #00ff00;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             text-align: center;
             box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            position: relative;
+            z-index: 10;
         }
         .panel-title {
             color: #00ff00;
-            font-size: 1.5rem;
-            margin-bottom: 15px;
+            font-size: 2rem;
+            margin-bottom: 20px;
         }
         .control-btn {
-            padding: 12px;
+            padding: 15px 20px;
             background: linear-gradient(45deg, #ff0000, #b30000);
             border: none;
             border-radius: 8px;
             color: #ffffff;
             cursor: pointer;
             font-weight: bold;
-            margin: 5px;
+            margin: 10px;
             transition: all 0.3s ease;
+            font-size: 14px;
         }
         .control-btn:hover {
             background: linear-gradient(45deg, #b30000, #ff0000);
             transform: scale(1.05);
         }
+        #manualsList {
+            color: #ffffff; 
+            margin: 20px 0;
+            min-height: 60px;
+            font-size: 16px;
+        }
         #manualsList a.control-btn {
             background: linear-gradient(45deg, #00ff00, #00cc00);
+            text-decoration: none;
+            display: inline-block;
         }
         #manualsList a.control-btn:hover {
             background: linear-gradient(45deg, #00cc00, #00ff00);
+        }
+        .payment-section {
+            background: rgba(0,0,50,0.5);
+            border: 1px solid #0080ff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .crypto-details {
+            color: #00ff00; 
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(0,255,0,0.1);
+            border-radius: 5px;
         }
         .heuristic-panel {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.95);
             border: 2px solid #ff00ff;
             border-radius: 10px;
             padding: 15px;
-            min-width: 250px;
+            min-width: 280px;
             max-height: 400px;
             overflow-y: auto;
+            z-index: 1000;
+            font-size: 11px;
+        }
+        .panel-header {
+            font-weight: bold; 
+            color: #ff00ff; 
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 12px;
         }
         .heuristic-log {
-            font-size: 0.7em;
-            line-height: 1.2;
-            margin-bottom: 5px;
+            font-size: 10px;
+            line-height: 1.3;
+            margin-bottom: 3px;
             padding: 2px 5px;
             border-radius: 3px;
+            word-wrap: break-word;
         }
         .log-pass { background: rgba(0,255,0,0.2); color: #00ff00; }
         .log-fail { background: rgba(255,0,0,0.2); color: #ff0000; }
+        @media (max-width: 768px) {
+            .manuals-section { 
+                padding: 20px; 
+                margin: 10px;
+            }
+            .heuristic-panel { 
+                position: relative;
+                top: auto;
+                right: auto;
+                margin: 20px auto;
+                max-width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="heuristic-panel" id="heuristicPanel">
-        <div style="font-weight: bold; color: #ff00ff; margin-bottom: 10px;">SYSTEM DIAGNOSTICS</div>
+        <div class="panel-header">SYSTEM DIAGNOSTICS</div>
         <div id="heuristicLog"></div>
     </div>
+    
     <div class="manuals-section">
-        <h3 class="panel-title">Manuals & Downloads</h3>
-        <div id="manualsList" style="color: #ffffff; margin-top: 10px;"></div>
-        <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-            <input type="hidden" name="cmd" value="_xclick">
-            <input type="hidden" name="business" value="Lexalytics@yahoo.com">
-            <input type="hidden" name="item_name" value="Manuals Access">
-            <input type="hidden" name="amount" value="10.00">
-            <input type="hidden" name="currency_code" value="USD">
-            <input type="submit" class="control-btn" value="🚀 Purchase Access $10">
-        </form>
-        <button class="control-btn" onclick="showCryptoDetails('bitcoin', 'manuals', 10)">🪙 Bitcoin</button>
-        <button class="control-btn" onclick="showCryptoDetails('ethereum', 'manuals', 10)">💎 Ethereum</button>
-        <div id="cryptoDetails" style="color: #00ff00; margin-top: 10px;"></div>
+        <h1 class="panel-title">📚 GMSRFC Manuals & Downloads</h1>
+        
+        <div id="manualsList">⚠️ Complete payment and add transaction ID to access manuals.</div>
+        
+        <div class="payment-section">
+            <h3 style="color: #0080ff; margin-bottom: 15px;">Crypto Payment Only</h3>
+            
+            <button class="control-btn" onclick="showCryptoDetails('bitcoin', 'manuals', 10)">🪙 Bitcoin</button>
+            <button class="control-btn" onclick="showCryptoDetails('ethereum', 'manuals', 10)">💎 Ethereum</button>
+            <button class="control-btn" onclick="showCryptoDetails('ctok', 'manuals', 10)">🌟 CTOK</button>
+        </div>
+        
+        <div id="cryptoDetails" class="crypto-details" style="display: none;"></div>
+        
+        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #333;">
+            <p style="color: #888; font-size: 12px;">
+                After payment, add ?tx=[transaction_id]&item=[hackerwatch-manual|kozmic-kasino-manual|studio-manual] to URL
+            </p>
+        </div>
     </div>
 
     <script>
         const products = {
             'hackerwatch-manual': { 
                 type: 'file', 
-                url: '/public/Manuals/HACKERWATCH_USER_MANUAL.md', 
+                url: '/HACKERWATCH_USER_MANUAL.md', 
                 name: 'HackerWatch User Manual' 
             },
             'kozmic-kasino-manual': { 
                 type: 'file', 
-                url: '/public/Manuals/KOZMIC_KASINO_USER_MANUAL.md', 
+                url: '/KOZMIC_KASINO_USER_MANUAL.md', 
                 name: 'Kozmic Kasino User Manual' 
             },
             'studio-manual': { 
                 type: 'file', 
-                url: '/public/Manuals/PERSONAL_HOME_STUDIO_MANUAL.md', 
+                url: '/PERSONAL_HOME_STUDIO_MANUAL.md', 
                 name: 'Personal Home Studio Manual' 
             }
         };
@@ -122,7 +177,7 @@
                 logDiv.textContent = `${timestamp} ${logMessage}`;
                 logElement.appendChild(logDiv);
                 logElement.scrollTop = logElement.scrollHeight;
-                if (logElement.children.length > 50) {
+                if (logElement.children.length > 30) {
                     logElement.removeChild(logElement.firstChild);
                 }
             }
@@ -130,12 +185,28 @@
 
         function showCryptoDetails(crypto, itemId, price) {
             const details = document.getElementById('cryptoDetails');
+            let address, name;
+            
+            if (crypto === 'bitcoin') {
+                address = '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa';
+                name = 'Bitcoin (BTC)';
+            } else if (crypto === 'ethereum') {
+                address = '0x742d35Cc6634C0532925a3b844Bc454e4438f44e';
+                name = 'Ethereum (ETH)';
+            } else if (crypto === 'ctok') {
+                address = 'CTOK-ADDRESS-PLACEHOLDER';
+                name = 'CTOK';
+            }
+            
             details.innerHTML = `
-                <p>Send ${crypto === 'bitcoin' ? 'BTC' : 'ETH'} equivalent of $${price} to:</p>
-                <p>${crypto === 'bitcoin' ? '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa' : '0x742d35Cc6634C0532925a3b844Bc454e4438f44e'}</p>
-                <p>Email receipt to Lexalytics@yahoo.com and add ?tx=[your_tx_id]&item=[hackerwatch-manual|kozmic-kasino-manual|studio-manual] to URL.</p>
+                <h4>💰 ${name} Payment</h4>
+                <p><strong>Amount:</strong> $${price} USD equivalent</p>
+                <p><strong>Address:</strong> ${address}</p>
+                <p><strong>Instructions:</strong> Send payment, then email receipt to Lexalytics@yahoo.com with transaction ID</p>
+                <p><strong>Access:</strong> Add ?tx=[your_transaction_id]&item=[manual_name] to this URL</p>
             `;
-            addLog('payment', `Displayed ${crypto} payment details for ${itemId}`, true);
+            details.style.display = 'block';
+            addLog('payment', `Displayed ${crypto} payment details`, true, `$${price} for ${itemId}`);
         }
 
         function checkTransaction() {
@@ -143,18 +214,37 @@
             const txId = params.get('tx');
             const item = params.get('item');
             const manualsList = document.getElementById('manualsList');
+            
             if (!txId || !item || !products[item]) {
-                addLog('payment', 'Invalid transaction or item', false, 'Add ?tx=[your_tx_id]&item=[hackerwatch-manual|kozmic-kasino-manual|studio-manual]');
-                manualsList.innerHTML = '⚠️ Complete payment and add transaction ID to access manuals.';
+                addLog('payment', 'No valid transaction', false, 'Showing payment options');
+                manualsList.innerHTML = `
+                    <div style="padding: 20px;">
+                        <h3 style="color: #ffaa00; margin-bottom: 15px;">Available Manuals</h3>
+                        <p style="margin-bottom: 15px;">• HackerWatch User Manual</p>
+                        <p style="margin-bottom: 15px;">• Kozmic Kasino User Manual</p>
+                        <p style="margin-bottom: 15px;">• Personal Home Studio Manual</p>
+                        <p style="color: #ff6666;">Complete payment below to access downloads</p>
+                    </div>
+                `;
                 return;
             }
+            
             const product = products[item];
-            manualsList.innerHTML = `✅ Access verified. <a href="https://coldnsteel.github.io/GMSRFC${product.url}" class="control-btn" download>Download ${product.name}</a>`;
-            addLog('payment', `Unlocked ${product.name}`, true);
+            manualsList.innerHTML = `
+                <div style="padding: 20px; background: rgba(0,255,0,0.1); border-radius: 10px;">
+                    <h3 style="color: #00ff00; margin-bottom: 15px;">✅ Access Verified</h3>
+                    <p style="margin-bottom: 15px;">Transaction: ${txId}</p>
+                    <a href="https://coldnsteel.github.io/GMSRFC${product.url}" class="control-btn" download>
+                        📥 Download ${product.name}
+                    </a>
+                </div>
+            `;
+            addLog('payment', `Access granted for ${product.name}`, true, `TX: ${txId}`);
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            addLog('system', 'INITIALIZATION', true, 'Manuals page ready!');
+            addLog('system', 'INITIALIZATION', true, 'GMSRFC Manuals system ready');
+            addLog('system', 'FILES', true, 'Manual files located in root directory');
             checkTransaction();
         });
     </script>
