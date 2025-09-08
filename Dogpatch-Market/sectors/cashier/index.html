@@ -242,7 +242,7 @@
             let address = '';
             
             if (method === 'venmo') {
-                address = '@karla-Gottschalk';
+                address = '@Karla-Gottschalk';
                 paymentAddress.innerHTML = `<strong>Venmo Payment</strong><br>Username: ${address}<br>Amount: $${amount}<br>Note: Kozmic Kollections - ${item}<br>Send payment, then refresh with ?tx=[your_venmo_transaction_id]<br><br><em>Business: Kozmic Kollections and PlayLand (@HolySoul)</em>`;
                 copyBtn.innerText = 'Copy Venmo Username';
             } else if (method === 'bitcoin') {
@@ -268,7 +268,7 @@
                 timestamp: new Date().toISOString(), 
                 source: 'KozmicCashier', 
                 token: 'ψΩ§∞',
-                venmo: method === 'venmo' ? '@karla-Gottschalk' : null
+                venmo: method === 'venmo' ? '@Karla-Gottschalk' : null
             });
             localStorage.setItem('securityLog', JSON.stringify(log));
         }
@@ -331,7 +331,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             debugLog('🛡️ Kozmic Cashier Debug Started');
             debugLog('Token: ψΩ§∞ | Mission: STARCOM-0908-LS-GMSRFC-DOGPATCH-V211');
-            debugLog('Payment options: Venmo (@karla-Gottschalk), BTC, ETH, CTOK', 'success');
+            debugLog('Payment options: Venmo (@Karla-Gottschalk), BTC, ETH, CTOK', 'success');
             const params = getQueryParams();
             if (params) {
                 document.getElementById('purchaseInfo').textContent = `Purchasing ${products[params.item]?.name || params.item} for $${params.amount}...`;
