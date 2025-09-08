@@ -6,7 +6,13 @@
     <title>🌌 Psi-Recruits - HackerWatch Fortress Training 🌌</title>
     <link rel="stylesheet" href="/assets/css/style.css">
     <style>
-        body { background: #0a0a23; color: #f0f0f0; font-family: Arial, sans-serif; }
+        body { 
+            background: #0a0a23; 
+            color: #f0f0f0; 
+            font-family: Arial, sans-serif; 
+            margin: 0;
+            padding: 20px;
+        }
         .recruit-container {
             background: linear-gradient(135deg, rgba(184, 134, 11, 0.4), rgba(255, 69, 0, 0.4));
             border: 4px solid #b8860b;
@@ -17,40 +23,188 @@
             text-align: center;
             box-shadow: 0 15px 60px rgba(184, 134, 11, 0.5);
         }
-        .recruit-title { color: #b8860b; font-size: 2.5em; }
-        .recruit-text { color: #00ced1; font-size: 1.2em; margin: 20px 0; }
+        .recruit-title { 
+            color: #b8860b; 
+            font-size: 2.5em; 
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px #b8860b;
+        }
+        .recruit-text { 
+            color: #00ced1; 
+            font-size: 1.2em; 
+            margin: 20px 0; 
+            line-height: 1.6;
+        }
+        .promo-section {
+            background: rgba(255, 170, 0, 0.2);
+            border: 2px solid #ffaa00;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        .promo-text { 
+            color: #ffaa00; 
+            font-weight: bold; 
+            font-size: 1.3em;
+            margin: 10px 0; 
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #ffaa00; }
+            to { text-shadow: 0 0 20px #ffaa00, 0 0 30px #ffaa00; }
+        }
+        .original-price {
+            color: #ff6666;
+            text-decoration: line-through;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
         .recruit-btn {
-            font-size: 1.2em;
-            padding: 15px 30px;
-            background: #1e90ff;
+            font-size: 1.3em;
+            padding: 18px 35px;
+            background: linear-gradient(45deg, #1e90ff, #00ff00);
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
+            margin: 20px 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(30, 144, 255, 0.4);
         }
-        .recruit-btn:hover { background: #0070ba; }
+        .recruit-btn:hover { 
+            background: linear-gradient(45deg, #0070ba, #00cc00);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(30, 144, 255, 0.6);
+        }
+        .grand-opening-link {
+            background: linear-gradient(45deg, #ff1493, #1e90ff);
+            color: #ffffff;
+            padding: 15px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 15px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .grand-opening-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 20, 147, 0.5);
+        }
+        .feature-list {
+            text-align: left;
+            max-width: 600px;
+            margin: 25px auto;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #00ced1;
+        }
+        .feature-list li {
+            color: #00ced1;
+            margin: 8px 0;
+            font-size: 1.1em;
+        }
+        footer {
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 2px solid #b8860b;
+        }
+        footer p {
+            color: #00ced1;
+            text-align: center;
+            margin: 10px 0;
+        }
+        footer a {
+            color: inherit;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        footer a:hover {
+            text-shadow: 0 0 10px currentColor;
+        }
     </style>
 </head>
 <body>
     <div class="recruit-container">
         <h1 class="recruit-title">🌌 Psi-Recruits: Join HackerWatch Fortress 🌌</h1>
+        
         <p class="recruit-text">
-            Train to defend against social engineering and cyber threats with HackerWatch Fortress! Learn reconnaissance, spot weak locks, and protect assets like an ethical hacker. Inspired by <em>How I Rob Banks</em>.
+            Train to defend against social engineering and cyber threats with HackerWatch Fortress! Learn reconnaissance, spot weak locks, and protect digital assets like an ethical hacker. Inspired by <em>How I Rob Banks</em> and real-world cybersecurity training.
         </p>
-        <button class="recruit-btn" onclick="window.location.href='/sectors/cashier/index.html?item=fortress-pass&amount=8'">🛡️ Join Fortress ($8)</button>
+
+        <div class="feature-list">
+            <h3 style="color: #b8860b; text-align: center;">🛡️ Training Includes:</h3>
+            <ul>
+                <li>🌍 Real-time IP intelligence and threat detection</li>
+                <li>📊 Dynamic threat scoring (0-100 scale)</li>
+                <li>🚨 Automated ICE NINE reporting to authorities</li>
+                <li>🔐 Advanced device fingerprinting techniques</li>
+                <li>🎯 Social engineering awareness training</li>
+                <li>🔍 VPN detection and geolocation monitoring</li>
+            </ul>
+        </div>
+
+        <div class="promo-section">
+            <div class="original-price">Regular Training Price: $8</div>
+            <div class="promo-text">🎓 Back to School Special: 50% OFF!</div>
+            <div class="promo-text" style="font-size: 2em; color: #00ff00;">Only $4!</div>
+            <p style="color: #ffffff; margin-top: 10px;">
+                Limited time offer - Professional cybersecurity training at student prices
+            </p>
+        </div>
+
+        <a href="/sectors/cashier/index.html?item=fortress-pass&amount=4" class="recruit-btn">
+            🛡️ Join Fortress Training - $4
+        </a>
+
+        <div style="margin: 30px 0;">
+            <p style="color: #00ced1; margin-bottom: 15px;">🚀 Ready for the full experience?</p>
+            <a href="/fortress-grand-opening.html" class="grand-opening-link">
+                Check out Fortress Grand Opening ($19 Student Price)
+            </a>
+        </div>
+
+        <p class="recruit-text" style="font-size: 1em; color: #888;">
+            Training covers ethical hacking principles, threat awareness, and personal cybersecurity best practices. All content is educational and promotes legal, ethical security practices.
+        </p>
     </div>
+
     <footer>
-        <p style="color: #00ced1; text-align: center;">
+        <p>
             <a href="/" style="color: #ff1493;">🏛️ Back to GMSRFC</a> |
-            <a href="/Dogpatch-Market/index.html" style="color: #b8860b;">🛒 Dogpatch Market</a>
+            <a href="/Dogpatch-Market/index.html" style="color: #b8860b;">🛒 Dogpatch Market</a> |
+            <a href="/public/Manuals" style="color: #1e90ff;">📚 Documentation</a>
         </p>
-        <p style="color: #00ced1; text-align: center;">🔑 Code: PsiRecruits_Fortress_v1.0</p>
+        <p style="color: #888; font-size: 0.9em;">
+            🔑 Code: PsiRecruits_Fortress_v1.2 | Emmanuel - God With Us
+        </p>
     </footer>
+
     <script src="/assets/js/cosmic.js"></script>
     <script>
-        const log = JSON.parse(localStorage.getItem('securityLog') || '[]');
-        log.push({ issue: 'Visited Psi-Recruits', timestamp: new Date().toISOString(), source: 'Recruits' });
-        localStorage.setItem('securityLog', JSON.stringify(log));
+        // Security logging
+        const log = JSON.parse(localStorage.getItem("securityLog") || "[]");
+        log.push({ 
+            issue: "Visited Psi-Recruits Training", 
+            timestamp: new Date().toISOString(), 
+            source: "Recruits",
+            promo: "50% off - $4 training"
+        });
+        localStorage.setItem("securityLog", JSON.stringify(log));
+        
+        // Track promo engagement
+        document.querySelector('.recruit-btn').addEventListener('click', function() {
+            log.push({
+                issue: "Clicked Fortress Training Purchase",
+                timestamp: new Date().toISOString(),
+                source: "Recruits",
+                amount: "$4"
+            });
+            localStorage.setItem("securityLog", JSON.stringify(log));
+        });
     </script>
 </body>
 </html>
