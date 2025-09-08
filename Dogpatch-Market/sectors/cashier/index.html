@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🛡️ Crypto Cashier - GMSRFC</title>
-    <!-- v2.10.8, 2025-09-04 -->
+    <!-- v2.11.0, 2025-09-08 -->
     <style>
         body { 
             background: #1a1a1a; 
@@ -36,6 +36,21 @@
         }
         .crypto-btn:hover {
             background: #ff69b4;
+            transform: translateY(-2px);
+        }
+        .venmo-btn { 
+            background: #3d95ce; 
+            color: white; 
+            padding: 12px 24px; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            margin: 10px 5px; 
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .venmo-btn:hover {
+            background: #2980b9;
             transform: translateY(-2px);
         }
         .crypto-address { 
@@ -119,13 +134,13 @@
             body { font-size: 14px; } 
             .cashier-container { padding: 15px; width: 95%; } 
             .cashier-title { font-size: 1.8em; } 
-            .crypto-btn { padding: 10px 16px; margin: 8px 3px; }
+            .crypto-btn, .venmo-btn { padding: 10px 16px; margin: 8px 3px; }
         }
     </style>
 </head>
 <body>
     <div class="cashier-container">
-        <h1 class="cashier-title">🛡️ Crypto Cashier 🌌</h1>
+        <h1 class="cashier-title">🛡️ Kozmic Cashier 🌌</h1>
         <p class="cashier-text" id="purchaseInfo">Processing your purchase...</p>
         
         <div class="debug-box">
@@ -136,17 +151,18 @@
         <div class="debug-box">
             <h3 style="color: #00aaff;">Test URL (Copy & Paste):</h3>
             <div class="test-url" onclick="copyTestUrl()">
-                https://coldnsteel.github.io/GMSRFC/Dogpatch-Market/sectors/cashier/index.html?item=fortress-pass&amount=8
+                https://coldnsteel.github.io/GMSRFC/Dogpatch-Market/sectors/cashier/index.html?item=fortress-pass&amount=19
             </div>
             <small style="color: #ffaa00;">Click above to copy, then paste in new tab</small>
         </div>
         
         <div class="debug-box">
-            <h3 style="color: #00aaff;">Crypto Payment:</h3>
-            <button class="crypto-btn" onclick="showCrypto('bitcoin')">🪙 Pay with Bitcoin</button>
-            <button class="crypto-btn" onclick="showCrypto('ethereum')">💎 Pay with Ethereum</button>
-            <button class="crypto-btn" onclick="showCrypto('ctok')">🌟 Pay with CTOK</button>
-            <div class="crypto-address" id="cryptoAddress" style="display: none;"></div>
+            <h3 style="color: #00aaff;">Payment Options:</h3>
+            <button class="venmo-btn" onclick="showPayment('venmo')">💰 Pay with Venmo</button>
+            <button class="crypto-btn" onclick="showPayment('bitcoin')">🪙 Pay with Bitcoin</button>
+            <button class="crypto-btn" onclick="showPayment('ethereum')">💎 Pay with Ethereum</button>
+            <button class="crypto-btn" onclick="showPayment('ctok')">🌟 Pay with CTOK</button>
+            <div class="crypto-address" id="paymentAddress" style="display: none;"></div>
             <button class="copy-btn" id="copyBtn" style="display: none;" onclick="copyAddress()">Copy Address</button>
         </div>
         
@@ -159,7 +175,7 @@
         <p style="color: #ff69b4; text-align: center; margin: 15px 0;">
             <a href="../index.html" style="color: #00ff7f;">🛒 Dogpatch Market</a>
         </p>
-        <p style="color: #ff69b4; text-align: center;">🔑 Code: Cashier_Fortress_v2.10.8 | Token: ψΩ§∞ | Mission: STARCOM-0825-LS-GMSRFC-DOGPATCH-V28</p>
+        <p style="color: #ff69b4; text-align: center;">🔑 Code: Cashier_Fortress_v2.11.0 | Token: ψΩ§∞ | Mission: STARCOM-0908-LS-GMSRFC-DOGPATCH-V211</p>
     </div>
     
     <script>
@@ -209,7 +225,7 @@
         }
 
         function copyTestUrl() {
-            const url = 'https://coldnsteel.github.io/GMSRFC/Dogpatch-Market/sectors/cashier/index.html?item=fortress-pass&amount=8';
+            const url = 'https://coldnsteel.github.io/GMSRFC/Dogpatch-Market/sectors/cashier/index.html?item=fortress-pass&amount=19';
             navigator.clipboard.writeText(url).then(() => {
                 debugLog('✅ Test URL copied to clipboard', 'success');
             }).catch(() => {
@@ -217,39 +233,63 @@
             });
         }
 
-        function showCrypto(method) {
+        function showPayment(method) {
             const params = getQueryParams();
             if (!params) return;
             const { item, amount } = params;
-            const cryptoAddress = document.getElementById('cryptoAddress');
+            const paymentAddress = document.getElementById('paymentAddress');
             const copyBtn = document.getElementById('copyBtn');
             let address = '';
-            if (method === 'bitcoin') {
+            
+            if (method === 'venmo') {
+                address = '@karla-Gottschalk';
+                paymentAddress.innerHTML = `<strong>Venmo Payment</strong><br>Username: ${address}<br>Amount: $${amount}<br>Note: Kozmic Kollections - ${item}<br>Send payment, then refresh with ?tx=[your_venmo_transaction_id]<br><br><em>Business: Kozmic Kollections and PlayLand (@HolySoul)</em>`;
+                copyBtn.innerText = 'Copy Venmo Username';
+            } else if (method === 'bitcoin') {
                 address = 'bc1qvevxcage66n8j86rtzvxn8xrzw9k5nOp5fxg';
-                cryptoAddress.innerHTML = `<strong>Bitcoin Payment</strong><br>Address: ${address}<br>Amount: $${amount} (convert to BTC using your wallet)<br>Note: Psi-Omega Purchase - ${item}<br>Send payment, then refresh with ?tx=[your_tx_id]`;
+                paymentAddress.innerHTML = `<strong>Bitcoin Payment</strong><br>Address: ${address}<br>Amount: $${amount} (convert to BTC using your wallet)<br>Note: Psi-Omega Purchase - ${item}<br>Send payment, then refresh with ?tx=[your_tx_id]`;
+                copyBtn.innerText = 'Copy Bitcoin Address';
             } else if (method === 'ethereum') {
                 address = '0xfD9FD0c94caf9AdDbEd6c968504cC47f2638C158';
-                cryptoAddress.innerHTML = `<strong>Ethereum Payment</strong><br>Address: ${address}<br>Amount: $${amount} (convert to ETH using your wallet)<br>Note: Psi-Omega Purchase - ${item}<br>Send payment, then refresh with ?tx=[your_tx_id]`;
+                paymentAddress.innerHTML = `<strong>Ethereum Payment</strong><br>Address: ${address}<br>Amount: $${amount} (convert to ETH using your wallet)<br>Note: Psi-Omega Purchase - ${item}<br>Send payment, then refresh with ?tx=[your_tx_id]`;
+                copyBtn.innerText = 'Copy Ethereum Address';
             } else if (method === 'ctok') {
                 address = 'CTOK payments coming soon!';
-                cryptoAddress.innerHTML = `<strong>CTOK Payment</strong><br>${address}`;
+                paymentAddress.innerHTML = `<strong>CTOK Payment</strong><br>${address}`;
             }
-            cryptoAddress.style.display = 'block';
+            
+            paymentAddress.style.display = 'block';
             copyBtn.style.display = method !== 'ctok' ? 'block' : 'none';
-            debugLog(`✅ Showing ${method} address for ${item} - $${amount}`, 'success');
+            debugLog(`✅ Showing ${method} payment for ${item} - $${amount}`, 'success');
+            
             const log = JSON.parse(localStorage.getItem('securityLog') || '[]');
-            log.push({ issue: `Crypto payment initiated: ${item} ($${amount}) via ${method}`, timestamp: new Date().toISOString(), source: 'Cashier', token: 'ψΩ§∞' });
+            log.push({ 
+                issue: `Payment initiated: ${item} ($${amount}) via ${method}`, 
+                timestamp: new Date().toISOString(), 
+                source: 'KozmicCashier', 
+                token: 'ψΩ§∞',
+                venmo: method === 'venmo' ? '@karla-Gottschalk' : null
+            });
             localStorage.setItem('securityLog', JSON.stringify(log));
         }
 
         function copyAddress() {
             try {
-                const cryptoAddress = document.getElementById('cryptoAddress').innerHTML;
-                const addressMatch = cryptoAddress.match(/(bc1[a-zA-Z0-9]+|0x[a-fA-F0-9]+)/);
-                if (addressMatch) {
-                    const address = addressMatch[0];
-                    navigator.clipboard.writeText(address).then(() => {
-                        debugLog('✅ Address copied: ' + address, 'success');
+                const paymentAddress = document.getElementById('paymentAddress').innerHTML;
+                let addressToCopy = '';
+                
+                if (paymentAddress.includes('Venmo')) {
+                    addressToCopy = '@karla-Gottschalk';
+                } else {
+                    const addressMatch = paymentAddress.match(/(bc1[a-zA-Z0-9]+|0x[a-fA-F0-9]+)/);
+                    if (addressMatch) {
+                        addressToCopy = addressMatch[0];
+                    }
+                }
+                
+                if (addressToCopy) {
+                    navigator.clipboard.writeText(addressToCopy).then(() => {
+                        debugLog('✅ Address copied: ' + addressToCopy, 'success');
                     }).catch(() => {
                         debugLog('⚠️ Copy failed - manually copy address above', 'warning');
                     });
@@ -273,7 +313,7 @@
             const downloadSection = document.getElementById('downloadSection');
             const downloadInfo = document.getElementById('downloadInfo');
             const downloadLink = document.getElementById('downloadLink');
-            downloadInfo.innerHTML = `✅ Payment verified for ${product.name}.<br>Please check your wallet to confirm transaction ${txId}.`;
+            downloadInfo.innerHTML = `✅ Payment verified for ${product.name}.<br>Please check your payment method to confirm transaction ${txId}.`;
             if (product.type === 'file' || product.type === 'access') {
                 downloadLink.href = `https://coldnsteel.github.io/GMSRFC${product.url}`;
                 downloadLink.innerText = `Access ${product.name}`;
@@ -284,14 +324,14 @@
             downloadSection.style.display = 'block';
             debugLog(`✅ Unlocked ${product.name} for item: ${item}`, 'success');
             const log = JSON.parse(localStorage.getItem('securityLog') || '[]');
-            log.push({ issue: `Product unlocked: ${item} (tx: ${txId})`, timestamp: new Date().toISOString(), source: 'Cashier', token: 'ψΩ§∞' });
+            log.push({ issue: `Product unlocked: ${item} (tx: ${txId})`, timestamp: new Date().toISOString(), source: 'KozmicCashier', token: 'ψΩ§∞' });
             localStorage.setItem('securityLog', JSON.stringify(log));
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            debugLog('🛡️ HackerWatch Fortress Debug Started');
-            debugLog('Token: ψΩ§∞ | Mission: STARCOM-0825-LS-GMSRFC-DOGPATCH-V28');
-            debugLog('PayPal removed - crypto-only payments (BTC, ETH, CTOK)', 'success');
+            debugLog('🛡️ Kozmic Cashier Debug Started');
+            debugLog('Token: ψΩ§∞ | Mission: STARCOM-0908-LS-GMSRFC-DOGPATCH-V211');
+            debugLog('Payment options: Venmo (@karla-Gottschalk), BTC, ETH, CTOK', 'success');
             const params = getQueryParams();
             if (params) {
                 document.getElementById('purchaseInfo').textContent = `Purchasing ${products[params.item]?.name || params.item} for $${params.amount}...`;
