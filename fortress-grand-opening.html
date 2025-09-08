@@ -130,7 +130,7 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(255, 20, 147, 0.5);
         }
-        .qr-section {
+        .screenshots-section {
             background: rgba(255, 255, 255, 0.9);
             border-radius: 15px;
             padding: 30px;
@@ -138,17 +138,28 @@
             text-align: center;
             color: #000;
         }
-        .qr-code {
-            width: 200px;
-            height: 200px;
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .screenshot-item {
             background: #fff;
-            border: 3px solid #000;
-            margin: 20px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
             border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .screenshot-item img {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 8px;
+            border: 2px solid #00ff00;
+        }
+        .screenshot-caption {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #1a1a2e;
         }
         .teaser-section {
             background: rgba(0, 255, 0, 0.1);
@@ -168,6 +179,7 @@
             .hero-subtitle { font-size: 1.2rem; }
             .student-price { font-size: 2rem; }
             .features-grid { grid-template-columns: 1fr; }
+            .screenshot-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -189,6 +201,31 @@
                 </p>
             </div>
         </div>
+
+        <div class="screenshots-section">
+            <h3>See HackerWatch-Fortress In Action</h3>
+            <p style="margin-bottom: 20px;">Real screenshots from the live security system</p>
+            <div class="screenshot-grid">
+                <div class="screenshot-item">
+                    <img src="/public/fortress-computer-0.png" alt="Fortress Desktop Dashboard">
+                    <div class="screenshot-caption">Desktop Security Dashboard</div>
+                </div>
+                <div class="screenshot-item">
+                    <img src="/public/Fortress-phone-0.PNG" alt="Fortress Mobile Interface">
+                    <div class="screenshot-caption">Mobile Security Interface</div>
+                </div>
+                <div class="screenshot-item">
+                    <img src="/public/Fortress-phone-1.PNG" alt="Fortress Threat Assessment">
+                    <div class="screenshot-caption">Real-Time Threat Assessment</div>
+                </div>
+                <div class="screenshot-item">
+                    <img src="/public/Fortress-phone-2.PNG" alt="Fortress Network Monitor">
+                    <div class="screenshot-caption">Network Security Monitoring</div>
+                </div>
+            </div>
+            <p style="font-weight: bold; color: #1a1a2e;">Professional-grade cybersecurity that works on all your devices</p>
+        </div>
+
         <div class="features-grid">
             <div class="feature-card">
                 <div class="feature-icon">🌍</div>
@@ -218,16 +255,6 @@
             <a href="https://coldnsteel.github.io/HackerWatch-Fortress/" class="purchase-btn">
                 👁️ Live Demo
             </a>
-        </div>
-        <div class="qr-section">
-            <h3>Mobile Access QR Code</h3>
-            <div class="qr-code">
-                QR CODE<br>
-                Scan to access<br>
-                fortress purchase<br>
-                on mobile device
-            </div>
-            <p><strong>Scan with phone camera to purchase instantly</strong></p>
         </div>
         <div class="teaser-section">
             <h3 style="color: #00ff00;">Coming to the Kozmos</h3>
