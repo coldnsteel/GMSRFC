@@ -1,1 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GMSRFC Podcast Player</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Comic Sans MS', cursive;
+            background: linear-gradient(135deg, #ff4444, #ffd700, #ff69b4, #9932cc);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+            animation: cosmic-pulse 8s infinite;
+        }
 
+        @keyframes cosmic-pulse {
+            0%, 100% { filter: brightness(1) saturate(1); }
+            50% { filter: brightness(1.1) saturate(1.2); }
+        }
+
+        .player-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            border: 3px solid #ffd700;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+        }
+
+        .player-container h2 {
+            color: #ffd700;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        .control-btn {
+            background: linear-gradient(45deg, #ff0000, #ff6600);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            color: #fff;
+            cursor: pointer;
+            font-family: 'Comic Sans MS', cursive;
+            font-weight: bold;
+            margin: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .control-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 0, 0, 0.6);
+            background: linear-gradient(45deg, #ff6600, #ffd700);
+        }
+
+        audio {
+            width: 100%;
+            margin: 10px 0;
+            border-radius: 10px;
+        }
+
+        .sheep-counter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 105, 180, 0.9);
+            border: 3px solid gold;
+            border-radius: 15px;
+            padding: 1rem;
+            text-align: center;
+            z-index: 1000;
+            animation: sheep-wiggle 3s infinite;
+        }
+
+        @keyframes sheep-wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-3deg); }
+            75% { transform: rotate(3deg); }
+        }
+
+        @media (max-width: 768px) {
+            .player-container { padding: 15px; }
+            .control-btn { padding: 0.8rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="player-container" id="playerContainer">
+        <h2>🎙️ GMSRFC Podcast Player</h2>
+        <button class="control-btn" onclick="importStudioTrack()">💾 Import Studio Track</button>
+    </div>
+
+    <div class="sheep-counter">
+        <div style="color: #ff69b4; font-weight: bold;">🐑 SHEEP COUNT</div>
+        <div style="font-size: 2em;" id="sheepCount">42</div>
+        <div style="color: #ffd700;">Tracks Loaded!</div>
+    </div>
+
+    <script>
+        let sheepCount = 42;
+
+        function importStudioTrack() {
+            const track = prompt('Enter Portable Studio track URL or ID:');
+            if (track) {
+                const player = document.createElement('audio');
+                player.src = track;
+                player.controls = true;
+                document.getElementById('playerContainer').appendChild(player);
+                sheepCount += 1;
+                document.getElementById('sheepCount').textContent = sheepCount;
+                console.log(`Imported track ${track}`);
+                showMessage(`✅ Track imported! Sheep count: ${sheepCount}`);
+            }
+        }
+
+        function showMessage(message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.textContent = message;
+            messageDiv.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: linear-gradient(45deg, #ff69b4, #ffd700);
+                color: #000;
+                padding: 1rem 2rem;
+                border-radius: 25px;
+                font-weight: bold;
+                z-index: 9999;
+                border: 2px solid #ff0000;
+                animation: messageSlide 0.5s ease-out;
+                max-width: 80%;
+                text-align: center;
+            `;
+            
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes messageSlide {
+                    0% { top: -100px; opacity: 0; }
+                    100% { top: 20px; opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+            document.body.appendChild(messageDiv);
+            
+            setTimeout(() => {
+                messageDiv.remove();
+                style.remove();
+            }, 4000);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            showMessage('🎙️ GMSRFC Podcast Player Loaded! Ready to import Portable Studio tracks!');
+        });
+    </script>
+</body>
+</html>

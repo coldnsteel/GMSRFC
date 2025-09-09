@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛡️ HackerWatch-Fortress Grand Opening - Professional Cybersecurity</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: "Courier New", monospace;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e);
+            color: #ffffff;
+            min-height: 100vh;
+            animation: cosmicPulse 6s ease-in-out infinite;
+        }
+        @keyframes cosmicPulse {
+            0%, 100% { background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e); }
+            50% { background: linear-gradient(135deg, #1a1a2e, #16213e, #0a0a0a); }
+        }
+        .grand-opening-banner {
+            background: linear-gradient(45deg, #ff1493, #00ff00, #1e90ff);
+            color: #000;
+            text-align: center;
+            padding: 15px;
+            font-weight: bold;
+            font-size: 1.2em;
+            animation: bannerGlow 2s ease-in-out infinite alternate;
+        }
+        @keyframes bannerGlow {
+            from { box-shadow: 0 0 20px rgba(255, 20, 147, 0.8); }
+            to { box-shadow: 0 0 40px rgba(0, 255, 0, 0.8); }
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .hero-section {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 20px;
+            margin: 20px 0;
+            border: 3px solid #00ff00;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+        }
+        .hero-title {
+            font-size: 3rem;
+            color: #00ff00;
+            text-shadow: 0 0 20px #00ff00;
+            margin-bottom: 20px;
+        }
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #ffffff;
+            margin-bottom: 30px;
+        }
+        .price-section {
+            background: rgba(255, 20, 147, 0.2);
+            border: 2px solid #ff1493;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        .original-price {
+            font-size: 1.5rem;
+            color: #ff6666;
+            text-decoration: line-through;
+            margin-bottom: 10px;
+        }
+        .student-price {
+            font-size: 3rem;
+            color: #00ff00;
+            font-weight: bold;
+            text-shadow: 0 0 15px #00ff00;
+            margin-bottom: 15px;
+        }
+        .deadline {
+            font-size: 1.2rem;
+            color: #ffaa00;
+            font-weight: bold;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .feature-card {
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #1e90ff;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+        }
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        .feature-title {
+            color: #1e90ff;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        .purchase-buttons {
+            text-align: center;
+            margin: 40px 0;
+        }
+        .purchase-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff1493, #1e90ff);
+            color: #ffffff;
+            padding: 20px 40px;
+            margin: 15px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .purchase-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.5);
+        }
+        .screenshots-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+            color: #000;
+        }
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .screenshot-item {
+            background: #fff;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        .screenshot-item:hover {
+            transform: translateY(-5px);
+        }
+        .screenshot-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 2px solid #00ff00;
+            max-height: 400px;
+            object-fit: contain;
+        }
+        .screenshot-caption {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #1a1a2e;
+            font-size: 0.9em;
+        }
+        .teaser-section {
+            background: rgba(0, 255, 0, 0.1);
+            border: 2px solid #00ff00;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        .coming-soon {
+            color: #ffaa00;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2rem; }
+            .hero-subtitle { font-size: 1.2rem; }
+            .student-price { font-size: 2rem; }
+            .features-grid { grid-template-columns: 1fr; }
+            .screenshot-grid { grid-template-columns: 1fr; }
+            .container { padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="grand-opening-banner">
+        🚀 GRAND OPENING WEEKEND - PROFESSIONAL CYBERSECURITY AT STUDENT PRICES! 🚀
+    </div>
+    <div class="container">
+        <div class="hero-section">
+            <h1 class="hero-title">🛡️ HackerWatch-Fortress v2.2</h1>
+            <p class="hero-subtitle">Enterprise-Grade Personal Cybersecurity<br>
+            IP Tracking • VPN Detection • Automated Threat Reporting</p>
+            <div class="price-section">
+                <div class="original-price">Regular Price: $49</div>
+                <div class="student-price">$19</div>
+                <div class="deadline">Student Pricing Until Christmas 2025!</div>
+                <p style="color: #ffffff; margin-top: 15px;">
+                    FREE Recruit Training Included • Professional Security System
+                </p>
+            </div>
+        </div>
+
+        <div class="screenshots-section">
+            <h3>See HackerWatch-Fortress In Action</h3>
+            <p style="margin-bottom: 20px;">Real screenshots from the live security system</p>
+            <div class="screenshot-grid">
+                <div class="screenshot-item">
+                    <img src="public/fortress-computer-0.png" alt="Fortress Desktop Main Dashboard" loading="lazy">
+                    <div class="screenshot-caption">Desktop Security Dashboard</div>
+                </div>
+                <div class="screenshot-item">
+                    <img src="public/fortress-computer-.png" alt="Fortress Desktop Network Monitor" loading="lazy">
+                    <div class="screenshot-caption">Desktop Network Monitor</div>
+                </div>
+                <div class="screenshot-item">
+                    <img src="public/Fortress-phone-0.PNG" alt="Fortress Mobile Main Interface" loading="lazy">
+                    <div class="screenshot-caption">Mobile Security Interface</div>
+                </div>
+                <div class="screenshot-item">
+                    <img src="public/Fortress-phone-1.PNG" alt="Fortress Mobile Threat Assessment" loading="lazy">
+                    <div class="screenshot-caption">Mobile Threat Assessment</div>
+                </div>
+                <div class="screenshot-item">
+                    <img src="public/Fortress-phone-2.PNG" alt="Fortress Mobile Network Monitor" loading="lazy">
+                    <div class="screenshot-caption">Mobile Network Monitor</div>
+                </div>
+                <div class="screenshot-item">
+                    <img src="public/Fortress-phone-3.PNG" alt="Fortress Mobile Security Logs" loading="lazy">
+                    <div class="screenshot-caption">Mobile Security Logs</div>
+                </div>
+                <div class="screenshot-item">
+                    <img src="public/Fortress-phone-4.PNG" alt="Fortress Mobile Active Protections" loading="lazy">
+                    <div class="screenshot-caption">Mobile Active Protections</div>
+                </div>
+                <div class="screenshot-item">
+                    <img src="public/Fortress-phone-5.jpg" alt="Fortress Mobile Device Status" loading="lazy">
+                    <div class="screenshot-caption">Mobile Device Status</div>
+                </div>
+            </div>
+            <p style="font-weight: bold; color: #1a1a2e;">Professional-grade cybersecurity that works on all your devices</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🌍</div>
+                <div class="feature-title">Real-Time IP Intelligence</div>
+                <p>Multi-API tracking with geolocation, VPN detection, and country risk assessment</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <div class="feature-title">Threat Scoring System</div>
+                <p>Dynamic 0-100 threat assessment with automated escalation protocols</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🚨</div>
+                <div class="feature-title">ICE NINE Reporting</div>
+                <p>Automated referrals to HSI, FBI, and CISA for serious cybersecurity threats</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔐</div>
+                <div class="feature-title">Device Fingerprinting</div>
+                <p>Advanced device identification and security assessment capabilities</p>
+            </div>
+        </div>
+        <div class="purchase-buttons">
+            <a href="Dogpatch-Market/sectors/cashier/index.html?item=fortress-pass&amount=19" class="purchase-btn">
+                💳 Purchase Now - $19
+            </a>
+            <a href="https://coldnsteel.github.io/HackerWatch-Fortress/" class="purchase-btn">
+                👁️ Live Demo
+            </a>
+        </div>
+        <div class="teaser-section">
+            <h3 style="color: #00ff00;">Coming to the Kozmos</h3>
+            <div class="coming-soon">Next Wave Features:</div>
+            <p>🎙️ <strong>Podcast Studio Integration</strong> - Professional audio production</p>
+            <p>🎭 <strong>Comedy Lounge Access</strong> - AI-powered entertainment hub</p>
+            <p>🎰 <strong>Kozmic Kasino</strong> - NFT gaming and CTOK transactions</p>
+            <p>🚀 <strong>Academy Hub</strong> - Advanced cybersecurity training</p>
+            <p style="margin-top: 20px; color: #ffaa00;">
+                <strong>Fortress owners get priority access to all future platforms!</strong>
+            </p>
+        </div>
+        <footer style="text-align: center; padding: 30px; color: #888;">
+            <p>🔑 Professional cybersecurity shouldn't break the bank</p>
+            <p>Contact: lexalytics@yahoo.com | Emmanuel - God With Us</p>
+            <p style="margin-top: 15px;">
+                <a href="psi-recruits.html" style="color: #00ff00;">🎓 Free Recruit Training</a> |
+                <a href="public/Manuals" style="color: #1e90ff;">📚 Documentation</a> |
+                <a href="index.html" style="color: #ff1493;">🏠 GMSRFC Home</a>
+            </p>
+        </footer>
+    </div>
+    <script>
+        const log = JSON.parse(localStorage.getItem("securityLog") || "[]");
+        log.push({ 
+            issue: "Visited Fortress Grand Opening", 
+            timestamp: new Date().toISOString(), 
+            source: "GrandOpening",
+            price: "$19 Student Pricing"
+        });
+        localStorage.setItem("securityLog", JSON.stringify(log));
+        function updateCountdown() {
+            const christmas = new Date("2025-12-25");
+            const now = new Date();
+            const diff = christmas - now;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            if (days > 0) {
+                document.querySelector(".deadline").innerHTML = 
+                    `Student Pricing Until Christmas 2025! (${days} days left)`;
+            }
+        }
+        updateCountdown();
+        setInterval(updateCountdown, 86400000);
+    </script>
+</body>
+</html>

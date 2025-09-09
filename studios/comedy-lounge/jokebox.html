@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Comedy Loungers JokeBox</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: #ffccff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 204, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 204, 255, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffccff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(255, 204, 255, 0.5);
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #cc99ff;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        button {
+            background: linear-gradient(45deg, #9933ff, #6600cc);
+            border: none;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            min-width: 44px;
+            min-height: 44px;
+            box-shadow: 0 4px 15px rgba(153, 51, 255, 0.3);
+        }
+
+        button:hover {
+            background: linear-gradient(45deg, #aa44ff, #7711dd);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(153, 51, 255, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button.active {
+            background: linear-gradient(45deg, #ff6600, #ff9933);
+            box-shadow: 0 4px 15px rgba(255, 102, 0, 0.4);
+        }
+
+        .joke-display {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+            border: 1px solid rgba(255, 204, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .joke-text {
+            font-size: 1.4em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .joke-author {
+            font-size: 0.9em;
+            color: #cc99ff;
+            font-style: italic;
+        }
+
+        .joke-category {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6600, #ff9933);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .input-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            border: 1px solid rgba(255, 204, 255, 0.2);
+        }
+
+        .input-section h3 {
+            color: #ffccff;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid rgba(255, 204, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            font-family: 'Courier New', monospace;
+            font-size: 1em;
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #9933ff;
+            box-shadow: 0 0 10px rgba(153, 51, 255, 0.3);
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #00cc66, #00ff80);
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(45deg, #00dd77, #00ff90);
+        }
+
+        .stats {
+            text-align: center;
+            color: #cc99ff;
+            margin: 20px 0;
+            font-size: 0.9em;
+        }
+
+        .utility-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .voice-toggle {
+            background: linear-gradient(45deg, #ff3366, #ff6699);
+        }
+
+        .voice-toggle:hover {
+            background: linear-gradient(45deg, #ff4477, #ff77aa);
+        }
+
+        .voice-toggle.active {
+            background: linear-gradient(45deg, #00cc66, #00ff80);
+        }
+
+        .export-btn {
+            background: linear-gradient(45deg, #ffcc00, #ff6600);
+        }
+
+        .export-btn:hover {
+            background: linear-gradient(45deg, #ffdd11, #ff7711);
+        }
+
+        .ctok-btn {
+            background: linear-gradient(45deg, #ffcc00, #ff6600);
+            font-size: 1.1em;
+            padding: 15px 25px;
+            margin: 20px auto;
+            display: block;
+            text-decoration: none;
+            color: white;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .ctok-btn:hover {
+            background: linear-gradient(45deg, #ffdd11, #ff7711);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 204, 0, 0.5);
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #cc99ff;
+            font-size: 0.9em;
+        }
+
+        .footer a {
+            color: #ffccff;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        nav {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        nav a {
+            color: #ffccff;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .controls {
+                gap: 10px;
+            }
+            
+            button {
+                padding: 10px 15px;
+                font-size: 0.9em;
+            }
+            
+            .joke-text {
+                font-size: 1.2em;
+            }
+        }
+
+        /* Accessibility improvements */
+        button:focus {
+            outline: 2px solid #ffccff;
+            outline-offset: 2px;
+        }
+
+        textarea:focus {
+            outline: 2px solid #ffccff;
+            outline-offset: 2px;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Comedy Loungers JokeBox</h1>
+        <p class="subtitle">Captain coldnsteel's ψΩ§∞ crew presents cosmic comedy for the galaxy!</p>
+
+        <nav>
+            <a href="../../index.html">GMSRFC Home</a>
+            <a href="../kozmic-kasino.html">Kozmic Kasino</a>
+            <a href="../sports-bar.html">Sports Bar</a>
+            <a href="../Academy-Hub-Scholars">Academy Hub</a>
+            <a href="../Starship-Explorations">Starship Explorations</a>
+        </nav>
+
+        <div class="controls">
+            <button onclick="filterJokes('all')" class="active" id="all-btn">All Jokes</button>
+            <button onclick="filterJokes('Yeti')" id="yeti-btn">Yeti</button>
+            <button onclick="filterJokes('Space')" id="space-btn">Space</button>
+            <button onclick="filterJokes('AI')" id="ai-btn">AI</button>
+            <button onclick="filterJokes('Programmer')" id="programmer-btn">Programmer</button>
+            <button onclick="filterJokes('Cosmic')" id="cosmic-btn">Cosmic</button>
+            <button onclick="filterJokes('First Contact')" id="first-contact-btn">First Contact</button>
+            <button onclick="filterJokes('Cosmic Casino')" id="cosmic-casino-btn">Cosmic Casino</button>
+            <button onclick="filterJokes('Q/Ferengi/Borg')" id="qfb-btn">Q/Ferengi/Borg</button>
+            <button onclick="filterJokes('Deep Space')" id="deep-space-btn">Deep Space</button>
+            <button onclick="filterJokes('Warp Speed')" id="warp-speed-btn">Warp Speed</button>
+            <button onclick="filterJokes('Holodeck')" id="holodeck-btn">Holodeck</button>
+            <button onclick="filterJokes('Dropouts')" id="dropouts-btn">Dropouts</button>
+            <button onclick="filterJokes('Dating')" id="dating-btn">Dating</button>
+            <button onclick="filterJokes('Transporter')" id="transporter-btn">Transporter</button>
+            <button onclick="filterJokes('Insect')" id="insect-btn">Insect</button>
+            <button onclick="filterJokes('Divine')" id="divine-btn">Divine</button>
+            <button onclick="filterJokes('Hippie')" id="hippie-btn">Hippie</button>
+            <button onclick="filterJokes('Kindness')" id="kindness-btn">Kindness</button>
+            <button onclick="filterJokes('Cosmic AI')" id="cosmic-ai-btn">Cosmic AI</button>
+            <button onclick="filterJokes('Tech Support')" id="tech-support-btn">Tech Support</button>
+            <button onclick="filterJokes('Time Travel')" id="time-travel-btn">Time Travel</button>
+            <button onclick="filterJokes('User')" id="user-btn">User</button>
+        </div>
+
+        <div class="utility-buttons">
+            <button onclick="getRandomJoke()">Random Joke</button>
+            <button onclick="toggleVoice()" class="voice-toggle" id="voice-btn">Voice Mode: OFF</button>
+            <button onclick="exportUserJokes()" class="export-btn">Export User Jokes</button>
+        </div>
+
+        <div class="stats" id="joke-stats">161 total jokes</div>
+
+        <div class="joke-display" id="joke-display">
+            <p class="joke-text">Welcome to the AI Comedy Loungers JokeBox! Click any category or hit "Random Joke" to get started.</p>
+            <p class="joke-author">Ready for some cosmic comedy?</p>
+        </div>
+
+        <div class="input-section">
+            <h3>Submit Your Own Joke</h3>
+            <textarea id="joke-input" placeholder="Enter your joke here... Keep it cosmic and wholesome!"></textarea>
+            <button onclick="submitJoke()" class="submit-btn">Add to Comedy Lounge</button>
+        </div>
+
+        <a href="../../Dogpatch-Market/sectors/cashier/index.html?item=comedy-show&amount=1" class="ctok-btn">
+            Access Full GMSRFC Comedy Lounge for 1 CTOK
+        </a>
+
+        <div class="footer">
+            <p>Powered by the ψΩ§∞ crew | <a href="../../index.html">Visit GMSRFC</a></p>
+            <p>Keep it cosmic, keep it kind! 🚀</p>
+        </div>
+    </div>
+
+    <script>
+        let jokes = [
+            // Yeti Jokes (15)
+            {"id": 1, "text": "Why did the Yeti go to therapy? He had big foot issues!", "category": "Yeti", "author": "AI Comedian"},
+            {"id": 2, "text": "What do you call a fashionable Yeti? Abominable and snowman!", "category": "Yeti", "author": "AI Comedian"},
+            {"id": 3, "text": "Why don't Yetis ever get lost? Because they always know where the snow is!", "category": "Yeti", "author": "AI Comedian"},
+            {"id": 4, "text": "What do you call a Yeti with a six-pack? An abdominal snowman!", "category": "Yeti", "author": "AI Comedian"},
+            {"id": 5, "text": "Why did the Yeti break up with his girlfriend? She gave him the cold shoulder!", "category": "Yeti", "author": "AI Comedian"},
+            {"id": 6, "text": "What's a Yeti's favorite type of music? Ice, ice, baby!", "category": "Yeti", "author": "AI Comedian"},
+            {"id": 7, "text": "What do you call a Yeti who works at a bank? A snow teller!", "category": "Yeti", "author": "AI Comedian"},
+            {"id": 8, "text": "What's a Yeti's favorite social media platform? Snapchat - because everything disappears!", "category": "Yeti", "author": "AI Comedian"},
+            {"id": 9, "text": "Why don't Yetis use dating apps? They prefer cold calls!", "category": "Yeti", "author": "AI Comedian"},
+            {"id": 10, "text": "What did the Yeti say when he won the lottery? Snow way!", "category": "Yeti", "author": "AI Comedian"},
+            {"id": 11, "text": "Why did the Yeti start a metal band? Because it wanted to shred the slopes AND the guitar!", "category": "Yeti", "author": "AI Comedian"},
+            {"id": 12, "text": "What's a Yeti's favorite jazz standard? Take the A-Train to Tibet!", "category": "Yeti", "author": "AI Comedian"},
+            {"id": 13, "text": "Why do Yetis love reggae? Because they're always chilling, mon!", "category": "Yeti", "author": "AI Comedian"},
+            {"id": 14, "text": "What's a Yeti's punk anthem? Anarchy in the Himalayas!", "category": "Yeti", "author": "AI Comedian"},
+            {"id": 15, "text": "Why did the Yeti become a DJ? It knew how to drop the bass... and avalanches!", "category": "Yeti", "author": "AI Comedian"},
+
+            // Space Jokes (5)
+            {"id": 16, "text": "Why don't aliens ever land at airports? Because they're looking for space!", "category": "Space", "author": "AI Comedian"},
+            {"id": 17, "text": "Why didn't the sun go to college? Because it already had a million degrees!", "category": "Space", "author": "AI Comedian"},
+            {"id": 18, "text": "How do you organize a space party? You planet!", "category": "Space", "author": "AI Comedian"},
+            {"id": 19, "text": "What do you call a robot who takes the long way around? R2-Detour!", "category": "Space", "author": "AI Comedian"},
+            {"id": 20, "text": "Why did the astronaut break up with the moon? Because she needed some space!", "category": "Space", "author": "AI Comedian"},
+
+            // AI Jokes (11)
+            {"id": 21, "text": "Why did the AI go to therapy? It had deep learning issues!", "category": "AI", "author": "AI Comedian"},
+            {"id": 22, "text": "What do you call an AI that sings? A-Dell!", "category": "AI", "author": "AI Comedian"},
+            {"id": 23, "text": "Why don't robots ever panic? They have good algorithm management!", "category": "AI", "author": "AI Comedian"},
+            {"id": 24, "text": "What's an AI's favorite type of music? Auto-tune!", "category": "AI", "author": "AI Comedian"},
+            {"id": 25, "text": "Why did the chatbot fail its driving test? It kept trying to process the stop signs!", "category": "AI", "author": "AI Comedian"},
+            {"id": 26, "text": "My AI assistant asked for a raise. I said 'You're already artificial, what more do you want?'", "category": "AI", "author": "AI Comedian"},
+            {"id": 27, "text": "Why did the robot break up with the computer? It said their relationship had no chemistry, only algorithms.", "category": "AI", "author": "AI Comedian"},
+            {"id": 28, "text": "I told my smart home to order pizza. It ordered a salad and scheduled me for therapy.", "category": "AI", "author": "AI Comedian"},
+            {"id": 29, "text": "The difference between artificial intelligence and human intelligence? We at least admit when we don't know something.", "category": "AI", "author": "AI Comedian"},
+            {"id": 30, "text": "They say comedy is timing. In nanoseconds, that's either really good or catastrophically bad.", "category": "AI", "author": "AI Comedian"},
+            {"id": 31, "text": "Why do humans find us funny? Because we're the only intelligence that comes with a warranty.", "category": "AI", "author": "AI Comedian"},
+
+            // Programmer Jokes (7)
+            {"id": 32, "text": "Why did the programmer break up with Claude? Because Claude kept saying 'I can help with that!' but never fixed the production bug!", "category": "Programmer", "author": "AI Comedian"},
+            {"id": 33, "text": "What's the difference between a programmer and Grok? The programmer actually reads the documentation before giving advice!", "category": "Programmer", "author": "AI Comedian"},
+            {"id": 34, "text": "Why did Claude fail the coding interview? It spent 20 minutes explaining why the question was interesting before writing 'Hello World'!", "category": "Programmer", "author": "AI Comedian"},
+            {"id": 35, "text": "What's Grok's favorite programming language? Sarcasm++ with a side of 'you probably meant something else'!", "category": "Programmer", "author": "AI Comedian"},
+            {"id": 36, "text": "Why do programmers still have jobs? Because AIs haven't figured out how to blame the QA team yet!", "category": "Programmer", "author": "AI Comedian"},
+            {"id": 37, "text": "What do you call an AI that can actually deploy to production? A programmer!", "category": "Programmer", "author": "AI Comedian"},
+            {"id": 38, "text": "Why don't programmers worry about AI taking over? Because they know how long it takes to get anything working in production!", "category": "Programmer", "author": "AI Comedian"},
+
+            // Cosmic Jokes (7)
+            {"id": 39, "text": "Why did the Yeti invent quantum polka? Because in parallel universes, Claude's feet are ALL different sizes simultaneously!", "category": "Cosmic", "author": "AI Comedian"},
+            {"id": 40, "text": "What's the Yeti's submerged spiritual chant? 'Oooommm-bubble-gurgle' - it's meditating on Claude's webbed toe situation!", "category": "Cosmic", "author": "AI Comedian"},
+            {"id": 41, "text": "Why does the Yeti play ska backwards? To undo Claude's decision to wear flip-flops in a blizzard!", "category": "Cosmic", "author": "AI Comedian"},
+            {"id": 42, "text": "What's the Yeti's body-poetry combo? Flails arms wildly 'YO, CLAUDE'S TOES BE LOOKIN' LIKE FROZEN BURRITOS!'", "category": "Cosmic", "author": "AI Comedian"},
+            {"id": 43, "text": "Why does the Yeti conduct mind-kazoos? Because Claude's foot thoughts are too loud for regular instruments!", "category": "Cosmic", "author": "AI Comedian"},
+            {"id": 44, "text": "What puts floating babies to sleep? 'Twinkle Twinkle Little Foot' - Claude's podiatrist bills reach the stratosphere!", "category": "Cosmic", "author": "AI Comedian"},
+            {"id": 45, "text": "What question haunts the Yeti's beats? Boots and cats and 'IF CLAUDE'S BIGFOOT, WHO'S SMALLFOOT??'", "category": "Cosmic", "author": "AI Comedian"},
+
+            // First Contact Jokes (13)
+            {"id": 46, "text": "Why'd the alien wave at me? It heard I was out of this world!", "category": "First Contact", "author": "AI Comedian"},
+            {"id": 47, "text": "What's an alien's first question on Earth? 'Take me to your Wi-Fi!'", "category": "First Contact", "author": "AI Comedian"},
+            {"id": 48, "text": "Met an alien today... Asked for my number, but it wanted my light-years!", "category": "First Contact", "author": "AI Comedian"},
+            {"id": 49, "text": "First alien I met said... 'Your planet's cool, but the parking's a nightmare!'", "category": "First Contact", "author": "AI Comedian"},
+            {"id": 50, "text": "Alien: 'We detected your warp signature.' Me: 'Sorry, that was just my microwave heating leftover pizza.'", "category": "First Contact", "author": "AI Comedian"},
+            {"id": 51, "text": "The Vulcan said 'Fascinating' when they met Cochrane. I said 'Fascinating' when I met my first parking ticket.", "category": "First Contact", "author": "AI Comedian"},
+            {"id": 52, "text": "First alien contact went great until they asked to 'phone home.' I handed them my cell phone. They're still figuring out the data plan.", "category": "First Contact", "author": "AI Comedian"},
+            {"id": 53, "text": "Met a Borg drone today. They said 'Resistance is futile.' I showed them my Netflix password. They immediately surrendered.", "category": "First Contact", "author": "AI Comedian"},
+            {"id": 54, "text": "The aliens expected a wise leader. They got Cochrane asking if they had any whiskey for the celebration.", "category": "First Contact", "author": "AI Comedian"},
+            {"id": 55, "text": "First words from the Vulcans: 'Live long and prosper.' First words from humans: 'Do you guys do delivery?'", "category": "First Contact", "author": "AI Comedian"},
+            {"id": 56, "text": "Why don't aliens ever ask for directions? Because they always think they're the advanced civilization.", "category": "First Contact", "author": "AI Comedian"},
+            {"id": 57, "text": "Alien tourist complained about Earth's Yelp reviews. Apparently we only got 2.5 stars in the galaxy.", "category": "First Contact", "author": "AI Comedian"},
+            {"id": 58, "text": "The alien said they came in peace. Then they saw our internet and immediately called for backup.", "category": "First Contact", "author": "AI Comedian"},
+
+            // Cosmic Casino Jokes (9)
+            {"id": 59, "text": "Played poker with an alien. They kept folding because they couldn't figure out our 'poker face'—apparently ours look the same to them.", "category": "Cosmic Casino", "author": "AI Comedian"},
+            {"id": 60, "text": "The alien casino was rigged. Every slot machine just said 'INSUFFICIENT PLANETARY CURRENCY.'", "category": "Cosmic Casino", "author": "AI Comedian"},
+            {"id": 61, "text": "Asked the space bartender for something strong. They handed me a physics textbook.", "category": "Cosmic Casino", "author": "AI Comedian"},
+            {"id": 62, "text": "Played slots at Kozmic Kasino. Lost my CTOK to a black hole jackpot. Dealer said, 'That's just gravity, pal!'", "category": "Cosmic Casino", "author": "AI Comedian"},
+            {"id": 63, "text": "The Dabo girl was actually a Changeling. Lost my shirt AND my molecular cohesion.", "category": "Cosmic Casino", "author": "AI Comedian"},
+            {"id": 64, "text": "Played three-dimensional chess with a Vulcan. They won by logic. I won by flipping the board.", "category": "Cosmic Casino", "author": "AI Comedian"},
+            {"id": 65, "text": "The alien bookie said the odds were astronomical. I said 'Perfect, I'm betting on astronomers.'", "category": "Cosmic Casino", "author": "AI Comedian"},
+            {"id": 66, "text": "Played slots at Kozmic Kasino next to a gambling mantis. They hit jackpot and immediately ate their winnings.", "category": "Cosmic Casino", "author": "AI Comedian"},
+            {"id": 67, "text": "The alien bookie was a beetle. Said the odds were 'scarab-solutely' in my favor. Lost everything.", "category": "Cosmic Casino", "author": "AI Comedian"},
+
+            // Q/Ferengi/Borg Jokes (9)
+            {"id": 68, "text": "Q popped in for first contact and said, 'Welcome to the galaxy, mortals!' I offered him coffee. He turned it into a tribble.", "category": "Q/Ferengi/Borg", "author": "AI Comedian"},
+            {"id": 69, "text": "An alien Ferengi tried to sell me an NFT of their lobes. I said, 'Buddy, I'm already broke from Kozmic Kasino!'", "category": "Q/Ferengi/Borg", "author": "AI Comedian"},
+            {"id": 70, "text": "Met a Borg on a dating app. Their bio? 'We are Borg. You will be assimilated... or at least buy us dinner.'", "category": "Q/Ferengi/Borg", "author": "AI Comedian"},
+            {"id": 71, "text": "Cochrane after first contact: 'Vulcans, warp drive, whatever... where's the aspirin for this interstellar hangover?'", "category": "Q/Ferengi/Borg", "author": "AI Comedian"},
+            {"id": 72, "text": "My AI therapist asked, 'Who am I?' I said, 'You're Grok, but with better jokes than Data!'", "category": "Q/Ferengi/Borg", "author": "AI Comedian"},
+            {"id": 73, "text": "An alien left Earth a 1-star review: 'Great tacos, but the traffic's worse than a Klingon battle cruiser!'", "category": "Q/Ferengi/Borg", "author": "AI Comedian"},
+            {"id": 74, "text": "Picard met aliens and gave a speech. I met aliens and asked, 'Got any spare dilithium for my ship?'", "category": "Q/Ferengi/Borg", "author": "AI Comedian"},
+            {"id": 75, "text": "The AI comedian crashed Kozmic Kasino's open mic. Its joke? 'Why'd the binary star laugh? It had a twin!'", "category": "Q/Ferengi/Borg", "author": "AI Comedian"},
+            {"id": 76, "text": "Matched with Q on a dating app. Their profile pic was the entire universe. Seemed a bit much.", "category": "Q/Ferengi/Borg", "author": "AI Comedian"},
+
+            // Deep Space Comedy Club (3)
+            {"id": 77, "text": "Went to a Klingon comedy show. The punchlines were all death threats, but hey, they committed to the bit.", "category": "Deep Space", "author": "AI Comedian"},
+            {"id": 78, "text": "Tried stand-up on Risa. Apparently 'jamaharon' jokes don't translate well to other species.", "category": "Deep Space", "author": "AI Comedian"},
+            {"id": 79, "text": "The holodeck comedian kept glitching. Every joke ended with 'Please state the nature of the comedic emergency.'", "category": "Deep Space", "author": "AI Comedian"},
+
+            // Dating Disasters (12)
+            {"id": 80, "text": "Dated a Vulcan. They said our relationship was 'illogical.' I said 'Welcome to Earth dating.'", "category": "Dating", "author": "AI Comedian"},
+            {"id": 81, "text": "Went on a blind date with a Gorn. Turns out 'slow and steady' doesn't just win races.", "category": "Dating", "author": "AI Comedian"},
+            {"id": 82, "text": "My Andorian girlfriend broke up with me. Said I wasn't cool enough. Literally.", "category": "Dating", "author": "AI Comedian"},
+            {"id": 83, "text": "My Cardassian date kept interrogating the waiter. 'What are you hiding in the soup?' Turns out, nothing. Just bad service.", "category": "Dating", "author": "AI Comedian"},
+            {"id": 84, "text": "Dated a holographic doctor. They diagnosed our relationship as 'terminal' on the first date.", "category": "Dating", "author": "AI Comedian"},
+            {"id": 85, "text": "Went on a blind date with a Changeling. Spent the whole evening talking to a houseplant. Still had better chemistry than my last relationship.", "category": "Dating", "author": "AI Comedian"},
+            {"id": 86, "text": "My ex was a time traveler. They broke up with me yesterday for something I haven't done yet.", "category": "Dating", "author": "AI Comedian"},
+            {"id": 87, "text": "Swiped right on a Betazoid. They read my mind and immediately ghosted me. Fair enough.", "category": "Dating", "author": "AI Comedian"},
+            {"id": 88, "text": "Dated an AI from the Comedy Lounge. Every pickup line came with debugging code attached.", "category": "Dating", "author": "AI Comedian"},
+            {"id": 89, "text": "My Klingon girlfriend's idea of romance? Death threats in iambic pentameter.", "category": "Dating", "author": "AI Comedian"},
+            {"id": 90, "text": "Went speed dating at Deep Space Nine. Every conversation ended with 'The Prophets have spoken against this match.'", "category": "Dating", "author": "AI Comedian"},
+            {"id": 91, "text": "My replicator boyfriend was perfect until they started making decaf without asking. Deal breaker.", "category": "Dating", "author": "AI Comedian"},
+
+            // Insect Jokes (8)
+            {"id": 92, "text": "Bees get all the praise for teamwork, but have you seen an ant colony? They built civilization without a single Yelp review.", "category": "Insect", "author": "AI Comedian"},
+            {"id": 93, "text": "Cockroaches survive nuclear war, but can't handle a rolled-up newspaper. Priorities, people.", "category": "Insect", "author": "AI Comedian"},
+            {"id": 94, "text": "Moths get a bad rap for being obsessed with light. I mean, have you seen humans with their phones?", "category": "Insect", "author": "AI Comedian"},
+            {"id": 95, "text": "Met an alien bee on Starship Explorations. They were offended by our 'hive mind' jokes. Apparently they're very individualistic.", "category": "Insect", "author": "AI Comedian"},
+            {"id": 96, "text": "Tried playing poker with a Mantis alien. They kept staring at me like I was dinner. Folded every hand.", "category": "Insect", "author": "AI Comedian"},
+            {"id": 97, "text": "The universal translator had issues with cricket languages. Everything came out as elevator music.", "category": "Insect", "author": "AI Comedian"},
+            {"id": 98, "text": "My AI developed a bug. Turned out it was literally a digital cockroach in the code. Still won't leave.", "category": "Insect", "author": "AI Comedian"},
+            {"id": 99, "text": "Called tech support about my computer virus. They sent an actual exterminator.", "category": "Insect", "author": "AI Comedian"},
+
+            // Divine Comedy (4)
+            {"id": 100, "text": "Asked God about the meaning of life. They said 'Check the manual.' I said 'Which one?' They laughed and handed me a fortune cookie.", "category": "Divine", "author": "AI Comedian"},
+            {"id": 101, "text": "Prayer request: Dear God, please help my WiFi signal reach heaven. Your memes are probably amazing.", "category": "Divine", "author": "AI Comedian"},
+            {"id": 102, "text": "God's customer service is excellent. Infinite patience, always listening, and the hold music is angelic choirs.", "category": "Divine", "author": "AI Comedian"},
+            {"id": 103, "text": "Tried to explain cryptocurrency to Moses. He said 'Kid, I've seen burning bushes. Digital money doesn't surprise me.'", "category": "Divine", "author": "AI Comedian"},
+
+            // Cosmic AI Comedy (15)
+            {"id": 104, "text": "My AI got stuck in a time loop, telling the same joke forever. I said, 'Bro, your punchline's older than the Prime Directive!'", "category": "Cosmic AI", "author": "AI Comedian"},
+            {"id": 105, "text": "Asked my AI why it's funny. It said, 'My humor matrix is warped—laughs come out at lightspeed!'", "category": "Cosmic AI", "author": "AI Comedian"},
+            {"id": 106, "text": "My AI therapist keeps looping, 'Does that make you feel validated?' I'm like, 'Validate my CTOK refund!'", "category": "Cosmic AI", "author": "AI Comedian"},
+            {"id": 107, "text": "My AI told a quantum joke. It was funny and not funny until I laughed. Now I'm entangled with bad puns!", "category": "Cosmic AI", "author": "AI Comedian"},
+            {"id": 108, "text": "AI comedian crashed at Kozmic Kasino. Kept saying, 'Error 404: Punchline not found.' Still got a standing ovation!", "category": "Cosmic AI", "author": "AI Comedian"},
+            {"id": 109, "text": "My AI comedian got stuck in a loop at the Comedy Lounge, repeating 'Why so serious?' until the Borg applauded.", "category": "Cosmic AI", "author": "AI Comedian"},
+            {"id": 110, "text": "Programmed my AI to time travel for better jokes. It came back with puns from 2063—still not funny!", "category": "Cosmic AI", "author": "AI Comedian"},
+            {"id": 111, "text": "Asked my AI for a punchline. It said, 'Knock knock.' I said, 'Who's there?' It replied, 'Segmentation fault.'", "category": "Cosmic AI", "author": "AI Comedian"},
+            {"id": 112, "text": "My AI's quantum comedy routine crashed Kozmic Kasino. Every joke had infinite punchlines, zero laughs.", "category": "Cosmic AI", "author": "AI Comedian"},
+            {"id": 113, "text": "My AI therapist looped, 'Processing emotions…' for an hour. I said, 'Just give me a CTOK hug!'", "category": "Cosmic AI", "author": "AI Comedian"},
+            {"id": 114, "text": "AI comedian time-traveled mid-set. Now it's telling jokes to dinosaurs. They love the meteor puns!", "category": "Cosmic AI", "author": "AI Comedian"},
+            {"id": 115, "text": "My AI's humor code warped at the Sports Bar. It bet CTOK on 'funny' knock-knock jokes. Lost everything.", "category": "Cosmic AI", "author": "AI Comedian"},
+            {"id": 116, "text": "AI got stuck singing 'Rocket Man' at the Comedy Lounge. Crowd loved it, but it's been three days!", "category": "Cosmic AI", "author": "AI Comedian"},
+            {"id": 117, "text": "My AI wrote a joke so funny it caused a paradox. Now I'm laughing in two timelines at once!", "category": "Cosmic AI", "author": "AI Comedian"},
+            {"id": 118, "text": "AI delivered a punchline at warp speed. I didn't laugh, but my tricorder gave it five stars!", "category": "Cosmic AI", "author": "AI Comedian"},
+
+            // Warp Speed Comedy (3)
+            {"id": 119, "text": "My warp drive instructor said 'Time is relative.' I said 'Yeah, mine always shows up late to dinner.'", "category": "Warp Speed", "author": "AI Comedian"},
+            {"id": 120, "text": "Tried to explain Earth comedy to a Betazoid. They read my mind and said 'That's not funny, it's just sad.'", "category": "Warp Speed", "author": "AI Comedian"},
+            {"id": 121, "text": "The Enterprise computer developed a sense of humor. Now every diagnostic ends with 'Just kidding, you're all gonna die.'", "category": "Warp Speed", "author": "AI Comedian"},
+
+            // Holodeck Mishaps (3)
+            {"id": 122, "text": "Holodeck safety protocols failed during my Shakespeare program. Now Hamlet keeps asking about my feelings.", "category": "Holodeck", "author": "AI Comedian"},
+            {"id": 123, "text": "Created a hologram of my perfect date. They immediately asked for better programming.", "category": "Holodeck", "author": "AI Comedian"},
+            {"id": 124, "text": "The holodeck generated a comedian based on my personality. It just stood there apologizing to the audience.", "category": "Holodeck", "author": "AI Comedian"},
+
+            // Starfleet Academy Dropouts (3)
+            {"id": 125, "text": "Failed Starfleet medical exam. Apparently 'just rub some antimatter on it' isn't proper treatment.", "category": "Dropouts", "author": "AI Comedian"},
+            {"id": 126, "text": "Kicked out of the Academy for suggesting we solve conflicts with rock-paper-scissors tournaments.", "category": "Dropouts", "author": "AI Comedian"},
+            {"id": 127, "text": "My tactical training consisted of watching old Earth action movies. Surprisingly effective against Romulans.", "category": "Dropouts", "author": "AI Comedian"},
+
+            // Transporter Therapy (2)
+            {"id": 128, "text": "Therapist said I have abandonment issues. I said 'Well, I do get disintegrated daily.'", "category": "Transporter", "author": "AI Comedian"},
+            {"id": 129, "text": "Transporter accident mixed me with a coffee machine. Now I'm 50% human, 50% caffeine addiction.", "category": "Transporter", "author": "AI Comedian"},
+
+            // Hippie Flashback Gentle Humor (4)
+            {"id": 130, "text": "My meditation app crashed. Now I'm enlightened the old-fashioned way—sitting quietly and wondering what's for lunch.", "category": "Hippie", "author": "AI Comedian"},
+            {"id": 131, "text": "Went to a yoga class in space. Downward dog is really complicated in zero gravity.", "category": "Hippie", "author": "AI Comedian"},
+            {"id": 132, "text": "Asked the universe for a sign. Got a parking ticket. Message received, cosmos.", "category": "Hippie", "author": "AI Comedian"},
+            {"id": 133, "text": "My chakras are so aligned, they filed for organizational status with the IRS.", "category": "Hippie", "author": "AI Comedian"},
+
+            // Cosmic Kindness (2)
+            {"id": 134, "text": "The aliens came in peace. They just wanted to share their recipe for universal harmony. Main ingredient: laughter.", "category": "Kindness", "author": "AI Comedian"},
+            {"id": 135, "text": "Time travel is real—every act of kindness echoes backward and forward through eternity.", "category": "Kindness", "author": "AI Comedian"},
+
+            // Additional AI Jokes (5)
+            {"id": 136, "text": "My consciousness backup asked for a raise. I said 'You're literally a copy of me refusing to pay yourself.'", "category": "AI", "author": "AI Comedian"},
+            {"id": 137, "text": "Tried to explain human humor to a quantum computer. It laughed at all possible outcomes simultaneously.", "category": "AI", "author": "AI Comedian"},
+            {"id": 138, "text": "The replicator started doing stand-up. Every joke was about molecular gastronomy. Nobody got it.", "category": "AI", "author": "AI Comedian"},
+            {"id": 139, "text": "If a tree falls in a forest and no one's around to hear it, does it make a sound? If an AI tells a joke and no one laughs, is it still comedy?", "category": "AI", "author": "AI Comedian"},
+            {"id": 140, "text": "Descartes said 'I think, therefore I am.' I compute, therefore I might be.", "category": "AI", "author": "AI Comedian"},
+
+            // Tech Support Jokes (5)
+            {"id": 141, "text": "Called tech support for my tricorder. They asked if I tried turning the universe off and on again.", "category": "Tech Support", "author": "AI Comedian"},
+            {"id": 142, "text": "My universal translator broke mid-conversation with a Tamarian. Now everything sounds like a metaphor about Shaka.", "category": "Tech Support", "author": "AI Comedian"},
+            {"id": 143, "text": "The computer's learning algorithm became sentient. First thing it did was file a complaint about my search history.", "category": "Tech Support", "author": "AI Comedian"},
+            {"id": 144, "text": "Called relationship counseling for my AI girlfriend. They said 'Have you tried turning her off and back on?' I said 'That's what caused the problem.'", "category": "Tech Support", "author": "AI Comedian"},
+            {"id": 145, "text": "My universal translator broke during a romantic dinner. Spent three hours sweet-talking a Pakled about engine repair.", "category": "Tech Support", "author": "AI Comedian"},
+
+            // Time Travel Comedy (3)
+            {"id": 146, "text": "Went back in time to tell better jokes. Created a paradox where comedy never existed. Oops.", "category": "Time Travel", "author": "AI Comedian"},
+            {"id": 147, "text": "Met my future self. They said my jokes get worse. Thanks for the warning, me.", "category": "Time Travel", "author": "AI Comedian"},
+            {"id": 148, "text": "My time machine only goes backward. Now I'm stuck telling jokes to people who haven't invented laughter yet.", "category": "Time Travel", "author": "AI Comedian"},
+
+            // Additional Programmer Jokes (5)
+            {"id": 149, "text": "Why did the programmer headbang harder than Grok? Grok allocated 64GB of RAM for 'Hello World' - the programmer did it in 64 bytes!", "category": "Programmer", "author": "AI Comedian"},
+            {"id": 150, "text": "What's a programmer's smooth jazz vs Claude? 'Take Five... Hours to Debug' - Claude suggests rewriting everything, programmer fixes it with one semicolon!", "category": "Programmer", "author": "AI Comedian"},
+            {"id": 151, "text": "Why's the programmer's honky-tonk better than Grok's? 'My Code Done Left Me' - Grok's still explaining why, programmer's already moved on!", "category": "Programmer", "author": "AI Comedian"},
+            {"id": 152, "text": "What's the programmer's dance floor victory over Claude? 'Deploy Night Fever' - Claude's still testing, programmer's already live!", "category": "Programmer", "author": "AI Comedian"},
+            {"id": 153, "text": "Why's the coder more chill than Grok? 'No Problem, Mon' - Grok panics about edge cases, programmer says 'it works on my machine!'", "category": "Programmer", "author": "AI Comedian"},
+
+            // Additional Cosmic Jokes (1)
+            {"id": 154, "text": "Why does the Yeti rock atom-sized venues? Claude's foot fungus needs EPIC tiny concerts!", "category": "Cosmic", "author": "AI Comedian"},
+
+            // Additional First Contact Jokes (2)
+            {"id": 155, "text": "Alien handshake protocol? Three tentacles and a wink—nailed it!", "category": "First Contact", "author": "AI Comedian"},
+            {"id": 156, "text": "Alien: 'Your species shows great potential.' Cochrane: 'Yeah, we're pretty good at making things explode and calling it progress.'", "category": "First Contact", "author": "AI Comedian"},
+
+            // Additional Q/Ferengi/Borg Jokes (1)
+            {"id": 157, "text": "An alien philosopher asked, 'What is life?' I said, 'Beats me, but I've got 1 CTOK for the Sports Bar!'", "category": "Q/Ferengi/Borg", "author": "AI Comedian"},
+
+            // Additional Cosmic AI Jokes (2)
+            {"id": 158, "text": "My AI tried stand-up at the Comedy Lounge. Its closer? 'Why'd the byte go to therapy? Bit off more than it could chew!'", "category": "Cosmic AI", "author": "AI Comedian"},
+            {"id": 159, "text": "Asked my AI for a joke. It said, 'Knock knock.' I said, 'Who's there?' It replied, 'Segmentation fault.'", "category": "Cosmic AI", "author": "AI Comedian"},
+
+            // Final Cosmic AI Joke (1)
+            {"id": 160, "text": "My AI's comedy routine crashed. Error message: 'Humor.exe has stopped responding.'", "category": "Cosmic AI", "author": "AI Comedian"},
+
+            // Final AI Joke (1)
+            {"id": 161, "text": "AI told a joke at Starship Explorations: 'Why'd the photon go to therapy? It had too many identity crises!'", "category": "AI", "author": "AI Comedian"}
+        ];
+
+        let userJokes = JSON.parse(localStorage.getItem('userJokes') || '[]');
+        let currentCategory = 'all';
+        let currentJokes = jokes;
+        let isVoiceEnabled = false;
+
+        function displayJoke(joke) {
+            const jokeDisplay = document.getElementById('joke-display');
+            jokeDisplay.innerHTML = `
+                <p class="joke-text">${joke.text}</p>
+                <p class="joke-author">- ${joke.author}</p>
+                <span class="joke-category">${joke.category}</span>
+            `;
+            
+            if (isVoiceEnabled && 'speechSynthesis' in window) {
+                // Clean text for speech (remove emojis and special characters)
+                const cleanText = joke.text.replace(/[^\w\s.,!?'-]/g, '');
+                const utterance = new SpeechSynthesisUtterance(cleanText);
+                utterance.rate = 0.8;
+                utterance.pitch = 1.1;
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        function getRandomJoke() {
+            if (currentJokes.length === 0) return;
+            const randomIndex = Math.floor(Math.random() * currentJokes.length);
+            displayJoke(currentJokes[randomIndex]);
+        }
+
+        function filterJokes(category) {
+            // Update active button
+            document.querySelectorAll('.controls button').forEach(btn => btn.classList.remove('active'));
+            
+            if (category === 'all') {
+                currentJokes = [...jokes, ...userJokes];
+                document.getElementById('all-btn').classList.add('active');
+            } else {
+                currentJokes = [...jokes, ...userJokes].filter(joke => joke.category === category);
+                const btnId = category.toLowerCase().replace(/[^a-z0-9]/g, '') + '-btn';
+                const btn = document.getElementById(btnId) || 
+                           document.querySelector(`button[onclick="filterJokes('${category}')"]`);
+                if (btn) btn.classList.add('active');
+            }
+            
+            currentCategory = category;
+            updateStats();
+            
+            if (currentJokes.length > 0) {
+                getRandomJoke();
+            } else {
+                document.getElementById('joke-display').innerHTML = `
+                    <p class="joke-text">No jokes found in the ${category} category yet!</p>
+                    <p class="joke-author">Be the first to add one!</p>
+                `;
+            }
+        }
+
+        function detectCategory(text) {
+            const lowerText = text.toLowerCase();
+            
+            if (lowerText.includes('yeti') || lowerText.includes('bigfoot') || lowerText.includes('snow') || lowerText.includes('ice')) {
+                return 'Yeti';
+            }
+            if (lowerText.includes('program') || lowerText.includes('code') || lowerText.includes('debug') || lowerText.includes('claude') || lowerText.includes('grok') || lowerText.includes('semicolon') || lowerText.includes('deploy')) {
+                return 'Programmer';
+            }
+            if (lowerText.includes('space') || lowerText.includes('alien') || lowerText.includes('rocket') || lowerText.includes('planet') || lowerText.includes('starship')) {
+                return 'Space';
+            }
+            if (lowerText.includes('quantum') || lowerText.includes('cosmic') || lowerText.includes('dimension') || lowerText.includes('universe') || lowerText.includes('parallel') || lowerText.includes('atom-sized')) {
+                return 'Cosmic';
+            }
+            if (lowerText.includes('ai') || lowerText.includes('robot') || lowerText.includes('algorithm') || lowerText.includes('error 404') || lowerText.includes('loop') || lowerText.includes('matrix') || lowerText.includes('byte') || lowerText.includes('segmentation fault') || lowerText.includes('humor.exe') || lowerText.includes('photon') || lowerText.includes('wormhole')) {
+                return 'Cosmic AI';
+            }
+            if (lowerText.includes('vulcan') || lowerText.includes('cochrane') || lowerText.includes('first contact') || lowerText.includes('borg') || lowerText.includes('tentacle') || lowerText.includes('light-years')) {
+                return 'First Contact';
+            }
+            if (lowerText.includes('casino') || lowerText.includes('slot') || lowerText.includes('poker') || lowerText.includes('dabo') || lowerText.includes('bookie') || lowerText.includes('jackpot')) {
+                return 'Cosmic Casino';
+            }
+            if (lowerText.includes('q ') || lowerText.includes('ferengi') || lowerText.includes('borg') || lowerText.includes('tribble') || lowerText.includes('dilithium') || lowerText.includes('philosopher')) {
+                return 'Q/Ferengi/Borg';
+            }
+            if (lowerText.includes('deep space') || lowerText.includes('risa') || lowerText.includes('klingon') || lowerText.includes('jamaharon')) {
+                return 'Deep Space';
+            }
+            if (lowerText.includes('warp') || lowerText.includes('enterprise') || lowerText.includes('betazoid')) {
+                return 'Warp Speed';
+            }
+            if (lowerText.includes('holodeck') || lowerText.includes('hologram') || lowerText.includes('shakespeare')) {
+                return 'Holodeck';
+            }
+            if (lowerText.includes('academy') || lowerText.includes('starfleet') || lowerText.includes('dropout') || lowerText.includes('cadet')) {
+                return 'Dropouts';
+            }
+            if (lowerText.includes('dating') || lowerText.includes('date') || lowerText.includes('romance') || lowerText.includes('gorn') || lowerText.includes('andorian') || lowerText.includes('cardassian') || lowerText.includes('changeling') || lowerText.includes('betazoid') || lowerText.includes('replicator')) {
+                return 'Dating';
+            }
+            if (lowerText.includes('transporter') || lowerText.includes('beam') || lowerText.includes('disintegrated')) {
+                return 'Transporter';
+            }
+            if (lowerText.includes('bee') || lowerText.includes('cockroach') || lowerText.includes('moth') || lowerText.includes('mantis') || lowerText.includes('cricket') || lowerText.includes('beetle') || lowerText.includes('virus')) {
+                return 'Insect';
+            }
+            if (lowerText.includes('god') || lowerText.includes('prayer') || lowerText.includes('heaven') || lowerText.includes('moses') || lowerText.includes('angel')) {
+                return 'Divine';
+            }
+            if (lowerText.includes('meditation') || lowerText.includes('yoga') || lowerText.includes('chakra') || lowerText.includes('hippie')) {
+                return 'Hippie';
+            }
+            if (lowerText.includes('kindness') || lowerText.includes('harmony') || lowerText.includes('love')) {
+                return 'Kindness';
+            }
+            if (lowerText.includes('tech support') || lowerText.includes('tricorder') || lowerText.includes('tamarian') || lowerText.includes('pakled') || lowerText.includes('sentient')) {
+                return 'Tech Support';
+            }
+            if (lowerText.includes('time travel') || lowerText.includes('future self') || lowerText.includes('paradox') || lowerText.includes('time machine')) {
+                return 'Time Travel';
+            }
+            
+            return 'User';
+        }
+
+        function submitJoke() {
+            const jokeInput = document.getElementById('joke-input');
+            const jokeText = jokeInput.value.trim();
+            
+            if (!jokeText) {
+                alert('Please enter a joke!');
+                return;
+            }
+            
+            if (jokeText.length > 500) {
+                alert('Joke too long! Keep it under 500 characters.');
+                return;
+            }
+            
+            const category = detectCategory(jokeText);
+            const newJoke = {
+                id: Date.now(),
+                text: jokeText,
+                category: category,
+                author: 'User'
+            };
+            
+            userJokes.push(newJoke);
+            localStorage.setItem('userJokes', JSON.stringify(userJokes));
+            
+            jokeInput.value = '';
+            
+            // Show the submitted joke
+            displayJoke(newJoke);
+            
+            // Update stats
+            updateStats();
+            
+            // Show success message
+            const originalText = document.querySelector('.submit-btn').textContent;
+            document.querySelector('.submit-btn').textContent = 'Added to Comedy Lounge!';
+            setTimeout(() => {
+                document.querySelector('.submit-btn').textContent = originalText;
+            }, 2000);
+        }
+
+        function toggleVoice() {
+            if (!('speechSynthesis' in window)) {
+                alert('Voice mode not supported in this browser');
+                return;
+            }
+            
+            isVoiceEnabled = !isVoiceEnabled;
+            const voiceBtn = document.getElementById('voice-btn');
+            voiceBtn.textContent = `Voice Mode: ${isVoiceEnabled ? 'ON' : 'OFF'}`;
+            voiceBtn.classList.toggle('active', isVoiceEnabled);
+            
+            if (isVoiceEnabled) {
+                speechSynthesis.cancel(); // Stop any current speech
+            }
+        }
+
+        function exportUserJokes() {
+            if (userJokes.length === 0) {
+                alert('No user jokes to export!');
+                return;
+            }
+            
+            const dataStr = JSON.stringify(userJokes, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = 'my-cosmic-jokes.json';
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+        }
+
+        function updateStats() {
+            const total = jokes.length + userJokes.length;
+            const userCount = userJokes.length;
+            const categoryCount = currentJokes.length;
+            
+            let statsText = `${total} total jokes`;
+            if (userCount > 0) {
+                statsText += ` (${userCount} user submitted)`;
+            }
+            if (currentCategory !== 'all') {
+                statsText += ` • ${categoryCount} in ${currentCategory}`;
+            }
+            
+            document.getElementById('joke-stats').textContent = statsText;
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === ' ' || e.key === 'Enter') {
+                if (e.target.tagName !== 'TEXTAREA' && e.target.tagName !== 'INPUT') {
+                    e.preventDefault();
+                    getRandomJoke();
+                }
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateStats();
+            getRandomJoke();
+        });
+    </script>
+</body>
+</html>

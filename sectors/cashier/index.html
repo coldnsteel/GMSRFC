@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛡️ GMSRFC Cashier with Coupons</title>
+    <!-- v2.10.8, 2025-08-31 -->
+    <style>
+        body { background: #1a1a1a; color: #00ff00; font-family: monospace; padding: 20px; }
+        .debug-box { background: #000; border: 2px solid #00ff00; padding: 15px; margin: 10px 0; border-radius: 8px; }
+        .error { color: #ff4444; } .success { color: #44ff44; } .warning { color: #ffaa00; }
+        .coupon-box { background: #333; border: 2px solid #ff69b4; padding: 15px; margin: 10px 0; border-radius: 8px; }
+        .crypto-btn { background: #ff1493; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }
+        .coupon-input { background: #333; color: #00ff7f; border: 1px solid #ff69b4; padding: 8px; border-radius: 5px; margin: 5px; }
+        .apply-btn { background: #9b59b6; color: white; padding: 8px 15px; border: none; border-radius: 5px; cursor: pointer; }
+        .price-display { font-size: 1.5em; color: #00ff7f; margin: 10px 0; }
+        .original-price { text-decoration: line-through; color: #666; }
+        .discount-amount { color: #ff69b4; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="debug-box">
+        <h1>🛡️ GMSRFC Secure Cashier</h1>
+        <p><strong>Contact:</strong> Lexalytics@yahoo.com | <strong>Token:</strong> ψΩ§∞</p>
+        <div id="debug-output">Loading...</div>
+    </div>
+    
+    <div class="coupon-box">
+        <h3>💰 Coupon Code</h3>
+        <input type="text" id="couponCode" class="coupon-input" placeholder="Enter coupon code" />
+        <button class="apply-btn" onclick="applyCoupon()">Apply Coupon</button>
+        <div id="couponStatus"></div>
+    </div>
+    
+    <div class="debug-box">
+        <h3>💲 Pricing</h3>
+        <div id="pricingDisplay" class="price-display">
+            <div>Product: <span id="productName">Loading...</span></div>
+            <div id="priceBreakdown">Base Price: $<span id="basePrice">0</span></div>
+        </div>
+    </div>
+    
+    <div class="debug-box">
+        <h3>🚀 Crypto Payment</h3>
+        <button class="crypto-btn" onclick="showCrypto('bitcoin')">🪙 Bitcoin</button>
+        <button class="crypto-btn" onclick="showCrypto('ethereum')">💎 Ethereum</button>
+        <div id="cryptoAddress" style="display: none; background: #333; color: #00ff7f; padding: 10px; margin: 10px 0; border-radius: 5px;"></div>
+    </div>
+    
+    <script>
+        const coupons = {
+            'LAUNCH25': { discount: 0.25, expires: '2025-12-31', type: 'percentage', description: '25% Launch Discount' },
+            'FORTRESS10': { discount: 10, expires: '2026-01-31', type: 'fixed', description: '$10 Off HackerWatch' },
+            'STUDENT50': { discount: 0.50, expires: '2025-12-31', type: 'percentage', description: '50% Student Discount' },
+            'BETA20': { discount: 0.20, expires: '2025-10-31', type: 'percentage', description: '20% Beta Tester' }
+        };
+        
+        let currentProduct = { name: '', basePrice: 0, finalPrice: 0 };
+        let appliedCoupon = null;
+        
+        function debugLog(message, type = 'info') {
+            const output = document.getElementById('debug-output');
+            const timestamp = new Date().toLocaleTimeString();
+            const className = type === 'error' ? 'error' : type === 'success' ? 'success' : type === 'warning' ? 'warning' : '';
+            output.innerHTML += `<div class="${className}">[${timestamp}] ${message}</div>`;
+        }
+        
+        function getQueryParams() {
+            const search = window.location.search;
+            const params = new URLSearchParams(search);
+            const item = params.get('item') || 'hackerwatch-fortress';
+            const amount = parseFloat(params.get('amount')) || 47;
+            
+            debugLog(`Product: ${item}, Base Price: $${amount}`, 'success');
+            return { item, amount };
+        }
+        
+        function applyCoupon() {
+            const couponCode = document.getElementById('couponCode').value.toUpperCase();
+            const couponStatus = document.getElementById('couponStatus');
+            
+            if (!couponCode) {
+                couponStatus.innerHTML = '<div class="warning">Please enter a coupon code</div>';
+                return;
+            }
+            
+            const coupon = coupons[couponCode];
+            if (!coupon) {
+                couponStatus.innerHTML = '<div class="error">Invalid coupon code</div>';
+                debugLog(`Invalid coupon: ${couponCode}`, 'error');
+                return;
+            }
+            
+            if (new Date() > new Date(coupon.expires)) {
+                couponStatus.innerHTML = '<div class="error">Coupon has expired</div>';
+                debugLog(`Expired coupon: ${couponCode}`, 'error');
+                return;
+            }
+            
+            // Calculate discount
+            const discount = coupon.type === 'percentage' 
+                ? currentProduct.basePrice * coupon.discount 
+                : coupon.discount;
+            
+            currentProduct.finalPrice = Math.max(0, currentProduct.basePrice - discount);
+            appliedCoupon = { code: couponCode, discount, ...coupon };
+            
+            // Update display
+            couponStatus.innerHTML = `<div class="success">✅ ${coupon.description} applied!</div>`;
+            updatePriceDisplay();
+            
+            debugLog(`Coupon ${couponCode} applied: $${discount.toFixed(2)} discount`, 'success');
+            
+            // Log for fulfillment system
+            const log = JSON.parse(localStorage.getItem('securityLog') || '[]');
+            log.push({
+                issue: `Coupon applied: ${couponCode} ($${discount.toFixed(2)} off)`,
+                timestamp: new Date().toISOString(),
+                source: 'Cashier',
+                token: 'ψΩ§∞'
+            });
+            localStorage.setItem('securityLog', JSON.stringify(log));
+        }
+        
+        function updatePriceDisplay() {
+            const priceBreakdown = document.getElementById('priceBreakdown');
+            
+            if (appliedCoupon) {
+                const discount = appliedCoupon.discount;
+                priceBreakdown.innerHTML = `
+                    <div>Base Price: <span class="original-price">$${currentProduct.basePrice.toFixed(2)}</span></div>
+                    <div>Discount: <span class="discount-amount">-$${discount.toFixed(2)}</span></div>
+                    <div><strong>Final Price: $${currentProduct.finalPrice.toFixed(2)}</strong></div>
+                `;
+            } else {
+                priceBreakdown.innerHTML = `Base Price: $${currentProduct.basePrice.toFixed(2)}`;
+            }
+        }
+        
+        function showCrypto(method) {
+            const cryptoAddress = document.getElementById('cryptoAddress');
+            const price = currentProduct.finalPrice || currentProduct.basePrice;
+            
+            let address = '';
+            if (method === 'bitcoin') {
+                address = 'bc1qvevxcage66n8j86rtzvxn8xrzw9k5nOp5fxg';
+                cryptoAddress.innerHTML = `
+                    <strong>Bitcoin Payment</strong><br>
+                    Address: ${address}<br>
+                    Amount: $${price.toFixed(2)} (convert to BTC)<br>
+                    Product: ${currentProduct.name}<br>
+                    ${appliedCoupon ? `Coupon: ${appliedCoupon.code}<br>` : ''}
+                    After payment, email transaction ID to: Lexalytics@yahoo.com
+                `;
+            } else if (method === 'ethereum') {
+                address = '0xfD9FD0c94caf9AdDbEd6c968504cC47f2638C158';
+                cryptoAddress.innerHTML = `
+                    <strong>Ethereum Payment</strong><br>
+                    Address: ${address}<br>
+                    Amount: $${price.toFixed(2)} (convert to ETH)<br>
+                    Product: ${currentProduct.name}<br>
+                    ${appliedCoupon ? `Coupon: ${appliedCoupon.code}<br>` : ''}
+                    After payment, email transaction ID to: Lexalytics@yahoo.com
+                `;
+            }
+            
+            cryptoAddress.style.display = 'block';
+            debugLog(`Showing ${method} payment for $${price.toFixed(2)}`, 'success');
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            debugLog('🛡️ GMSRFC Cashier with Coupons Loaded');
+            debugLog('Contact: Lexalytics@yahoo.com | Token: ψΩ§∞');
+            
+            const params = getQueryParams();
+            currentProduct = {
+                name: params.item.replace('-', ' ').toUpperCase(),
+                basePrice: params.amount,
+                finalPrice: params.amount
+            };
+            
+            document.getElementById('productName').textContent = currentProduct.name;
+            document.getElementById('basePrice').textContent = currentProduct.basePrice.toFixed(2);
+            
+            debugLog('Available coupons: LAUNCH25, FORTRESS10, STUDENT50, BETA20', 'success');
+        });
+    </script>
+</body>
+</html>

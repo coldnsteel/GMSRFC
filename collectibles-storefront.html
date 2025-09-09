@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GMSRFC Unified Digital Products & Collectibles</title>
+    <style>
+        body { 
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d1b2e 50%, #1a2332 100%); 
+            color: #00ff00; 
+            font-family: 'Courier New', monospace; 
+            padding: 20px; 
+            margin: 0;
+            min-height: 100vh;
+        }
+        .content { position: relative; z-index: 2; }
+        .header {
+            text-align: center;
+            background: rgba(0,0,0,0.8);
+            border: 2px solid #00ff00;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            background: rgba(51,51,51,0.8);
+            color: #00ff7f;
+            border: 2px solid #ff69b4;
+            padding: 12px 20px;
+            margin: 5px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .nav-tab:hover, .nav-tab.active {
+            background: #ff69b4;
+            color: white;
+            transform: scale(1.05);
+        }
+        .section {
+            display: none;
+            background: rgba(0,0,0,0.7);
+            border: 2px solid #00ff00;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        .section.active { display: block; }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .product-card {
+            background: rgba(51,51,51,0.8);
+            border: 2px solid #ff69b4;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(255, 105, 180, 0.3);
+        }
+        .product-emoji { font-size: 2em; display: block; margin: 10px 0; }
+        .product-title { color: #00ff7f; margin: 10px 0; }
+        .product-price { font-size: 1.3em; color: #ffd700; font-weight: bold; margin: 10px 0; }
+        .product-description { color: #ccc; margin: 15px 0; line-height: 1.4; }
+        .buy-btn {
+            background: linear-gradient(45deg, #ff1493, #9b59b6);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 5px;
+            min-width: 120px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .buy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.4);
+        }
+        .category-header {
+            background: linear-gradient(45deg, #ff69b4, #9b59b6, #00ff7f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2em;
+            text-align: center;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        .debug-info {
+            background: rgba(0,0,0,0.8);
+            border: 1px solid #00ff00;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        .coupon-section {
+            background: rgba(25,25,25,0.9);
+            border: 2px solid #ffd700;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .coupon-input {
+            background: rgba(51,51,51,0.8);
+            color: #00ff7f;
+            border: 1px solid #ffd700;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 0 10px;
+            width: 200px;
+        }
+        .apply-btn {
+            background: #ffd700;
+            color: #000;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="header">
+            <h1>GMSRFC Unified Digital Products & Collectibles</h1>
+            <p><strong>Contact:</strong> Lexalytics@yahoo.com | <strong>Token:</strong> ψΩ§∞</p>
+            <p>StarSeed Fulfillment Merged - Crypto-Only System</p>
+        </div>
+        
+        <div class="coupon-section">
+            <h3>Coupon Codes Available</h3>
+            <input type="text" id="globalCoupon" class="coupon-input" placeholder="Enter coupon code">
+            <button class="apply-btn" onclick="applyCoupon()">Apply Coupon</button>
+            <div id="couponStatus" style="margin-top: 10px;"></div>
+            <p style="font-size: 0.9em; margin-top: 10px;">Codes: LAUNCH25, FORTRESS10, STUDENT50, BETA20</p>
+        </div>
+        
+        <div class="nav-tabs">
+            <div class="nav-tab active" onclick="showSection('all-products')">All Products</div>
+            <div class="nav-tab" onclick="showSection('podcasts')">🎙️ Podcasts</div>
+            <div class="nav-tab" onclick="showSection('studios')">🎬 Studios</div>
+            <div class="nav-tab" onclick="showSection('collectibles')">🏆 Collectibles</div>
+        </div>
+        
+        <div id="all-products" class="section active">
+            <div class="category-header">Complete Digital Catalog</div>
+            <div class="product-grid">
+                <div class="product-card">
+                    <span class="product-emoji">🛡️</span>
+                    <h3 class="product-title">HackerWatch Fortress Pro</h3>
+                    <div class="product-price">$47.00</div>
+                    <p class="product-description">Complete security system with certificate and serial number</p>
+                    <button class="buy-btn" onclick="buyCrypto('hackerwatch-fortress', 47)">Buy Now $47</button>
+                </div>
+                
+                <div class="product-card">
+                    <span class="product-emoji">🦖🎵</span>
+                    <h3 class="product-title">Dino Symphony MP3</h3>
+                    <div class="product-price">Free / $5 Donation</div>
+                    <p class="product-description">Educational content for children - donations help create more</p>
+                    <button class="buy-btn" onclick="freeDonation('dino-symphony')">Free Download</button>
+                    <button class="buy-btn" onclick="buyCrypto('dino-symphony', 5)" style="background: #28a745;">Donate $5</button>
+                </div>
+                
+                <div class="product-card">
+                    <span class="product-emoji">🏅📮</span>
+                    <h3 class="product-title">Vietnam Memorial Stamp</h3>
+                    <div class="product-price">$125.00</div>
+                    <p class="product-description">Rare golden memorial stamp</p>
+                    <button class="buy-btn" onclick="buyCrypto('vietnam-stamp', 125)">Buy Now $125</button>
+                </div>
+                
+                <div class="product-card">
+                    <span class="product-emoji">🪙👑</span>
+                    <h3 class="product-title">Peter the Great Kopek</h3>
+                    <div class="product-price">$350.00</div>
+                    <p class="product-description">Historic Russian kopek</p>
+                    <button class="buy-btn" onclick="buyCrypto('peter-kopek', 350)">Buy Now $350</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="podcasts" class="section">
+            <div class="category-header">Podcast Studio</div>
+            <div class="product-grid">
+                <div class="product-card">
+                    <span class="product-emoji">🎙️</span>
+                    <h3 class="product-title">Sillyosopher Saga</h3>
+                    <div class="product-price">Available Now</div>
+                    <p class="product-description">Cosmic comedy podcast with philosophy and humor</p>
+                    <a href="/podcasts/sillyosopher-saga.html" class="buy-btn">🎧 Listen Now</a>
+                </div>
+                
+                <div class="product-card">
+                    <span class="product-emoji">🐑🎭</span>
+                    <h3 class="product-title">Sheep in Control</h3>
+                    <div class="product-price">Available Now</div>
+                    <p class="product-description">Comedy exploring control and chaos with cosmic humor</p>
+                    <a href="/podcasts/sheep-in-control.html" class="buy-btn">🎧 Listen Now</a>
+                </div>
+                
+                <div class="product-card">
+                    <span class="product-emoji">🎵🎙️</span>
+                    <h3 class="product-title">Audio Input Studio</h3>
+                    <div class="product-price">Interactive</div>
+                    <p class="product-description">Submit your comedy clips and audio content</p>
+                    <a href="/podcasts/audio-input.html" class="buy-btn">🎤 Submit Audio</a>
+                </div>
+                
+                <div class="product-card">
+                    <span class="product-emoji">🎧🎛️</span>
+                    <h3 class="product-title">Podcast Player</h3>
+                    <div class="product-price">Free Tool</div>
+                    <p class="product-description">Universal podcast player for all episodes</p>
+                    <a href="/podcasts/podcast-player.html" class="buy-btn">▶️ Open Player</a>
+                </div>
+            </div>
+        </div>
+        
+        <div id="studios" class="section">
+            <div class="category-header">Creative Studios</div>
+            <div class="product-grid">
+                <div class="product-card">
+                    <span class="product-emoji">🎰</span>
+                    <h3 class="product-title">KOZMIC-KASINO</h3>
+                    <div class="product-price">$50.00</div>
+                    <p class="product-description">NFT casino with AI croupiers and gangsta AI games</p>
+                    <button class="buy-btn" onclick="buyCrypto('kozmic-kasino', 50)">Access $50</button>
+                </div>
+                
+                <div class="product-card">
+                    <span class="product-emoji">🎙️🏠</span>
+                    <h3 class="product-title">Master-Studio</h3>
+                    <div class="product-price">$75.00</div>
+                    <p class="product-description">Complete studio for podcasting and streaming</p>
+                    <button class="buy-btn" onclick="buyCrypto('master-studio', 75)">Access $75</button>
+                </div>
+                
+                <div class="product-card">
+                    <span class="product-emoji">📱🎬</span>
+                    <h3 class="product-title">Portable-Studio</h3>
+                    <div class="product-price">$30.00</div>
+                    <p class="product-description">Mobile studio for on-the-go creation</p>
+                    <button class="buy-btn" onclick="buyCrypto('portable-studio', 30)">Access $30</button>
+                </div>
+                
+                <div class="product-card">
+                    <span class="product-emoji">🎸🎛️</span>
+                    <h3 class="product-title">Rock & Blues Console</h3>
+                    <div class="product-price">$60.00</div>
+                    <p class="product-description">Music studio console honoring Janis, Chet, and Sam</p>
+                    <button class="buy-btn" onclick="buyCrypto('kozmic-console', 60)">Access $60</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="collectibles" class="section">
+            <div class="category-header">Collectibles</div>
+            <div class="product-grid">
+                <div class="product-card">
+                    <span class="product-emoji">🏅</span>
+                    <h3 class="product-title">Vietnam Memorial Stamp</h3>
+                    <div class="product-price">$125.00</div>
+                    <p class="product-description">Rare golden memorial stamp</p>
+                    <button class="buy-btn" onclick="buyCrypto('vietnam-stamp', 125)">Buy $125</button>
+                </div>
+                
+                <div class="product-card">
+                    <span class="product-emoji">🪙</span>
+                    <h3 class="product-title">Peter the Great Kopek</h3>
+                    <div class="product-price">$350.00</div>
+                    <p class="product-description">Historic Russian kopek</p>
+                    <button class="buy-btn" onclick="buyCrypto('peter-kopek', 350)">Buy $350</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="debug-info">
+            <strong>System Status:</strong><br>
+            GMSRFC Unified Storefront - Crypto Only System<br>
+            Contact: Lexalytics@yahoo.com | Token: ψΩ§∞<br>
+            Existing Podcast Files Integrated
+        </div>
+    </div>
+    
+    <script>
+        var currentCoupon = null;
+        
+        function showSection(sectionId) {
+            var sections = document.querySelectorAll('.section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            
+            var tabs = document.querySelectorAll('.nav-tab');
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active');
+            }
+            
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        function applyCoupon() {
+            var code = document.getElementById('globalCoupon').value.toUpperCase();
+            var status = document.getElementById('couponStatus');
+            
+            if (code === 'LAUNCH25') {
+                currentCoupon = { code: code, discount: 0.25 };
+                status.innerHTML = '<div style="color: #44ff44;">25% Launch Discount Applied!</div>';
+            } else if (code === 'FORTRESS10') {
+                currentCoupon = { code: code, discount: 10, type: 'fixed' };
+                status.innerHTML = '<div style="color: #44ff44;">$10 Off Applied!</div>';
+            } else if (code) {
+                status.innerHTML = '<div style="color: #ff4444;">Invalid coupon code</div>';
+            }
+        }
+        
+        function buyCrypto(itemId, price) {
+            var finalPrice = price;
+            if (currentCoupon) {
+                if (currentCoupon.type === 'fixed') {
+                    finalPrice = Math.max(0, price - currentCoupon.discount);
+                } else {
+                    finalPrice = price * (1 - currentCoupon.discount);
+                }
+            }
+            
+            var message = 'CRYPTO PAYMENT\\n\\n';
+            message += 'Item: ' + itemId + '\\n';
+            message += 'Price: $' + finalPrice.toFixed(2) + '\\n\\n';
+            message += 'Bitcoin: bc1qvevxcage66n8j86rtzvxn8xrzw9k5nOp5fxg\\n';
+            message += 'Ethereum: 0xfD9FD0c94caf9AdDbEd6c968504cC47f2638C158\\n\\n';
+            message += 'Email transaction ID to: Lexalytics@yahoo.com';
+            
+            alert(message);
+        }
+        
+        function freeDonation(itemId) {
+            alert('Free download available!\\n\\nEmail: Lexalytics@yahoo.com\\nSubject: Free Download - ' + itemId + '\\n\\nFor the good of children - donations welcome!');
+        }
+    </script>
+</body>
+</html>

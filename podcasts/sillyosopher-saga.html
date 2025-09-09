@@ -236,6 +236,16 @@
             50% { transform: scale(1.05); }
         }
 
+        .podcast-tools {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 2rem auto;
+            max-width: 800px;
+            text-align: center;
+            border: 2px solid #ffd700;
+        }
+
         .navigation-links {
             background: rgba(0, 0, 0, 0.8);
             padding: 1.5rem;
@@ -480,6 +490,11 @@
         </div>
     </div>
 
+    <div class="podcast-tools">
+        <h3 style="color: #ff69b4;">Create Your Podcast</h3>
+        <a href="/studios/portable-studio.html" class="control-btn">🎬 Open Portable Studio</a>
+    </div>
+
     <div class="navigation-links">
         <h3 style="color: #ffd700; margin-bottom: 1rem;">🌌 ACADEMY NETWORK</h3>
         <a href="sheep-in-control.html" class="nav-link">🐑 Original Podcast</a>
@@ -625,10 +640,36 @@
         function showMessage(message) {
             const messageDiv = document.createElement('div');
             messageDiv.textContent = message;
+            messageDiv.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: linear-gradient(45deg, #ff69b4, #ffd700);
+                color: #000;
+                padding: 1rem 2rem;
+                border-radius: 25px;
+                font-weight: bold;
+                z-index: 9999;
+                border: 2px solid #ff0000;
+                animation: messageSlide 0.5s ease-out;
+                max-width: 80%;
+                text-align: center;
+            `;
+            
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes messageSlide {
+                    0% { top: -100px; opacity: 0; }
+                    100% { top: 20px; opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
             document.body.appendChild(messageDiv);
             
             setTimeout(() => {
                 messageDiv.remove();
+                style.remove();
             }, 4000);
         }
 
@@ -785,21 +826,4 @@
         console.log("ψΩ§∞ - Component 2 of Hybrid System DEPLOYED!");
     </script>
 </body>
-</html>style.cssText = `
-                position: fixed;
-                top: 20px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: linear-gradient(45deg, #ff69b4, #ffd700);
-                color: #000;
-                padding: 1rem 2rem;
-                border-radius: 25px;
-                font-weight: bold;
-                z-index: 9999;
-                border: 2px solid #ff0000;
-                animation: messageSlide 0.5s ease-out;
-                max-width: 80%;
-                text-align: center;
-            `;
-            
-            messageDiv.
+</html>

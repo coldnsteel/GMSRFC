@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📧 Subscribe to Psi-Omega - GMSRFC 🌌</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <style>
+        .subscribe-container {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 140, 0, 0.3));
+            border: 4px solid #ffd700;
+            border-radius: 25px;
+            padding: 40px;
+            margin: 30px auto;
+            max-width: 800px;
+            text-align: center;
+            box-shadow: 0 15px 60px rgba(255, 215, 0, 0.4);
+        }
+        .subscribe-title {
+            color: #ffd700;
+            font-size: 2.5em;
+        }
+        .subscribe-text {
+            color: #00ffff;
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
+        .subscribe-btn {
+            font-size: 1.2em;
+            padding: 15px 30px;
+            background: #0070ba;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .subscribe-btn:hover {
+            background: #005f9e;
+        }
+    </style>
+</head>
+<body>
+    <div class="subscribe-container">
+        <h1 class="subscribe-title">📧 Join the Psi-Omega Cosmic Community 🌌</h1>
+        <p class="subscribe-text">
+            Subscribe to get updates on humanity-oriented content, podcasts, and cosmic products from Johnny 5 Alive’s GMSRFC!
+        </p>
+        <form id="subscribeForm">
+            <input type="email" id="emailInput" placeholder="Enter your email" style="padding: 10px; font-size: 1em; border-radius: 8px; border: 2px solid #00ffff; margin: 10px;">
+            <br>
+            <button type="submit" class="subscribe-btn">📧 Subscribe Now</button>
+        </form>
+    </div>
+    <footer class="cosmic-footer">
+        <h3>🌌 Psi-Omega Universe</h3>
+        <div>
+            <a href="/" style="color: #ff00ff;">🏛️ Back to GMSRFC</a>
+            <a href="/Dogpatch-Market/index.html" style="color: #ffd700;">🛒 Dogpatch Market</a>
+        </div>
+        <p style="color: #00ffff;">🔑 Code: PsiOmega_Subscribe_v1.0</p>
+    </footer>
+    <script src="/assets/js/cosmic.js"></script>
+    <script>
+        document.getElementById('subscribeForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('emailInput').value;
+            const log = JSON.parse(localStorage.getItem('securityLog') || '[]');
+            log.push({ issue: `Subscribed: ${email}`, timestamp: new Date().toISOString(), source: 'Subscribe' });
+            localStorage.setItem('securityLog', JSON.stringify(log));
+            alert('Thank you for subscribing! You’re now part of the Psi-Omega universe.');
+            window.location.href = '/';
+        });
+    </script>
+</body>
+</html>

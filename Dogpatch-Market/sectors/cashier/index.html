@@ -3,119 +3,343 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💳 Dogpatch Market - Cosmic Checkout 💳</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <title>🛡️ Crypto Cashier - GMSRFC</title>
+    <!-- v2.11.0, 2025-09-08 -->
     <style>
-        .cashier-container {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 140, 0, 0.3));
-            border: 4px solid #ffd700;
-            border-radius: 25px;
-            padding: 40px;
-            margin: 30px auto;
-            max-width: 800px;
-            text-align: center;
-            box-shadow: 0 15px 60px rgba(255, 215, 0, 0.4);
+        body { 
+            background: #1a1a1a; 
+            color: #ffffff; 
+            font-family: monospace; 
+            padding: 20px; 
+            margin: 0;
         }
-        .cashier-title {
-            color: #ffd700;
-            font-size: 2.5em;
+        .debug-box { 
+            background: #000; 
+            border: 2px solid #00aaff; 
+            padding: 15px; 
+            margin: 10px 0; 
+            border-radius: 8px;
         }
-        .cashier-info {
-            color: #00ffff;
-            font-size: 1.2em;
-            margin: 20px 0;
-        }
-        .payment-methods {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 20px 0;
-        }
-        .payment-methods span {
-            color: #ffd700;
+        .error { color: #ff4444; } 
+        .success { color: #44ff44; } 
+        .warning { color: #ffaa00; }
+        .crypto-btn { 
+            background: #ff1493; 
+            color: white; 
+            padding: 12px 24px; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            margin: 10px 5px; 
+            font-size: 14px;
             font-weight: bold;
         }
-        .confirm-btn {
-            font-size: 1.2em;
-            padding: 15px 30px;
-            background: #0070ba;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
+        .crypto-btn:hover {
+            background: #ff69b4;
+            transform: translateY(-2px);
         }
-        .confirm-btn:hover {
-            background: #005f9e;
+        .venmo-btn { 
+            background: #3d95ce; 
+            color: white; 
+            padding: 12px 24px; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            margin: 10px 5px; 
+            font-size: 14px;
+            font-weight: bold;
         }
-        .back-btn {
-            font-size: 1em;
-            padding: 10px 20px;
-            background: #ff1493;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-top: 20px;
+        .venmo-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
         }
-        .back-btn:hover {
-            background: #d8117b;
+        .crypto-address { 
+            background: #333; 
+            color: #ffffff; 
+            padding: 15px; 
+            margin: 10px 0; 
+            border-radius: 8px; 
+            font-size: 0.9em; 
+            word-break: break-all; 
+            border: 1px solid #555;
+        }
+        .copy-btn { 
+            background: #0070ba; 
+            color: white; 
+            padding: 8px 15px; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            margin: 5px 0; 
+        }
+        .copy-btn:hover {
+            background: #0056b3;
+        }
+        .download-btn { 
+            background: #00ced1; 
+            color: white; 
+            padding: 12px 20px; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            margin: 10px 0; 
+            text-decoration: none;
+            display: inline-block;
+        }
+        .download-btn:hover {
+            background: #00b8d4;
+        }
+        .cashier-container { 
+            background: linear-gradient(135deg, rgba(106, 90, 205, 0.3), rgba(255, 105, 180, 0.3)); 
+            border: 4px solid #ff69b4; 
+            border-radius: 25px; 
+            padding: 25px; 
+            max-width: 90%; 
+            width: 700px; 
+            text-align: center; 
+            margin: 0 auto;
+        }
+        .cashier-title { 
+            color: #00ff7f; 
+            font-size: 2.2em; 
+            margin-bottom: 15px; 
+            text-shadow: 0 0 10px rgba(0, 255, 127, 0.5);
+        }
+        .cashier-text { 
+            color: #ffffff; 
+            font-size: 1.3em; 
+            margin: 15px 0; 
+            font-weight: bold;
+        }
+        .test-url { 
+            background: #333; 
+            color: #00ff7f; 
+            padding: 12px; 
+            margin: 10px 0; 
+            border-radius: 8px; 
+            font-size: 0.9em; 
+            word-break: break-all; 
+            cursor: pointer; 
+            border: 1px solid #555;
+        }
+        .test-url:hover {
+            background: #444;
+        }
+        #debug-output {
+            max-height: 200px;
+            overflow-y: auto;
+            text-align: left;
+        }
+        @media (max-width: 480px) { 
+            body { font-size: 14px; } 
+            .cashier-container { padding: 15px; width: 95%; } 
+            .cashier-title { font-size: 1.8em; } 
+            .crypto-btn, .venmo-btn { padding: 10px 16px; margin: 8px 3px; }
         }
     </style>
 </head>
 <body>
     <div class="cashier-container">
-        <h1 class="cashier-title">💳 Cosmic Checkout 💳</h1>
-        <p class="cashier-info">Securely purchase your humanity-oriented GMSRFC content!</p>
-        <div id="purchaseDetails" class="cashier-info"></div>
-        <div class="payment-methods">
-            <span>🪙 Bitcoin</span>
-            <span>💎 Ethereum</span>
-            <span>🌟 CTOK</span>
-            <span>💖 PayPal</span>
+        <h1 class="cashier-title">🛡️ Kozmic Cashier 🌌</h1>
+        <p class="cashier-text" id="purchaseInfo">Processing your purchase...</p>
+        
+        <div class="debug-box">
+            <h3 style="color: #00aaff;">URL Debug Output:</h3>
+            <div id="debug-output">Loading...</div>
         </div>
-        <button class="confirm-btn" onclick="confirmPurchase()">Confirm Purchase</button>
-        <br>
-        <button class="back-btn" onclick="window.location.href='/Dogpatch-Market/index.html'">🛒 Back to Market</button>
+        
+        <div class="debug-box">
+            <h3 style="color: #00aaff;">Test URL (Copy & Paste):</h3>
+            <div class="test-url" onclick="copyTestUrl()">
+                https://coldnsteel.github.io/GMSRFC/Dogpatch-Market/sectors/cashier/index.html?item=fortress-pass&amount=19
+            </div>
+            <small style="color: #ffaa00;">Click above to copy, then paste in new tab</small>
+        </div>
+        
+        <div class="debug-box">
+            <h3 style="color: #00aaff;">Payment Options:</h3>
+            <button class="venmo-btn" onclick="showPayment('venmo')">💰 Pay with Venmo</button>
+            <button class="crypto-btn" onclick="showPayment('bitcoin')">🪙 Pay with Bitcoin</button>
+            <button class="crypto-btn" onclick="showPayment('ethereum')">💎 Pay with Ethereum</button>
+            <button class="crypto-btn" onclick="showPayment('ctok')">🌟 Pay with CTOK</button>
+            <div class="crypto-address" id="paymentAddress" style="display: none;"></div>
+            <button class="copy-btn" id="copyBtn" style="display: none;" onclick="copyAddress()">Copy Address</button>
+        </div>
+        
+        <div class="debug-box" id="downloadSection" style="display: none;">
+            <h3 style="color: #00aaff;">Access Product:</h3>
+            <div id="downloadInfo" style="color: #ffffff;"></div>
+            <a id="downloadLink" class="download-btn" style="display: none;">Access Now</a>
+        </div>
+        
+        <p style="color: #ff69b4; text-align: center; margin: 15px 0;">
+            <a href="../index.html" style="color: #00ff7f;">🛒 Dogpatch Market</a>
+        </p>
+        <p style="color: #ff69b4; text-align: center;">🔑 Code: Cashier_Fortress_v2.11.0 | Token: ψΩ§∞ | Mission: STARCOM-0908-LS-GMSRFC-DOGPATCH-V211</p>
     </div>
-    <footer class="cosmic-footer">
-        <h3>🛒 Dogpatch Market</h3>
-        <div>
-            <a href="/" style="color: #ff00ff;">🏛️ Back to GMSRFC</a>
-            <a href="https://coldnsteel.github.io/psi-omega-digital-downloads/psi-omega-universe.md" style="color: #ffd700;">🌌 Psi Omega Portal</a>
-        </div>
-        <p style="color: #00ffff;">🔑 Code: PsiOmega_Cashier_Commerce_v1.0</p>
-    </footer>
-    <script src="/assets/js/cosmic.js"></script>
+    
     <script>
+        const products = {
+            'fortress-pass': { type: 'access', url: '/Dogpatch-Market/assets/fortress-pass.txt', name: 'HackerWatch Fortress Pass' },
+            'psi-omega-access': { type: 'access', url: '/Dogpatch-Market/assets/psi-omega-access.txt', name: 'Psi-Omega Access' },
+            'gmsrfc-docs': { type: 'file', url: '/Dogpatch-Market/assets/gmsrfc-docs.txt', name: 'GMSRFC Documentation' },
+            'reviewer-code': { type: 'access', url: '/Dogpatch-Market/assets/reviewer-code.txt', name: 'Reviewer Code Access' },
+            'comedy-show': { type: 'access', url: '/studios/comedy-lounge/jokebox.html', name: 'Comedy Lounge Access' }
+        };
+
+        function debugLog(message, type = 'info') {
+            const output = document.getElementById('debug-output');
+            const timestamp = new Date().toLocaleTimeString();
+            const className = type === 'error' ? 'error' : type === 'success' ? 'success' : type === 'warning' ? 'warning' : '';
+            output.innerHTML += `<div class="${className}">[${timestamp}] ${message}</div>`;
+        }
+
         function getQueryParams() {
-            const params = new URLSearchParams(window.location.search);
-            return {
-                item: params.get('item') || 'unknown',
-                amount: parseFloat(params.get('amount')) || 0
-            };
+            try {
+                const search = window.location.search;
+                debugLog(`Raw URL search: ${search || 'EMPTY'}`);
+                if (!search) {
+                    debugLog('⚠️ No URL parameters - use test URL above', 'warning');
+                    return null;
+                }
+                const params = new URLSearchParams(search);
+                const item = params.get('item') || 'NOT_FOUND';
+                const amount = params.get('amount') || 'NOT_FOUND';
+                debugLog(`Raw params - item: ${item} amount: ${amount}`);
+                const numAmount = parseFloat(amount);
+                debugLog(`Final params - item: ${item} amount: ${numAmount}`);
+                if (item === 'NOT_FOUND' || amount === 'NOT_FOUND') {
+                    debugLog('❌ URL parameters missing', 'error');
+                    return null;
+                }
+                if (isNaN(numAmount)) {
+                    debugLog('❌ Invalid amount value', 'error');
+                    return null;
+                }
+                debugLog('✅ URL parameters parsed successfully', 'success');
+                return { item, amount: numAmount };
+            } catch (error) {
+                debugLog(`❌ Error parsing query params: ${error.message}`, 'error');
+                return null;
+            }
         }
-        function displayPurchaseDetails() {
-            const { item, amount } = getQueryParams();
-            const itemNames = {
-                'academy-edition': 'Academy Edition',
-                'dino-symphony': 'Dino Symphony MP3',
-                'aria-wallpaper': 'ARIA Wallpaper Pack',
-                'fortress-pass': 'Fortress Pass Certificate',
-                'little-x-bundle': 'Little X Rocket Bundle',
-                'donation': 'Humanity Donation'
-            };
-            const itemName = itemNames[item] || 'Unknown Item';
-            document.getElementById('purchaseDetails').innerHTML = `Purchasing: ${itemName} for $${amount.toFixed(2)}`;
+
+        function copyTestUrl() {
+            const url = 'https://coldnsteel.github.io/GMSRFC/Dogpatch-Market/sectors/cashier/index.html?item=fortress-pass&amount=19';
+            navigator.clipboard.writeText(url).then(() => {
+                debugLog('✅ Test URL copied to clipboard', 'success');
+            }).catch(() => {
+                debugLog('⚠️ Copy failed - manually copy URL above', 'warning');
+            });
         }
-        function confirmPurchase() {
-            const { item, amount } = getQueryParams();
+
+        function showPayment(method) {
+            const params = getQueryParams();
+            if (!params) return;
+            const { item, amount } = params;
+            const paymentAddress = document.getElementById('paymentAddress');
+            const copyBtn = document.getElementById('copyBtn');
+            let address = '';
+            
+            if (method === 'venmo') {
+                address = '@Karla-Gottschalk';
+                paymentAddress.innerHTML = `<strong>Venmo Payment</strong><br>Username: ${address}<br>Amount: $${amount}<br>Note: Kozmic Kollections - ${item}<br>Send payment, then refresh with ?tx=[your_venmo_transaction_id]<br><br><em>Business: Kozmic Kollections and PlayLand (@HolySoul)</em>`;
+                copyBtn.innerText = 'Copy Venmo Username';
+            } else if (method === 'bitcoin') {
+                address = 'bc1qvevxcage66n8j86rtzvxn8xrzw9k5nOp5fxg';
+                paymentAddress.innerHTML = `<strong>Bitcoin Payment</strong><br>Address: ${address}<br>Amount: $${amount} (convert to BTC using your wallet)<br>Note: Psi-Omega Purchase - ${item}<br>Send payment, then refresh with ?tx=[your_tx_id]`;
+                copyBtn.innerText = 'Copy Bitcoin Address';
+            } else if (method === 'ethereum') {
+                address = '0xfD9FD0c94caf9AdDbEd6c968504cC47f2638C158';
+                paymentAddress.innerHTML = `<strong>Ethereum Payment</strong><br>Address: ${address}<br>Amount: $${amount} (convert to ETH using your wallet)<br>Note: Psi-Omega Purchase - ${item}<br>Send payment, then refresh with ?tx=[your_tx_id]`;
+                copyBtn.innerText = 'Copy Ethereum Address';
+            } else if (method === 'ctok') {
+                address = 'CTOK payments coming soon!';
+                paymentAddress.innerHTML = `<strong>CTOK Payment</strong><br>${address}`;
+            }
+            
+            paymentAddress.style.display = 'block';
+            copyBtn.style.display = method !== 'ctok' ? 'block' : 'none';
+            debugLog(`✅ Showing ${method} payment for ${item} - $${amount}`, 'success');
+            
             const log = JSON.parse(localStorage.getItem('securityLog') || '[]');
-            log.push({ issue: `Confirmed Purchase: ${item} ($${amount})`, timestamp: new Date().toISOString(), source: 'Cashier' });
+            log.push({ 
+                issue: `Payment initiated: ${item} ($${amount}) via ${method}`, 
+                timestamp: new Date().toISOString(), 
+                source: 'KozmicCashier', 
+                token: 'ψΩ§∞',
+                venmo: method === 'venmo' ? '@Karla-Gottschalk' : null
+            });
             localStorage.setItem('securityLog', JSON.stringify(log));
-            alert(`Thank you for purchasing ${item}! Your transaction of $${amount.toFixed(2)} is being processed.`);
-            window.location.href = '/Dogpatch-Market/index.html';
         }
-        document.addEventListener('DOMContentLoaded', displayPurchaseDetails);
+
+        function copyAddress() {
+            try {
+                const paymentAddress = document.getElementById('paymentAddress').innerHTML;
+                let addressToCopy = '';
+                
+                if (paymentAddress.includes('Venmo')) {
+                    addressToCopy = '@Karla-Gottschalk';
+                } else {
+                    const addressMatch = paymentAddress.match(/(bc1[a-zA-Z0-9]+|0x[a-fA-F0-9]+)/);
+                    if (addressMatch) {
+                        addressToCopy = addressMatch[0];
+                    }
+                }
+                
+                if (addressToCopy) {
+                    navigator.clipboard.writeText(addressToCopy).then(() => {
+                        debugLog('✅ Address copied: ' + addressToCopy, 'success');
+                    }).catch(() => {
+                        debugLog('⚠️ Copy failed - manually copy address above', 'warning');
+                    });
+                } else {
+                    debugLog('❌ No valid address found to copy', 'error');
+                }
+            } catch (error) {
+                debugLog(`❌ Error copying address: ${error.message}`, 'error');
+            }
+        }
+
+        function checkTransaction() {
+            const params = new URLSearchParams(window.location.search);
+            const txId = params.get('tx');
+            const item = params.get('item');
+            if (!txId || !item || !products[item]) {
+                debugLog('⚠️ No transaction ID or invalid item - add ?tx=[your_tx_id] after payment', 'warning');
+                return;
+            }
+            const product = products[item];
+            const downloadSection = document.getElementById('downloadSection');
+            const downloadInfo = document.getElementById('downloadInfo');
+            const downloadLink = document.getElementById('downloadLink');
+            downloadInfo.innerHTML = `✅ Payment verified for ${product.name}.<br>Please check your payment method to confirm transaction ${txId}.`;
+            if (product.type === 'file' || product.type === 'access') {
+                downloadLink.href = `https://coldnsteel.github.io/GMSRFC${product.url}`;
+                downloadLink.innerText = `Access ${product.name}`;
+                downloadLink.style.display = 'block';
+            } else {
+                downloadInfo.innerHTML += `<br>No download required for ${product.name}.`;
+            }
+            downloadSection.style.display = 'block';
+            debugLog(`✅ Unlocked ${product.name} for item: ${item}`, 'success');
+            const log = JSON.parse(localStorage.getItem('securityLog') || '[]');
+            log.push({ issue: `Product unlocked: ${item} (tx: ${txId})`, timestamp: new Date().toISOString(), source: 'KozmicCashier', token: 'ψΩ§∞' });
+            localStorage.setItem('securityLog', JSON.stringify(log));
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            debugLog('🛡️ Kozmic Cashier Debug Started');
+            debugLog('Token: ψΩ§∞ | Mission: STARCOM-0908-LS-GMSRFC-DOGPATCH-V211');
+            debugLog('Payment options: Venmo (@Karla-Gottschalk), BTC, ETH, CTOK', 'success');
+            const params = getQueryParams();
+            if (params) {
+                document.getElementById('purchaseInfo').textContent = `Purchasing ${products[params.item]?.name || params.item} for $${params.amount}...`;
+            } else {
+                document.getElementById('purchaseInfo').textContent = 'Click test URL above to load purchase details...';
+            }
+            checkTransaction();
+        });
     </script>
 </body>
 </html>

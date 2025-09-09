@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sports Bar - GMSRFC</title>
+  <style>
+    body {
+      background-color: #6a5acd;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .video-feed {
+      width: 100%;
+      height: 400px;
+      background-color: #000;
+      margin-bottom: 20px;
+    }
+    .chat-box {
+      border: 1px solid #ffffff;
+      height: 300px;
+      overflow-y: scroll;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    .chat-input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      font-size: 18px;
+      min-width: 44px;
+      min-height: 44px;
+      background-color: #ff4500;
+      color: #ffffff;
+      border: none;
+      cursor: pointer;
+      margin: 10px 0;
+    }
+    .btn:hover {
+      background-color: #ff6347;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🏈 GMSRFC Sports Bar</h1>
+    <p>Welcome to the Sports Bar! Watch live feeds and chat with patrons.</p>
+
+    <!-- Video Feed -->
+    <div class="video-feed">
+      <iframe
+        width="100%"
+        height="100%"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
+    </div>
+
+    <!-- Patron Chat -->
+    <div class="chat-box" id="chatBox">
+      <p><strong>Patron1:</strong> Let's go team! 🏀</p>
+    </div>
+    <input
+      type="text"
+      class="chat-input"
+      id="chatInput"
+      placeholder="Type your message..."
+    />
+    <button class="btn" onclick="sendMessage()">Send Message</button>
+
+    <!-- CTOK Payment for Entry/Tips -->
+    <button class="btn" onclick="buyEntry('sports-bar-entry', 1)">
+      🎟️ Enter Sports Bar (1 CTOK)
+    </button>
+    <button class="btn" onclick="sendTip('sports-bar-tip', 5)">
+      💸 Tip Bartender (5 CTOK)
+    </button>
+    <a href="/index.html">Back to GMSRFC Hub</a>
+  </div>
+
+  <script>
+    // CTOK Payment Functions
+    function buyEntry(itemId, price) {
+      try {
+        const url = new URL(window.location.href);
+        url.pathname = '/Dogpatch-Market/sectors/cashier/index.html';
+        url.searchParams.set('item', itemId);
+        url.searchParams.set('amount', price);
+        window.location.href = url.toString();
+      } catch (e) {
+        console.error('Entry payment redirect failed:', e);
+      }
+    }
+
+    function sendTip(itemId, price) {
+      try {
+        const url = new URL(window.location.href);
+        url.pathname = '/Dogpatch-Market/sectors/cashier/index.html';
+        url.searchParams.set('item', itemId);
+        url.searchParams.set('amount', price);
+        window.location.href = url.toString();
+      } catch (e) {
+        console.error('Tip payment redirect failed:', e);
+      }
+    }
+
+    // Chat Functionality
+    function sendMessage() {
+      const input = document.getElementById('chatInput');
+      const chatBox = document.getElementById('chatBox');
+      const message = input.value.trim();
+      if (message) {
+        const newMessage = document.createElement('p');
+        newMessage.innerHTML = `<strong>Patron:</strong> ${message}`;
+        chatBox.appendChild(newMessage);
+        chatBox.scrollTop = chatBox.scrollHeight;
+        input.value = '';
+      }
+    }
+
+    // Handle Enter key for chat
+    document.getElementById('chatInput').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+  </script>
+</body>
+</html>
+

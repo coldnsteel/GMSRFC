@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🚀 Starship Explorations - GMSRFC</title>
+  <style>
+    body {
+      background-color: #6a5acd;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .launch-banner {
+      background: linear-gradient(45deg, #ff1493, #00ff7f);
+      color: #000;
+      padding: 15px;
+      text-align: center;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      font-weight: bold;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+    .mission-log {
+      border: 1px solid #ffffff;
+      height: 300px;
+      overflow-y: scroll;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    .mission-input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      font-size: 18px;
+      min-width: 44px;
+      min-height: 44px;
+      background-color: #ff4500;
+      color: #ffffff;
+      border: none;
+      cursor: pointer;
+      margin: 10px 0;
+    }
+    .btn:hover {
+      background-color: #ff6347;
+    }
+  </style>
+</head>
+<body>
+  <div class="launch-banner">
+    🚀 T-7 Days to GMSRFC Launch! Explore the Cosmos with Starship! 🚀
+  </div>
+  <div class="container">
+    <h1>🚀 Starship Explorations</h1>
+    <p>Embark on interstellar adventures! Log missions and collect starship NFTs.</p>
+
+    <!-- Mission Log -->
+    <div class="mission-log" id="missionLog">
+      <p><strong>Captain1:</strong> Launched to Andromeda! 🌌</p>
+    </div>
+    <input
+      type="text"
+      class="mission-input"
+      id="missionInput"
+      placeholder="Log your mission..."
+    />
+    <button class="btn" onclick="logMission()">Log Mission</button>
+
+    <!-- CTOK Payment for Access/NFT -->
+    <button class="btn" onclick="buyAccess('starship-launch', 1)">
+      🌟 Launch Mission (1 CTOK)
+    </button>
+    <button class="btn" onclick="buyNFT('starship-nft', 5)">
+      🪙 Buy Starship NFT (5 CTOK)
+    </button>
+    <a href="/index.html">Back to GMSRFC Hub</a>
+  </div>
+
+  <script>
+    // CTOK Payment Functions
+    function buyAccess(itemId, price) {
+      try {
+        const url = new URL(window.location.href);
+        url.pathname = '/Dogpatch-Market/sectors/cashier/index.html';
+        url.searchParams.set('item', itemId);
+        url.searchParams.set('amount', price);
+        window.location.href = url.toString();
+      } catch (e) {
+        console.error('Access payment redirect failed:', e);
+        alert('Error redirecting to cashier. Please try again.');
+      }
+    }
+
+    function buyNFT(itemId, price) {
+      try {
+        const url = new URL(window.location.href);
+        url.pathname = '/Dogpatch-Market/sectors/cashier/index.html';
+        url.searchParams.set('item', itemId);
+        url.searchParams.set('amount', price);
+        window.location.href = url.toString();
+      } catch (e) {
+        console.error('NFT payment redirect failed:', e);
+        alert('Error redirecting to cashier. Please try again.');
+      }
+    }
+
+    // Mission Log Functionality
+    function logMission() {
+      const input = document.getElementById('missionInput');
+      const missionLog = document.getElementById('missionLog');
+      const message = input.value.trim();
+      if (message) {
+        const newMessage = document.createElement('p');
+        newMessage.innerHTML = `<strong>Captain:</strong> ${message}`;
+        missionLog.appendChild(newMessage);
+        missionLog.scrollTop = missionLog.scrollHeight;
+        input.value = '';
+      }
+    }
+
+    // Handle Enter key for mission log
+    document.getElementById('missionInput').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') logMission();
+    });
+  </script>
+</body>
+</html>
