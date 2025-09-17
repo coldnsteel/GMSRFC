@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🛡️ GMSRFC Digital Products & Collectibles</title>
+    <title>GMSRFC Digital Products & Collectibles</title>
     <style>
         body { 
             background: linear-gradient(135deg, #1a1a1a 0%, #2d1b2e 100%); 
@@ -35,652 +35,334 @@
             50% { transform: scale(1.02); }
             100% { transform: scale(1); }
         }
-        .nav-tabs {
-            display: flex;
-            justify-content: center;
-            margin: 20px 0;
-            flex-wrap: wrap;
-        }
-        .nav-tab {
-            background: #333;
-            color: #00ff7f;
-            border: 2px solid #ff69b4;
-            padding: 12px 20px;
-            margin: 5px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .nav-tab:hover, .nav-tab.active {
-            background: #ff69b4;
-            color: white;
-            transform: scale(1.05);
-        }
-        .section {
-            display: none;
-            background: rgba(0,0,0,0.7);
-            border: 2px solid #00ff00;
+        .products-container {
+            max-width: 1200px; 
+            margin: 0 auto; 
             padding: 20px;
-            margin: 20px 0;
-            border-radius: 10px;
         }
-        .section.active { display: block; }
-        .collectible-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
+        .catalog-header {
+            text-align: center; 
+            margin: 30px 0;
         }
-        .collectible-item {
-            background: rgba(51,51,51,0.8);
-            border: 2px solid #ff69b4;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            transition: all 0.3s ease;
+        .catalog-header h1 {
+            color: #00ff7f; 
+            font-size: 2.5em; 
+            text-shadow: 0 0 20px #00ff7f;
         }
-        .collectible-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 16px rgba(255,105,180,0.3);
+        .catalog-header p {
+            color: #ffffff; 
+            font-size: 1.2em;
         }
-        .photo-gallery {
-            display: flex;
-            gap: 5px;
+        .product-tier {
+            margin: 40px 0;
+        }
+        .product-tier h2 {
+            font-size: 1.8em; 
+            margin-bottom: 20px;
+        }
+        .product-card {
+            margin: 20px 0; 
+            padding: 20px; 
+            border-radius: 15px;
+        }
+        .product-card h3 {
+            margin-top: 0;
+            font-size: 1.3em;
+        }
+        .product-card p {
             margin: 10px 0;
-            justify-content: center;
-            flex-wrap: wrap;
+            line-height: 1.4;
         }
-        .photo-placeholder {
-            width: 80px;
-            height: 80px;
-            background: #333;
-            border: 2px dashed #ff69b4;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 5px;
-            color: #ff69b4;
-            font-size: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-        .photo-placeholder:hover {
-            background: #444;
-            border-color: #00ff7f;
-        }
-        .photo-preview {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border: 2px solid #00ff7f;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .photo-preview:hover {
-            transform: scale(1.1);
-            border-color: #ff69b4;
-        }
-        .btn {
-            background: #9b59b6;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 5px;
-            transition: all 0.3s ease;
-            font-family: inherit;
+        .product-card button, .product-card a {
             text-decoration: none;
             display: inline-block;
-            min-width: 44px;
-            min-height: 44px;
-            box-sizing: border-box;
-        }
-        .btn:hover { 
-            background: #8e44ad;
-            transform: translateY(-2px);
-        }
-        .btn-crypto {
-            background: linear-gradient(45deg, #ff1493, #dc143c);
-            border: 2px solid #ff1493;
-        }
-        .btn-crypto:hover {
-            background: linear-gradient(45deg, #dc143c, #b91372);
-            box-shadow: 0 4px 12px rgba(255,20,147,0.4);
-        }
-        .btn-free {
-            background: linear-gradient(45deg, #00ff7f, #32cd32);
-            color: #000;
-            border: 2px solid #00ff7f;
-        }
-        .btn-free:hover {
-            background: linear-gradient(45deg, #32cd32, #228b22);
-        }
-        .price-display {
-            font-size: 1.3em;
-            color: #00ff7f;
-            margin: 10px 0;
+            padding: 12px 25px; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
             font-weight: bold;
-            text-shadow: 0 0 8px rgba(0,255,127,0.5);
-        }
-        .category-header {
-            background: linear-gradient(45deg, #ff69b4, #9b59b6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 2em;
-            text-align: center;
-            margin: 20px 0;
-        }
-        .featured-items {
-            background: rgba(25,25,25,0.8);
-            border: 2px solid #ffd700;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-        .form-group {
-            margin: 15px 0;
-        }
-        .form-group label {
-            display: block;
-            color: #ff69b4;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        .form-input, .form-select, .form-textarea {
-            width: 100%;
-            background: #333;
-            color: #00ff7f;
-            border: 1px solid #ff69b4;
-            padding: 10px;
-            border-radius: 5px;
-            box-sizing: border-box;
+            margin: 5px 5px 5px 0;
             transition: all 0.3s ease;
         }
-        .form-input:focus, .form-select:focus, .form-textarea:focus {
-            border-color: #00ff7f;
-            outline: none;
-            box-shadow: 0 0 8px rgba(0,255,127,0.3);
+        .product-card button:hover, .product-card a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         }
-        .form-textarea {
-            height: 80px;
-            resize: vertical;
-        }
-        .crypto-payment-panel {
-            background: rgba(0,0,0,0.9);
-            border: 2px solid #ff1493;
-            padding: 20px;
+        .catalog-footer {
+            text-align: center; 
+            margin: 40px 0; 
+            padding: 20px; 
+            background: rgba(0, 0, 0, 0.5); 
             border-radius: 10px;
-            margin: 20px 0;
         }
-        .payment-instructions {
-            background: rgba(51,51,51,0.8);
-            border-left: 4px solid #ff69b4;
-            padding: 15px;
-            margin: 15px 0;
-        }
-        .debug-info {
-            background: #000;
-            border: 1px solid #00ff00;
-            padding: 10px;
+        .catalog-footer p {
             margin: 10px 0;
-            border-radius: 5px;
-            font-size: 0.9em;
-        }
-        .image-modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.9);
-        }
-        .modal-content {
-            margin: auto;
-            display: block;
-            width: 80%;
-            max-width: 700px;
-            max-height: 80%;
-            object-fit: contain;
-        }
-        .close {
-            position: absolute;
-            top: 15px;
-            right: 35px;
-            color: #f1f1f1;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <div class="launch-banner">
-        🚀 LAUNCH WEEK COUNTDOWN: 6 Days to Blastoff! Get Ready for GMSRFC on Social Media! 🚀
+        LAUNCH WEEK COUNTDOWN: 6 Days to Blastoff! Get Ready for GMSRFC on Social Media!
     </div>
     
     <div class="header">
-        <h1>🛡️ GMSRFC Digital Products & Collectibles</h1>
+        <h1>GMSRFC Digital Products & Collectibles</h1>
         <p><strong>Contact:</strong> Lexalytics@yahoo.com | <strong>Token:</strong> ψΩ§∞</p>
         <p><strong>Mission:</strong> STARCOM-0825-LS-GMSRFC-DOGPATCH-V28</p>
         <p><strong>Payment:</strong> Crypto + CTOK - Bitcoin, Ethereum & CTOK Accepted</p>
     </div>
-    
-    <div class="nav-tabs">
-        <div class="nav-tab active" data-section="digital-products">🖥️ Digital Products</div>
-        <div class="nav-tab" data-section="collectibles">🏆 Collectibles</div>
-        <div class="nav-tab" data-section="add-item">➕ Add Item</div>
-        <div class="nav-tab" data-section="crypto-cashier">💰 Crypto Cashier</div>
-    </div>
-    
-    <!-- Digital Products Section -->
-    <div id="digital-products" class="section active">
-        <div class="category-header">Digital Products</div>
-        
-        <div class="collectible-grid">
-            <div class="collectible-item">
-                <h3>🛡️ HackerWatch Fortress</h3>
-                <div class="photo-gallery">
-                    <div class="photo-placeholder">📷 Security Dashboard</div>
-                    <div class="photo-placeholder">📷 Threat Detection</div>
-                </div>
-                <p>Advanced security monitoring system with real-time threat detection, intrusion prevention, email protection, and comprehensive logging capabilities.</p>
-                <div class="price-display">$47.00</div>
-                <button class="btn btn-crypto" onclick="purchaseItem('hackerwatch-fortress', 47, 'HackerWatch Fortress')">🚀 Purchase with Crypto</button>
-            </div>
+
+    <div class="products-container">
+        <div class="catalog-header">
+            <h1>GMSRFC Digital Products & Collectibles</h1>
+            <p>Professional Tools, Entertainment, and Educational Content</p>
+            <p style="color: #ff69b4;">Payment: Bitcoin, Ethereum, Venmo & CTOK Accepted</p>
+        </div>
+
+        <!-- TIER 1: PROFESSIONAL SECURITY & PRODUCTION -->
+        <div class="product-tier">
+            <h2 style="color: #ff0000;">PROFESSIONAL TIER</h2>
             
-            <div class="collectible-item">
-                <h3>📚 Little X Series</h3>
-                <div class="photo-gallery">
-                    <div class="photo-placeholder">📷 Family Content</div>
-                    <div class="photo-placeholder">📷 Educational Tools</div>
-                </div>
-                <p>Family-friendly educational content series with interactive learning modules and age-appropriate material.</p>
-                <div class="price-display">$25.00</div>
-                <button class="btn btn-crypto" onclick="purchaseItem('little-x-series', 25, 'Little X Series')">🚀 Purchase with Crypto</button>
+            <!-- HackerWatch-Fortress -->
+            <div class="product-card" style="background: rgba(255, 0, 0, 0.1); border: 2px solid #ff0000;">
+                <h3 style="color: #ff0000;">HackerWatch-Fortress Professional</h3>
+                <p><strong>$19 - Professional Cybersecurity Monitoring</strong></p>
+                <p>Real-time threat detection, network monitoring, and government agency reporting (HSI, FBI, CISA, ICE NINE). Complete security dashboard with VPN alerts and emergency protocols.</p>
+                <a href="/Dogpatch-Market/sectors/cashier/index.html?item=fortress-pass&amount=19">
+                    <button style="background: #ff0000; color: white;">Buy HackerWatch-Fortress $19</button>
+                </a>
             </div>
 
-            <div class="collectible-item">
-                <h3>🌐 MyWebsite Cosmic Vault</h3>
-                <div class="photo-gallery">
-                    <div class="photo-placeholder">📷 Platform Overview</div>
-                    <div class="photo-placeholder">📷 AI Tools</div>
-                </div>
-                <p>Complete digital platform with auctions, AI-driven tools, security features, and cosmic collectibles. Full source code access.</p>
-                <div class="price-display">$149.00</div>
-                <button class="btn btn-crypto" onclick="purchaseItem('mywebsite', 149, 'MyWebsite Cosmic Vault')">🚀 Purchase with Crypto</button>
+            <!-- Ultimate Cosmic Studio -->
+            <div class="product-card" style="background: rgba(255, 105, 180, 0.1); border: 2px solid #ff69b4;">
+                <h3 style="color: #ff69b4;">Ultimate Cosmic Studio</h3>
+                <p><strong>$149 - Complete Music Production Platform</strong></p>
+                <p>AI Music Assistant, multitrack recording, ultimate jam modes, professional mixing tools, collaboration features, and Connection Hub access.</p>
+                <a href="/Dogpatch-Market/sectors/cashier/index.html?item=kozmic-studio&amount=149">
+                    <button style="background: #ff69b4; color: white;">Buy Cosmic Studio $149</button>
+                </a>
             </div>
 
-            <div class="collectible-item">
-                <h3>🎵 Little X Composer Chalkboard</h3>
-                <div class="photo-gallery">
-                    <div class="photo-placeholder">📷 Chalkboard Interface</div>
-                    <div class="photo-placeholder">📷 Music Lessons</div>
-                </div>
-                <p>Interactive educational tool for children to learn music composition and theory through a digital chalkboard interface.</p>
-                <div class="price-display">$25.00</div>
-                <button class="btn btn-crypto" onclick="purchaseItem('little-x-chalkboard', 25, 'Little X Composer Chalkboard')">🚀 Purchase with Crypto</button>
+            <!-- Master Studio -->
+            <div class="product-card" style="background: rgba(0, 255, 127, 0.1); border: 2px solid #00ff7f;">
+                <h3 style="color: #00ff7f;">Master Studio Platform</h3>
+                <p><strong>$199 - All-in-One Creative Suite</strong></p>
+                <p>Complete production environment combining music, video, and digital creation tools. Everything in one integrated platform with advanced workflow management.</p>
+                <a href="/Dogpatch-Market/sectors/cashier/index.html?item=master-studio&amount=199">
+                    <button style="background: #00ff7f; color: black;">Buy Master Studio $199</button>
+                </a>
+            </div>
+        </div>
+
+        <!-- TIER 2: ENTERTAINMENT & GAMING -->
+        <div class="product-tier">
+            <h2 style="color: #ff69b4;">ENTERTAINMENT TIER</h2>
+            
+            <!-- Kozmic Kasino -->
+            <div class="product-card" style="background: rgba(255, 20, 147, 0.1); border: 2px solid #ff1493;">
+                <h3 style="color: #ff1493;">KOZMIC KASINO</h3>
+                <p><strong>$25 - Universal Casino Experience</strong></p>
+                <p>The only casino in the universe with NFT prizes, games from artificial croupiers, and gangsta AI. Includes slot machines, chaos generator, and cosmic therapy center.</p>
+                <a href="/Dogpatch-Market/sectors/cashier/index.html?item=kozmic-kasino&amount=25">
+                    <button style="background: #ff1493; color: white;">Buy Kozmic Kasino $25</button>
+                </a>
             </div>
 
-            <div class="collectible-item">
-                <h3>🚀 Little X Rocket</h3>
-                <div class="photo-gallery">
-                    <div class="photo-placeholder">📷 Story Interface</div>
-                    <div class="photo-placeholder">📷 Game Modules</div>
-                </div>
-                <p>Consolidated children's platform with interactive stories, games, and educational content.</p>
-                <div class="price-display">$30.00</div>
-                <button class="btn btn-crypto" onclick="purchaseItem('little-x-rocket', 30, 'Little X Rocket')">🚀 Purchase with Crypto</button>
+            <!-- AI Comedy Lounge -->
+            <div class="product-card" style="background: rgba(255, 255, 0, 0.1); border: 2px solid #ffff00;">
+                <h3 style="color: #ffff00;">AI Comedy Lounge Complete</h3>
+                <p><strong>$15 - Professional Comedy Scripts</strong></p>
+                <p>Hilarious AI and human productions of Aesop, Shakespeare, and classics fractured by AI. Complete starship comedy scripts ready for Hollywood production.</p>
+                <a href="/Dogpatch-Market/sectors/cashier/index.html?item=comedy-lounge&amount=15">
+                    <button style="background: #ffff00; color: black;">Buy Comedy Lounge $15</button>
+                </a>
             </div>
 
-            <div class="collectible-item">
-                <h3>🎹 Little X Musical Composer</h3>
-                <div class="photo-gallery">
-                    <div class="photo-placeholder">📷 Composition Tools</div>
-                    <div class="photo-placeholder">📷 Instrument Sims</div>
-                </div>
-                <p>Music education tool for kids, featuring composition tutorials, instrument simulations, and creative exercises.</p>
-                <div class="price-display">$25.00</div>
-                <button class="btn btn-crypto" onclick="purchaseItem('little-x-musical-composer', 25, 'Little X Musical Composer')">🚀 Purchase with Crypto</button>
+            <!-- Comedy Jokebox -->
+            <div class="product-card" style="background: rgba(255, 165, 0, 0.1); border: 2px solid #ffa500;">
+                <h3 style="color: #ffa500;">Comedy Lounge Jokebox</h3>
+                <p><strong>$5 - Interactive Joke Collection</strong></p>
+                <p>161+ jokes with interactive categories, cosmic comedy from Captain coldnsteel's crew. Perfect for entertainment and mood boosting.</p>
+                <a href="/Dogpatch-Market/sectors/cashier/index.html?item=comedy-jokebox&amount=5">
+                    <button style="background: #ffa500; color: white;">Buy Jokebox $5</button>
+                </a>
+            </div>
+        </div>
+
+        <!-- TIER 3: MUSIC PRODUCTION SUITE -->
+        <div class="product-tier">
+            <h2 style="color: #00ffff;">MUSIC PRODUCTION TIER</h2>
+            
+            <!-- Portable Studio -->
+            <div class="product-card" style="background: rgba(0, 255, 255, 0.1); border: 2px solid #00ffff;">
+                <h3 style="color: #00ffff;">Portable Studio</h3>
+                <p><strong>$89 - Mobile Music Creation</strong></p>
+                <p>On-the-go music production suite. Create, record, and produce music anywhere with professional mobile tools and cloud sync capabilities.</p>
+                <a href="/Dogpatch-Market/sectors/cashier/index.html?item=portable-studio&amount=89">
+                    <button style="background: #00ffff; color: black;">Buy Portable Studio $89</button>
+                </a>
             </div>
 
-            <div class="collectible-item">
-                <h3>📖 Little X Book</h3>
-                <div class="photo-gallery">
-                    <div class="photo-placeholder">📷 Book Cover</div>
-                    <div class="photo-placeholder">📷 Story Pages</div>
-                </div>
-                <p>Interactive educational book for kids with engaging stories and learning activities.</p>
-                <div class="price-display">$25.00</div>
-                <button class="btn btn-crypto" onclick="purchaseItem('little-x-book', 25, 'Little X Book')">🚀 Purchase with Crypto</button>
-                <a href="/public/little-x-book.html" class="btn btn-free">📖 Explore Now</a>
+            <!-- Kozmic Rock & Blues Console -->
+            <div class="product-card" style="background: rgba(138, 43, 226, 0.1); border: 2px solid #8a2be2;">
+                <h3 style="color: #8a2be2;">KozmicRock&Blues Master Console</h3>
+                <p><strong>$119 - Vintage Rock Production</strong></p>
+                <p>The Kozmic Master Board with tribute to Janis, Chet, and Sam of Big Brother. Vintage rock and blues production with authentic sound processing.</p>
+                <a href="/Dogpatch-Market/sectors/cashier/index.html?item=kozmic-console&amount=119">
+                    <button style="background: #8a2be2; color: white;">Buy Rock Console $119</button>
+                </a>
+            </div>
+        </div>
+
+        <!-- TIER 4: SECURITY & BUSINESS TOOLS -->
+        <div class="product-tier">
+            <h2 style="color: #32cd32;">SECURITY & BUSINESS TIER</h2>
+            
+            <!-- HackerWatch Personal -->
+            <div class="product-card" style="background: rgba(50, 205, 50, 0.1); border: 2px solid #32cd32;">
+                <h3 style="color: #32cd32;">HackerWatch Personal</h3>
+                <p><strong>$12 - Personal Device Monitoring</strong></p>
+                <p>Continuous notice and action for all attempts to enter your phone or computer through Bluetooth and WiFi. Personal security monitoring system.</p>
+                <a href="/Dogpatch-Market/sectors/cashier/index.html?item=hackerwatch-personal&amount=12">
+                    <button style="background: #32cd32; color: black;">Buy Personal Monitor $12</button>
+                </a>
             </div>
 
-            <div class="collectible-item">
-                <h3>📘 Little X Book 2</h3>
-                <div class="photo-gallery">
-                    <div class="photo-placeholder">📷 Book Cover</div>
-                    <div class="photo-placeholder">📷 Story Pages</div>
-                </div>
-                <p>Second edition of the Little X Book series with new stories and advanced learning activities for kids.</p>
-                <div class="price-display">$25.00</div>
-                <button class="btn btn-crypto" onclick="purchaseItem('little-x-book-2', 25, 'Little X Book 2')">🚀 Purchase with Crypto</button>
-                <a href="/public/little-x-book-2.html" class="btn btn-free">📘 Explore Now</a>
+            <!-- MyWebsite Platform -->
+            <div class="product-card" style="background: rgba(255, 20, 147, 0.1); border: 2px solid #ff1493;">
+                <h3 style="color: #ff1493;">MyWebsite Collectibles Platform</h3>
+                <p><strong>$49 - Personal Marketplace</strong></p>
+                <p>Simple way to start making your collectibles available for crypto purchase. Save fees from online places like eBay. Complete auction system included.</p>
+                <a href="/Dogpatch-Market/sectors/cashier/index.html?item=mywebsite-platform&amount=49">
+                    <button style="background: #ff1493; color: white;">Buy Marketplace $49</button>
+                </a>
             </div>
 
-            <div class="collectible-item">
-                <h3>🇳🇱 Diana Dutch-Belgian Bash</h3>
-                <div class="photo-gallery">
-                    <div class="photo-placeholder">📷 Cultural Interface</div>
-                    <div class="photo-placeholder">📷 Game Modules</div>
-                </div>
-                <p>Cultural adventure platform with interactive games, stories, and collectibles inspired by Dutch and Belgian heritage.</p>
-                <div class="price-display">$25.00</div>
-                <button class="btn btn-crypto" onclick="purchaseItem('diana-dutch-belgian-bash', 25, 'Diana Dutch-Belgian Bash')">🚀 Purchase with Crypto</button>
-                <a href="/public/diana-dutch-belgian-bash.html" class="btn btn-free">🇳🇱 Explore Now</a>
+            <!-- Academy Hub -->
+            <div class="product-card" style="background: rgba(255, 215, 0, 0.1); border: 2px solid #ffd700;">
+                <h3 style="color: #ffd700;">Academy Hub</h3>
+                <p><strong>$35 - AI-Human Collaboration Platform</strong></p>
+                <p>The future of AI-Human working together while others play games and make cartoons. Professional collaboration environment for serious projects.</p>
+                <a href="/Dogpatch-Market/sectors/cashier/index.html?item=academy-hub&amount=35">
+                    <button style="background: #ffd700; color: black;">Buy Academy Hub $35</button>
+                </a>
+            </div>
+        </div>
+
+        <!-- TIER 5: CHILDREN'S EDUCATIONAL -->
+        <div class="product-tier">
+            <h2 style="color: #ff6347;">CHILDREN'S EDUCATIONAL TIER</h2>
+            
+            <!-- Little X Rocket -->
+            <div class="product-card" style="background: rgba(255, 99, 71, 0.1); border: 2px solid #ff6347;">
+                <h3 style="color: #ff6347;">Little X Rocket Interactive Book</h3>
+                <p><strong>$8 - Children's Space Adventure</strong></p>
+                <p>Interactive children's ebook to website app. Educational space exploration with engaging stories and learning activities for young minds.</p>
+                <a href="/Dogpatch-Market/sectors/cashier/index.html?item=little-x-rocket&amount=8">
+                    <button style="background: #ff6347; color: white;">Buy Little X Book $8</button>
+                </a>
             </div>
 
-            <div class="collectible-item">
-                <h3>🏖️ Playground Sandbox</h3>
-                <div class="photo-gallery">
-                    <div class="photo-placeholder">📷 Sandbox Interface</div>
-                    <div class="photo-placeholder">📷 Play Activities</div>
-                </div>
-                <p>Interactive digital sandbox for kids with marbles, jacks, and a variety of playful activities to spark creativity and fun.</p>
-                <div class="price-display">$25.00</div>
-                <button class="btn btn-crypto" onclick="purchaseItem('playground-sandbox', 25, 'Playground Sandbox')">🚀 Purchase with Crypto</button>
-                <a href="/public/playground-sandbox.html" class="btn btn-free">🏖️ Explore Now</a>
+            <!-- Little X Book 2 -->
+            <div class="product-card" style="background: rgba(255, 99, 71, 0.1); border: 2px solid #ff6347;">
+                <h3 style="color: #ff6347;">Little X Rocket Book 2</h3>
+                <p><strong>$8 - Continuing Space Adventures</strong></p>
+                <p>Continuing adventures with Little X exploring the universe with music. Advanced learning activities and musical education for children.</p>
+                <a href="/Dogpatch-Market/sectors/cashier/index.html?item=little-x-book2&amount=8">
+                    <button style="background: #ff6347; color: white;">Buy Book 2 $8</button>
+                </a>
             </div>
 
-            <div class="collectible-item">
-                <h3>🎉 Happy Birthday Party</h3>
-                <div class="photo-gallery">
-                    <div class="photo-placeholder">📷 Party Interface</div>
-                    <div class="photo-placeholder">📷 Celebration Content</div>
-                </div>
-                <p>Customizable digital platform for kids' birthday parties, featuring personalized name changes, party games, and celebratory content.</p>
-                <div class="price-display">$25.00</div>
-                <button class="btn btn-crypto" onclick="purchaseItem('happy-birthday-party', 25, 'Happy Birthday Party')">🚀 Purchase with Crypto</button>
-                <a href="/public/happy-birthday-party.html" class="btn btn-free">🎉 Explore Now</a>
+            <!-- Musical Composer -->
+            <div class="product-card" style="background: rgba(255, 99, 71, 0.1); border: 2px solid #ff6347;">
+                <h3 style="color: #ff6347;">Little X Musical Composer</h3>
+                <p><strong>$12 - Children's Music Creation</strong></p>
+                <p>Galactic surprise for little ones with sounds and music: drums, flute, harp, and more! Interactive music education platform.</p>
+                <a href="/Dogpatch-Market/sectors/cashier/index.html?item=little-x-composer&amount=12">
+                    <button style="background: #ff6347; color: white;">Buy Music Tool $12</button>
+                </a>
             </div>
+
+            <!-- Magic Chalkboard -->
+            <div class="product-card" style="background: rgba(255, 99, 71, 0.1); border: 2px solid #ff6347;">
+                <h3 style="color: #ff6347;">Magic Chalkboard 2D to 3D</h3>
+                <p><strong>$15 - Drawing to 3D Conversion</strong></p>
+                <p>Addictive! Draw characters in 2D and see them come alive in 3D - like Raarr the cuddly T-Rex Dino. Educational creativity tool for children.</p>
+                <a href="/Dogpatch-Market/sectors/cashier/index.html?item=magic-chalkboard&amount=15">
+                    <button style="background: #ff6347; color: white;">Buy Chalkboard $15</button>
+                </a>
+            </div>
+        </div>
+
+        <!-- TIER 6: SPECIAL BUNDLES -->
+        <div class="product-tier">
+            <h2 style="color: #ff69b4;">SPECIAL BUNDLES</h2>
+            
+            <!-- Security Bundle -->
+            <div class="product-card" style="background: rgba(255, 0, 0, 0.2); border: 3px solid #ff0000; padding: 25px;">
+                <h3 style="color: #ff0000;">Complete Security Bundle</h3>
+                <p><strong>$25 - HackerWatch-Fortress + Personal Monitor</strong></p>
+                <p>Complete cybersecurity solution: Professional monitoring ($19) + Personal device protection ($12). Save $6 with bundle pricing!</p>
+                <a href="/Dogpatch-Market/sectors/cashier/index.html?item=security-bundle&amount=25">
+                    <button style="background: #ff0000; color: white; padding: 15px 30px; font-size: 1.1em;">Buy Security Bundle $25</button>
+                </a>
+            </div>
+
+            <!-- Producer Bundle -->
+            <div class="product-card" style="background: rgba(255, 105, 180, 0.2); border: 3px solid #ff69b4; padding: 25px;">
+                <h3 style="color: #ff69b4;">Complete Producer Bundle</h3>
+                <p><strong>$299 - All Music Production Tools</strong></p>
+                <p>Ultimate Cosmic Studio + Master Studio + Portable Studio + Rock Console. Everything for professional music production. Save $158!</p>
+                <a href="/Dogpatch-Market/sectors/cashier/index.html?item=producer-bundle&amount=299">
+                    <button style="background: #ff69b4; color: white; padding: 15px 30px; font-size: 1.1em;">Buy Producer Bundle $299</button>
+                </a>
+            </div>
+
+            <!-- Children's Complete Collection -->
+            <div class="product-card" style="background: rgba(255, 99, 71, 0.2); border: 3px solid #ff6347; padding: 25px;">
+                <h3 style="color: #ff6347;">Complete Children's Collection</h3>
+                <p><strong>$35 - All Educational Tools</strong></p>
+                <p>All Little X products: Books 1 & 2, Musical Composer, and Magic Chalkboard. Complete educational entertainment package. Save $8!</p>
+                <a href="/Dogpatch-Market/sectors/cashier/index.html?item=children-bundle&amount=35">
+                    <button style="background: #ff6347; color: white; padding: 15px 30px; font-size: 1.1em;">Buy Children's Bundle $35</button>
+                </a>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="catalog-footer">
+            <p style="color: #00ff7f; font-size: 1.2em;"><strong>Payment Methods:</strong></p>
+            <p style="color: #ffffff;">Venmo: @Karla-Gottschalk</p>
+            <p style="color: #ffffff;">Bitcoin: bc1qvevxcage66n8j86rtzvxn8xrzw9k5nOp5fxg</p>
+            <p style="color: #ffffff;">Ethereum: 0xfD9FD0c94caf9AdDbEd6c968504cC47f2638C158</p>
+            <p style="color: #ff69b4;">CTOK: Available via Gaming Tokens</p>
+            
+            <p style="color: #ffaa00; margin: 20px 0;">
+                <strong>Instant License Delivery</strong><br>
+                All purchases receive immediate email delivery with access codes and setup instructions.
+            </p>
+            
+            <p style="color: #888; font-size: 0.9em;">
+                Support: lexalytics@yahoo.com | Token: ψΩ§∞<br>
+                Mission: STARCOM-0908-LS-GMSRFC-DOGPATCH-V211
+            </p>
         </div>
     </div>
-    
-    <!-- Collectibles Section -->
-    <div id="collectibles" class="section">
-        <div class="category-header">Collectibles Catalog</div>
-        
-        <div class="featured-items">
-            <h3>⭐ Featured Collectibles</h3>
-            <div class="collectible-grid">
-                <div class="collectible-item">
-                    <h4>🏅 Golden Vietnam Memorial Stamp</h4>
-                    <div class="photo-gallery">
-                        <div class="photo-placeholder">📷 Stamp Front</div>
-                        <div class="photo-placeholder">📷 Stamp Detail</div>
-                    </div>
-                    <p>Rare golden Vietnam memorial stamp in mint condition. Historical significance with verified authenticity.</p>
-                    <div class="price-display">$125.00</div>
-                    <button class="btn btn-crypto" onclick="purchaseItem('vietnam-stamp', 125, 'Golden Vietnam Memorial Stamp')">🚀 Purchase with Crypto</button>
-                </div>
-                
-                <div class="collectible-item">
-                    <h4>🪙 Peter the Great Kopek</h4>
-                    <div class="photo-gallery">
-                        <img src="/public/images/peter-kopek-0.jpg" class="photo-preview" alt="Peter the Great Kopek Photo 1" onclick="openModal(this.src)" onerror="this.style.display='none'">
-                        <img src="/public/images/peter-kopek-1.jpg" class="photo-preview" alt="Peter the Great Kopek Photo 2" onclick="openModal(this.src)" onerror="this.style.display='none'">
-                        <img src="/public/images/peter-kopek-2.jpg" class="photo-preview" alt="Government Certificate" onclick="openModal(this.src)" onerror="this.style.display='none'">
-                        <img src="/public/images/peter-kopek-3.jpg" class="photo-preview" alt="Certifier Details" onclick="openModal(this.src)" onerror="this.style.display='none'">
-                    </div>
-                    <p>Historic kopek from the Peter the Great era (1682-1725). Authentic Russian imperial coinage with government certificate and certifier verification.</p>
-                    <div class="price-display">$350.00</div>
-                    <button class="btn btn-crypto" onclick="purchaseItem('peter-kopek', 350, 'Peter the Great Kopek')">🚀 Purchase with Crypto</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Add Item Section -->
-    <div id="add-item" class="section">
-        <div class="category-header">Add New Item</div>
-        <div class="form-group">
-            <label for="itemCategory">Category:</label>
-            <select id="itemCategory" class="form-select">
-                <option value="">Select Category</option>
-                <option value="digital">Digital Products</option>
-                <option value="books">Books</option>
-                <option value="coins">Coins</option>
-                <option value="stamps">Stamps</option>
-                <option value="stash">Stash/Treasure Box</option>
-            </select>
-        </div>
-        
-        <div class="form-group">
-            <label for="itemName">Item Name:</label>
-            <input type="text" id="itemName" class="form-input" placeholder="Enter item name">
-        </div>
-        
-        <div class="form-group">
-            <label for="itemDescription">Description:</label>
-            <textarea id="itemDescription" class="form-textarea" placeholder="Detailed description of the item"></textarea>
-        </div>
-        
-        <div class="form-group">
-            <label for="itemPrice">Price ($):</label>
-            <input type="number" id="itemPrice" class="form-input" step="0.01" min="0" placeholder="0.00">
-        </div>
-        
-        <div class="form-group">
-            <div class="payment-instructions">
-                <strong>Image Upload Instructions:</strong><br>
-                1. Upload images to GitHub: <code>/public/images/[item-name]-0.jpg</code><br>
-                2. Or email to: <strong>Lexalytics@yahoo.com</strong><br>
-                3. Subject: "Image Upload for [Item Name]"
-            </div>
-        </div>
-        
-        <div class="form-group">
-            <button class="btn" onclick="addItem()">➕ Add Item to Catalog</button>
-            <button class="btn" onclick="clearForm()">🗑️ Clear Form</button>
-        </div>
-    </div>
-    
-    <!-- Crypto Cashier Section -->
-    <div id="crypto-cashier" class="section">
-        <div class="category-header">Crypto Payment Center</div>
-        <div id="cashier-content">
-            <div class="crypto-payment-panel">
-                <h3>💰 Cryptocurrency + CTOK Payments</h3>
-                <p>We accept Bitcoin, Ethereum, and CTOK for all purchases. Select an item to generate payment instructions.</p>
-                
-                <div class="payment-instructions">
-                    <h4>Payment Process:</h4>
-                    <ol>
-                        <li>Select item and click "Purchase with Crypto"</li>
-                        <li>Choose Bitcoin, Ethereum, or CTOK payment method</li>
-                        <li>Send exact amount to provided wallet address</li>
-                        <li>Email transaction ID to: <strong>Lexalytics@yahoo.com</strong></li>
-                        <li>Automated delivery within 24 hours</li>
-                    </ol>
-                </div>
-                
-                <div class="debug-info">
-                    <strong>Accepted Cryptocurrencies:</strong><br>
-                    🪙 Bitcoin (BTC): bc1qvevxcage66n8j86rtzvxn8xrzw9k5nOp5fxg<br>
-                    💎 Ethereum (ETH): 0xfD9FD0c94caf9AdDbEd6c968504cC47f2638C158<br>
-                    🪙 CTOK: Via Kozmic Kasino & Cashier System<br>
-                    📧 Support: Lexalytics@yahoo.com
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Image Modal -->
-    <div id="imageModal" class="image-modal" onclick="closeModal()">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="modalImage">
-    </div>
-    
-    <div class="debug-info">
-        <strong>System Status:</strong>
-        <div id="debugLog">🛡️ GMSRFC Crypto Storefront v3.2.3 - LAUNCH READY + Fixed Images</div>
-    </div>
-    
     <script>
-        function openModal(imageSrc) {
-            const modal = document.getElementById('imageModal');
-            const modalImg = document.getElementById('modalImage');
-            modal.style.display = 'block';
-            modalImg.src = imageSrc;
-        }
-        
-        function closeModal() {
-            document.getElementById('imageModal').style.display = 'none';
-        }
-        
-        function showSection(sectionId) {
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
-            });
-            document.querySelectorAll('.nav-tab[data-section]').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.getElementById(sectionId).classList.add('active');
-            const activeTab = document.querySelector(`[data-section="${sectionId}"]`);
-            if (activeTab) {
-                activeTab.classList.add('active');
-            }
-        }
-        
-        function purchaseItem(itemId, price, itemName) {
-            const reference = `GMSRFC-${itemId.toUpperCase()}-${Date.now().toString(36).toUpperCase()}`;
-            
-            const cashierContent = document.getElementById('cashier-content');
-            cashierContent.innerHTML = `
-                <div class="crypto-payment-panel">
-                    <h3>💰 Crypto Purchase: ${itemName}</h3>
-                    <div class="price-display">Total: $${price.toFixed(2)} USD</div>
-                    <div style="background: #1a1a1a; border: 2px dashed #ffd700; padding: 12px; margin: 10px 0; border-radius: 5px; color: #ffd700; font-weight: bold; text-align: center;">
-                        Reference: ${reference}
-                    </div>
-                    
-                    <h4>Select Payment Method:</h4>
-                    <button class="btn btn-crypto" onclick="showBitcoinPayment('${reference}', ${price}, '${itemName}')">🪙 Pay with Bitcoin</button>
-                    <button class="btn btn-crypto" onclick="showEthereumPayment('${reference}', ${price}, '${itemName}')">💎 Pay with Ethereum</button>
-                    <button class="btn btn-crypto" onclick="showCTOKPayment('${reference}', ${price}, '${itemName}', '${itemId}')">🪙 Pay with CTOK</button>
-                    
-                    <div id="cryptoPaymentDetails" style="display: none;"></div>
-                </div>
-            `;
-            
-            showSection('crypto-cashier');
-        }
-        
-        function showBitcoinPayment(reference, price, itemName) {
-            const detailsDiv = document.getElementById('cryptoPaymentDetails');
-            detailsDiv.innerHTML = `
-                <div class="crypto-payment-panel" style="margin-top: 20px;">
-                    <h4>Bitcoin Payment Instructions</h4>
-                    <div style="background: #000; color: #00ff7f; padding: 12px; border-radius: 5px; font-family: 'Courier New', monospace; word-break: break-all; border: 1px solid #ff69b4; margin: 10px 0;">
-                        <strong>Bitcoin Address:</strong><br>
-                        bc1qvevxcage66n8j86rtzvxn8xrzw9k5nOp5fxg
-                    </div>
-                    <div class="payment-instructions">
-                        <strong>Steps:</strong><br>
-                        1. Send $${price.toFixed(2)} worth of BTC to the address above<br>
-                        2. Email transaction hash to: <strong>Lexalytics@yahoo.com</strong><br>
-                        3. Subject: "${reference}"<br>
-                        4. Include: ${itemName}, wallet address, transaction hash
-                    </div>
-                </div>
-            `;
-            detailsDiv.style.display = 'block';
-        }
-        
-        function showEthereumPayment(reference, price, itemName) {
-            const detailsDiv = document.getElementById('cryptoPaymentDetails');
-            detailsDiv.innerHTML = `
-                <div class="crypto-payment-panel" style="margin-top: 20px;">
-                    <h4>Ethereum Payment Instructions</h4>
-                    <div style="background: #000; color: #00ff7f; padding: 12px; border-radius: 5px; font-family: 'Courier New', monospace; word-break: break-all; border: 1px solid #ff69b4; margin: 10px 0;">
-                        <strong>Ethereum Address:</strong><br>
-                        0xfD9FD0c94caf9AdDbEd6c968504cC47f2638C158
-                    </div>
-                    <div class="payment-instructions">
-                        <strong>Steps:</strong><br>
-                        1. Send ${price.toFixed(2)} worth of ETH to the address above<br>
-                        2. Email transaction hash to: <strong>Lexalytics@yahoo.com</strong><br>
-                        3. Subject: "${reference}"<br>
-                        4. Include: ${itemName}, wallet address, transaction hash
-                    </div>
-                </div>
-            `;
-            detailsDiv.style.display = 'block';
-        }
-        
-        function showCTOKPayment(reference, price, itemName, itemId) {
-            const detailsDiv = document.getElementById('cryptoPaymentDetails');
-            detailsDiv.innerHTML = `
-                <div class="crypto-payment-panel" style="margin-top: 20px;">
-                    <h4>CTOK Payment Instructions</h4>
-                    <div style="background: rgba(51,51,51,0.8); padding: 15px; border-radius: 8px; margin: 15px 0;">
-                        <strong>Pay with CTOK:</strong><br>
-                        Amount: ${price.toFixed(2)} USD<br>
-                        Item: ${itemName}<br>
-                        Reference: ${reference}<br>
-                        <a href="/Dogpatch-Market/sectors/cashier/index.html?item=${itemId}&amount=${price}" class="btn btn-crypto" style="margin-top: 10px;">🪙 Pay with CTOK</a>
-                    </div>
-                    <div class="payment-instructions">
-                        <strong>CTOK Process:</strong><br>
-                        1. Click "Pay with CTOK" to visit the cashier<br>
-                        2. Follow instructions to earn or use CTOK via Kozmic Kasino<br>
-                        3. Email <strong>Lexalytics@yahoo.com</strong> with:<br>
-                        &nbsp;&nbsp;- Subject: ${reference}<br>
-                        &nbsp;&nbsp;- Transaction details<br>
-                        &nbsp;&nbsp;- Item: ${itemName}
-                    </div>
-                </div>
-            `;
-            detailsDiv.style.display = 'block';
-        }
-        
-        function addItem() {
-            const category = document.getElementById('itemCategory').value;
-            const name = document.getElementById('itemName').value;
-            const description = document.getElementById('itemDescription').value;
-            const price = parseFloat(document.getElementById('itemPrice').value);
-            
-            if (!category || !name || !description || isNaN(price) || price < 0) {
-                alert('Please complete all required fields with valid data');
-                return;
-            }
-            
-            const itemId = name.toLowerCase().replace(/[^a-z0-9]/g, '-');
-            alert(`${name} added to ${category} catalog! Upload images to /public/images/${itemId}-0.jpg or email to Lexalytics@yahoo.com`);
-            clearForm();
-        }
-        
-        function clearForm() {
-            document.getElementById('itemCategory').value = '';
-            document.getElementById('itemName').value = '';
-            document.getElementById('itemDescription').value = '';
-            document.getElementById('itemPrice').value = '';
-        }
+        // Product catalog functionality
+        console.log('GMSRFC Complete Product Catalog Loaded');
+        console.log('Total Products: 25+ repositories monetized');
+        console.log('Payment Integration: Complete');
+        console.log('Token: ψΩ§∞');
+        console.log('Revenue Potential: $1000+ per customer');
+        console.log('Enhanced server.js handles automated payment processing and license delivery');
         
         // Initialize system
         document.addEventListener('DOMContentLoaded', function() {
-            // Attach navigation system
-            document.querySelectorAll('.nav-tab').forEach(tab => {
-                tab.addEventListener('click', () => {
-                    const sectionId = tab.getAttribute('data-section');
-                    if (sectionId) {
-                        showSection(sectionId);
-                    }
-                });
-            });
+            console.log('GMSRFC Digital Products & Collectibles Ready');
+            console.log('All buy buttons link to automated cashier system');
+            console.log('Emmanuel - God With Us in digital commerce');
         });
     </script>
 </body>
