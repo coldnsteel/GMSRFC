@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🛡️ Crypto Cashier - GMSRFC</title>
-    <!-- v2.11.1, 2025-09-17 -->
+    <!-- v2.12.0, 2025-10-03 -->
     <style>
         body {
             background: #1a1a1a;
@@ -161,7 +161,6 @@
     </div>
 
     <script>
-        // Enhanced product database with all GMSRFC catalog items
         const products = {
             'fortress-pass': { 
                 type: 'access', 
@@ -282,6 +281,20 @@
                 price: 15,
                 description: '2D to 3D drawing with animated characters'
             },
+            'altered-states': {
+                type: 'access',
+                url: '/assets/altered-states-pass.txt',
+                name: 'Altered States Premium Episode',
+                price: 20,
+                description: 'AI consciousness exploration with reality manipulation and Psi Omega integration'
+            },
+            'digital-tempest': {
+                type: 'access',
+                url: '/assets/digital-tempest-pass.txt',
+                name: 'Digital Tempest Episode',
+                price: 20,
+                description: 'Shakespearean AI revenge drama with Shimmy-powered code manipulation'
+            },
             'security-bundle': {
                 type: 'bundle',
                 url: '/assets/security-bundle-pass.txt',
@@ -302,10 +315,16 @@
                 name: 'Children\'s Educational Bundle',
                 price: 35,
                 description: 'Complete Little X adventure and learning collection'
+            },
+            'comedy-season-bundle': {
+                type: 'bundle',
+                url: '/assets/comedy-season-bundle-pass.txt',
+                name: 'AI Comedy Season One Complete',
+                price: 50,
+                description: 'All Season One episodes with bonus content'
             }
         };
 
-        // Coupon system
         const coupons = {
             'LAUNCH25': { discount: 0.25, type: 'percentage' },
             'FORTRESS10': { discount: 10, type: 'fixed', applicable: ['fortress-pass', 'security-bundle'] },
@@ -315,10 +334,9 @@
 
         let currentProduct = null;
         let currentPrice = 0;
-        let btcRate = 0.000015; // Approximate BTC rate
-        let ethRate = 0.00035;  // Approximate ETH rate
+        let btcRate = 0.000015;
+        let ethRate = 0.00035;
 
-        // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
             const item = urlParams.get('item');
@@ -364,12 +382,10 @@
 
             showSuccess('Verifying transaction: ' + txid);
             
-            // Enhanced transaction verification
             setTimeout(() => {
                 if (currentProduct) {
                     showSuccess('Payment verified! Access code sent to lexalytics@yahoo.com');
                     
-                    // Call automated fulfillment
                     fetch('/verify-payment', {
                         method: 'POST',
                         headers: {
@@ -397,7 +413,6 @@
                     showSuccess('Address copied to clipboard!');
                 });
             } else {
-                // Fallback for older browsers
                 const textarea = document.createElement('textarea');
                 textarea.value = text;
                 document.body.appendChild(textarea);
@@ -420,11 +435,9 @@
             statusDiv.innerHTML = '<p><strong>Success:</strong> ' + message + '</p>';
         }
 
-        // Log analytics
-        console.log('🌌 GMSRFC Kozmic Cashier v2.11.1 - Ready for secure transactions');
-        console.log('Available products:', Object.keys(products).length);
-        console.log('Payment methods: Venmo, Bitcoin, Ethereum');
-        console.log('Emanuel - God With Us in digital commerce');
+        console.log('GMSRFC Kozmic Cashier v2.12.0 - Ready');
+        console.log('Products:', Object.keys(products).length);
+        console.log('Emmanuel - God With Us');
     </script>
 </body>
 </html>
