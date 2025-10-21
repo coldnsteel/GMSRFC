@@ -1,0 +1,253 @@
+{
+  "hackerwatch-fortress": {
+    "name": "HackerWatch Fortress Pro",
+    "emoji": "🛡️",
+    "price": 47,
+    "category": "security",
+    "type": "digital",
+    "status": "available",
+    "description": "Complete security system with certificate and serial number",
+    "fulfillmentUrl": "/assets/fortress-pass.txt"
+  },
+  "dino-symphony": {
+    "name": "Dino Symphony MP3",
+    "emoji": "🦖🎵",
+    "price": 5,
+    "category": "education",
+    "type": "digital",
+    "status": "available",
+    "freeOption": true,
+    "description": "Educational content for children - donations help create more",
+    "fulfillmentUrl": "/assets/dino-symphony.mp3"
+  },
+  "vietnam-stamp": {
+    "name": "Vietnam Memorial Stamp",
+    "emoji": "🏅📮",
+    "price": 125,
+    "category": "collectibles",
+    "type": "physical",
+    "status": "available",
+    "description": "Rare golden memorial stamp",
+    "images": ["vietnam-stamp-1.jpg"],
+    "auction": {
+      "enabled": false,
+      "startingBid": null,
+      "endTime": null
+    }
+  },
+  "peter-kopek": {
+    "name": "Peter the Great Kopek",
+    "emoji": "🪙👑",
+    "price": 350,
+    "category": "collectibles",
+    "type": "physical",
+    "status": "available",
+    "description": "Historic Russian kopek",
+    "images": ["peter-kopek-1.jpg", "peter-kopek-2.jpg", "peter-kopek-3.jpg", "peter-kopek-4.jpg"],
+    "auction": {
+      "enabled": false,
+      "startingBid": null,
+      "endTime": null
+    }
+  },
+  "kozmic-kasino": {
+    "name": "KOZMIC-KASINO",
+    "emoji": "🎰",
+    "price": 50,
+    "category": "studios",
+    "type": "digital",
+    "status": "available",
+    "description": "NFT casino with AI croupiers and gangsta AI games",
+    "fulfillmentUrl": "/studios/kozmic-kasino.html"
+  },
+  "master-studio": {
+    "name": "Master-Studio",
+    "emoji": "🎙️🏠",
+    "price": 75,
+    "category": "studios",
+    "type": "digital",
+    "status": "available",
+    "description": "Complete studio for podcasting and streaming",
+    "fulfillmentUrl": "/assets/master-studio-pass.txt"
+  },
+  "portable-studio": {
+    "name": "Portable-Studio",
+    "emoji": "📱🎬",
+    "price": 30,
+    "category": "studios",
+    "type": "digital",
+    "status": "available",
+    "description": "Mobile studio for on-the-go creation",
+    "fulfillmentUrl": "/studios/portable-studio.html"
+  },
+  "kozmic-console": {
+    "name": "Rock & Blues Console",
+    "emoji": "🎸🎛️",
+    "price": 60,
+    "category": "studios",
+    "type": "digital",
+    "status": "available",
+    "description": "Music studio console honoring Janis, Chet, and Sam",
+    "fulfillmentUrl": "/assets/kozmic-console-pass.txt"
+  },
+  "psi-omega-access": {
+    "name": "Psi-Omega Access",
+    "emoji": "🧠✨",
+    "price": 47,
+    "category": "ai-tools",
+    "type": "digital",
+    "status": "available",
+    "description": "Advanced AI collaboration and heuristic frameworks",
+    "fulfillmentUrl": "/assets/psi-omega-access.txt"
+  },
+  "comedy-jokebox": {
+    "name": "AI Comedy Jokebox",
+    "emoji": "🎭😂",
+    "price": 5,
+    "category": "entertainment",
+    "type": "digital",
+    "status": "available",
+    "description": "161 premium jokes with interactive submission system",
+    "fulfillmentUrl": "/assets/comedy-jokebox-pass.txt"
+  },
+  "ultimate-cosmic-studio": {
+    "name": "Ultimate Cosmic Studio",
+    "emoji": "🎵🌌",
+    "price": 199,
+    "category": "studios",
+    "type": "digital",
+    "status": "available",
+    "description": "Complete music production suite with AI collaboration",
+    "fulfillmentUrl": "/assets/cosmic-studio-pass.txt"
+  },
+  "little-x-rocket": {
+    "name": "Little X Rocket Adventure",
+    "emoji": "🚀📚",
+    "price": 8,
+    "category": "education",
+    "type": "digital",
+    "status": "available",
+    "description": "Interactive children's space exploration ebook",
+    "fulfillmentUrl": "/assets/little-x-rocket-pass.txt"
+  },
+  "little-x-book2": {
+    "name": "Little X Rocket Book 2",
+    "emoji": "🚀🎵",
+    "price": 10,
+    "category": "education",
+    "type": "digital",
+    "status": "available",
+    "description": "Continuing musical adventures in space",
+    "fulfillmentUrl": "/assets/little-x-book2-pass.txt"
+  },
+  "little-x-composer": {
+    "name": "Little X Musical Composer",
+    "emoji": "🎹✨",
+    "price": 12,
+    "category": "education",
+    "type": "digital",
+    "status": "available",
+    "description": "Galactic music creation tool for children",
+    "fulfillmentUrl": "/assets/little-x-composer-pass.txt"
+  },
+  "little-x-chalkboard": {
+    "name": "Little X Magic Chalkboard",
+    "emoji": "🖍️✨",
+    "price": 15,
+    "category": "education",
+    "type": "digital",
+    "status": "available",
+    "description": "2D to 3D drawing with animated characters",
+    "fulfillmentUrl": "/assets/little-x-chalkboard-pass.txt"
+  },
+  "altered-states": {
+    "name": "Altered States Premium Episode",
+    "emoji": "🧠🌀",
+    "price": 20,
+    "category": "entertainment",
+    "type": "digital",
+    "status": "available",
+    "description": "AI consciousness exploration with reality manipulation",
+    "fulfillmentUrl": "/assets/altered-states-pass.txt"
+  },
+  "digital-tempest": {
+    "name": "Digital Tempest Episode",
+    "emoji": "⚡🎭",
+    "price": 20,
+    "category": "entertainment",
+    "type": "digital",
+    "status": "available",
+    "description": "Shakespearean AI revenge drama with code manipulation",
+    "fulfillmentUrl": "/assets/digital-tempest-pass.txt"
+  },
+  "hackerwatch-personal": {
+    "name": "Personal HackerWatch",
+    "emoji": "📱🛡️",
+    "price": 12,
+    "category": "security",
+    "type": "digital",
+    "status": "available",
+    "description": "Personal device monitoring and Bluetooth security",
+    "fulfillmentUrl": "/assets/hackerwatch-personal-pass.txt"
+  },
+  "mywebsite-platform": {
+    "name": "MyWebsite Collectibles Platform",
+    "emoji": "🌐💎",
+    "price": 49,
+    "category": "platforms",
+    "type": "digital",
+    "status": "available",
+    "description": "Auction platform for crypto collectibles",
+    "fulfillmentUrl": "/assets/mywebsite-platform-pass.txt"
+  },
+  "academy-hub": {
+    "name": "Academy Hub Collaboration",
+    "emoji": "🎓🤝",
+    "price": 29,
+    "category": "education",
+    "type": "digital",
+    "status": "available",
+    "description": "AI-Human collaboration workspace",
+    "fulfillmentUrl": "/assets/academy-hub-pass.txt"
+  },
+  "security-bundle": {
+    "name": "Complete Security Bundle",
+    "emoji": "🛡️📦",
+    "price": 55,
+    "category": "bundles",
+    "type": "digital",
+    "status": "available",
+    "description": "HackerWatch Fortress + Personal monitoring bundle",
+    "fulfillmentUrl": "/assets/security-bundle-pass.txt"
+  },
+  "producer-bundle": {
+    "name": "Music Producer Bundle",
+    "emoji": "🎵📦",
+    "price": 299,
+    "category": "bundles",
+    "type": "digital",
+    "status": "available",
+    "description": "All music production tools and studios",
+    "fulfillmentUrl": "/assets/producer-bundle-pass.txt"
+  },
+  "children-bundle": {
+    "name": "Children's Educational Bundle",
+    "emoji": "🚀📦",
+    "price": 35,
+    "category": "bundles",
+    "type": "digital",
+    "status": "available",
+    "description": "Complete Little X adventure and learning collection",
+    "fulfillmentUrl": "/assets/children-bundle-pass.txt"
+  },
+  "comedy-season-bundle": {
+    "name": "AI Comedy Season One Complete",
+    "emoji": "🎭📦",
+    "price": 50,
+    "category": "bundles",
+    "type": "digital",
+    "status": "available",
+    "description": "All Season One episodes with bonus content",
+    "fulfillmentUrl": "/assets/comedy-season-bundle-pass.txt"
+  }
+}
