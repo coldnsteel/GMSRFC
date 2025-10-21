@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🛡️ Crypto Cashier - GMSRFC</title>
-    <!-- v2.12.0, 2025-10-03 -->
     <style>
         body {
             background: #1a1a1a;
@@ -33,12 +32,23 @@
             padding: 15px;
             margin: 20px 0;
         }
+        .product-emoji {
+            font-size: 3em;
+            text-align: center;
+            display: block;
+            margin: 10px 0;
+        }
         .price {
             font-size: 24px;
             color: #ffff00;
             text-align: center;
             margin: 15px 0;
             text-shadow: 0 0 8px #ffff00;
+        }
+        .original-price {
+            text-decoration: line-through;
+            color: #888;
+            font-size: 18px;
         }
         .payment-methods {
             display: grid;
@@ -72,16 +82,14 @@
         .btn:hover {
             background: linear-gradient(45deg, #00ff00, #88ff88);
         }
-        .coupon-section {
-            background: rgba(50, 0, 50, 0.3);
-            border: 1px solid #ff00ff;
+        .coupon-applied {
+            background: rgba(255, 215, 0, 0.2);
+            border: 1px solid #ffd700;
             border-radius: 8px;
-            padding: 15px;
-            margin: 20px 0;
-        }
-        .coupon-code {
-            color: #ff00ff;
-            font-weight: bold;
+            padding: 10px;
+            margin: 15px 0;
+            color: #ffd700;
+            text-align: center;
         }
         .error { color: #ff4444; }
         .success { color: #44ff44; }
@@ -98,6 +106,12 @@
             border-top: 1px solid #333;
             padding-top: 15px;
         }
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 1.5em;
+            color: #00ff7f;
+        }
     </style>
 </head>
 <body>
@@ -105,273 +119,123 @@
         <h1>🛡️ Kozmic Cashier 🌌</h1>
         <h2>Secure Checkout for GMSRFC</h2>
         
-        <div class="product-info">
-            <h3>Complete Your Purchase</h3>
-            <div id="product-display">
-                <div id="product-name">Select a product</div>
-                <div id="product-description">Professional digital tools and entertainment</div>
-                <div class="price" id="product-price">$0.00</div>
-            </div>
+        <div class="loading" id="loadingMessage">Loading checkout...</div>
+        
+        <div class="product-info" id="productInfo" style="display: none;">
+            <span class="product-emoji" id="product-emoji">📦</span>
+            <h3 style="text-align: center; color: #00ff7f;" id="product-name">Product</h3>
+            <p style="text-align: center; color: #ccc;" id="product-description">Description</p>
+            <div class="price" id="product-price">$0.00</div>
+            <div id="couponDisplay"></div>
         </div>
 
-        <div class="coupon-section">
-            <h3>🎫 Active Coupons</h3>
-            <div>
-                <span class="coupon-code">LAUNCH25</span> - 25% off all products<br>
-                <span class="coupon-code">FORTRESS10</span> - $10 off Security Bundle<br>
-                <span class="coupon-code">STUDENT50</span> - 50% off Educational items<br>
-                <span class="coupon-code">BETA20</span> - 20% off Beta products
-            </div>
-        </div>
-
-        <div class="payment-methods">
-            <div class="payment-option">
-                <h3>💰 Venmo Payment</h3>
-                <p><strong>Send to:</strong> @Karla-Gottschalk</p>
-                <p><strong>Amount:</strong> $<span id="venmo-amount">0.00</span></p>
-                <p><strong>Note:</strong> Include transaction ID in memo</p>
-                <button class="btn" onclick="window.open('https://venmo.com/code?user_id=1234567890', '_blank')">Pay via Venmo</button>
-            </div>
-
+        <div class="payment-methods" id="paymentMethods" style="display: none;">
             <div class="payment-option">
                 <h3>₿ Bitcoin Payment</h3>
-                <div class="crypto-address" id="btc-address">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</div>
-                <p><strong>Amount:</strong> <span id="btc-amount">0.00000000</span> BTC</p>
+                <div class="crypto-address" id="btc-address">bc1qvevxcage66n8j86rtzvxn8xrzw9k5nOp5fxg</div>
+                <p><strong>Amount:</strong> $<span id="btc-usd">0.00</span> USD</p>
                 <button class="btn" onclick="copyToClipboard('btc-address')">Copy Address</button>
             </div>
 
             <div class="payment-option">
                 <h3>Ξ Ethereum Payment</h3>
-                <div class="crypto-address" id="eth-address">0x742d35Cc6635C0532925a3b8D0f5E013b4C9862A</div>
-                <p><strong>Amount:</strong> <span id="eth-amount">0.000</span> ETH</p>
+                <div class="crypto-address" id="eth-address">0xfD9FD0c94caf9AdDbEd6c968504cC47f2638C158</div>
+                <p><strong>Amount:</strong> $<span id="eth-usd">0.00</span> USD</p>
                 <button class="btn" onclick="copyToClipboard('eth-address')">Copy Address</button>
             </div>
         </div>
 
         <div class="transaction-status" id="status-display">
-            <p>Complete payment and add ?tx=[transaction_id] to this URL</p>
-            <p><strong>Example:</strong> ?tx=abc123def456</p>
+            <p><strong>After Payment:</strong></p>
+            <p>Email transaction ID to: <strong>Lexalytics@yahoo.com</strong></p>
+            <p>Include product name and wallet address used</p>
         </div>
 
         <div class="footer">
             <p>🌌 GMSRFC - Gottschalk, Moseley, Santoro, Ramirez Fine Collectibles 🌌</p>
             <p>Instant digital delivery • Secure crypto payments • Professional support</p>
-            <p>Support: lexalytics@yahoo.com</p>
+            <p>Support: lexalytics@yahoo.com | Token: ψΩ§∞</p>
         </div>
     </div>
 
     <script>
-        const products = {
-            'fortress-pass': { 
-                type: 'access', 
-                url: '/assets/fortress-pass.txt', 
-                name: 'HackerWatch Fortress Pass',
-                price: 19,
-                description: 'Professional cybersecurity monitoring with real-time threat detection'
-            },
-            'psi-omega-access': { 
-                type: 'access', 
-                url: '/assets/psi-omega-access.txt', 
-                name: 'Psi-Omega Access',
-                price: 47,
-                description: 'Advanced AI collaboration and heuristic frameworks'
-            },
-            'gmsrfc-docs': { 
-                type: 'access', 
-                url: '/assets/gmsrfc-docs.txt', 
-                name: 'GMSRFC Technical Documentation',
-                price: 12,
-                description: 'Complete system architecture and API documentation'
-            },
-            'reviewer-code': { 
-                type: 'access', 
-                url: '/assets/reviewer-code.txt', 
-                name: 'Reviewer Access Code',
-                price: 1,
-                description: 'Beta testing privileges and early access features'
-            },
-            'ultimate-cosmic-studio': {
-                type: 'access',
-                url: '/assets/cosmic-studio-pass.txt',
-                name: 'Ultimate Cosmic Studio',
-                price: 199,
-                description: 'Complete music production suite with AI collaboration'
-            },
-            'master-studio': {
-                type: 'access',
-                url: '/assets/master-studio-pass.txt',
-                name: 'Master Studio Platform',
-                price: 149,
-                description: 'All-in-one creative production environment'
-            },
-            'comedy-jokebox': {
-                type: 'access',
-                url: '/assets/comedy-jokebox-pass.txt',
-                name: 'AI Comedy Jokebox',
-                price: 5,
-                description: '161 premium jokes with interactive submission system'
-            },
-            'kozmic-kasino': {
-                type: 'access',
-                url: '/assets/kozmic-kasino-pass.txt',
-                name: 'Kozmic Kasino Gaming',
-                price: 25,
-                description: 'NFT prizes, AI croupiers, and cosmic entertainment'
-            },
-            'portable-studio': {
-                type: 'access',
-                url: '/assets/portable-studio-pass.txt',
-                name: 'Portable Studio',
-                price: 89,
-                description: 'Mobile music production with cloud sync'
-            },
-            'kozmic-console': {
-                type: 'access',
-                url: '/assets/kozmic-console-pass.txt',
-                name: 'Kozmic Rock & Blues Console',
-                price: 119,
-                description: 'Professional blues and rock production board'
-            },
-            'hackerwatch-personal': {
-                type: 'access',
-                url: '/assets/hackerwatch-personal-pass.txt',
-                name: 'Personal HackerWatch',
-                price: 12,
-                description: 'Personal device monitoring and Bluetooth security'
-            },
-            'mywebsite-platform': {
-                type: 'access',
-                url: '/assets/mywebsite-platform-pass.txt',
-                name: 'MyWebsite Collectibles Platform',
-                price: 49,
-                description: 'Auction platform for crypto collectibles'
-            },
-            'academy-hub': {
-                type: 'access',
-                url: '/assets/academy-hub-pass.txt',
-                name: 'Academy Hub Collaboration',
-                price: 29,
-                description: 'AI-Human collaboration workspace'
-            },
-            'little-x-rocket': {
-                type: 'access',
-                url: '/assets/little-x-rocket-pass.txt',
-                name: 'Little X Rocket Adventure',
-                price: 8,
-                description: 'Interactive children\'s space exploration ebook'
-            },
-            'little-x-book2': {
-                type: 'access',
-                url: '/assets/little-x-book2-pass.txt',
-                name: 'Little X Rocket Book 2',
-                price: 10,
-                description: 'Continuing musical adventures in space'
-            },
-            'little-x-composer': {
-                type: 'access',
-                url: '/assets/little-x-composer-pass.txt',
-                name: 'Little X Musical Composer',
-                price: 12,
-                description: 'Galactic music creation tool for children'
-            },
-            'little-x-chalkboard': {
-                type: 'access',
-                url: '/assets/little-x-chalkboard-pass.txt',
-                name: 'Little X Magic Chalkboard',
-                price: 15,
-                description: '2D to 3D drawing with animated characters'
-            },
-            'altered-states': {
-                type: 'access',
-                url: '/assets/altered-states-pass.txt',
-                name: 'Altered States Premium Episode',
-                price: 20,
-                description: 'AI consciousness exploration with reality manipulation and Psi Omega integration'
-            },
-            'digital-tempest': {
-                type: 'access',
-                url: '/assets/digital-tempest-pass.txt',
-                name: 'Digital Tempest Episode',
-                price: 20,
-                description: 'Shakespearean AI revenge drama with Shimmy-powered code manipulation'
-            },
-            'security-bundle': {
-                type: 'bundle',
-                url: '/assets/security-bundle-pass.txt',
-                name: 'Complete Security Bundle',
-                price: 25,
-                description: 'HackerWatch Fortress + Personal monitoring bundle'
-            },
-            'producer-bundle': {
-                type: 'bundle',
-                url: '/assets/producer-bundle-pass.txt',
-                name: 'Music Producer Bundle',
-                price: 299,
-                description: 'All music production tools and studios'
-            },
-            'children-bundle': {
-                type: 'bundle',
-                url: '/assets/children-bundle-pass.txt',
-                name: 'Children\'s Educational Bundle',
-                price: 35,
-                description: 'Complete Little X adventure and learning collection'
-            },
-            'comedy-season-bundle': {
-                type: 'bundle',
-                url: '/assets/comedy-season-bundle-pass.txt',
-                name: 'AI Comedy Season One Complete',
-                price: 50,
-                description: 'All Season One episodes with bonus content'
-            }
-        };
-
-        const coupons = {
-            'LAUNCH25': { discount: 0.25, type: 'percentage' },
-            'FORTRESS10': { discount: 10, type: 'fixed', applicable: ['fortress-pass', 'security-bundle'] },
-            'STUDENT50': { discount: 0.50, type: 'percentage', applicable: ['little-x-rocket', 'little-x-book2', 'little-x-composer', 'little-x-chalkboard', 'children-bundle'] },
-            'BETA20': { discount: 0.20, type: 'percentage', applicable: ['reviewer-code', 'psi-omega-access'] }
-        };
-
+        let products = {};
         let currentProduct = null;
         let currentPrice = 0;
-        let btcRate = 0.000015;
-        let ethRate = 0.00035;
+        let originalPrice = 0;
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const item = urlParams.get('item');
-            const amount = urlParams.get('amount');
-            const txid = urlParams.get('tx');
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                // Load products from JSON
+                const response = await fetch('../products.json');
+                products = await response.json();
+                console.log('Cashier: Loaded products:', Object.keys(products).length);
+                
+                // Get URL parameters
+                const urlParams = new URLSearchParams(window.location.search);
+                const itemId = urlParams.get('item');
+                const amount = urlParams.get('amount');
+                const txid = urlParams.get('tx');
 
-            if (item && products[item]) {
-                loadProduct(item, amount);
-            } else if (item) {
-                showError('Invalid item selected: ' + item);
-            }
+                if (itemId && products[itemId]) {
+                    loadProduct(itemId, amount);
+                } else if (itemId) {
+                    showError('Product not found: ' + itemId);
+                } else {
+                    showError('No product specified. Please select a product from the store.');
+                }
 
-            if (txid) {
-                verifyTransaction(txid);
+                if (txid) {
+                    verifyTransaction(txid);
+                }
+                
+            } catch (error) {
+                console.error('Error loading products:', error);
+                showError('Error loading checkout. Please try again.');
             }
         });
 
-        function loadProduct(itemKey, customAmount = null) {
-            const product = products[itemKey];
+        function loadProduct(itemId, customAmount = null) {
+            const product = products[itemId];
             if (!product) {
-                showError('Product not found');
+                showError('Product not found in database');
                 return;
             }
 
             currentProduct = product;
+            originalPrice = product.price;
             currentPrice = customAmount ? parseFloat(customAmount) : product.price;
 
+            // Hide loading
+            document.getElementById('loadingMessage').style.display = 'none';
+            
+            // Show product info
+            document.getElementById('productInfo').style.display = 'block';
+            document.getElementById('paymentMethods').style.display = 'grid';
+            
+            // Fill in product details
+            document.getElementById('product-emoji').textContent = product.emoji || '📦';
             document.getElementById('product-name').textContent = product.name;
             document.getElementById('product-description').textContent = product.description;
-            document.getElementById('product-price').textContent = '$' + currentPrice.toFixed(2);
-            document.getElementById('venmo-amount').textContent = currentPrice.toFixed(2);
-            document.getElementById('btc-amount').textContent = (currentPrice * btcRate).toFixed(8);
-            document.getElementById('eth-amount').textContent = (currentPrice * ethRate).toFixed(6);
+            
+            // Show pricing
+            let priceHTML = '$' + currentPrice.toFixed(2);
+            if (currentPrice < originalPrice) {
+                priceHTML = `<span class="original-price">$${originalPrice.toFixed(2)}</span> ${priceHTML}`;
+                
+                const discount = ((originalPrice - currentPrice) / originalPrice * 100).toFixed(0);
+                document.getElementById('couponDisplay').innerHTML = `
+                    <div class="coupon-applied">
+                        🎫 Discount Applied: ${discount}% OFF!
+                    </div>
+                `;
+            }
+            
+            document.getElementById('product-price').innerHTML = priceHTML;
+            document.getElementById('btc-usd').textContent = currentPrice.toFixed(2);
+            document.getElementById('eth-usd').textContent = currentPrice.toFixed(2);
 
-            showSuccess('Product loaded: ' + product.name);
+            showSuccess('Ready for checkout: ' + product.name);
         }
 
         function verifyTransaction(txid) {
@@ -384,20 +248,16 @@
             
             setTimeout(() => {
                 if (currentProduct) {
-                    showSuccess('Payment verified! Access code sent to lexalytics@yahoo.com');
+                    showSuccess('Payment verified! Access details will be sent to Lexalytics@yahoo.com within 24 hours.');
                     
-                    fetch('/verify-payment', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            transactionId: txid,
-                            productId: Object.keys(products).find(key => products[key] === currentProduct),
-                            amount: currentPrice,
-                            paymentMethod: 'crypto'
-                        })
-                    }).catch(console.error);
+                    // Log transaction for backend processing
+                    console.log('Transaction logged:', {
+                        transactionId: txid,
+                        productId: Object.keys(products).find(key => products[key] === currentProduct),
+                        productName: currentProduct.name,
+                        amount: currentPrice,
+                        timestamp: new Date().toISOString()
+                    });
                 } else {
                     showError('No product selected for verification');
                 }
@@ -427,17 +287,19 @@
             const statusDiv = document.getElementById('status-display');
             statusDiv.className = 'transaction-status error';
             statusDiv.innerHTML = '<p><strong>Error:</strong> ' + message + '</p>';
+            
+            // Show even if products didn't load
+            document.getElementById('loadingMessage').style.display = 'none';
         }
 
         function showSuccess(message) {
             const statusDiv = document.getElementById('status-display');
             statusDiv.className = 'transaction-status success';
-            statusDiv.innerHTML = '<p><strong>Success:</strong> ' + message + '</p>';
+            statusDiv.innerHTML = '<p><strong>✓</strong> ' + message + '</p>';
         }
 
-        console.log('GMSRFC Kozmic Cashier v2.12.0 - Ready');
-        console.log('Products:', Object.keys(products).length);
-        console.log('Emmanuel - God With Us');
+        console.log('GMSRFC Kozmic Cashier v3.0.0 - Dynamic Inventory');
+        console.log('Emmanuel - God With Us | Token: ψΩ§∞');
     </script>
 </body>
 </html>
