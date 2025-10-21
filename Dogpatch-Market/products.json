@@ -7,7 +7,7 @@
     "type": "digital",
     "status": "available",
     "description": "Complete security system with certificate and serial number",
-    "fulfillmentUrl": "/assets/fortress-pass.txt"
+    "fulfillmentUrl": "https://coldnsteel.github.io/HackerWatch/"
   },
   "dino-symphony": {
     "name": "Dino Symphony MP3",
@@ -58,7 +58,7 @@
     "type": "digital",
     "status": "available",
     "description": "NFT casino with AI croupiers and gangsta AI games",
-    "fulfillmentUrl": "/studios/kozmic-kasino.html"
+    "fulfillmentUrl": "https://kozmic-kasino.vercel.app/"
   },
   "master-studio": {
     "name": "Master-Studio",
@@ -78,7 +78,7 @@
     "type": "digital",
     "status": "available",
     "description": "Mobile studio for on-the-go creation",
-    "fulfillmentUrl": "/studios/portable-studio.html"
+    "fulfillmentUrl": "https://portable-studio.vercel.app/"
   },
   "kozmic-console": {
     "name": "Rock & Blues Console",
@@ -88,7 +88,7 @@
     "type": "digital",
     "status": "available",
     "description": "Music studio console honoring Janis, Chet, and Sam",
-    "fulfillmentUrl": "/assets/kozmic-console-pass.txt"
+    "fulfillmentUrl": "https://kozmic-rockand-blues-master-console.vercel.app/"
   },
   "psi-omega-access": {
     "name": "Psi-Omega Access",
@@ -108,7 +108,18 @@
     "type": "digital",
     "status": "available",
     "description": "161 premium jokes with interactive submission system",
-    "fulfillmentUrl": "/assets/comedy-jokebox-pass.txt"
+    "fulfillmentUrl": "https://comedy-lounge-jokebox.vercel.app/"
+  },
+  "claude-grok-jokebox": {
+    "name": "Claude & Grok's Free Jokebox",
+    "emoji": "🤖😂",
+    "price": 0,
+    "category": "entertainment",
+    "type": "digital",
+    "status": "available",
+    "freeOption": true,
+    "description": "Free comedy jokebox featuring AI-generated humor",
+    "fulfillmentUrl": "https://claude-and-groks-free-jokebox.vercel.app/"
   },
   "ultimate-cosmic-studio": {
     "name": "Ultimate Cosmic Studio",
@@ -128,7 +139,7 @@
     "type": "digital",
     "status": "available",
     "description": "Interactive children's space exploration ebook",
-    "fulfillmentUrl": "/assets/little-x-rocket-pass.txt"
+    "fulfillmentUrl": "https://little-x-rocket.vercel.app/"
   },
   "little-x-book2": {
     "name": "Little X Rocket Book 2",
@@ -138,27 +149,67 @@
     "type": "digital",
     "status": "available",
     "description": "Continuing musical adventures in space",
-    "fulfillmentUrl": "/assets/little-x-book2-pass.txt"
+    "fulfillmentUrl": "https://little-x-rocket-book-2-a30lzee3v-karla-gottschalks-projects.vercel.app/"
   },
-  "little-x-composer": {
-    "name": "Little X Musical Composer",
-    "emoji": "🎹✨",
-    "price": 12,
+  "little-x-book3": {
+    "name": "Little X Rocket Book 3",
+    "emoji": "🚀🌟",
+    "price": 10,
     "category": "education",
     "type": "digital",
     "status": "available",
-    "description": "Galactic music creation tool for children",
-    "fulfillmentUrl": "/assets/little-x-composer-pass.txt"
+    "description": "More cosmic adventures with Little X",
+    "fulfillmentUrl": "https://little-x-book3.vercel.app/"
   },
-  "little-x-chalkboard": {
-    "name": "Little X Magic Chalkboard",
-    "emoji": "🖍️✨",
+  "little-x-book4": {
+    "name": "Little X Rocket Book 4",
+    "emoji": "🚀💫",
+    "price": 10,
+    "category": "education",
+    "type": "digital",
+    "status": "available",
+    "description": "Little X explores new galaxies",
+    "fulfillmentUrl": "https://little-x-book4.vercel.app/"
+  },
+  "little-x-book5": {
+    "name": "Little X Rocket Book 5",
+    "emoji": "🚀🌈",
+    "price": 10,
+    "category": "education",
+    "type": "digital",
+    "status": "available",
+    "description": "Little X's rainbow nebula adventure",
+    "fulfillmentUrl": "https://little-x-book-5.vercel.app/"
+  },
+  "little-x-book6": {
+    "name": "Little X Rocket Book 6",
+    "emoji": "🚀🎨",
+    "price": 10,
+    "category": "education",
+    "type": "digital",
+    "status": "available",
+    "description": "Little X creates cosmic art",
+    "fulfillmentUrl": "https://little-x-book-6.vercel.app/"
+  },
+  "little-x-book7": {
+    "name": "Little X Rocket Book 7",
+    "emoji": "🚀🎭",
+    "price": 10,
+    "category": "education",
+    "type": "digital",
+    "status": "available",
+    "description": "Little X's theatrical space journey",
+    "fulfillmentUrl": "https://little-x-book7.vercel.app/"
+  },
+  "little-x-composer": {
+    "name": "Little X Musical Composer & Magic Chalkboard",
+    "emoji": "🎹🖍️",
     "price": 15,
     "category": "education",
     "type": "digital",
     "status": "available",
-    "description": "2D to 3D drawing with animated characters",
-    "fulfillmentUrl": "/assets/little-x-chalkboard-pass.txt"
+    "description": "Combined: Galactic music creation tool + 2D to 3D drawing with animated characters",
+    "fulfillmentUrl": "https://little-x-composer-magicchalkboard.vercel.app/"
   },
   "altered-states": {
     "name": "Altered States Premium Episode",
@@ -230,15 +281,15 @@
     "description": "All music production tools and studios",
     "fulfillmentUrl": "/assets/producer-bundle-pass.txt"
   },
-  "children-bundle": {
-    "name": "Children's Educational Bundle",
+  "little-x-complete-series": {
+    "name": "Little X Complete Series Bundle",
     "emoji": "🚀📦",
-    "price": 35,
+    "price": 50,
     "category": "bundles",
     "type": "digital",
     "status": "available",
-    "description": "Complete Little X adventure and learning collection",
-    "fulfillmentUrl": "/assets/children-bundle-pass.txt"
+    "description": "All 7 Little X Rocket books + Composer & Chalkboard",
+    "fulfillmentUrl": "/assets/little-x-bundle-pass.txt"
   },
   "comedy-season-bundle": {
     "name": "AI Comedy Season One Complete",
