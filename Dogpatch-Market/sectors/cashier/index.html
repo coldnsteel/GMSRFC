@@ -166,8 +166,8 @@
 
         document.addEventListener('DOMContentLoaded', async function() {
             try {
-                // Load products from JSON
-                const response = await fetch('../products.json');
+                // Load products from JSON - FIXED PATH: Go up 2 levels
+                const response = await fetch('../../products.json');
                 products = await response.json();
                 console.log('Cashier: Loaded products:', Object.keys(products).length);
                 
@@ -298,7 +298,7 @@
             statusDiv.innerHTML = '<p><strong>✓</strong> ' + message + '</p>';
         }
 
-        console.log('GMSRFC Kozmic Cashier v3.0.0 - Dynamic Inventory');
+        console.log('GMSRFC Kozmic Cashier v3.0.1 - Path Fixed');
         console.log('Emmanuel - God With Us | Token: ψΩ§∞');
     </script>
 </body>
