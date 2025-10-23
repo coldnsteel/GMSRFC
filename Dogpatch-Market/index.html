@@ -27,16 +27,17 @@
             justify-content: center;
             margin: 20px 0;
             flex-wrap: wrap;
+            gap: 10px;
         }
         .nav-tab {
             background: rgba(51,51,51,0.8);
             color: #00ff7f;
             border: 2px solid #ff69b4;
             padding: 12px 20px;
-            margin: 5px;
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-weight: bold;
         }
         .nav-tab:hover, .nav-tab.active {
             background: #ff69b4;
@@ -61,32 +62,47 @@
         .product-card {
             background: rgba(51,51,51,0.8);
             border: 2px solid #ff69b4;
-            padding: 15px;
+            padding: 20px;
             border-radius: 10px;
             text-align: center;
             transition: transform 0.3s ease;
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         .product-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 5px 20px rgba(255, 105, 180, 0.3);
         }
-        .product-card.sold {
-            opacity: 0.5;
-            border-color: #888;
-        }
-        .sold-badge {
-            background: #ff4444;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-weight: bold;
-            display: inline-block;
+        .product-emoji { 
+            font-size: 3em; 
+            display: block; 
             margin: 10px 0;
         }
-        .product-emoji { font-size: 2em; display: block; margin: 10px 0; }
-        .product-title { color: #00ff7f; margin: 10px 0; }
-        .product-price { font-size: 1.3em; color: #ffd700; font-weight: bold; margin: 10px 0; }
-        .product-description { color: #ccc; margin: 15px 0; line-height: 1.4; }
+        .product-title { 
+            color: #00ff7f; 
+            margin: 10px 0;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .product-price { 
+            font-size: 1.4em; 
+            color: #ffd700; 
+            font-weight: bold; 
+            margin: 10px 0;
+        }
+        .product-description { 
+            color: #ccc; 
+            margin: 15px 0; 
+            line-height: 1.4;
+            flex-grow: 1;
+        }
+        .product-status {
+            color: #888;
+            font-size: 0.9em;
+            margin: 5px 0;
+        }
         .buy-btn {
             background: linear-gradient(45deg, #ff1493, #9b59b6);
             color: white;
@@ -97,7 +113,6 @@
             font-weight: bold;
             transition: all 0.3s ease;
             margin: 5px;
-            min-width: 120px;
             text-decoration: none;
             display: inline-block;
         }
@@ -105,9 +120,11 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(255, 20, 147, 0.4);
         }
-        .buy-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
+        .buy-btn.free {
+            background: linear-gradient(45deg, #28a745, #20c997);
+        }
+        .buy-btn.preview {
+            background: linear-gradient(45deg, #17a2b8, #138496);
         }
         .category-header {
             background: linear-gradient(45deg, #ff69b4, #9b59b6, #00ff7f);
@@ -117,14 +134,6 @@
             text-align: center;
             margin: 20px 0;
             font-weight: bold;
-        }
-        .debug-info {
-            background: rgba(0,0,0,0.8);
-            border: 1px solid #00ff00;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 5px;
-            font-size: 0.9em;
         }
         .coupon-section {
             background: rgba(25,25,25,0.9);
@@ -158,308 +167,296 @@
             font-size: 1.5em;
             color: #00ff7f;
         }
-        .auction-timer {
-            background: rgba(255, 0, 0, 0.2);
-            border: 1px solid #ff4444;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
+        .error-message {
+            background: rgba(255,0,0,0.2);
+            border: 2px solid #ff0000;
             color: #ff6666;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
         }
     </style>
 </head>
 <body>
     <div class="content">
         <div class="header">
-            <h1>GMSRFC Unified Digital Products & Collectibles</h1>
+            <h1>🚀 GMSRFC Unified Digital Products & Collectibles</h1>
             <p><strong>Contact:</strong> Lexalytics@yahoo.com | <strong>Token:</strong> ψΩ§∞</p>
-            <p>StarSeed Fulfillment Merged - Crypto-Only System</p>
+            <p>StarSeed Fulfillment - Complete Digital Catalog</p>
+            <p style="color: #ff69b4;">Payment: Bitcoin, Ethereum, Venmo & CTOK Accepted</p>
         </div>
         
         <div class="coupon-section">
-            <h3>Coupon Codes Available</h3>
+            <h3>💰 Coupon Codes Available</h3>
             <input type="text" id="globalCoupon" class="coupon-input" placeholder="Enter coupon code">
             <button class="apply-btn" onclick="applyCoupon()">Apply Coupon</button>
             <div id="couponStatus" style="margin-top: 10px;"></div>
-            <p style="font-size: 0.9em; margin-top: 10px;">Codes: LAUNCH25, FORTRESS10, STUDENT50, BETA20</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">
+                <strong>Active Codes:</strong> LAUNCH25 (25% off) | FORTRESS10 ($10 off) | STUDENT50 (50% off) | BETA20 (20% off)
+            </p>
         </div>
         
-        <div class="nav-tabs" id="navTabs">
-            <div class="nav-tab active" onclick="showSection('all-products')">All Products</div>
+        <div class="nav-tabs" id="categoryTabs">
+            <div class="nav-tab active" onclick="showCategory('all')">🌟 All Products</div>
         </div>
         
-        <div id="all-products" class="section active">
-            <div class="category-header">Complete Digital Catalog</div>
-            <div class="loading" id="loadingMessage">Loading products...</div>
-            <div class="product-grid" id="allProductsGrid"></div>
-        </div>
-        
-        <div id="podcasts" class="section">
-            <div class="category-header">Podcast Studio</div>
-            <div class="product-grid">
-                <div class="product-card">
-                    <span class="product-emoji">🎙️</span>
-                    <h3 class="product-title">Sillyosopher Saga</h3>
-                    <div class="product-price">Available Now</div>
-                    <p class="product-description">Cosmic comedy podcast with philosophy and humor</p>
-                    <a href="/podcasts/sillyosopher-saga.html" class="buy-btn">🎧 Listen Now</a>
-                </div>
-                
-                <div class="product-card">
-                    <span class="product-emoji">🐑🎭</span>
-                    <h3 class="product-title">Sheep in Control</h3>
-                    <div class="product-price">Available Now</div>
-                    <p class="product-description">Comedy exploring control and chaos with cosmic humor</p>
-                    <a href="/podcasts/sheep-in-control.html" class="buy-btn">🎧 Listen Now</a>
-                </div>
-                
-                <div class="product-card">
-                    <span class="product-emoji">🎵🎙️</span>
-                    <h3 class="product-title">Audio Input Studio</h3>
-                    <div class="product-price">Interactive</div>
-                    <p class="product-description">Submit your comedy clips and audio content</p>
-                    <a href="/podcasts/audio-input.html" class="buy-btn">🎤 Submit Audio</a>
-                </div>
-                
-                <div class="product-card">
-                    <span class="product-emoji">🎧🎛️</span>
-                    <h3 class="product-title">Podcast Player</h3>
-                    <div class="product-price">Free Tool</div>
-                    <p class="product-description">Universal podcast player for all episodes</p>
-                    <a href="/podcasts/podcast-player.html" class="buy-btn">▶️ Open Player</a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="debug-info">
-            <strong>System Status:</strong><br>
-            GMSRFC Unified Storefront - Dynamic Inventory System<br>
-            Contact: Lexalytics@yahoo.com | Token: ψΩ§∞<br>
-            Products loaded from central database
+        <div id="productContainer">
+            <div class="loading">⏳ Loading products from catalog...</div>
         </div>
     </div>
     
     <script>
-        let products = {};
+        // Global state
+        let allProducts = {};
         let currentCoupon = null;
-        let categoryTabs = {};
+        let currentCategory = 'all';
+        
+        // Category emoji mapping
+        const categoryEmojis = {
+            'security': '🛡️',
+            'education': '📚',
+            'studios': '🎬',
+            'entertainment': '🎭',
+            'collectibles': '💎',
+            'ai-tools': '🧠',
+            'platforms': '🌐',
+            'bundles': '📦'
+        };
+        
+        // Coupon codes
+        const coupons = {
+            'LAUNCH25': { type: 'percent', value: 0.25, name: '25% Launch Discount' },
+            'FORTRESS10': { type: 'fixed', value: 10, name: '$10 Off Fortress' },
+            'STUDENT50': { type: 'percent', value: 0.50, name: '50% Student Discount' },
+            'BETA20': { type: 'percent', value: 0.20, name: '20% Beta Tester' }
+        };
         
         // Load products from JSON
         async function loadProducts() {
             try {
-                const response = await fetch('products.json');
-                products = await response.json();
-                console.log('Loaded products:', Object.keys(products).length);
+                const response = await fetch('./products.json');
+                if (!response.ok) throw new Error('Failed to load products');
                 
-                // Hide loading message
-                document.getElementById('loadingMessage').style.display = 'none';
+                allProducts = await response.json();
+                console.log('✅ Loaded products:', Object.keys(allProducts).length);
                 
-                // Generate category tabs
-                generateCategoryTabs();
-                
-                // Display all products
-                displayProducts('all-products');
-                
+                renderCategoryTabs();
+                renderProducts();
             } catch (error) {
-                console.error('Error loading products:', error);
-                document.getElementById('loadingMessage').innerHTML = 
-                    '<span style="color: #ff4444;">Error loading products. Please refresh the page.</span>';
+                console.error('❌ Error loading products:', error);
+                document.getElementById('productContainer').innerHTML = `
+                    <div class="error-message">
+                        <h2>⚠️ Unable to Load Products</h2>
+                        <p>Error: ${error.message}</p>
+                        <p>Please check that products.json exists in the same directory.</p>
+                    </div>
+                `;
             }
         }
         
-        // Generate category tabs dynamically
-        function generateCategoryTabs() {
+        // Render category tabs
+        function renderCategoryTabs() {
             const categories = {};
             
-            // Collect unique categories
-            for (const [id, product] of Object.entries(products)) {
-                if (product.status === 'available') {
-                    const cat = product.category;
-                    if (!categories[cat]) {
-                        categories[cat] = [];
-                    }
-                    categories[cat].push({id, ...product});
-                }
-            }
-            
-            categoryTabs = categories;
-            
-            // Add category tabs to navigation
-            const navTabs = document.getElementById('navTabs');
-            const allTab = navTabs.querySelector('.nav-tab');
-            
-            // Add podcasts tab (static)
-            navTabs.innerHTML += '<div class="nav-tab" onclick="showSection(\'podcasts\')">🎙️ Podcasts</div>';
-            
-            // Add dynamic category tabs
-            for (const cat of Object.keys(categories)) {
-                const emoji = getCategoryEmoji(cat);
-                navTabs.innerHTML += `<div class="nav-tab" onclick="showSection('${cat}')">${emoji} ${capitalizeCategory(cat)}</div>`;
-                
-                // Create section for this category
-                const section = document.createElement('div');
-                section.id = cat;
-                section.className = 'section';
-                section.innerHTML = `
-                    <div class="category-header">${capitalizeCategory(cat)}</div>
-                    <div class="product-grid" id="${cat}-grid"></div>
-                `;
-                document.querySelector('.content').appendChild(section);
-            }
-        }
-        
-        // Display products in grid
-        function displayProducts(sectionId) {
-            let productsToShow = [];
-            
-            if (sectionId === 'all-products') {
-                // Show all available products
-                productsToShow = Object.entries(products)
-                    .filter(([id, p]) => p.status === 'available')
-                    .map(([id, p]) => ({id, ...p}));
-            } else if (categoryTabs[sectionId]) {
-                // Show products from specific category
-                productsToShow = categoryTabs[sectionId];
-            }
-            
-            const gridId = sectionId === 'all-products' ? 'allProductsGrid' : `${sectionId}-grid`;
-            const grid = document.getElementById(gridId);
-            
-            if (!grid) return;
-            
-            grid.innerHTML = '';
-            
-            productsToShow.forEach(product => {
-                const card = createProductCard(product);
-                grid.appendChild(card);
+            // Count products per category
+            Object.values(allProducts).forEach(product => {
+                const cat = product.category;
+                categories[cat] = (categories[cat] || 0) + 1;
             });
+            
+            const tabsHtml = ['<div class="nav-tab active" onclick="showCategory(\'all\')">🌟 All Products (' + Object.keys(allProducts).length + ')</div>'];
+            
+            Object.keys(categories).sort().forEach(cat => {
+                const emoji = categoryEmojis[cat] || '📦';
+                const label = cat.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+                tabsHtml.push(`<div class="nav-tab" onclick="showCategory('${cat}')">${emoji} ${label} (${categories[cat]})</div>`);
+            });
+            
+            document.getElementById('categoryTabs').innerHTML = tabsHtml.join('');
         }
         
-        // Create product card element
-        function createProductCard(product) {
-            const card = document.createElement('div');
-            card.className = 'product-card';
-            if (product.status === 'sold') card.classList.add('sold');
+        // Render products
+        function renderProducts() {
+            const filtered = currentCategory === 'all' 
+                ? Object.entries(allProducts)
+                : Object.entries(allProducts).filter(([id, p]) => p.category === currentCategory);
+            
+            if (filtered.length === 0) {
+                document.getElementById('productContainer').innerHTML = `
+                    <div class="section active">
+                        <p style="text-align: center; color: #888;">No products found in this category.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const categoryName = currentCategory === 'all' ? 'Complete Digital Catalog' : 
+                currentCategory.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+            
+            let html = `
+                <div class="section active">
+                    <div class="category-header">${categoryName}</div>
+                    <div class="product-grid">
+            `;
+            
+            filtered.forEach(([productId, product]) => {
+                html += renderProductCard(productId, product);
+            });
+            
+            html += '</div></div>';
+            document.getElementById('productContainer').innerHTML = html;
+        }
+        
+        // Render individual product card
+        function renderProductCard(productId, product) {
+            const isFree = product.freeOption || product.price === 0;
+            const priceDisplay = isFree ? 'Free / Donation' : `$${product.price.toFixed(2)}`;
             
             let buttons = '';
             
-            if (product.status === 'sold') {
-                buttons = '<div class="sold-badge">SOLD</div>';
-            } else if (product.freeOption) {
+            if (isFree) {
                 buttons = `
-                    <button class="buy-btn" onclick="freeDonation('${product.id}')">Free Download</button>
-                    <button class="buy-btn" onclick="buyCrypto('${product.id}', ${product.price})" style="background: #28a745;">Donate $${product.price}</button>
+                    <button class="buy-btn free" onclick="freeDonation('${productId}', '${product.name}')">
+                        🎁 Free Download
+                    </button>
+                    <button class="buy-btn" onclick="buyCrypto('${productId}', ${product.price || 5})">
+                        💝 Donate $${product.price || 5}
+                    </button>
                 `;
-            } else if (product.auction && product.auction.enabled) {
-                buttons = `
-                    <div class="auction-timer" id="timer-${product.id}">Auction ends: ${product.auction.endTime}</div>
-                    <button class="buy-btn" onclick="bidAuction('${product.id}', ${product.auction.startingBid || product.price})">Bid Now $${product.auction.startingBid || product.price}</button>
-                `;
+            } else if (product.fulfillmentUrl) {
+                // Check if it's a Little X book with preview
+                if (productId.startsWith('little-x-') && product.fulfillmentUrl.includes('vercel.app')) {
+                    buttons = `
+                        <a href="${product.fulfillmentUrl}" target="_blank" class="buy-btn preview">
+                            👀 Preview Book
+                        </a>
+                        <button class="buy-btn" onclick="buyCrypto('${productId}', ${product.price})">
+                            💳 Buy Now $${product.price}
+                        </button>
+                    `;
+                } else {
+                    buttons = `
+                        <button class="buy-btn" onclick="buyCrypto('${productId}', ${product.price})">
+                            💳 Buy Now $${product.price}
+                        </button>
+                    `;
+                }
             } else {
-                buttons = `<button class="buy-btn" onclick="buyCrypto('${product.id}', ${product.price})">Buy Now $${product.price}</button>`;
+                buttons = `
+                    <button class="buy-btn" onclick="buyCrypto('${productId}', ${product.price})">
+                        💳 Buy Now $${product.price}
+                    </button>
+                `;
             }
             
-            card.innerHTML = `
-                <span class="product-emoji">${product.emoji || '📦'}</span>
-                <h3 class="product-title">${product.name}</h3>
-                <div class="product-price">$${product.price.toFixed(2)}</div>
-                <p class="product-description">${product.description}</p>
-                ${buttons}
-            `;
+            const statusBadge = product.status === 'available' ? '' : 
+                `<div class="product-status">⏰ ${product.status}</div>`;
             
-            return card;
+            return `
+                <div class="product-card">
+                    <div>
+                        <span class="product-emoji">${product.emoji}</span>
+                        <h3 class="product-title">${product.name}</h3>
+                        <div class="product-price">${priceDisplay}</div>
+                        ${statusBadge}
+                        <p class="product-description">${product.description}</p>
+                    </div>
+                    <div>
+                        ${buttons}
+                    </div>
+                </div>
+            `;
         }
         
-        // Show section
-        function showSection(sectionId) {
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(s => s.classList.remove('active'));
+        // Show category
+        function showCategory(category) {
+            currentCategory = category;
             
-            const tabs = document.querySelectorAll('.nav-tab');
-            tabs.forEach(t => t.classList.remove('active'));
+            // Update active tab
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
             
-            const section = document.getElementById(sectionId);
-            if (section) {
-                section.classList.add('active');
-                event.target.classList.add('active');
-                
-                // Display products for this category
-                if (sectionId !== 'podcasts') {
-                    displayProducts(sectionId);
-                }
-            }
+            renderProducts();
         }
         
         // Apply coupon
         function applyCoupon() {
-            const code = document.getElementById('globalCoupon').value.toUpperCase();
+            const code = document.getElementById('globalCoupon').value.toUpperCase().trim();
             const status = document.getElementById('couponStatus');
             
-            const coupons = {
-                'LAUNCH25': { discount: 0.25, type: 'percentage' },
-                'FORTRESS10': { discount: 10, type: 'fixed' },
-                'STUDENT50': { discount: 0.50, type: 'percentage' },
-                'BETA20': { discount: 0.20, type: 'percentage' }
-            };
-            
             if (coupons[code]) {
-                currentCoupon = coupons[code];
-                currentCoupon.code = code;
-                status.innerHTML = `<div style="color: #44ff44;">${code} Applied!</div>`;
+                currentCoupon = { code, ...coupons[code] };
+                status.innerHTML = `<div style="color: #44ff44;">✅ ${currentCoupon.name} Applied!</div>`;
             } else if (code) {
-                status.innerHTML = '<div style="color: #ff4444;">Invalid coupon code</div>';
+                status.innerHTML = '<div style="color: #ff4444;">❌ Invalid coupon code</div>';
+                currentCoupon = null;
             }
         }
         
-        // Buy with crypto - redirect to cashier
+        // Calculate discounted price
+        function calculatePrice(basePrice) {
+            if (!currentCoupon) return basePrice;
+            
+            if (currentCoupon.type === 'fixed') {
+                return Math.max(0, basePrice - currentCoupon.value);
+            } else {
+                return basePrice * (1 - currentCoupon.value);
+            }
+        }
+        
+        // Buy with crypto
         function buyCrypto(itemId, price) {
-            let finalPrice = price;
+            const finalPrice = calculatePrice(price);
+            const discount = price - finalPrice;
             
-            if (currentCoupon) {
-                if (currentCoupon.type === 'fixed') {
-                    finalPrice = Math.max(0, price - currentCoupon.discount);
-                } else {
-                    finalPrice = price * (1 - currentCoupon.discount);
-                }
+            let message = '🔐 CRYPTO PAYMENT\n\n';
+            message += `Item: ${itemId}\n`;
+            message += `Original Price: $${price.toFixed(2)}\n`;
+            
+            if (discount > 0) {
+                message += `Discount: -$${discount.toFixed(2)}\n`;
+                message += `Final Price: $${finalPrice.toFixed(2)}\n`;
+            } else {
+                message += `Price: $${finalPrice.toFixed(2)}\n`;
             }
             
-            window.location.href = `sectors/cashier/index.html?item=${itemId}&amount=${finalPrice.toFixed(2)}`;
-        }
-        
-        // Bid on auction
-        function bidAuction(itemId, startingBid) {
-            alert(`AUCTION BIDDING\n\nItem: ${products[itemId].name}\nStarting Bid: $${startingBid}\n\nComing soon: Real-time bidding system!`);
+            message += '\n💰 PAYMENT ADDRESSES:\n';
+            message += 'Bitcoin: bc1qvevxcage66n8j86rtzvxn8xrzw9k5nOp5fxg\n';
+            message += 'Ethereum: 0xfD9FD0c94caf9AdDbEd6c968504cC47f2638C158\n\n';
+            message += '📧 After payment, email transaction ID to:\n';
+            message += 'Lexalytics@yahoo.com\n\n';
+            message += 'Token: ψΩ§∞';
+            
+            alert(message);
+            
+            // Optional: Redirect to cashier page
+            // window.location.href = `/Dogpatch-Market/sectors/cashier/index.html?item=${itemId}&amount=${finalPrice.toFixed(2)}`;
         }
         
         // Free donation
-        function freeDonation(itemId) {
-            alert(`Free download available!\n\nEmail: Lexalytics@yahoo.com\nSubject: Free Download - ${products[itemId].name}\n\nFor the good of children - donations welcome!`);
+        function freeDonation(itemId, productName) {
+            let message = '🎁 FREE DOWNLOAD\n\n';
+            message += `Product: ${productName}\n\n`;
+            message += '📧 Email for free download:\n';
+            message += 'Lexalytics@yahoo.com\n';
+            message += `Subject: Free Download - ${itemId}\n\n`;
+            message += '💝 Donations welcome and help create more content!\n';
+            message += 'Bitcoin: bc1qvevxcage66n8j86rtzvxn8xrzw9k5nOp5fxg\n';
+            message += 'Ethereum: 0xfD9FD0c94caf9AdDbEd6c968504cC47f2638C158\n\n';
+            message += 'Thank you for supporting educational content! 🙏';
+            
+            alert(message);
         }
         
-        // Helper functions
-        function getCategoryEmoji(category) {
-            const emojis = {
-                'security': '🛡️',
-                'studios': '🎬',
-                'collectibles': '🏆',
-                'education': '📚',
-                'entertainment': '🎭',
-                'ai-tools': '🧠',
-                'platforms': '🌐',
-                'bundles': '📦'
-            };
-            return emojis[category] || '📦';
-        }
-        
-        function capitalizeCategory(category) {
-            return category
-                .split('-')
-                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                .join(' ');
-        }
-        
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', loadProducts);
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 GMSRFC Dogpatch Market Loaded');
+            console.log('Token: ψΩ§∞');
+            loadProducts();
+        });
     </script>
 </body>
 </html>
