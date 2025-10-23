@@ -70,10 +70,76 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            position: relative;
         }
         .product-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 5px 20px rgba(255, 105, 180, 0.3);
+        }
+        .product-card.sold {
+            opacity: 0.6;
+            border-color: #888;
+        }
+        .product-card.auction {
+            border: 3px solid #ffd700;
+            animation: auctionPulse 2s infinite;
+        }
+        @keyframes auctionPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+            50% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.8); }
+        }
+        .status-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+            text-transform: uppercase;
+        }
+        .status-badge.sold {
+            background: #dc3545;
+            color: white;
+        }
+        .status-badge.auction {
+            background: #ffd700;
+            color: #000;
+            animation: flash 1s infinite;
+        }
+        .status-badge.coming-soon {
+            background: #6c757d;
+            color: white;
+        }
+        @keyframes flash {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .auction-info {
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid #ffd700;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+        .countdown {
+            font-size: 1.3em;
+            color: #ffd700;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .countdown.urgent {
+            color: #ff4444;
+            animation: urgentBlink 0.5s infinite;
+        }
+        @keyframes urgentBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .current-bid {
+            color: #00ff7f;
+            font-size: 1.2em;
+            margin: 5px 0;
         }
         .product-emoji { 
             font-size: 3em; 
@@ -98,11 +164,6 @@
             line-height: 1.4;
             flex-grow: 1;
         }
-        .product-status {
-            color: #888;
-            font-size: 0.9em;
-            margin: 5px 0;
-        }
         .buy-btn {
             background: linear-gradient(45deg, #ff1493, #9b59b6);
             color: white;
@@ -120,11 +181,24 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(255, 20, 147, 0.4);
         }
+        .buy-btn.disabled {
+            background: #555;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+        .buy-btn.disabled:hover {
+            transform: none;
+        }
         .buy-btn.free {
             background: linear-gradient(45deg, #28a745, #20c997);
         }
         .buy-btn.preview {
             background: linear-gradient(45deg, #17a2b8, #138496);
+        }
+        .buy-btn.auction {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #000;
+            font-size: 1.1em;
         }
         .category-header {
             background: linear-gradient(45deg, #ff69b4, #9b59b6, #00ff7f);
@@ -176,8 +250,20 @@
             margin: 20px 0;
             text-align: center;
         }
+        .bid-input {
+            background: rgba(51,51,51,0.8);
+            color: #ffd700;
+            border: 2px solid #ffd700;
+            padding: 8px;
+            border-radius: 5px;
+            width: 120px;
+            margin: 5px;
+            text-align: center;
+            font-size: 1.1em;
+        }
     </style>
 </head>
+<!-- SECTION 2/5: HTML Body Structure -->
 <body>
     <div class="content">
         <div class="header">
@@ -207,12 +293,12 @@
     </div>
     
     <script>
-        // Global state
+        // SECTION 2/5: Global State & Config
         let allProducts = {};
         let currentCoupon = null;
         let currentCategory = 'all';
+        let countdownIntervals = {};
         
-        // Category emoji mapping
         const categoryEmojis = {
             'security': '🛡️',
             'education': '📚',
@@ -224,15 +310,14 @@
             'bundles': '📦'
         };
         
-        // Coupon codes
         const coupons = {
             'LAUNCH25': { type: 'percent', value: 0.25, name: '25% Launch Discount' },
             'FORTRESS10': { type: 'fixed', value: 10, name: '$10 Off Fortress' },
             'STUDENT50': { type: 'percent', value: 0.50, name: '50% Student Discount' },
             'BETA20': { type: 'percent', value: 0.20, name: '20% Beta Tester' }
         };
+// SECTION 3/5: Core Product Loading & Rendering Functions
         
-        // Load products from JSON
         async function loadProducts() {
             try {
                 const response = await fetch('./products.json');
@@ -243,6 +328,7 @@
                 
                 renderCategoryTabs();
                 renderProducts();
+                startCountdowns();
             } catch (error) {
                 console.error('❌ Error loading products:', error);
                 document.getElementById('productContainer').innerHTML = `
@@ -255,11 +341,8 @@
             }
         }
         
-        // Render category tabs
         function renderCategoryTabs() {
             const categories = {};
-            
-            // Count products per category
             Object.values(allProducts).forEach(product => {
                 const cat = product.category;
                 categories[cat] = (categories[cat] || 0) + 1;
@@ -276,7 +359,6 @@
             document.getElementById('categoryTabs').innerHTML = tabsHtml.join('');
         }
         
-        // Render products
         function renderProducts() {
             const filtered = currentCategory === 'all' 
                 ? Object.entries(allProducts)
@@ -307,15 +389,55 @@
             html += '</div></div>';
             document.getElementById('productContainer').innerHTML = html;
         }
+// SECTION 4/5: Product Card Rendering & Auction Features
         
-        // Render individual product card
         function renderProductCard(productId, product) {
+            const isSold = product.status === 'sold';
+            const isAuction = product.auction && product.auction.enabled;
+            const isComingSoon = product.status === 'coming-soon';
             const isFree = product.freeOption || product.price === 0;
-            const priceDisplay = isFree ? 'Free / Donation' : `$${product.price.toFixed(2)}`;
+            
+            let statusBadge = '';
+            let cardClass = 'product-card';
+            
+            if (isSold) {
+                statusBadge = '<div class="status-badge sold">🚫 SOLD</div>';
+                cardClass += ' sold';
+            } else if (isAuction) {
+                statusBadge = '<div class="status-badge auction">⚡ LIVE AUCTION</div>';
+                cardClass += ' auction';
+            } else if (isComingSoon) {
+                statusBadge = '<div class="status-badge coming-soon">⏰ COMING SOON</div>';
+            }
+            
+            let priceDisplay = '';
+            if (isSold) {
+                priceDisplay = `<div class="product-price" style="text-decoration: line-through; color: #888;">$${product.price.toFixed(2)}</div>`;
+            } else if (isAuction) {
+                const currentBid = product.auction.currentBid || product.auction.startingBid;
+                priceDisplay = `
+                    <div class="auction-info">
+                        <div class="current-bid">Current Bid: $${currentBid.toFixed(2)}</div>
+                        <div id="countdown-${productId}" class="countdown">Loading...</div>
+                    </div>
+                `;
+            } else if (isFree) {
+                priceDisplay = '<div class="product-price">Free / Donation</div>';
+            } else {
+                priceDisplay = `<div class="product-price">$${product.price.toFixed(2)}</div>`;
+            }
             
             let buttons = '';
-            
-            if (isFree) {
+            if (isSold) {
+                buttons = '<button class="buy-btn disabled" disabled>SOLD OUT</button>';
+            } else if (isComingSoon) {
+                buttons = '<button class="buy-btn disabled" disabled>Coming Soon</button>';
+            } else if (isAuction) {
+                buttons = `
+                    <input type="number" id="bid-${productId}" class="bid-input" placeholder="Your bid" min="${(product.auction.currentBid || product.auction.startingBid) + 1}">
+                    <button class="buy-btn auction" onclick="placeBid('${productId}')">⚡ Place Bid</button>
+                `;
+            } else if (isFree) {
                 buttons = `
                     <button class="buy-btn free" onclick="freeDonation('${productId}', '${product.name}')">
                         🎁 Free Download
@@ -325,7 +447,6 @@
                     </button>
                 `;
             } else if (product.fulfillmentUrl) {
-                // Check if it's a Little X book with preview
                 if (productId.startsWith('little-x-') && product.fulfillmentUrl.includes('vercel.app')) {
                     buttons = `
                         <a href="${product.fulfillmentUrl}" target="_blank" class="buy-btn preview">
@@ -350,16 +471,13 @@
                 `;
             }
             
-            const statusBadge = product.status === 'available' ? '' : 
-                `<div class="product-status">⏰ ${product.status}</div>`;
-            
             return `
-                <div class="product-card">
+                <div class="${cardClass}">
+                    ${statusBadge}
                     <div>
                         <span class="product-emoji">${product.emoji}</span>
                         <h3 class="product-title">${product.name}</h3>
-                        <div class="product-price">${priceDisplay}</div>
-                        ${statusBadge}
+                        ${priceDisplay}
                         <p class="product-description">${product.description}</p>
                     </div>
                     <div>
@@ -369,20 +487,69 @@
             `;
         }
         
-        // Show category
+        function startCountdowns() {
+            Object.values(countdownIntervals).forEach(interval => clearInterval(interval));
+            countdownIntervals = {};
+            
+            Object.entries(allProducts).forEach(([productId, product]) => {
+                if (product.auction && product.auction.enabled && product.auction.endTime) {
+                    updateCountdown(productId, product.auction.endTime);
+                    countdownIntervals[productId] = setInterval(() => {
+                        updateCountdown(productId, product.auction.endTime);
+                    }, 1000);
+                }
+            });
+        }
+        
+        function updateCountdown(productId, endTime) {
+            const countdownElement = document.getElementById(`countdown-${productId}`);
+            if (!countdownElement) return;
+            
+            const now = new Date().getTime();
+            const end = new Date(endTime).getTime();
+            const distance = end - now;
+            
+            if (distance < 0) {
+                countdownElement.innerHTML = '⏰ AUCTION ENDED';
+                countdownElement.classList.remove('urgent');
+                clearInterval(countdownIntervals[productId]);
+                return;
+            }
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            let timeString = '';
+            if (days > 0) {
+                timeString = `⏰ ${days}d ${hours}h ${minutes}m`;
+            } else if (hours > 0) {
+                timeString = `⏰ ${hours}h ${minutes}m ${seconds}s`;
+            } else {
+                timeString = `⏰ ${minutes}m ${seconds}s`;
+            }
+            
+            countdownElement.innerHTML = timeString;
+            
+            if (hours === 0 && days === 0) {
+                countdownElement.classList.add('urgent');
+            }
+        }
+// SECTION 5/5: UI Interactions & Payment Functions - FINAL SECTION
+        
         function showCategory(category) {
             currentCategory = category;
             
-            // Update active tab
             document.querySelectorAll('.nav-tab').forEach(tab => {
                 tab.classList.remove('active');
             });
             event.target.classList.add('active');
             
             renderProducts();
+            startCountdowns();
         }
         
-        // Apply coupon
         function applyCoupon() {
             const code = document.getElementById('globalCoupon').value.toUpperCase().trim();
             const status = document.getElementById('couponStatus');
@@ -396,7 +563,6 @@
             }
         }
         
-        // Calculate discounted price
         function calculatePrice(basePrice) {
             if (!currentCoupon) return basePrice;
             
@@ -407,7 +573,31 @@
             }
         }
         
-        // Buy with crypto
+        function placeBid(productId) {
+            const bidInput = document.getElementById(`bid-${productId}`);
+            const bidAmount = parseFloat(bidInput.value);
+            const product = allProducts[productId];
+            const minBid = (product.auction.currentBid || product.auction.startingBid) + 1;
+            
+            if (!bidAmount || bidAmount < minBid) {
+                alert(`❌ Minimum bid is $${minBid.toFixed(2)}`);
+                return;
+            }
+            
+            let message = `⚡ AUCTION BID\n\n`;
+            message += `Item: ${product.name}\n`;
+            message += `Your Bid: $${bidAmount.toFixed(2)}\n`;
+            message += `Current Bid: $${(product.auction.currentBid || product.auction.startingBid).toFixed(2)}\n\n`;
+            message += `To place your bid:\n`;
+            message += `📧 Email: Lexalytics@yahoo.com\n`;
+            message += `Subject: Auction Bid - ${productId}\n`;
+            message += `Include: Your bid amount and contact info\n\n`;
+            message += `💰 Payment due upon winning\n`;
+            message += `Token: ψΩ§∞`;
+            
+            alert(message);
+        }
+        
         function buyCrypto(itemId, price) {
             const finalPrice = calculatePrice(price);
             const discount = price - finalPrice;
@@ -431,12 +621,8 @@
             message += 'Token: ψΩ§∞';
             
             alert(message);
-            
-            // Optional: Redirect to cashier page
-            // window.location.href = `/Dogpatch-Market/sectors/cashier/index.html?item=${itemId}&amount=${finalPrice.toFixed(2)}`;
         }
         
-        // Free donation
         function freeDonation(itemId, productName) {
             let message = '🎁 FREE DOWNLOAD\n\n';
             message += `Product: ${productName}\n\n`;
@@ -451,7 +637,6 @@
             alert(message);
         }
         
-        // Initialize on load
         document.addEventListener('DOMContentLoaded', function() {
             console.log('🚀 GMSRFC Dogpatch Market Loaded');
             console.log('Token: ψΩ§∞');
@@ -460,3 +645,4 @@
     </script>
 </body>
 </html>
+<!-- END OF FILE: All 5 sections complete -->
