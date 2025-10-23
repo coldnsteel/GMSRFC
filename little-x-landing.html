@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Little X Rocket Adventures - Interactive Space Books for Kids</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Comic Sans MS', 'Arial Rounded MT Bold', cursive, sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a3e 50%, #2d1b4e 100%);
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 30px;
+            margin: 40px 0;
+            border: 3px solid #ff69b4;
+            box-shadow: 0 0 40px rgba(255, 105, 180, 0.3);
+        }
+        
+        .hero h1 {
+            font-size: 4em;
+            background: linear-gradient(45deg, #ff69b4, #ffd700, #00ff7f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(255, 105, 180, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.5em;
+            color: #ffd700;
+            margin: 15px 0;
+        }
+        
+        .rocket-emoji {
+            font-size: 5em;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .book-card {
+            background: rgba(0, 0, 0, 0.7);
+            border: 3px solid #9b59b6;
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .book-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: #ff69b4;
+            box-shadow: 0 10px 40px rgba(255, 105, 180, 0.5);
+        }
+        
+        .book-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 105, 180, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+        }
+        
+        .book-card:hover::before {
+            left: 100%;
+        }
+        
+        .book-emoji {
+            font-size: 4em;
+            display: block;
+            margin: 15px 0;
+        }
+        
+        .book-title {
+            font-size: 1.5em;
+            color: #00ff7f;
+            margin: 15px 0;
+        }
+        
+        .book-price {
+            font-size: 1.8em;
+            color: #ffd700;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        
+        .book-description {
+            color: #ccc;
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 10px 5px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .btn-preview {
+            background: linear-gradient(45deg, #17a2b8, #138496);
+            color: white;
+        }
+        
+        .btn-preview:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(23, 162, 184, 0.5);
+        }
+        
+        .btn-buy {
+            background: linear-gradient(45deg, #ff1493, #9b59b6);
+            color: white;
+        }
+        
+        .btn-buy:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(255, 20, 147, 0.5);
+        }
+        
+        .bundle-section {
+            background: linear-gradient(135deg, rgba(255, 105, 180, 0.2), rgba(155, 89, 182, 0.2));
+            border: 4px solid #ffd700;
+            border-radius: 30px;
+            padding: 40px;
+            margin: 60px 0;
+            text-align: center;
+        }
+        
+        .bundle-section h2 {
+            font-size: 3em;
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+        
+        .bundle-price {
+            font-size: 2.5em;
+            color: #00ff7f;
+            margin: 20px 0;
+        }
+        
+        .bundle-savings {
+            font-size: 1.3em;
+            color: #ff69b4;
+            margin: 15px 0;
+        }
+        
+        .features {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+        
+        .features h2 {
+            text-align: center;
+            font-size: 2.5em;
+            color: #ff69b4;
+            margin-bottom: 30px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-item {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .feature-emoji {
+            font-size: 3em;
+            display: block;
+            margin-bottom: 15px;
+        }
+        
+        .feature-item h3 {
+            color: #00ff7f;
+            margin-bottom: 10px;
+        }
+        
+        .feature-item p {
+            color: #ccc;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5em; }
+            .hero p { font-size: 1.2em; }
+            .books-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<!-- SECTION 2/5: Body + Hero -->
+<body>
+    <!-- Animated Stars Background -->
+    <div class="stars" id="starsContainer"></div>
+    
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="rocket-emoji">🚀</div>
+            <h1>Little X Rocket Adventures</h1>
+            <p>Interactive Space Books for Young Explorers</p>
+            <p style="font-size: 1.2em; color: #00ff7f;">⭐ 7 Books + Musical Tools + Magic Chalkboard ⭐</p>
+            <p style="font-size: 1em; color: #ccc; margin-top: 20px;">Join Little X on cosmic adventures filled with music, art, and imagination!</p>
+        </div>
+        
+        <!-- Features Section -->
+        <div class="features">
+            <h2>✨ What Makes Little X Special?</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <span class="feature-emoji">🎵</span>
+                    <h3>Musical Adventures</h3>
+                    <p>Interactive music creation tools and cosmic melodies in every story</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-emoji">🎨</span>
+                    <h3>Creative Tools</h3>
+                    <p>Magic Chalkboard turns 2D drawings into 3D characters</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-emoji">🌌</span>
+                    <h3>Space Exploration</h3>
+                    <p>Journey through galaxies, nebulas, and cosmic wonders</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-emoji">📖</span>
+                    <h3>Interactive Stories</h3>
+                    <p>Click, play, and explore - every book is an adventure</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-emoji">🎭</span>
+                    <h3>Theater & Art</h3>
+                    <p>Theatrical space journeys with cosmic performances</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-emoji">🧠</span>
+                    <h3>Educational Fun</h3>
+                    <p>Learning disguised as pure cosmic entertainment</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Books Grid Title -->
+        <h2 style="text-align: center; font-size: 3em; color: #ffd700; margin: 60px 0 40px;">📚 The Complete Series</h2>
+<!-- SECTION 3/5: Individual Books -->
+        <div class="books-grid">
+            
+            <!-- Book 1 -->
+            <div class="book-card">
+                <span class="book-emoji">🚀📚</span>
+                <h3 class="book-title">Little X Rocket Adventure</h3>
+                <div class="book-price">$8.00</div>
+                <p class="book-description">Where it all begins! Little X's first journey into space with interactive exploration and cosmic discoveries.</p>
+                <a href="https://little-x-rocket.vercel.app/" target="_blank" class="btn btn-preview">👀 Preview Book</a>
+                <a href="/Dogpatch-Market/index.html#little-x-rocket" class="btn btn-buy">💳 Buy Now</a>
+            </div>
+            
+            <!-- Book 2 -->
+            <div class="book-card">
+                <span class="book-emoji">🚀🎵</span>
+                <h3 class="book-title">Little X Rocket Book 2</h3>
+                <div class="book-price">$10.00</div>
+                <p class="book-description">Musical adventures in space! Little X discovers cosmic melodies and intergalactic rhythms.</p>
+                <a href="https://little-x-rocket-book-2-a30lzee3v-karla-gottschalks-projects.vercel.app/" target="_blank" class="btn btn-preview">👀 Preview Book</a>
+                <a href="/Dogpatch-Market/index.html#little-x-book2" class="btn btn-buy">💳 Buy Now</a>
+            </div>
+            
+            <!-- Book 3 -->
+            <div class="book-card">
+                <span class="book-emoji">🚀🌟</span>
+                <h3 class="book-title">Little X Rocket Book 3</h3>
+                <div class="book-price">$10.00</div>
+                <p class="book-description">More cosmic adventures! Little X explores mysterious space phenomena and ancient star wisdom.</p>
+                <a href="https://little-x-book3.vercel.app/" target="_blank" class="btn btn-preview">👀 Preview Book</a>
+                <a href="/Dogpatch-Market/index.html#little-x-book3" class="btn btn-buy">💳 Buy Now</a>
+            </div>
+            
+            <!-- Book 4 -->
+            <div class="book-card">
+                <span class="book-emoji">🚀💫</span>
+                <h3 class="book-title">Little X Rocket Book 4</h3>
+                <div class="book-price">$10.00</div>
+                <p class="book-description">New galaxies await! Little X ventures into uncharted cosmic territories.</p>
+                <a href="https://little-x-book4.vercel.app/" target="_blank" class="btn btn-preview">👀 Preview Book</a>
+                <a href="/Dogpatch-Market/index.html#little-x-book4" class="btn btn-buy">💳 Buy Now</a>
+            </div>
+            
+            <!-- Book 5 -->
+            <div class="book-card">
+                <span class="book-emoji">🚀🌈</span>
+                <h3 class="book-title">Little X Rocket Book 5</h3>
+                <div class="book-price">$10.00</div>
+                <p class="book-description">Rainbow nebula adventure! Little X discovers the colors of the cosmos.</p>
+                <a href="https://little-x-book-5.vercel.app/" target="_blank" class="btn btn-preview">👀 Preview Book</a>
+                <a href="/Dogpatch-Market/index.html#little-x-book5" class="btn btn-buy">💳 Buy Now</a>
+            </div>
+            
+            <!-- Book 6 -->
+            <div class="book-card">
+                <span class="book-emoji">🚀🎨</span>
+                <h3 class="book-title">Little X Rocket Book 6</h3>
+                <div class="book-price">$10.00</div>
+                <p class="book-description">Cosmic art creation! Little X paints the universe with stellar imagination.</p>
+                <a href="https://little-x-book-6.vercel.app/" target="_blank" class="btn btn-preview">👀 Preview Book</a>
+                <a href="/Dogpatch-Market/index.html#little-x-book6" class="btn btn-buy">💳 Buy Now</a>
+            </div>
+            
+            <!-- Book 7 -->
+            <div class="book-card">
+                <span class="book-emoji">🚀🎭</span>
+                <h3 class="book-title">Little X Rocket Book 7</h3>
+                <div class="book-price">$10.00</div>
+                <p class="book-description">Theatrical space journey! Little X performs cosmic dramas among the stars.</p>
+                <a href="https://little-x-book7.vercel.app/" target="_blank" class="btn btn-preview">👀 Preview Book</a>
+                <a href="/Dogpatch-Market/index.html#little-x-book7" class="btn btn-buy">💳 Buy Now</a>
+            </div>
+            
+            <!-- Musical Composer + Magic Chalkboard -->
+            <div class="book-card" style="border-color: #ffd700;">
+                <span class="book-emoji">🎹🖍️</span>
+                <h3 class="book-title">Musical Composer & Magic Chalkboard</h3>
+                <div class="book-price">$15.00</div>
+                <p class="book-description">🌟 TWO TOOLS IN ONE! Create galactic music AND draw characters that come alive in 3D. Meet Raarr the cuddly T-Rex!</p>
+                <a href="https://little-x-composer-magicchalkboard.vercel.app/" target="_blank" class="btn btn-preview">👀 Try the Tools</a>
+                <a href="/Dogpatch-Market/index.html#little-x-composer" class="btn btn-buy">💳 Buy Now</a>
+            </div>
+            
+        </div>
+<!-- SECTION 4/5: Bundle & JavaScript -->
+        
+        <!-- Bundle Offer -->
+        <div class="bundle-section">
+            <h2>🎁 COMPLETE SERIES BUNDLE</h2>
+            <div class="rocket-emoji" style="font-size: 4em;">🚀📦</div>
+            <h3 style="font-size: 2em; color: #ff69b4; margin: 20px 0;">Get All 7 Books + Composer + Chalkboard</h3>
+            <div class="bundle-price">$50.00</div>
+            <div class="bundle-savings">💰 Save $33! (Regular price $83)</div>
+            <p style="font-size: 1.3em; margin: 25px 0; color: #ccc;">
+                ✨ Complete Little X collection<br>
+                🎵 Musical Composer tool included<br>
+                🖍️ Magic Chalkboard included<br>
+                🚀 Hours of educational entertainment<br>
+                🌌 Perfect gift for young space explorers
+            </p>
+            <a href="/Dogpatch-Market/index.html#little-x-complete-series" class="btn btn-buy" style="font-size: 1.3em; padding: 20px 40px;">
+                🎁 Get Complete Bundle
+            </a>
+        </div>
+        
+        <!-- Footer Info -->
+        <div style="text-align: center; padding: 40px 20px; background: rgba(0,0,0,0.5); border-radius: 20px; margin: 40px 0;">
+            <h3 style="color: #00ff7f; margin-bottom: 20px;">💳 Payment Methods</h3>
+            <p style="color: #ccc; margin: 10px 0;">Bitcoin, Ethereum, Venmo & CTOK Accepted</p>
+            <p style="color: #ccc; margin: 10px 0;">📧 Contact: Lexalytics@yahoo.com</p>
+            <p style="color: #ccc; margin: 10px 0;">🔮 Token: ψΩ§∞</p>
+            <p style="color: #ff69b4; margin-top: 20px; font-size: 1.1em;">✨ Instant digital delivery after purchase ✨</p>
+        </div>
+        
+    </div>
+    
+    <script>
+        // Generate animated stars
+        function createStars() {
+            const starsContainer = document.getElementById('starsContainer');
+            const starCount = 150;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.opacity = Math.random() * 0.7 + 0.3;
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // Smooth scroll to sections
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            createStars();
+            console.log('🚀 Little X Landing Page Loaded');
+            console.log('Token: ψΩ§∞');
+        });
+// SECTION 5/5: Final closing and analytics
+        
+        // Optional: Track page views
+        console.log('Little X Series: 7 Books + Tools Ready');
+        console.log('Bundle Price: $50 (Save $33)');
+        
+        // Add hover effects for book cards
+        document.querySelectorAll('.book-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
+<!-- END OF FILE: Little X Landing Page Complete -->
