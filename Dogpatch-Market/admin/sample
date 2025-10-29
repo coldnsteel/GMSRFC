@@ -1,0 +1,194 @@
+[
+  {
+    "id": "academy-edition",
+    "name": "GMSRFC Academy Edition",
+    "description": "Complete computer science curriculum with cryptography, networking, and system design. Professional certification included.",
+    "price": 299.99,
+    "image": "https://via.placeholder.com/300x300/1a1a2e/00ff00?text=Academy+Edition",
+    "category": "software",
+    "type": "digital",
+    "status": "available",
+    "auction": {
+      "isAuction": false,
+      "startingBid": null,
+      "currentBid": null,
+      "endDate": null
+    }
+  },
+  {
+    "id": "hackerwatch",
+    "name": "HackerWatch™ Smartwatch",
+    "description": "Custom-built cybersecurity smartwatch with penetration testing tools, network scanning, and encrypted communications.",
+    "price": 499.99,
+    "image": "https://via.placeholder.com/300x300/16213e/4ecdc4?text=HackerWatch",
+    "category": "hardware",
+    "type": "physical",
+    "status": "coming-soon",
+    "auction": {
+      "isAuction": false,
+      "startingBid": null,
+      "currentBid": null,
+      "endDate": null
+    }
+  },
+  {
+    "id": "kozmic-kasino",
+    "name": "KOZMIC KASINO Access",
+    "description": "Lifetime membership to the interdimensional entertainment hub. Includes AI Comedy Lounge, Music Studios, and Cosmic Gaming.",
+    "price": 149.99,
+    "image": "https://via.placeholder.com/300x300/ff6b9d/ffffff?text=KOZMIC+KASINO",
+    "category": "services",
+    "type": "digital",
+    "status": "available",
+    "auction": {
+      "isAuction": false,
+      "startingBid": null,
+      "currentBid": null,
+      "endDate": null
+    }
+  },
+  {
+    "id": "vintage-ibm",
+    "name": "IBM Model M Keyboard",
+    "description": "Legendary mechanical keyboard from 1987. Perfect condition, fully functional. The gold standard of typing.",
+    "price": 125.00,
+    "image": "https://via.placeholder.com/300x300/333333/ffffff?text=IBM+Model+M",
+    "category": "vintage",
+    "type": "physical",
+    "status": "available",
+    "auction": {
+      "isAuction": true,
+      "startingBid": 75.00,
+      "currentBid": 125.00,
+      "endDate": "2025-11-15T23:59:59"
+    }
+  },
+  {
+    "id": "crypto-course",
+    "name": "Cryptocurrency Mastery",
+    "description": "Complete course on blockchain development, smart contracts, DeFi, and crypto trading strategies.",
+    "price": 199.99,
+    "image": "https://via.placeholder.com/300x300/0a0a0a/FFD700?text=Crypto+Course",
+    "category": "crypto",
+    "type": "digital",
+    "status": "available",
+    "auction": {
+      "isAuction": false,
+      "startingBid": null,
+      "currentBid": null,
+      "endDate": null
+    }
+  },
+  {
+    "id": "raspberry-pi-kit",
+    "name": "Ultimate Raspberry Pi Hacking Kit",
+    "description": "Complete Pi 5 setup with custom OS, pre-installed pentesting tools, and project tutorials.",
+    "price": 179.99,
+    "image": "https://via.placeholder.com/300x300/16213e/c31432?text=Pi+Kit",
+    "category": "hardware",
+    "type": "physical",
+    "status": "available",
+    "auction": {
+      "isAuction": false,
+      "startingBid": null,
+      "currentBid": null,
+      "endDate": null
+    }
+  },
+  {
+    "id": "vintage-atari",
+    "name": "Atari 2600 Console",
+    "description": "Classic Atari 2600 with original box, 12 cartridges, and two joysticks. Collector's condition.",
+    "price": 200.00,
+    "image": "https://via.placeholder.com/300x300/8B4513/ffffff?text=Atari+2600",
+    "category": "vintage",
+    "type": "physical",
+    "status": "available",
+    "auction": {
+      "isAuction": true,
+      "startingBid": 150.00,
+      "currentBid": 200.00,
+      "endDate": "2025-11-20T23:59:59"
+    }
+  },
+  {
+    "id": "web-dev-bootcamp",
+    "name": "Full-Stack Web Development Bootcamp",
+    "description": "12-week intensive course covering React, Node.js, databases, deployment, and modern web practices.",
+    "price": 599.99,
+    "image": "https://via.placeholder.com/300x300/1a1a2e/61dafb?text=Web+Dev",
+    "category": "software",
+    "type": "digital",
+    "status": "available",
+    "auction": {
+      "isAuction": false,
+      "startingBid": null,
+      "currentBid": null,
+      "endDate": null
+    }
+  },
+  {
+    "id": "consulting-hour",
+    "name": "Expert Tech Consulting (1 Hour)",
+    "description": "One-on-one consulting for cybersecurity, system architecture, or software development questions.",
+    "price": 150.00,
+    "image": "https://via.placeholder.com/300x300/4ecdc4/000000?text=Consulting",
+    "category": "services",
+    "type": "digital",
+    "status": "available",
+    "auction": {
+      "isAuction": false,
+      "startingBid": null,
+      "currentBid": null,
+      "endDate": null
+    }
+  },
+  {
+    "id": "nft-collection",
+    "name": "Cosmic NFT Collection",
+    "description": "Limited edition NFT collection featuring interdimensional art. 100 unique pieces on Ethereum.",
+    "price": 0.5,
+    "image": "https://via.placeholder.com/300x300/9400D3/ffffff?text=NFT+Art",
+    "category": "crypto",
+    "type": "digital",
+    "status": "available",
+    "auction": {
+      "isAuction": true,
+      "startingBid": 0.25,
+      "currentBid": 0.5,
+      "endDate": "2025-12-01T23:59:59"
+    }
+  },
+  {
+    "id": "custom-server",
+    "name": "Custom Linux Server Setup",
+    "description": "Professional server configuration with security hardening, monitoring, and backup systems.",
+    "price": 399.99,
+    "image": "https://via.placeholder.com/300x300/000000/00ff00?text=Server+Setup",
+    "category": "services",
+    "type": "digital",
+    "status": "available",
+    "auction": {
+      "isAuction": false,
+      "startingBid": null,
+      "currentBid": null,
+      "endDate": null
+    }
+  },
+  {
+    "id": "vintage-commodore",
+    "name": "Commodore 64 Computer",
+    "description": "Working C64 with power supply, monitor, and 20+ floppy disks with games and software.",
+    "price": 300.00,
+    "image": "https://via.placeholder.com/300x300/D2B48C/8B4513?text=Commodore+64",
+    "category": "vintage",
+    "type": "physical",
+    "status": "sold",
+    "auction": {
+      "isAuction": false,
+      "startingBid": null,
+      "currentBid": null,
+      "endDate": null
+    }
+  }
+]
