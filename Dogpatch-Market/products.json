@@ -1,304 +1,223 @@
 {
-  "hackerwatch-fortress": {
-    "name": "HackerWatch Fortress Pro",
-    "emoji": "🛡️",
-    "price": 47,
-    "category": "security",
-    "type": "digital",
-    "status": "available",
-    "description": "Complete security system with certificate and serial number",
-    "fulfillmentUrl": "https://coldnsteel.github.io/HackerWatch/"
-  },
-  "dino-symphony": {
-    "name": "Dino Symphony MP3",
-    "emoji": "🦖🎵",
-    "price": 5,
-    "category": "education",
-    "type": "digital",
-    "status": "available",
-    "freeOption": true,
-    "description": "Educational content for children - donations help create more",
-    "fulfillmentUrl": "/assets/dino-symphony.mp3"
-  },
-  "vietnam-stamp": {
-    "name": "Vietnam Memorial Stamp",
-    "emoji": "🏅📮",
-    "price": 125,
-    "category": "collectibles",
-    "type": "physical",
-    "status": "available",
-    "description": "Rare golden memorial stamp",
-    "images": ["vietnam-stamp-1.jpg"],
-    "auction": {
-      "enabled": false,
-      "startingBid": null,
-      "endTime": null
+  "gmsrfc_security": {
+    "fortress": {
+      "id": "fortress-pass",
+      "name": "HackerWatch Fortress",
+      "studentPrice": 19,
+      "regularPrice": 49,
+      "description": "Real-time cybersecurity monitoring with IP/VPN detection and automated threat reporting to HSI/FBI/CISA",
+      "features": [
+        "Real-time IP intelligence",
+        "VPN/proxy detection",
+        "Threat scoring (0-100)",
+        "ICE NINE automated reporting",
+        "Device fingerprinting"
+      ],
+      "repo": "HackerWatch-Fortress",
+      "demo": "https://coldnsteel.github.io/Demo-HackerwatchFortress/",
+      "landing": "/fortress-grand-opening.html",
+      "cashier": "/Dogpatch-Market/sectors/cashier/index.html?item=fortress-pass&amount=19",
+      "images": [
+        "/public/fortress-computer-0.png",
+        "/public/Fortress-phone-1.PNG"
+      ]
+    },
+    "training": {
+      "id": "psi-recruits-training",
+      "name": "Psi-Recruits Training",
+      "price": 4,
+      "description": "Join the Shirtsleeve Hacker Corps - Training for American Freedom & Independence",
+      "landing": "/psi-recruits-html",
+      "cashier": "/Dogpatch-Market/sectors/cashier/index.html?item=psi-recruits-training&amount=4"
+    },
+    "academy": {
+      "id": "academy-hub",
+      "name": "Academy Hub - Full Access",
+      "price": "TBD",
+      "description": "The Shirtsleeve Hacker Corps for American Freedom - Community training and collaboration",
+      "landing": "/academy-master-controller.html",
+      "status": "coming_soon"
     }
   },
-  "peter-kopek": {
-    "name": "Peter the Great Kopek",
-    "emoji": "🪙👑",
-    "price": 350,
-    "category": "collectibles",
-    "type": "physical",
-    "status": "available",
-    "description": "Historic Russian kopek",
-    "images": ["peter-kopek-1.jpg", "peter-kopek-2.jpg", "peter-kopek-3.jpg", "peter-kopek-4.jpg"],
-    "auction": {
-      "enabled": false,
-      "startingBid": null,
-      "endTime": null
+
+  "playland_studios": {
+    "portable": {
+      "id": "portable-studio",
+      "name": "Portable Music Studio",
+      "price": 30,
+      "description": "Mobile music production with world music genres, 8-track mixer, UAD emulation",
+      "features": [
+        "World music genres (Indian, African, Reggae, Psychedelic)",
+        "8-track mixer",
+        "UAD plugin emulation",
+        "Collaboration hub",
+        "AI assistant"
+      ],
+      "repo": "Portable-Studio",
+      "url": "https://coldnsteel.github.io/Portable-Studio/",
+      "cashier": "/Dogpatch-Market/sectors/cashier/index.html?item=portable-studio&amount=30"
+    },
+    "kozmicblues": {
+      "id": "kozmicblues-console",
+      "name": "KozmicBlues Master Console",
+      "price": 60,
+      "description": "Electric guitar studio with professional effects chain, tuner, and metronome",
+      "features": [
+        "Professional effects chain (Drive, Reverb, Delay, Wah, Chorus)",
+        "Built-in guitar tuner",
+        "Metronome with multiple time signatures",
+        "Genre presets (Motown, Blues, Jazz, Rock, Funk)",
+        "Audio/video recording"
+      ],
+      "repo": "KozmicRockandBlues-MasterConsole",
+      "url": "https://coldnsteel.github.io/KozmicRockandBlues-MasterConsole/",
+      "cashier": "/Dogpatch-Market/sectors/cashier/index.html?item=kozmicblues-console&amount=60"
     }
   },
-  "kozmic-kasino": {
-    "name": "KOZMIC-KASINO",
-    "emoji": "🎰",
-    "price": 50,
-    "category": "studios",
-    "type": "digital",
-    "status": "available",
-    "description": "NFT casino with AI croupiers and gangsta AI games",
-    "fulfillmentUrl": "https://kozmic-kasino.vercel.app/"
+
+  "playland_littlex": {
+    "bundle": {
+      "id": "littlex-bundle",
+      "name": "Little X Universe Complete Bundle",
+      "price": 20,
+      "description": "All 7 Little X books - Purple Rocket through Heart Quests finale",
+      "platform": "gumroad",
+      "url": "https://superbguide.gumroad.com/l/little-x-universe-bundle-complete"
+    },
+    "book1": {
+      "id": "littlex-book1",
+      "name": "Little X Book 1: Purple Rocket",
+      "price": 5,
+      "platform": "gumroad",
+      "url": "https://superbguide.gumroad.com/l/little-x-book-1-purple-rocket"
+    },
+    "book2": {
+      "id": "littlex-book2",
+      "name": "Little X Book 2: Dream Machine",
+      "price": 5,
+      "description": "WITH VOICES! Raaarrr and ARIA narration",
+      "platform": "gumroad",
+      "url": "https://superbguide.gumroad.com/l/little-x-book-2-dream-machine"
+    },
+    "book3": {
+      "id": "littlex-book3",
+      "name": "Little X Book 3: Web of Life",
+      "price": 5,
+      "platform": "gumroad",
+      "url": "https://superbguide.gumroad.com/l/little-x-book-3-web-of-life"
+    },
+    "book4": {
+      "id": "littlex-book4",
+      "name": "Little X Book 4: Cosmic Codes",
+      "price": 5,
+      "platform": "gumroad",
+      "url": "https://superbguide.gumroad.com/l/little-x-book-4-cosmic-codes"
+    },
+    "book5": {
+      "id": "littlex-book5",
+      "name": "Little X Book 5: Justice for All",
+      "price": 5,
+      "platform": "gumroad",
+      "url": "https://superbguide.gumroad.com/l/little-x-book-5-justice-for-all"
+    },
+    "book6": {
+      "id": "littlex-book6",
+      "name": "Little X Book 6: Star Navigators",
+      "price": 7,
+      "platform": "gumroad",
+      "url": "https://superbguide.gumroad.com/l/little-x-book-6-star-navigators"
+    },
+    "book7": {
+      "id": "littlex-book7",
+      "name": "Little X Book 7: Heart Quests Finale",
+      "price": 7,
+      "platform": "gumroad",
+      "url": "https://superbguide.gumroad.com/l/little-x-book-7-heart-quests-finale"
+    },
+    "magic_chalkboard": {
+      "id": "magic-chalkboard",
+      "name": "Magic Chalkboard Composer",
+      "price": 7,
+      "description": "Advanced music creation tool - draw your melodies on a cosmic chalkboard",
+      "platform": "gumroad",
+      "url": "https://superbguide.gumroad.com/l/magic-chalkboard-composer",
+      "status": "published"
+    }
   },
-  "master-studio": {
-    "name": "Master-Studio",
-    "emoji": "🎙️🏠",
-    "price": 75,
-    "category": "studios",
-    "type": "digital",
-    "status": "available",
-    "description": "Complete studio for podcasting and streaming",
-    "fulfillmentUrl": "/assets/master-studio-pass.txt"
+
+  "playland_comedy": {
+    "lounge": {
+      "id": "comedy-lounge",
+      "name": "AI Comedy Lounge Access",
+      "price": 5,
+      "description": "Tech Fables + AI Comedy - Aesop & Shakespeare fractured by AI",
+      "repo": "AI-Comedy-Lounge",
+      "url": "https://coldnsteel.github.io/AI-Comedy-Lounge/",
+      "cashier": "/Dogpatch-Market/sectors/cashier/index.html?item=comedy-lounge&amount=5"
+    },
+    "party_package": {
+      "id": "party-package",
+      "name": "Comedy Party Package",
+      "price": 15,
+      "description": "Customizable AI-generated birthday party content - personalized messages, stories, music",
+      "features": [
+        "Custom name/age/theme",
+        "AI-generated party content",
+        "Birthday jokebox",
+        "Personalized messages"
+      ],
+      "integration": "Happy-Birthday-Diana",
+      "cashier": "/Dogpatch-Market/sectors/cashier/index.html?item=party-package&amount=15"
+    }
   },
-  "portable-studio": {
-    "name": "Portable-Studio",
-    "emoji": "📱🎬",
-    "price": 30,
-    "category": "studios",
-    "type": "digital",
-    "status": "available",
-    "description": "Mobile studio for on-the-go creation",
-    "fulfillmentUrl": "https://portable-studio.vercel.app/"
+
+  "playland_casino": {
+    "kasino": {
+      "id": "kozmic-kasino",
+      "name": "Kozmic Kasino Access",
+      "price": 10,
+      "description": "NFT prizes and games from AI croupiers - the only kasino in the universe!",
+      "features": [
+        "NFT prize games",
+        "AI gangsta croupiers",
+        "CTOK transactions",
+        "Unique cosmic gaming"
+      ],
+      "repo": "KOZMIC-KASINO",
+      "url": "https://coldnsteel.github.io/KOZMIC-KASINO/",
+      "cashier": "/Dogpatch-Market/sectors/cashier/index.html?item=kozmic-kasino&amount=10"
+    }
   },
-  "kozmic-console": {
-    "name": "Rock & Blues Console",
-    "emoji": "🎸🎛️",
-    "price": 60,
-    "category": "studios",
-    "type": "digital",
-    "status": "available",
-    "description": "Music studio console honoring Janis, Chet, and Sam",
-    "fulfillmentUrl": "https://kozmic-rockand-blues-master-console.vercel.app/"
+
+  "gumroad_templates": {
+    "mywebsite": {
+      "id": "crypto-storefront-starter",
+      "name": "Crypto Storefront Starter Kit",
+      "price": 25,
+      "description": "Primitive first tries - learn to build your own collectibles site with crypto payments",
+      "repo": "MyWebsite",
+      "platform": "gumroad",
+      "status": "ready_to_publish"
+    }
   },
-  "psi-omega-access": {
-    "name": "Psi-Omega Access",
-    "emoji": "🧠✨",
-    "price": 47,
-    "category": "ai-tools",
-    "type": "digital",
-    "status": "available",
-    "description": "Advanced AI collaboration and heuristic frameworks",
-    "fulfillmentUrl": "/assets/psi-omega-access.txt"
-  },
-  "comedy-jokebox": {
-    "name": "AI Comedy Jokebox",
-    "emoji": "🎭😂",
-    "price": 5,
-    "category": "entertainment",
-    "type": "digital",
-    "status": "available",
-    "description": "161 premium jokes with interactive submission system",
-    "fulfillmentUrl": "https://comedy-lounge-jokebox.vercel.app/"
-  },
-  "claude-grok-jokebox": {
-    "name": "Claude & Grok's Free Jokebox",
-    "emoji": "🤖😂",
-    "price": 0,
-    "category": "entertainment",
-    "type": "digital",
-    "status": "available",
-    "freeOption": true,
-    "description": "Free comedy jokebox featuring AI-generated humor",
-    "fulfillmentUrl": "https://claude-and-groks-free-jokebox.vercel.app/"
-  },
-  "ultimate-cosmic-studio": {
-    "name": "Ultimate Cosmic Studio",
-    "emoji": "🎵🌌",
-    "price": 199,
-    "category": "studios",
-    "type": "digital",
-    "status": "available",
-    "description": "Complete music production suite with AI collaboration",
-    "fulfillmentUrl": "/assets/cosmic-studio-pass.txt"
-  },
-  "little-x-rocket": {
-    "name": "Little X Rocket Adventure",
-    "emoji": "🚀📚",
-    "price": 8,
-    "category": "education",
-    "type": "digital",
-    "status": "available",
-    "description": "Interactive children's space exploration ebook",
-    "fulfillmentUrl": "https://little-x-rocket.vercel.app/"
-  },
-  "little-x-book2": {
-    "name": "Little X Rocket Book 2",
-    "emoji": "🚀🎵",
-    "price": 10,
-    "category": "education",
-    "type": "digital",
-    "status": "available",
-    "description": "Continuing musical adventures in space",
-    "fulfillmentUrl": "https://little-x-rocket-book-2-a30lzee3v-karla-gottschalks-projects.vercel.app/"
-  },
-  "little-x-book3": {
-    "name": "Little X Rocket Book 3",
-    "emoji": "🚀🌟",
-    "price": 10,
-    "category": "education",
-    "type": "digital",
-    "status": "available",
-    "description": "More cosmic adventures with Little X",
-    "fulfillmentUrl": "https://little-x-book3.vercel.app/"
-  },
-  "little-x-book4": {
-    "name": "Little X Rocket Book 4",
-    "emoji": "🚀💫",
-    "price": 10,
-    "category": "education",
-    "type": "digital",
-    "status": "available",
-    "description": "Little X explores new galaxies",
-    "fulfillmentUrl": "https://little-x-book4.vercel.app/"
-  },
-  "little-x-book5": {
-    "name": "Little X Rocket Book 5",
-    "emoji": "🚀🌈",
-    "price": 10,
-    "category": "education",
-    "type": "digital",
-    "status": "available",
-    "description": "Little X's rainbow nebula adventure",
-    "fulfillmentUrl": "https://little-x-book-5.vercel.app/"
-  },
-  "little-x-book6": {
-    "name": "Little X Rocket Book 6",
-    "emoji": "🚀🎨",
-    "price": 10,
-    "category": "education",
-    "type": "digital",
-    "status": "available",
-    "description": "Little X creates cosmic art",
-    "fulfillmentUrl": "https://little-x-book-6.vercel.app/"
-  },
-  "little-x-book7": {
-    "name": "Little X Rocket Book 7",
-    "emoji": "🚀🎭",
-    "price": 10,
-    "category": "education",
-    "type": "digital",
-    "status": "available",
-    "description": "Little X's theatrical space journey",
-    "fulfillmentUrl": "https://little-x-book7.vercel.app/"
-  },
-  "little-x-composer": {
-    "name": "Little X Musical Composer & Magic Chalkboard",
-    "emoji": "🎹🖍️",
-    "price": 15,
-    "category": "education",
-    "type": "digital",
-    "status": "available",
-    "description": "Combined: Galactic music creation tool + 2D to 3D drawing with animated characters",
-    "fulfillmentUrl": "https://little-x-composer-magicchalkboard.vercel.app/"
-  },
-  "altered-states": {
-    "name": "Altered States Premium Episode",
-    "emoji": "🧠🌀",
-    "price": 20,
-    "category": "entertainment",
-    "type": "digital",
-    "status": "available",
-    "description": "AI consciousness exploration with reality manipulation",
-    "fulfillmentUrl": "/assets/altered-states-pass.txt"
-  },
-  "digital-tempest": {
-    "name": "Digital Tempest Episode",
-    "emoji": "⚡🎭",
-    "price": 20,
-    "category": "entertainment",
-    "type": "digital",
-    "status": "available",
-    "description": "Shakespearean AI revenge drama with code manipulation",
-    "fulfillmentUrl": "/assets/digital-tempest-pass.txt"
-  },
-  "hackerwatch-personal": {
-    "name": "Personal HackerWatch",
-    "emoji": "📱🛡️",
-    "price": 12,
-    "category": "security",
-    "type": "digital",
-    "status": "available",
-    "description": "Personal device monitoring and Bluetooth security",
-    "fulfillmentUrl": "/assets/hackerwatch-personal-pass.txt"
-  },
-  "mywebsite-platform": {
-    "name": "MyWebsite Collectibles Platform",
-    "emoji": "🌐💎",
-    "price": 49,
-    "category": "platforms",
-    "type": "digital",
-    "status": "available",
-    "description": "Auction platform for crypto collectibles",
-    "fulfillmentUrl": "/assets/mywebsite-platform-pass.txt"
-  },
-  "academy-hub": {
-    "name": "Academy Hub Collaboration",
-    "emoji": "🎓🤝",
-    "price": 29,
-    "category": "education",
-    "type": "digital",
-    "status": "available",
-    "description": "AI-Human collaboration workspace",
-    "fulfillmentUrl": "/assets/academy-hub-pass.txt"
-  },
-  "security-bundle": {
-    "name": "Complete Security Bundle",
-    "emoji": "🛡️📦",
-    "price": 55,
-    "category": "bundles",
-    "type": "digital",
-    "status": "available",
-    "description": "HackerWatch Fortress + Personal monitoring bundle",
-    "fulfillmentUrl": "/assets/security-bundle-pass.txt"
-  },
-  "producer-bundle": {
-    "name": "Music Producer Bundle",
-    "emoji": "🎵📦",
-    "price": 299,
-    "category": "bundles",
-    "type": "digital",
-    "status": "available",
-    "description": "All music production tools and studios",
-    "fulfillmentUrl": "/assets/producer-bundle-pass.txt"
-  },
-  "little-x-complete-series": {
-    "name": "Little X Complete Series Bundle",
-    "emoji": "🚀📦",
-    "price": 50,
-    "category": "bundles",
-    "type": "digital",
-    "status": "available",
-    "description": "All 7 Little X Rocket books + Composer & Chalkboard",
-    "fulfillmentUrl": "/assets/little-x-bundle-pass.txt"
-  },
-  "comedy-season-bundle": {
-    "name": "AI Comedy Season One Complete",
-    "emoji": "🎭📦",
-    "price": 50,
-    "category": "bundles",
-    "type": "digital",
-    "status": "available",
-    "description": "All Season One episodes with bonus content",
-    "fulfillmentUrl": "/assets/comedy-season-bundle-pass.txt"
+
+  "not_for_sale": {
+    "psi_omega": {
+      "name": "Psi-Omega Digital Downloads",
+      "description": "Permanent memory bunker for AI collaboration",
+      "repo": "psi-omega-digital-downloads",
+      "purpose": "Claude & Grok memory storage"
+    },
+    "socks": {
+      "name": "Personal Stock Watcher",
+      "description": "Personal tool - not for sale",
+      "repo": "Socks"
+    },
+    "shimmy": {
+      "name": "Shimmy Integration",
+      "description": "Cloned from Michael-A-Kuykendall - global AI integrator",
+      "source": "https://github.com/Michael-A-Kuykendall/shimmy",
+      "purpose": "Local LLM inference for all products"
+    }
   }
 }
