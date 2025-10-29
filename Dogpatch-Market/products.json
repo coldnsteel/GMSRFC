@@ -1,223 +1,163 @@
 {
-  "gmsrfc_security": {
-    "fortress": {
-      "id": "fortress-pass",
-      "name": "HackerWatch Fortress",
-      "studentPrice": 19,
-      "regularPrice": 49,
-      "description": "Real-time cybersecurity monitoring with IP/VPN detection and automated threat reporting to HSI/FBI/CISA",
-      "features": [
-        "Real-time IP intelligence",
-        "VPN/proxy detection",
-        "Threat scoring (0-100)",
-        "ICE NINE automated reporting",
-        "Device fingerprinting"
-      ],
-      "repo": "HackerWatch-Fortress",
-      "demo": "https://coldnsteel.github.io/Demo-HackerwatchFortress/",
-      "landing": "/fortress-grand-opening.html",
-      "cashier": "/Dogpatch-Market/sectors/cashier/index.html?item=fortress-pass&amount=19",
-      "images": [
-        "/public/fortress-computer-0.png",
-        "/public/Fortress-phone-1.PNG"
-      ]
-    },
-    "training": {
-      "id": "psi-recruits-training",
-      "name": "Psi-Recruits Training",
-      "price": 4,
-      "description": "Join the Shirtsleeve Hacker Corps - Training for American Freedom & Independence",
-      "landing": "/psi-recruits-html",
-      "cashier": "/Dogpatch-Market/sectors/cashier/index.html?item=psi-recruits-training&amount=4"
-    },
-    "academy": {
-      "id": "academy-hub",
-      "name": "Academy Hub - Full Access",
-      "price": "TBD",
-      "description": "The Shirtsleeve Hacker Corps for American Freedom - Community training and collaboration",
-      "landing": "/academy-master-controller.html",
-      "status": "coming_soon"
-    }
+  "fortress-pass": {
+    "name": "HackerWatch Fortress",
+    "emoji": "🛡️",
+    "price": 19,
+    "category": "security",
+    "type": "digital",
+    "status": "available",
+    "description": "Real-time cybersecurity monitoring with IP/VPN detection and automated threat reporting to HSI/FBI/CISA. Enterprise-grade protection.",
+    "fulfillmentUrl": "/fortress-grand-opening.html",
+    "studentPrice": 19,
+    "regularPrice": 49
+  },
+  
+  "psi-recruits-training": {
+    "name": "Psi-Recruits Training",
+    "emoji": "🎓",
+    "price": 4,
+    "category": "education",
+    "type": "digital",
+    "status": "available",
+    "description": "Join the Shirtsleeve Hacker Corps! Ethical hacking, social engineering defense, and cyber threat identification for American Freedom.",
+    "fulfillmentUrl": "/psi-recruits-html"
+  },
+  
+  "portable-studio": {
+    "name": "Portable Music Studio",
+    "emoji": "🎹",
+    "price": 30,
+    "category": "studios",
+    "type": "digital",
+    "status": "available",
+    "description": "Mobile music production with world music genres, 8-track mixer, UAD emulation. Create professional music anywhere!",
+    "fulfillmentUrl": "https://coldnsteel.github.io/Portable-Studio/"
+  },
+  
+  "kozmicblues-console": {
+    "name": "KozmicBlues Master Console",
+    "emoji": "🎸",
+    "price": 60,
+    "category": "studios",
+    "type": "digital",
+    "status": "available",
+    "description": "Electric guitar studio with pro effects chain, tuner, metronome. Tribute to Janis, Chet & Sam of Big Brother!",
+    "fulfillmentUrl": "https://coldnsteel.github.io/KozmicRockandBlues-MasterConsole/"
+  },
+  
+  "littlex-bundle": {
+    "name": "Little X Universe Bundle",
+    "emoji": "🚀📚",
+    "price": 20,
+    "category": "education",
+    "type": "digital",
+    "status": "available",
+    "description": "All 7 Little X books! Purple Rocket through Heart Quests finale. Interactive cosmic adventures for kids.",
+    "fulfillmentUrl": "https://superbguide.gumroad.com/l/little-x-universe-bundle-complete"
+  },
+  
+  "littlex-book2": {
+    "name": "Little X Book 2: Dream Machine",
+    "emoji": "🎤",
+    "price": 5,
+    "category": "education",
+    "type": "digital",
+    "status": "available",
+    "description": "WITH VOICES! Raaarrr and ARIA narration. 4-chapter interactive adventure with music!",
+    "fulfillmentUrl": "https://superbguide.gumroad.com/l/little-x-book-2-dream-machine"
+  },
+  
+  "magic-chalkboard": {
+    "name": "Magic Chalkboard Composer",
+    "emoji": "🎨",
+    "price": 7,
+    "category": "education",
+    "type": "digital",
+    "status": "available",
+    "description": "Draw your melodies on a cosmic chalkboard! Visual music composition - no theory required. Kids love it!",
+    "fulfillmentUrl": "https://superbguide.gumroad.com/l/magic-chalkboard-composer"
+  },
+  
+  "comedy-lounge": {
+    "name": "AI Comedy Lounge Access",
+    "emoji": "🎭",
+    "price": 5,
+    "category": "entertainment",
+    "type": "digital",
+    "status": "available",
+    "description": "Tech Fables + AI Comedy! Aesop & Shakespeare fractured by AI. 14 hilarious fables indexed.",
+    "fulfillmentUrl": "https://coldnsteel.github.io/AI-Comedy-Lounge/",
+    "freeOption": true
+  },
+  
+  "party-package": {
+    "name": "Comedy Party Package",
+    "emoji": "🎉",
+    "price": 15,
+    "category": "entertainment",
+    "type": "digital",
+    "status": "available",
+    "description": "Customizable AI birthday content! Personalized messages, stories, music, and birthday jokebox.",
+    "fulfillmentUrl": "/Dogpatch-Market/sectors/cashier/index.html?item=party-package&amount=15"
+  },
+  
+  "kozmic-kasino": {
+    "name": "Kozmic Kasino Access",
+    "emoji": "🎰",
+    "price": 10,
+    "category": "entertainment",
+    "type": "digital",
+    "status": "available",
+    "description": "The ONLY kasino in the universe with NFT prizes and AI gangsta croupiers! CTOK transactions.",
+    "fulfillmentUrl": "https://coldnsteel.github.io/KOZMIC-KASINO/"
+  },
+  
+  "academy-hub": {
+    "name": "Academy Hub - Full Access",
+    "emoji": "🏛️",
+    "price": 50,
+    "category": "education",
+    "type": "digital",
+    "status": "coming-soon",
+    "description": "The Shirtsleeve Hacker Corps for American Freedom. Community training, advanced cybersecurity education.",
+    "fulfillmentUrl": "/academy-master-controller.html"
+  },
+  
+  "mywebsite-template": {
+    "name": "Crypto Storefront Starter Kit",
+    "emoji": "🏪",
+    "price": 25,
+    "category": "platforms",
+    "type": "digital",
+    "status": "available",
+    "description": "Primitive first tries - learn to build your own collectibles site with crypto payments. Perfect starter!",
+    "fulfillmentUrl": "https://superbguide.gumroad.com/l/crypto-storefront-starter"
   },
 
-  "playland_studios": {
-    "portable": {
-      "id": "portable-studio",
-      "name": "Portable Music Studio",
-      "price": 30,
-      "description": "Mobile music production with world music genres, 8-track mixer, UAD emulation",
-      "features": [
-        "World music genres (Indian, African, Reggae, Psychedelic)",
-        "8-track mixer",
-        "UAD plugin emulation",
-        "Collaboration hub",
-        "AI assistant"
-      ],
-      "repo": "Portable-Studio",
-      "url": "https://coldnsteel.github.io/Portable-Studio/",
-      "cashier": "/Dogpatch-Market/sectors/cashier/index.html?item=portable-studio&amount=30"
-    },
-    "kozmicblues": {
-      "id": "kozmicblues-console",
-      "name": "KozmicBlues Master Console",
-      "price": 60,
-      "description": "Electric guitar studio with professional effects chain, tuner, and metronome",
-      "features": [
-        "Professional effects chain (Drive, Reverb, Delay, Wah, Chorus)",
-        "Built-in guitar tuner",
-        "Metronome with multiple time signatures",
-        "Genre presets (Motown, Blues, Jazz, Rock, Funk)",
-        "Audio/video recording"
-      ],
-      "repo": "KozmicRockandBlues-MasterConsole",
-      "url": "https://coldnsteel.github.io/KozmicRockandBlues-MasterConsole/",
-      "cashier": "/Dogpatch-Market/sectors/cashier/index.html?item=kozmicblues-console&amount=60"
+  "example-flash-auction": {
+    "name": "Limited Edition Cosmic Art",
+    "emoji": "⚡💎",
+    "price": 500,
+    "category": "collectibles",
+    "type": "physical",
+    "status": "available",
+    "description": "Original cosmic artwork - flash auction! Rare piece from the GMSRFC collection.",
+    "auction": {
+      "enabled": true,
+      "startingBid": 250,
+      "currentBid": 275,
+      "endTime": "2025-11-05T23:59:59Z"
     }
   },
-
-  "playland_littlex": {
-    "bundle": {
-      "id": "littlex-bundle",
-      "name": "Little X Universe Complete Bundle",
-      "price": 20,
-      "description": "All 7 Little X books - Purple Rocket through Heart Quests finale",
-      "platform": "gumroad",
-      "url": "https://superbguide.gumroad.com/l/little-x-universe-bundle-complete"
-    },
-    "book1": {
-      "id": "littlex-book1",
-      "name": "Little X Book 1: Purple Rocket",
-      "price": 5,
-      "platform": "gumroad",
-      "url": "https://superbguide.gumroad.com/l/little-x-book-1-purple-rocket"
-    },
-    "book2": {
-      "id": "littlex-book2",
-      "name": "Little X Book 2: Dream Machine",
-      "price": 5,
-      "description": "WITH VOICES! Raaarrr and ARIA narration",
-      "platform": "gumroad",
-      "url": "https://superbguide.gumroad.com/l/little-x-book-2-dream-machine"
-    },
-    "book3": {
-      "id": "littlex-book3",
-      "name": "Little X Book 3: Web of Life",
-      "price": 5,
-      "platform": "gumroad",
-      "url": "https://superbguide.gumroad.com/l/little-x-book-3-web-of-life"
-    },
-    "book4": {
-      "id": "littlex-book4",
-      "name": "Little X Book 4: Cosmic Codes",
-      "price": 5,
-      "platform": "gumroad",
-      "url": "https://superbguide.gumroad.com/l/little-x-book-4-cosmic-codes"
-    },
-    "book5": {
-      "id": "littlex-book5",
-      "name": "Little X Book 5: Justice for All",
-      "price": 5,
-      "platform": "gumroad",
-      "url": "https://superbguide.gumroad.com/l/little-x-book-5-justice-for-all"
-    },
-    "book6": {
-      "id": "littlex-book6",
-      "name": "Little X Book 6: Star Navigators",
-      "price": 7,
-      "platform": "gumroad",
-      "url": "https://superbguide.gumroad.com/l/little-x-book-6-star-navigators"
-    },
-    "book7": {
-      "id": "littlex-book7",
-      "name": "Little X Book 7: Heart Quests Finale",
-      "price": 7,
-      "platform": "gumroad",
-      "url": "https://superbguide.gumroad.com/l/little-x-book-7-heart-quests-finale"
-    },
-    "magic_chalkboard": {
-      "id": "magic-chalkboard",
-      "name": "Magic Chalkboard Composer",
-      "price": 7,
-      "description": "Advanced music creation tool - draw your melodies on a cosmic chalkboard",
-      "platform": "gumroad",
-      "url": "https://superbguide.gumroad.com/l/magic-chalkboard-composer",
-      "status": "published"
-    }
-  },
-
-  "playland_comedy": {
-    "lounge": {
-      "id": "comedy-lounge",
-      "name": "AI Comedy Lounge Access",
-      "price": 5,
-      "description": "Tech Fables + AI Comedy - Aesop & Shakespeare fractured by AI",
-      "repo": "AI-Comedy-Lounge",
-      "url": "https://coldnsteel.github.io/AI-Comedy-Lounge/",
-      "cashier": "/Dogpatch-Market/sectors/cashier/index.html?item=comedy-lounge&amount=5"
-    },
-    "party_package": {
-      "id": "party-package",
-      "name": "Comedy Party Package",
-      "price": 15,
-      "description": "Customizable AI-generated birthday party content - personalized messages, stories, music",
-      "features": [
-        "Custom name/age/theme",
-        "AI-generated party content",
-        "Birthday jokebox",
-        "Personalized messages"
-      ],
-      "integration": "Happy-Birthday-Diana",
-      "cashier": "/Dogpatch-Market/sectors/cashier/index.html?item=party-package&amount=15"
-    }
-  },
-
-  "playland_casino": {
-    "kasino": {
-      "id": "kozmic-kasino",
-      "name": "Kozmic Kasino Access",
-      "price": 10,
-      "description": "NFT prizes and games from AI croupiers - the only kasino in the universe!",
-      "features": [
-        "NFT prize games",
-        "AI gangsta croupiers",
-        "CTOK transactions",
-        "Unique cosmic gaming"
-      ],
-      "repo": "KOZMIC-KASINO",
-      "url": "https://coldnsteel.github.io/KOZMIC-KASINO/",
-      "cashier": "/Dogpatch-Market/sectors/cashier/index.html?item=kozmic-kasino&amount=10"
-    }
-  },
-
-  "gumroad_templates": {
-    "mywebsite": {
-      "id": "crypto-storefront-starter",
-      "name": "Crypto Storefront Starter Kit",
-      "price": 25,
-      "description": "Primitive first tries - learn to build your own collectibles site with crypto payments",
-      "repo": "MyWebsite",
-      "platform": "gumroad",
-      "status": "ready_to_publish"
-    }
-  },
-
-  "not_for_sale": {
-    "psi_omega": {
-      "name": "Psi-Omega Digital Downloads",
-      "description": "Permanent memory bunker for AI collaboration",
-      "repo": "psi-omega-digital-downloads",
-      "purpose": "Claude & Grok memory storage"
-    },
-    "socks": {
-      "name": "Personal Stock Watcher",
-      "description": "Personal tool - not for sale",
-      "repo": "Socks"
-    },
-    "shimmy": {
-      "name": "Shimmy Integration",
-      "description": "Cloned from Michael-A-Kuykendall - global AI integrator",
-      "source": "https://github.com/Michael-A-Kuykendall/shimmy",
-      "purpose": "Local LLM inference for all products"
-    }
+  
+  "example-sold-item": {
+    "name": "Vintage Collectible",
+    "emoji": "🪙",
+    "price": 350,
+    "category": "collectibles",
+    "type": "physical",
+    "status": "sold",
+    "description": "Historic rare coin - SOLD to collector. Example of sold item display.",
+    "soldDate": "2025-10-20"
   }
 }
