@@ -1,5 +1,6 @@
 {
   "fortress-pass": {
+    "serial": "GMS-SEC-001",
     "name": "HackerWatch Fortress",
     "emoji": "🛡️",
     "price": 19,
@@ -11,8 +12,9 @@
     "studentPrice": 19,
     "regularPrice": 49
   },
-  
+
   "psi-recruits-training": {
+    "serial": "GMS-EDU-002",
     "name": "Psi-Recruits Training",
     "emoji": "🎓",
     "price": 4,
@@ -22,8 +24,9 @@
     "description": "Join the Shirtsleeve Hacker Corps! Ethical hacking, social engineering defense, and cyber threat identification for American Freedom.",
     "fulfillmentUrl": "/psi-recruits-html"
   },
-  
+
   "portable-studio": {
+    "serial": "GMS-STU-003",
     "name": "Portable Music Studio",
     "emoji": "🎹",
     "price": 30,
@@ -33,8 +36,9 @@
     "description": "Mobile music production with world music genres, 8-track mixer, UAD emulation. Create professional music anywhere!",
     "fulfillmentUrl": "https://coldnsteel.github.io/Portable-Studio/"
   },
-  
+
   "kozmicblues-console": {
+    "serial": "GMS-STU-004",
     "name": "KozmicBlues Master Console",
     "emoji": "🎸",
     "price": 60,
@@ -44,8 +48,9 @@
     "description": "Electric guitar studio with pro effects chain, tuner, metronome. Tribute to Janis, Chet & Sam of Big Brother!",
     "fulfillmentUrl": "https://coldnsteel.github.io/KozmicRockandBlues-MasterConsole/"
   },
-  
+
   "littlex-bundle": {
+    "serial": "GMS-EDU-005",
     "name": "Little X Universe Bundle",
     "emoji": "🚀📚",
     "price": 20,
@@ -55,8 +60,9 @@
     "description": "All 7 Little X books! Purple Rocket through Heart Quests finale. Interactive cosmic adventures for kids.",
     "fulfillmentUrl": "https://superbguide.gumroad.com/l/little-x-universe-bundle-complete"
   },
-  
+
   "littlex-book2": {
+    "serial": "GMS-EDU-006",
     "name": "Little X Book 2: Dream Machine",
     "emoji": "🎤",
     "price": 5,
@@ -66,8 +72,9 @@
     "description": "WITH VOICES! Raaarrr and ARIA narration. 4-chapter interactive adventure with music!",
     "fulfillmentUrl": "https://superbguide.gumroad.com/l/little-x-book-2-dream-machine"
   },
-  
+
   "magic-chalkboard": {
+    "serial": "GMS-EDU-007",
     "name": "Magic Chalkboard Composer",
     "emoji": "🎨",
     "price": 7,
@@ -77,8 +84,9 @@
     "description": "Draw your melodies on a cosmic chalkboard! Visual music composition - no theory required. Kids love it!",
     "fulfillmentUrl": "https://superbguide.gumroad.com/l/magic-chalkboard-composer"
   },
-  
+
   "comedy-lounge": {
+    "serial": "GMS-ENT-008",
     "name": "AI Comedy Lounge Access",
     "emoji": "🎭",
     "price": 5,
@@ -89,8 +97,9 @@
     "fulfillmentUrl": "https://coldnsteel.github.io/AI-Comedy-Lounge/",
     "freeOption": true
   },
-  
+
   "party-package": {
+    "serial": "GMS-ENT-009",
     "name": "Comedy Party Package",
     "emoji": "🎉",
     "price": 15,
@@ -100,8 +109,9 @@
     "description": "Customizable AI birthday content! Personalized messages, stories, music, and birthday jokebox.",
     "fulfillmentUrl": "/Dogpatch-Market/sectors/cashier/index.html?item=party-package&amount=15"
   },
-  
+
   "kozmic-kasino": {
+    "serial": "GMS-ENT-010",
     "name": "Kozmic Kasino Access",
     "emoji": "🎰",
     "price": 10,
@@ -111,8 +121,9 @@
     "description": "The ONLY kasino in the universe with NFT prizes and AI gangsta croupiers! CTOK transactions.",
     "fulfillmentUrl": "https://coldnsteel.github.io/KOZMIC-KASINO/"
   },
-  
+
   "academy-hub": {
+    "serial": "GMS-EDU-011",
     "name": "Academy Hub - Full Access",
     "emoji": "🏛️",
     "price": 50,
@@ -122,8 +133,9 @@
     "description": "The Shirtsleeve Hacker Corps for American Freedom. Community training, advanced cybersecurity education.",
     "fulfillmentUrl": "/academy-master-controller.html"
   },
-  
+
   "mywebsite-template": {
+    "serial": "GMS-PLT-012",
     "name": "Crypto Storefront Starter Kit",
     "emoji": "🏪",
     "price": 25,
@@ -135,6 +147,7 @@
   },
 
   "example-flash-auction": {
+    "serial": "GMS-COL-013",
     "name": "Limited Edition Cosmic Art",
     "emoji": "⚡💎",
     "price": 500,
@@ -149,8 +162,9 @@
       "endTime": "2025-11-05T23:59:59Z"
     }
   },
-  
+
   "example-sold-item": {
+    "serial": "GMS-COL-014",
     "name": "Vintage Collectible",
     "emoji": "🪙",
     "price": 350,
