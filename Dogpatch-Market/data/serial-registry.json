@@ -1,99 +1,94 @@
 {
-  "GMS-SEC-001": {
-    "productId": "fortress-pass",
-    "name": "HackerWatch Fortress",
-    "category": "security",
-    "status": "available"
+  "registry": {
+    "version": "1.0.0",
+    "generated": "2025-10-30T10:00:00Z",
+    "checksum": "f63ae0b41ef2e2e9e692ccdf82b93a6b1324a7a43f66ed98e8139d4204b2494f",
+    "description": "Dogpatch-Market Serial Registry for verified product fulfillment."
   },
-
-  "GMS-EDU-002": {
-    "productId": "psi-recruits-training",
-    "name": "Psi-Recruits Training",
-    "category": "education",
-    "status": "available"
-  },
-
-  "GMS-STU-003": {
-    "productId": "portable-studio",
-    "name": "Portable Music Studio",
-    "category": "studios",
-    "status": "available"
-  },
-
-  "GMS-STU-004": {
-    "productId": "kozmicblues-console",
-    "name": "KozmicBlues Master Console",
-    "category": "studios",
-    "status": "available"
-  },
-
-  "GMS-EDU-005": {
-    "productId": "littlex-bundle",
-    "name": "Little X Universe Bundle",
-    "category": "education",
-    "status": "available"
-  },
-
-  "GMS-EDU-006": {
-    "productId": "littlex-book2",
-    "name": "Little X Book 2: Dream Machine",
-    "category": "education",
-    "status": "available"
-  },
-
-  "GMS-EDU-007": {
-    "productId": "magic-chalkboard",
-    "name": "Magic Chalkboard Composer",
-    "category": "education",
-    "status": "available"
-  },
-
-  "GMS-ENT-008": {
-    "productId": "comedy-lounge",
-    "name": "AI Comedy Lounge Access",
-    "category": "entertainment",
-    "status": "available"
-  },
-
-  "GMS-ENT-009": {
-    "productId": "party-package",
-    "name": "Comedy Party Package",
-    "category": "entertainment",
-    "status": "available"
-  },
-
-  "GMS-ENT-010": {
-    "productId": "kozmic-kasino",
-    "name": "Kozmic Kasino Access",
-    "category": "entertainment",
-    "status": "available"
-  },
-
-  "GMS-EDU-011": {
-    "productId": "academy-hub",
-    "name": "Academy Hub - Full Access",
-    "category": "education",
-    "status": "coming-soon"
-  },
-
-  "GMS-PLT-012": {
-    "productId": "mywebsite-template",
-    "name": "Crypto Storefront Starter Kit",
-    "category": "platforms",
-    "status": "available"
-  },
-
-  "GMS-COL-013": {
-    "productId": "example-flash-auction",
-    "name": "Limited Edition Cosmic Art",
-    "category": "collectibles",
-    "status": "available"
-  },
-
-  "GMS-COL-014": {
-    "productId": "example-sold-item",
-    "name": "Vintage Collectible",
-    "category": "collectibles",
-    "status": "sold"
+  "products": {
+    "GMS-SEC-001": {
+      "productId": "fortress-pass",
+      "name": "HackerWatch Fortress",
+      "category": "security",
+      "status": "available"
+    },
+    "GMS-EDU-002": {
+      "productId": "psi-recruits-training",
+      "name": "Psi-Recruits Training",
+      "category": "education",
+      "status": "available"
+    },
+    "GMS-STU-003": {
+      "productId": "portable-studio",
+      "name": "Portable Music Studio",
+      "category": "studios",
+      "status": "available"
+    },
+    "GMS-STU-004": {
+      "productId": "kozmicblues-console",
+      "name": "KozmicBlues Master Console",
+      "category": "studios",
+      "status": "available"
+    },
+    "GMS-EDU-005": {
+      "productId": "littlex-bundle",
+      "name": "Little X Universe Bundle",
+      "category": "education",
+      "status": "available"
+    },
+    "GMS-EDU-006": {
+      "productId": "littlex-book2",
+      "name": "Little X Book 2: Dream Machine",
+      "category": "education",
+      "status": "available"
+    },
+    "GMS-EDU-007": {
+      "productId": "magic-chalkboard",
+      "name": "Magic Chalkboard Composer",
+      "category": "education",
+      "status": "available"
+    },
+    "GMS-ENT-008": {
+      "productId": "comedy-lounge",
+      "name": "AI Comedy Lounge Access",
+      "category": "entertainment",
+      "status": "available"
+    },
+    "GMS-ENT-009": {
+      "productId": "party-package",
+      "name": "Comedy Party Package",
+      "category": "entertainment",
+      "status": "available"
+    },
+    "GMS-ENT-010": {
+      "productId": "kozmic-kasino",
+      "name": "Kozmic Kasino Access",
+      "category": "entertainment",
+      "status": "available"
+    },
+    "GMS-EDU-011": {
+      "productId": "academy-hub",
+      "name": "Academy Hub - Full Access",
+      "category": "education",
+      "status": "coming-soon"
+    },
+    "GMS-PLT-012": {
+      "productId": "mywebsite-template",
+      "name": "Crypto Storefront Starter Kit",
+      "category": "platforms",
+      "status": "available"
+    },
+    "GMS-COL-013": {
+      "productId": "example-flash-auction",
+      "name": "Limited Edition Cosmic Art",
+      "category": "collectibles",
+      "status": "available"
+    },
+    "GMS-COL-014": {
+      "productId": "example-sold-item",
+      "name": "Vintage Collectible",
+      "category": "collectibles",
+      "status": "sold"
+    }
   }
 }
