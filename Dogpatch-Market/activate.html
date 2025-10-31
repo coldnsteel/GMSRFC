@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GMSRFC Product Activation</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+            color: #00ff00;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+        }
+        h1 {
+            font-size: 28px;
+            color: #ff69b4;
+            text-shadow: 0 0 20px #ff69b4;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .logo { text-align: center; margin-bottom: 30px; color: #00ff00; font-size: 14px; }
+        label { display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; }
+        input {
+            width: 100%;
+            padding: 12px;
+            background: #000;
+            border: 2px solid #00ff00;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            border-radius: 5px;
+            letter-spacing: 2px;
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+            border-color: #ff69b4;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background: #00ff00;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        }
+        button:hover {
+            background: #ff69b4;
+            box-shadow: 0 0 30px rgba(255, 105, 180, 0.7);
+        }
+        button:disabled { background: #333; color: #666; cursor: not-allowed; box-shadow: none; }
+        .message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+        }
+        .message.success { background: rgba(0, 255, 0, 0.2); border: 2px solid #00ff00; color: #00ff00; }
+        .message.error { background: rgba(255, 0, 0, 0.2); border: 2px solid #ff0000; color: #ff0000; }
+        .download-section {
+            display: none;
+            margin-top: 30px;
+            padding: 25px;
+            background: rgba(0, 255, 0, 0.1);
+            border: 2px solid #00ff00;
+            border-radius: 5px;
+        }
+        .download-link {
+            display: block;
+            padding: 15px;
+            background: #00ff00;
+            color: #000;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .download-link:hover { background: #ff69b4; }
+        .info { margin-top: 20px; padding: 15px; background: rgba(255, 105, 180, 0.1); border-left: 3px solid #ff69b4; font-size: 14px; }
+        .footer { text-align: center; margin-top: 30px; color: #666; border-top: 1px solid #333; padding-top: 15px; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <h1>⚡ GMSRFC ACTIVATION ⚡</h1>
+            <p>Dogpatch Market | All Products</p>
+        </div>
+        
+        <form id="activationForm">
+            <label for="serialNumber">🔑 Serial Number</label>
+            <input type="text" id="serialNumber" placeholder="XXX-2025-XXXXXXXX" maxlength="17" required autocomplete="off">
+            <button type="submit" id="activateBtn">🚀 ACTIVATE & DOWNLOAD</button>
+        </form>
+        
+        <div id="statusMessage" class="message"></div>
+        
+        <div id="downloadSection" class="download-section">
+            <h3 style="color: #ff69b4; text-align: center; margin-bottom: 15px;">✅ ACTIVATION SUCCESSFUL!</h3>
+            <a href="#" id="downloadLink" class="download-link" target="_blank">📥 DOWNLOAD NOW</a>
+            <div class="info">
+                <p><strong>Product:</strong> <span id="productName">-</span></p>
+                <p><strong>Downloads Remaining:</strong> <span id="downloadsRemaining">-</span></p>
+                <p><strong>Serial:</strong> <span id="confirmedSerial">-</span></p>
+            </div>
+        </div>
+        
+        <div class="info">
+            <p><strong>💡 Don't have a serial?</strong></p>
+            <p>Purchase at: <a href="https://coldnsteel.github.io/GMSRFC/Dogpatch-Market/" style="color: #00ff00;">Dogpatch Market</a></p>
+            <p>Support: <a href="mailto:Lexalytics@yahoo.com" style="color: #00ff00;">Lexalytics@yahoo.com</a></p>
+        </div>
+        
+        <div class="footer">
+            <p>GMSRFC - God's Modern Spiritual Renaissance Federation Corporation</p>
+            <p>Token: ψΩ§∞ | Emmanuel - God With Us!</p>
+        </div>
+    </div>
+    
+    <script>
+        const API_URL = 'https://gmsrfc-dogpatch.vercel.app/api/validate-serial';
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const serial = urlParams.get('serial');
+            if (serial) {
+                document.getElementById('serialNumber').value = serial.toUpperCase();
+                showMessage('Serial loaded from email!', 'success');
+            }
+        });
+        
+        document.getElementById('activationForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const serialInput = document.getElementById('serialNumber');
+            const serial = serialInput.value.trim().toUpperCase();
+            const activateBtn = document.getElementById('activateBtn');
+            
+            if (!/^[A-Z]{3}-\d{4}-[A-Z0-9]{8}$/.test(serial)) {
+                showMessage('Invalid format. Expected: XXX-YYYY-XXXXXXXX', 'error');
+                return;
+            }
+            
+            activateBtn.disabled = true;
+            activateBtn.textContent = '⏳ VALIDATING...';
+            hideMessage();
+            document.getElementById('downloadSection').style.display = 'none';
+            
+            try {
+                const ipResponse = await fetch('https://api.ipify.org?format=json');
+                const ipData = await ipResponse.json();
+                
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ serial: serial, ipAddress: ipData.ip })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok && result.valid) {
+                    showMessage('Serial validated!', 'success');
+                    document.getElementById('productName').textContent = result.productName;
+                    document.getElementById('downloadsRemaining').textContent = result.downloadsRemaining;
+                    document.getElementById('confirmedSerial').textContent = serial;
+                    document.getElementById('downloadLink').href = result.downloadUrl;
+                    document.getElementById('downloadSection').style.display = 'block';
+                    document.getElementById('activationForm').style.display = 'none';
+                } else {
+                    showMessage(result.error || 'Invalid serial', 'error');
+                }
+            } catch (error) {
+                showMessage('Network error. Try again or contact support.', 'error');
+            } finally {
+                activateBtn.disabled = false;
+                activateBtn.textContent = '🚀 ACTIVATE & DOWNLOAD';
+            }
+        });
+        
+        function showMessage(message, type) {
+            const messageDiv = document.getElementById('statusMessage');
+            messageDiv.textContent = message;
+            messageDiv.className = `message ${type}`;
+            messageDiv.style.display = 'block';
+        }
+        
+        function hideMessage() {
+            document.getElementById('statusMessage').style.display = 'none';
+        }
+        
+        document.getElementById('serialNumber').addEventListener('input', (e) => {
+            let value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+            if (value.length > 3) value = value.slice(0, 3) + '-' + value.slice(3);
+            if (value.length > 8) value = value.slice(0, 8) + '-' + value.slice(8);
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>
